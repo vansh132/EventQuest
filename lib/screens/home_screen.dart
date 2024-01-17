@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
                       color: Colors.blueAccent,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Center(child: Text("Img $index")),
+                    child: Center(child: Text("Img - $index")),
                   );
                 },
               ),
