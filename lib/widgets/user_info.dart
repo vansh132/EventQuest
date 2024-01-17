@@ -11,15 +11,23 @@ Widget UserBar() {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
+        Row(
           children: [
-            Text(
-              "Vansh Shah",
-              style: TextStyle(color: Colors.white),
+            Icon(Icons.person_2_rounded, color: Colors.white),
+            SizedBox(
+              width: 12,
             ),
-            Text(
-              "2347152",
-              style: TextStyle(color: Colors.white),
+            Column(
+              children: [
+                Text(
+                  "Vansh Shah",
+                  style: TextStyle(color: Colors.white),
+                ),
+                Text(
+                  "2347152",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
             ),
           ],
         ),
