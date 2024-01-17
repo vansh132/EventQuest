@@ -1,4 +1,4 @@
-import 'package:eventquest/screens/home_screen.dart';
+import 'package:eventquest/custome_navigation_botttom_bar.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,14 +13,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        textTheme: TextTheme(
-          
-        ),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: const CustomBottomNavigationBar(),
     );
   }
 }
-
