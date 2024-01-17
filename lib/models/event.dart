@@ -1,4 +1,3 @@
-import 'dart:html';
 
 class Event {
   final String eventId;
