@@ -32,6 +32,7 @@ class _EventScreenState extends State<EventScreen> {
   List<Event> events = [
     Event(
       eventId: "abc132",
+      eventCategory: "UG",
       eventName: "Talent Show",
       description: "Fresher's can show their talent",
       publishedOn: DateTime.now(),
@@ -45,6 +46,7 @@ class _EventScreenState extends State<EventScreen> {
     ),
     Event(
       eventId: "def456",
+      eventCategory: "PG",
       eventName: "Coding Competition",
       description: "Test your coding skills in this competition.",
       publishedOn: DateTime.now().subtract(Duration(days: 5)),
@@ -58,6 +60,7 @@ class _EventScreenState extends State<EventScreen> {
     ),
     Event(
       eventId: "ghi789",
+      eventCategory: "Both",
       eventName: "Art Exhibition",
       description: "Explore the world of art through various exhibits.",
       publishedOn: DateTime.now().subtract(Duration(days: 10)),
@@ -73,6 +76,12 @@ class _EventScreenState extends State<EventScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<Event> filteredEvents = _value == null
+        ? events
+        : events
+            .where((event) => event.eventCategory == getCategory(_value!))
+            .toList();
+
     return Scaffold(
       body: Container(
         color: Colors.amber,
@@ -84,9 +93,9 @@ class _EventScreenState extends State<EventScreen> {
             SizedBox(height: 20),
             Expanded(
               child: ListView.builder(
-                itemCount: events.length,
+                itemCount: filteredEvents.length,
                 itemBuilder: (context, index) {
-                  return buildEventCard(events[index]);
+                  return buildEventCard(filteredEvents[index]);
                 },
               ),
             ),
@@ -226,6 +235,23 @@ class _EventScreenState extends State<EventScreen> {
         ],
       ),
     );
+  }
+
+  String getCategory(int? index) {
+    if (index == null) {
+      return '';
+    }
+
+    switch (index) {
+      case 0:
+        return 'UG';
+      case 1:
+        return 'PG';
+      case 2:
+        return 'Both';
+      default:
+        return '';
+    }
   }
 }
 
