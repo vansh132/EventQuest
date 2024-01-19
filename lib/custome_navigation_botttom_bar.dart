@@ -41,8 +41,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.event),
+            label: 'Events',
+            backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
