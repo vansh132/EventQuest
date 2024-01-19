@@ -23,6 +23,117 @@ class HomeScreen extends StatelessWidget {
         noOfParticipants: 2,
         registartionDeadline: DateTime(2024, 1, 31),
       ),
+      Event(
+        eventId: "1",
+        eventName: "Music Concert",
+        description: "Enjoy a night of live music performances.",
+        publishedOn: DateTime.now(),
+        eventAmount: 50.0,
+        contactPerson: "John Doe",
+        contactNo: 1234567890,
+        noOfParticipants: 100,
+        registartionDeadline: DateTime(2024, 2, 15),
+      ),
+      Event(
+        eventId: "2",
+        eventName: "Art Exhibition",
+        description: "Explore the world of contemporary art.",
+        publishedOn: DateTime.now().add(Duration(days: 5)),
+        eventAmount: 20.0,
+        contactPerson: "Alice Smith",
+        contactNo: 9876543210,
+        noOfParticipants: 50,
+        registartionDeadline: DateTime(2024, 2, 20),
+      ),
+      Event(
+        eventId: "3",
+        eventName: "Tech Conference",
+        description: "Stay updated with the latest in technology.",
+        publishedOn: DateTime.now().add(Duration(days: 10)),
+        eventAmount: 75.0,
+        contactPerson: "Bob Johnson",
+        contactNo: 5555555555,
+        noOfParticipants: 200,
+        registartionDeadline: DateTime(2024, 2, 25),
+      ),
+      Event(
+        eventId: "4",
+        eventName: "Food Festival",
+        description: "Savor delicious cuisines from around the world.",
+        publishedOn: DateTime.now().add(Duration(days: 15)),
+        eventAmount: 30.0,
+        contactPerson: "Eva Brown",
+        contactNo: 7778889999,
+        noOfParticipants: 75,
+        registartionDeadline: DateTime(2024, 3, 1),
+      ),
+      Event(
+        eventId: "5",
+        eventName: "Fitness Challenge",
+        description: "Join us for a day of fitness and wellness activities.",
+        publishedOn: DateTime.now().add(Duration(days: 20)),
+        eventAmount: 10.0,
+        contactPerson: "Mike Davis",
+        contactNo: 1231231234,
+        noOfParticipants: 50,
+        registartionDeadline: DateTime(2024, 3, 5),
+      ),
+      Event(
+        eventId: "6",
+        eventName: "Science Fair",
+        description: "Discover the wonders of science through experiments.",
+        publishedOn: DateTime.now().add(Duration(days: 25)),
+        eventAmount: 15.0,
+        contactPerson: "Dr. Sarah White",
+        contactNo: 9998887777,
+        noOfParticipants: 30,
+        registartionDeadline: DateTime(2024, 3, 10),
+      ),
+      Event(
+        eventId: "7",
+        eventName: "Fashion Show",
+        description: "Witness the latest trends in fashion and style.",
+        publishedOn: DateTime.now().add(Duration(days: 30)),
+        eventAmount: 40.0,
+        contactPerson: "Olivia Taylor",
+        contactNo: 4567890123,
+        noOfParticipants: 60,
+        registartionDeadline: DateTime(2024, 3, 15),
+      ),
+      Event(
+        eventId: "8",
+        eventName: "Comedy Night",
+        description: "Laugh out loud with top stand-up comedians.",
+        publishedOn: DateTime.now().add(Duration(days: 35)),
+        eventAmount: 25.0,
+        contactPerson: "Chris Miller",
+        contactNo: 9876543210,
+        noOfParticipants: 40,
+        registartionDeadline: DateTime(2024, 3, 20),
+      ),
+      // Add two more events here...
+      Event(
+        eventId: "9",
+        eventName: "Dance Competition",
+        description: "Showcase your dance skills and creativity.",
+        publishedOn: DateTime.now().add(Duration(days: 40)),
+        eventAmount: 35.0,
+        contactPerson: "Sophie Green",
+        contactNo: 1112223333,
+        noOfParticipants: 50,
+        registartionDeadline: DateTime(2024, 3, 25),
+      ),
+      Event(
+        eventId: "10",
+        eventName: "Film Screening",
+        description: "Enjoy a night of cinematic masterpieces.",
+        publishedOn: DateTime.now().add(Duration(days: 45)),
+        eventAmount: 18.0,
+        contactPerson: "Daniel Lee",
+        contactNo: 9990001111,
+        noOfParticipants: 70,
+        registartionDeadline: DateTime(2024, 3, 30),
+      ),
     ];
 
     return Scaffold(
@@ -44,20 +155,27 @@ class HomeScreen extends StatelessWidget {
 Widget RecentEvents(BuildContext context, List<Event> events) {
   return Container(
     width: MediaQuery.of(context).size.width,
+    padding: const EdgeInsets.all(16),
     color: Colors.deepOrange,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Recent Events"),
-        SizedBox(
+        const Text(
+          "Recent Events",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(
           height: 12,
         ),
         Container(
           height: 200,
           child: GridView.builder(
             scrollDirection: Axis.horizontal,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,
               crossAxisSpacing: 8.0,
               mainAxisSpacing: 8.0,
             ),
@@ -71,5 +189,21 @@ Widget RecentEvents(BuildContext context, List<Event> events) {
 }
 
 Widget EventItem(Event event) {
-  return Text(event.eventName);
+  return Container(
+    decoration: BoxDecoration(
+      color: Colors.pinkAccent,
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Text(event.eventName),
+        Text(
+          event.description,
+          overflow: TextOverflow.ellipsis,
+        ),
+        Text(event.eventAmount.toString()),
+        Text(event.noOfParticipants.toString())
+      ],
+    ),
+  );
 }
