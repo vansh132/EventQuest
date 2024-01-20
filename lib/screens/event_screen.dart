@@ -3,24 +3,8 @@ import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Event Quest',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: EventScreen(),
-    );
-  }
-}
-
 class EventScreen extends StatefulWidget {
+  static const String routeName = '/event-screen';
   const EventScreen({Key? key}) : super(key: key);
 
   @override
@@ -90,7 +74,7 @@ class _EventScreenState extends State<EventScreen> {
             TopBar(),
             UserBar(),
             filterOption(context),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: ListView.builder(
                 itemCount: filteredEvents.length,
@@ -108,15 +92,10 @@ class _EventScreenState extends State<EventScreen> {
   Widget buildEventCard(Event event) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => EventDetailsScreen(),
-          ),
-        );
+        Navigator.pushNamed(context, EventDetailsScreen.routeName);
       },
       child: Card(
-        margin: EdgeInsets.all(8),
+        margin: const EdgeInsets.all(8),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
@@ -143,20 +122,20 @@ class _EventScreenState extends State<EventScreen> {
                     ),
                     elevation: 4.0,
                     child: Container(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             event.registartionDeadline.day.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
                           ),
                           Text(
                             event.registartionDeadline.monthShort,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
@@ -165,14 +144,14 @@ class _EventScreenState extends State<EventScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           event.eventName,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -256,17 +235,18 @@ class _EventScreenState extends State<EventScreen> {
 }
 
 class EventDetailsScreen extends StatelessWidget {
+  static const String routeName = '/event-detail-screen';
   const EventDetailsScreen();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Event Details'),
+        title: const Text('Event Details'),
       ),
       body: Container(
-        padding: EdgeInsets.all(16),
-        child: Center(child: Text("Detail Screen")),
+        padding: const EdgeInsets.all(16),
+        child: const Center(child: Text("Detail Screen")),
       ),
     );
   }
