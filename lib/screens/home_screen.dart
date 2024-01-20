@@ -187,11 +187,11 @@ Widget RecentEvents(BuildContext context, List<Event> events) {
             scrollDirection: Axis.horizontal,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 1,
-              crossAxisSpacing: 8.0,
-              mainAxisSpacing: 8.0,
+              crossAxisSpacing: 4.0,
+              mainAxisSpacing: 4.0,
             ),
             itemCount: events.length,
-            itemBuilder: (context, index) => EventItem(events[index]),
+            itemBuilder: (context, index) => EventItem2(events[index]),
           ),
         )
       ],
@@ -202,62 +202,111 @@ Widget RecentEvents(BuildContext context, List<Event> events) {
 Widget EventItem(Event event) {
   TextStyle textStyle = TextStyle(
     color: Colors.white,
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
   );
   return Container(
     decoration: BoxDecoration(
       image: DecorationImage(
         image: NetworkImage(
-          "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "https://images.unsplash.com/photo-1549451371-64aa98a6f660?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         ),
         fit: BoxFit.cover,
       ),
       borderRadius: BorderRadius.circular(12),
     ),
     child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
-          flex: 1,
-          child: Container(
-            alignment: Alignment.center,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Color.fromRGBO(0, 0, 0, 0.7),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12),
-                topRight: Radius.circular(12),
+        Container(
+          alignment: Alignment.center,
+          width: double.infinity,
+          margin: EdgeInsets.only(bottom: 4),
+          padding: EdgeInsets.only(top: 8, bottom: 8),
+          decoration: BoxDecoration(
+            color: Color.fromRGBO(0, 0, 0, 0.7),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(12),
+              topRight: Radius.circular(12),
+            ),
+          ),
+          child: Text(
+            event.eventName,
+            style: textStyle,
+          ),
+        ),
+        Container(
+          width: double.infinity,
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Color.fromRGBO(0, 0, 0, 0.7),
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(12),
+              bottomRight: Radius.circular(12),
+            ),
+          ),
+          child: Column(
+            children: [
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "No of Participant: ",
+                    ),
+                    TextSpan(
+                      text: event.noOfParticipants.toString(),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            child: Text(
-              event.eventName,
-              style: textStyle,
-            ),
+              SizedBox(
+                height: 12,
+              ),
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "Participation Fees: ",
+                    ),
+                    TextSpan(
+                      text: event.eventAmount.toString(),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
-        Expanded(
-          flex: 3,
-          child: Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Color.fromRGBO(0, 0, 0, 0.7),
-            ),
-            child: Text(
-              event.noOfParticipants.toString(),
-              style: textStyle,
-            ),
-          ),
+      ],
+    ),
+  );
+}
+
+Widget EventItem2(Event event) {
+  return Container(
+    margin: EdgeInsets.all(8),
+    padding: EdgeInsets.all(8),
+    decoration: BoxDecoration(
+      image: DecorationImage(
+        image: NetworkImage(
+          "https://images.unsplash.com/photo-1521048525864-2130780a12a5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         ),
-        Expanded(
-          flex: 2,
-          child: Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Color.fromRGBO(0, 0, 0, 0.7),
-            ),
-            child: Text(
-              event.eventAmount.toString(),
-              style: textStyle,
-            ),
+        fit: BoxFit.cover,
+      ),
+
+      // color: Colors.green,
+      borderRadius: BorderRadius.circular(12),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Text(
+          event.eventName,
+          style: TextStyle(
+            fontFamily: 'Roboto-Medium',
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
           ),
         ),
       ],
