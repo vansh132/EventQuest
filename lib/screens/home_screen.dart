@@ -189,20 +189,66 @@ Widget RecentEvents(BuildContext context, List<Event> events) {
 }
 
 Widget EventItem(Event event) {
+  TextStyle textStyle = TextStyle(
+    color: Colors.white,
+  );
   return Container(
     decoration: BoxDecoration(
-      color: Colors.pinkAccent,
+      image: DecorationImage(
+        image: NetworkImage(
+          "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        ),
+        fit: BoxFit.cover,
+      ),
+      borderRadius: BorderRadius.circular(12),
     ),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Text(event.eventName),
-        Text(
-          event.description,
-          overflow: TextOverflow.ellipsis,
+        Expanded(
+          flex: 1,
+          child: Container(
+            alignment: Alignment.center,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(0, 0, 0, 0.7),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(12),
+                topRight: Radius.circular(12),
+              ),
+            ),
+            child: Text(
+              event.eventName,
+              style: textStyle,
+            ),
+          ),
         ),
-        Text(event.eventAmount.toString()),
-        Text(event.noOfParticipants.toString())
+        Expanded(
+          flex: 3,
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(0, 0, 0, 0.7),
+            ),
+            child: Text(
+              event.noOfParticipants.toString(),
+              style: textStyle,
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 2,
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(0, 0, 0, 0.7),
+            ),
+            child: Text(
+              event.eventAmount.toString(),
+              style: textStyle,
+            ),
+          ),
+        ),
       ],
     ),
   );
