@@ -11,6 +11,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Event> events = [
       Event(
+        eventCategory: "UG",
         eventId: "abc132",
         eventName: "Talent Show",
         description: "Fresher's can show their talent",
@@ -25,6 +26,7 @@ class HomeScreen extends StatelessWidget {
       ),
       Event(
         eventId: "1",
+        eventCategory: "PG",
         eventName: "Music Concert",
         description: "Enjoy a night of live music performances.",
         publishedOn: DateTime.now(),
@@ -36,6 +38,7 @@ class HomeScreen extends StatelessWidget {
       ),
       Event(
         eventId: "2",
+        eventCategory: "Both",
         eventName: "Art Exhibition",
         description: "Explore the world of contemporary art.",
         publishedOn: DateTime.now().add(Duration(days: 5)),
@@ -47,6 +50,7 @@ class HomeScreen extends StatelessWidget {
       ),
       Event(
         eventId: "3",
+        eventCategory: "UG",
         eventName: "Tech Conference",
         description: "Stay updated with the latest in technology.",
         publishedOn: DateTime.now().add(Duration(days: 10)),
@@ -58,6 +62,7 @@ class HomeScreen extends StatelessWidget {
       ),
       Event(
         eventId: "4",
+        eventCategory: "PG",
         eventName: "Food Festival",
         description: "Savor delicious cuisines from around the world.",
         publishedOn: DateTime.now().add(Duration(days: 15)),
@@ -69,6 +74,7 @@ class HomeScreen extends StatelessWidget {
       ),
       Event(
         eventId: "5",
+        eventCategory: "Both",
         eventName: "Fitness Challenge",
         description: "Join us for a day of fitness and wellness activities.",
         publishedOn: DateTime.now().add(Duration(days: 20)),
@@ -80,6 +86,7 @@ class HomeScreen extends StatelessWidget {
       ),
       Event(
         eventId: "6",
+        eventCategory: "UG",
         eventName: "Science Fair",
         description: "Discover the wonders of science through experiments.",
         publishedOn: DateTime.now().add(Duration(days: 25)),
@@ -91,6 +98,7 @@ class HomeScreen extends StatelessWidget {
       ),
       Event(
         eventId: "7",
+        eventCategory: "UG",
         eventName: "Fashion Show",
         description: "Witness the latest trends in fashion and style.",
         publishedOn: DateTime.now().add(Duration(days: 30)),
@@ -102,6 +110,7 @@ class HomeScreen extends StatelessWidget {
       ),
       Event(
         eventId: "8",
+        eventCategory: "UG",
         eventName: "Comedy Night",
         description: "Laugh out loud with top stand-up comedians.",
         publishedOn: DateTime.now().add(Duration(days: 35)),
@@ -114,6 +123,7 @@ class HomeScreen extends StatelessWidget {
       // Add two more events here...
       Event(
         eventId: "9",
+        eventCategory: "UG",
         eventName: "Dance Competition",
         description: "Showcase your dance skills and creativity.",
         publishedOn: DateTime.now().add(Duration(days: 40)),
@@ -125,6 +135,7 @@ class HomeScreen extends StatelessWidget {
       ),
       Event(
         eventId: "10",
+        eventCategory: "UG",
         eventName: "Film Screening",
         description: "Enjoy a night of cinematic masterpieces.",
         publishedOn: DateTime.now().add(Duration(days: 45)),
