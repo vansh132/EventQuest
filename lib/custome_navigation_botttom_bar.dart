@@ -17,7 +17,7 @@ int _selectedIndex = 0;
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
-    const List<Widget> _widgetOptions = <Widget>[
+    List<Widget> _widgetOptions = <Widget>[
       HomeScreen(),
       EventScreen(),
       AnnouncementScreen(),
@@ -46,8 +46,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: Icon(Icons.announcement),
+            label: 'Announcement',
+            backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
