@@ -52,7 +52,8 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
-            label: 'School',
+            label: 'Task',
+            backgroundColor: Colors.black,
           ),
         ],
         currentIndex: _selectedIndex,
