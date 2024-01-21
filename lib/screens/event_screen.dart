@@ -76,11 +76,14 @@ class _EventScreenState extends State<EventScreen> {
             filterOption(context),
             const SizedBox(height: 20),
             Expanded(
-              child: ListView.builder(
-                itemCount: filteredEvents.length,
-                itemBuilder: (context, index) {
-                  return buildEventCard(filteredEvents[index]);
-                },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView.builder(
+                  itemCount: filteredEvents.length,
+                  itemBuilder: (context, index) {
+                    return buildEventCard(filteredEvents[index]);
+                  },
+                ),
               ),
             ),
           ],
