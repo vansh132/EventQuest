@@ -279,6 +279,7 @@ Widget EventItem(Event event) {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
+              //
               children: [
                 Text(
                   event.eventName,
