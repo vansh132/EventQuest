@@ -222,29 +222,77 @@ Widget EventItem(Event event) {
       // ),
       borderRadius: BorderRadius.circular(12),
     ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Text(
-          event.eventName,
-          style: const TextStyle(
-            fontFamily: 'Roboto-Medium',
-            fontWeight: FontWeight.w500,
-            fontSize: 16,
-            color: Colors.white,
+    child: Container(
+      margin: EdgeInsets.only(top: 95),
+      child: Row(
+        children: [
+          Card(
+            color: Colors.white.withOpacity(0.7),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            elevation: 4.0,
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    event.registartionDeadline.day.toString(),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
+                    event.registartionDeadline.monthShort,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-        Text(
-          DateFormat('dd-MM-yyyy').format(event.registartionDeadline),
-          style: const TextStyle(
-            fontFamily: 'Roboto-Medium',
-            fontWeight: FontWeight.w500,
-            fontSize: 12,
-            color: Colors.white70,
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  event.eventName,
+                  style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+              ],
+            ),
           ),
-        )
-      ],
+        ],
+      ),
     ),
   );
+}
+
+extension MonthToString on DateTime {
+  String get monthShort {
+    return [
+      '',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ][month];
+  }
 }
