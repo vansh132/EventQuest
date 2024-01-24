@@ -1,4 +1,5 @@
 import 'package:eventquest/models/event.dart';
+import 'package:eventquest/screens/detailed_screens/event_detail_screen.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,8 @@ class _EventScreenState extends State<EventScreen> {
       eventId: "def456",
       eventCategory: "PG",
       eventName: "Coding Competition",
-      description: "Test your coding skills in this competition.",
+      description:
+          "Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.",
       publishedOn: DateTime.now().subtract(Duration(days: 5)),
       eventImages: [],
       eventLink: "https://codingcompetition.com",
@@ -95,7 +97,8 @@ class _EventScreenState extends State<EventScreen> {
   Widget buildEventCard(Event event) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, EventDetailsScreen.routeName);
+        Navigator.pushNamed(context, EventDetailsScreen.routeName,
+            arguments: event);
       },
       child: Card(
         margin: const EdgeInsets.all(8),
@@ -150,7 +153,6 @@ class _EventScreenState extends State<EventScreen> {
                   const SizedBox(width: 16),
                   Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           event.eventName,
@@ -159,7 +161,12 @@ class _EventScreenState extends State<EventScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Text(event.description),
+                        Text(
+                          event.description,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          textAlign: TextAlign.justify,
+                        ),
                       ],
                     ),
                   ),

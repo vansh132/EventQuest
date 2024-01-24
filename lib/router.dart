@@ -1,4 +1,5 @@
 import 'package:eventquest/screens/detailed_screens/announcement_detail_screen.dart';
+import 'package:eventquest/screens/detailed_screens/event_detail_screen.dart';
 import 'package:eventquest/screens/event_screen.dart';
 import 'package:flutter/material.dart';
 
