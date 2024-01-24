@@ -1,3 +1,5 @@
+import 'package:eventquest/widgets/top_bar.dart';
+import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
 
 class TaskScreen extends StatelessWidget {
@@ -6,9 +8,13 @@ class TaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(
-          "Task Screen",
+      body: Container(
+        color: Colors.amber,
+        child: Column(
+          children: [
+            TopBar(),
+            UserBar(),
+          ],
         ),
       ),
     );
