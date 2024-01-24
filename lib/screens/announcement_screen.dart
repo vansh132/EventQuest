@@ -7,13 +7,16 @@ import 'package:intl/intl.dart';
 class AnnouncementScreen extends StatelessWidget {
   final List<Announcement> announcements = [
     Announcement(
-      title: 'Announcement 1',
-      description:
-          'This is a short description. It will be truncated if it exceeds 30 characters.',
+      title: 'Placement',
+      description: 'Congratulations to all the students who got placed.',
+      image:
+          "https://media.istockphoto.com/id/514363071/photo/just-one-moment-please.webp?b=1&s=170667a&w=0&k=20&c=8xY02WALsH-RYsCz83EBigqH4z3RQg76ZfOhgQjlefU=",
     ),
     Announcement(
-      title: 'Announcement 2',
-      description: 'Another announcement with a longer description.',
+      title: 'Nexus - Fest',
+      description: 'Congratulations to all the winners!!',
+      image:
+          "https://images.unsplash.com/photo-1658581872509-c8d19777bd24?q=80&w=2831&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     ),
   ];
 
@@ -56,17 +59,20 @@ class AnnouncementScreen extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12.0),
-                child: Image.network(
-                  "https://via.placeholder.com/80", // Replace with your image URL
-                  width: 80,
-                  height: 80,
-                  fit: BoxFit.cover,
+              Expanded(
+                flex: 1,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12.0),
+                  child: Image.network(
+                    announcement.image!,
+                    height: 90,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               SizedBox(width: 16),
               Expanded(
+                flex: 2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -87,27 +93,30 @@ class AnnouncementScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  SizedBox(
-                    height: 65,
-                  ),
-                  Text(
-                    "Date",
-                    style: TextStyle(
-                      fontSize: 8,
-                      fontWeight: FontWeight.bold,
+              Expanded(
+                flex: 1,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      height: 65,
                     ),
-                  ),
-                  Text(
-                    formattedDate,
-                    style: TextStyle(
-                      fontSize: 8,
-                      fontWeight: FontWeight.bold,
+                    Text(
+                      "Date",
+                      style: TextStyle(
+                        fontSize: 8,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
+                    Text(
+                      formattedDate,
+                      style: TextStyle(
+                        fontSize: 8,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
