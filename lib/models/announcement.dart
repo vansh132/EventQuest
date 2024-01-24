@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 class Announcement {
   final String title;
