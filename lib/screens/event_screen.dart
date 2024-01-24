@@ -153,6 +153,7 @@ class _EventScreenState extends State<EventScreen> {
                   const SizedBox(width: 16),
                   Expanded(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           event.eventName,
