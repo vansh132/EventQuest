@@ -1,3 +1,4 @@
+import 'package:eventquest/models/announcement.dart';
 import 'package:eventquest/models/event.dart';
 import 'package:eventquest/screen_items/highlights.dart';
 import 'package:eventquest/widgets/top_bar.dart';
@@ -148,16 +149,34 @@ class HomeScreen extends StatelessWidget {
       ),
     ];
 
+    List<Announcement> announcements = [
+      Announcement(
+        title: 'Placement',
+        description: 'Congratulations to all the students who got placed.',
+        image:
+            "https://media.istockphoto.com/id/514363071/photo/just-one-moment-please.webp?b=1&s=170667a&w=0&k=20&c=8xY02WALsH-RYsCz83EBigqH4z3RQg76ZfOhgQjlefU=",
+      ),
+      Announcement(
+        title: 'Nexus - Fest',
+        description: 'Congratulations to all the winners!!',
+        image:
+            "https://images.unsplash.com/photo-1658581872509-c8d19777bd24?q=80&w=2831&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      ),
+    ];
+
     return Scaffold(
       body: Container(
         color: Colors.amber,
-        child: Column(
-          children: [
-            TopBar(),
-            UserBar(),
-            Highlights(),
-            RecentEvents(context, events),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TopBar(),
+              UserBar(),
+              Highlights(),
+              RecentEvents(context, events),
+              RecentAnnouncements(context, announcements),
+            ],
+          ),
         ),
       ),
     );
@@ -247,4 +266,47 @@ Widget EventItem(Event event) {
       ],
     ),
   );
+}
+
+Widget RecentAnnouncements(
+    BuildContext context, List<Announcement> announcements) {
+  return Container(
+    width: MediaQuery.of(context).size.width,
+    padding: const EdgeInsets.all(16),
+    color: Colors.deepOrange,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          "Recent Events",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(
+          height: 12,
+        ),
+        Container(
+          // color: Colors.greenAccent,
+          height: 200,
+          child: GridView.builder(
+            scrollDirection: Axis.horizontal,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,
+              crossAxisSpacing: 4.0,
+              mainAxisSpacing: 4.0,
+            ),
+            itemCount: announcements.length,
+            itemBuilder: (context, index) =>
+                AnnouncementItem(announcements[index]),
+          ),
+        )
+      ],
+    ),
+  );
+}
+
+Widget AnnouncementItem(Announcement announcement) {
+  return Text("");
 }
