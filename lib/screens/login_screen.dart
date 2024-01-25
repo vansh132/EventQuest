@@ -1,6 +1,5 @@
 import 'package:eventquest/custome_navigation_botttom_bar.dart';
 import 'package:eventquest/screens/constants/utils.dart';
-import 'package:eventquest/screens/home_screen.dart';
 import 'package:eventquest/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 
