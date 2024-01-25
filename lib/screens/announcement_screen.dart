@@ -112,6 +112,14 @@ class AnnouncementScreen extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                         ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "By: ${announcement.publishedBy}",
+                          style: TextStyle(
+                              fontSize: 10, fontWeight: FontWeight.bold),
+                        ),
                       ],
                     ),
                   ),
