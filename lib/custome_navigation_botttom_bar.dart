@@ -5,6 +5,7 @@ import 'package:eventquest/screens/task_screen.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
+  static const String routeName = 'custom-navigation-screen';
   const CustomBottomNavigationBar({super.key});
 
   @override

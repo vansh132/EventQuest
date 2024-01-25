@@ -1,4 +1,6 @@
+import 'package:eventquest/custome_navigation_botttom_bar.dart';
 import 'package:eventquest/screens/constants/utils.dart';
+import 'package:eventquest/screens/home_screen.dart';
 import 'package:eventquest/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -48,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 padding: const EdgeInsets.all(8),
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.30,
-                child: Image.asset('assets/login_image.png'),
+                // child: Image.asset('assets/login_image.png'),
               ),
               Container(
                 // color: Colors.red,
@@ -170,9 +172,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        if (signInForm.currentState!.validate()) {
-                          signIn();
-                        }
+                        Navigator.pushNamed(
+                            context, CustomBottomNavigationBar.routeName);
                       },
                       child: const Icon(
                         size: 48,
