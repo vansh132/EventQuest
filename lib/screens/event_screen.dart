@@ -19,7 +19,8 @@ class _EventScreenState extends State<EventScreen> {
       eventId: "abc132",
       eventCategory: "UG",
       eventName: "Talent Show",
-      description: "Fresher's can show their talent",
+      description:
+          "Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. ",
       publishedOn: DateTime.now(),
       eventImages: [],
       eventLink: "",

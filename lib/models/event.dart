@@ -3,7 +3,7 @@ class Event {
   final String eventName;
   final String description;
   double eventAmount;
-  String eventImages;
+  List<String>? eventImages;
   final String eventCategory;
   final DateTime publishedOn;
   final int noOfParticipants;
@@ -17,7 +17,7 @@ class Event {
     required this.eventName,
     required this.description,
     required this.eventAmount,
-    required this.eventImages,
+    this.eventImages,
     required this.eventCategory,
     required this.publishedOn,
     required this.noOfParticipants,
