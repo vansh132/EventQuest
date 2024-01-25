@@ -22,8 +22,9 @@ class _EventScreenState extends State<EventScreen> {
       description:
           "Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. ",
       publishedOn: DateTime.now(),
-      eventImages: [],
-      eventLink: "",
+      eventImages:
+          "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXZlbnR8ZW58MHx8MHx8fDA%3D",
+      eventLink: "https://codingcompetition.com",
       eventAmount: 200,
       contactPerson: "Helen K Joy",
       contactNo: 9099897859,
@@ -37,7 +38,7 @@ class _EventScreenState extends State<EventScreen> {
       description:
           "Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.",
       publishedOn: DateTime.now().subtract(Duration(days: 5)),
-      eventImages: [],
+      eventImages: "",
       eventLink: "https://codingcompetition.com",
       eventAmount: 0,
       contactPerson: "John Doe",
@@ -51,7 +52,7 @@ class _EventScreenState extends State<EventScreen> {
       eventName: "Art Exhibition",
       description: "Explore the world of art through various exhibits.",
       publishedOn: DateTime.now().subtract(Duration(days: 10)),
-      eventImages: [],
+      eventImages: "",
       eventLink: "https://artexhibition.com",
       eventAmount: 50,
       contactPerson: "Alice Smith",

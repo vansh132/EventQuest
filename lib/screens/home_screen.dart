@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         eventName: "Talent Show",
         description: "Fresher's can show their talent",
         publishedOn: DateTime.now(),
-        eventImages: [],
+        eventImages: "",
         eventLink: "",
         eventAmount: 200,
         contactPerson: "Helen K Joy",

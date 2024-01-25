@@ -3,7 +3,7 @@ class Event {
   final String eventName;
   final String description;
   double eventAmount;
-  List<String>? eventImages;
+  String? eventImages;
   final String eventCategory;
   final DateTime publishedOn;
   final int noOfParticipants;
