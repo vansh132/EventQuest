@@ -24,7 +24,7 @@ class _EventScreenState extends State<EventScreen> {
       publishedOn: DateTime.now(),
       eventImages:
           "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXZlbnR8ZW58MHx8MHx8fDA%3D",
-      eventLink: "https://codingcompetition.com",
+      eventLink: "https://github.com/",
       eventAmount: 200,
       contactPerson: "Helen K Joy",
       contactNo: 9099897859,
@@ -36,9 +36,10 @@ class _EventScreenState extends State<EventScreen> {
       eventCategory: "PG",
       eventName: "Coding Competition",
       description:
-          "Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.Test your coding skills in this competition.",
+          "Welcome to CodeCraft Challenge, an exciting coding competition tailored for computer science enthusiasts! Whether you are a seasoned coder or a novice programmer, this event is designed to bring out the best in you. Sharpen your problem-solving skills, enhance your algorithmic thinking, and showcase your coding prowess in a thrilling environment.",
       publishedOn: DateTime.now().subtract(Duration(days: 5)),
-      eventImages: "",
+      eventImages:
+          "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29hZGluZ3xlbnwwfHwwfHx8MA%3D%3D",
       eventLink: "https://codingcompetition.com",
       eventAmount: 0,
       contactPerson: "John Doe",
@@ -52,7 +53,8 @@ class _EventScreenState extends State<EventScreen> {
       eventName: "Art Exhibition",
       description: "Explore the world of art through various exhibits.",
       publishedOn: DateTime.now().subtract(Duration(days: 10)),
-      eventImages: "",
+      eventImages:
+          "https://plus.unsplash.com/premium_photo-1661767490975-f31a02946f48?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       eventLink: "https://artexhibition.com",
       eventAmount: 50,
       contactPerson: "Alice Smith",
@@ -113,7 +115,7 @@ class _EventScreenState extends State<EventScreen> {
             ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
               child: Image.network(
-                "https://images.unsplash.com/photo-1616161560417-66d4db5892ec?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Placeholder image
+                event.eventImages!,
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: 200,

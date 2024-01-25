@@ -1,5 +1,7 @@
 import 'package:eventquest/models/event.dart';
+import 'package:eventquest/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EventDetailsScreen extends StatelessWidget {
   static const String routeName = '/event-detail-screen';
@@ -9,6 +11,7 @@ class EventDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Event event = ModalRoute.of(context)!.settings.arguments as Event;
+    print(event.eventLink);
     return Scaffold(
       appBar: AppBar(
         title: Text(event.eventName),
@@ -18,7 +21,7 @@ class EventDetailsScreen extends StatelessWidget {
           children: [
             // Event Image
             Image.network(
-              "https://images.unsplash.com/photo-1616161560417-66d4db5892ec?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              event.eventImages!,
               fit: BoxFit.cover,
               width: double.infinity,
               height: 200,
@@ -27,33 +30,95 @@ class EventDetailsScreen extends StatelessWidget {
             // Event Amount and Registration Deadline
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      event.eventAmount == 0
-                          ? 'Event Amount: Free'
-                          : 'Event Amount: \₹${event.eventAmount}',
-                      style: TextStyle(fontSize: 18),
+              child: Container(
+                padding: const EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 3),
                     ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      'Registration Deadline: ${event.registartionDeadline.day}/${event.registartionDeadline.month}/${event.registartionDeadline.year}',
-                      style: TextStyle(fontSize: 18),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Text("Participation Instructions",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 17)),
+                    const SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 65,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Registration Fees:",
+                              style: TextStyle(fontWeight: FontWeight.w600),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              "Registration Deadline:",
+                              style: TextStyle(fontWeight: FontWeight.w600),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              "No Of Participation:",
+                              style: TextStyle(fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(event.eventAmount.toString()),
+                            const SizedBox(height: 8),
+                            Text(
+                              "${event.registartionDeadline.day}/${event.registartionDeadline.month}/${event.registartionDeadline.year}",
+                            ),
+                            const SizedBox(height: 8),
+                            Text(event.noOfParticipants.toString()),
+                          ],
+                        )
+                      ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
 
             // Event Link
 
-            Text(
-              'Event Link: ${event.eventLink}',
-              style: TextStyle(fontSize: 18),
+            InkWell(
+              onTap: () {
+                _launchURL(event.eventLink!);
+              },
+              child: RichText(
+                text: TextSpan(
+                  style: TextStyle(fontSize: 18, color: Colors.black),
+                  children: [
+                    TextSpan(
+                      text: 'Event Link:',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    TextSpan(
+                        text: ' ${event.eventLink}',
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            color: Colors.redAccent)),
+                  ],
+                ),
+              ),
             ),
 
             // Description
@@ -65,15 +130,16 @@ class EventDetailsScreen extends StatelessWidget {
                   children: [
                     Text(
                       "Description:",
-                      style: TextStyle(fontSize: 18),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 18,
+                      height: 16,
                     ),
                     RichText(
                       text: TextSpan(
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 16,
                           color: Colors.black, // Set your preferred text color
                         ),
                         children: [
@@ -93,13 +159,30 @@ class EventDetailsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Contact Person: ${event.contactPerson}',
-                    style: TextStyle(fontSize: 18),
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(fontSize: 18, color: Colors.black),
+                      children: [
+                        TextSpan(
+                          text: 'Contact Person:',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(text: ' ${event.contactPerson}'),
+                      ],
+                    ),
                   ),
-                  Text(
-                    'Contact Number: ${event.contactNo}',
-                    style: TextStyle(fontSize: 18),
+                  SizedBox(height: 8), // Adjust the height for spacing
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(fontSize: 18, color: Colors.black),
+                      children: [
+                        TextSpan(
+                          text: 'Contact Number:',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(text: ' ${event.contactNo}'),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -109,15 +192,32 @@ class EventDetailsScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xff003049),
+                    foregroundColor: Colors.white),
                 onPressed: () {
-                  // Add your registration logic here
+                  Navigator.pushNamed(context, RegistrationScreen.routeName);
                 },
-                child: Text('Register'),
+                child: Text(
+                  'Register',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _launchURL(String url) async {
+    // ignore: deprecated_member_use
+    if (await canLaunch(url)) {
+      // ignore: deprecated_member_use
+      await launch(url);
+    } else {
+      // Print the error or handle it appropriately
+      print('Could not launch $url');
+    }
   }
 }
