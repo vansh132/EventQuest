@@ -70,7 +70,7 @@ class AnnouncementScreen extends StatelessWidget {
       child: Hero(
         tag: 'announcement_image_${announcement.hashCode}',
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0),
@@ -92,7 +92,7 @@ class AnnouncementScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Expanded(
                     flex: 2,
                     child: Column(
@@ -100,24 +100,24 @@ class AnnouncementScreen extends StatelessWidget {
                       children: [
                         Text(
                           announcement.title,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Text(
                           announcement.description,
-                          style: TextStyle(fontSize: 12),
+                          style: const TextStyle(fontSize: 12),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
                           "By: ${announcement.publishedBy}",
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 10, fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -128,10 +128,10 @@ class AnnouncementScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 65,
                         ),
-                        Text(
+                        const Text(
                           "Date",
                           style: TextStyle(
                             fontSize: 8,
@@ -140,7 +140,7 @@ class AnnouncementScreen extends StatelessWidget {
                         ),
                         Text(
                           formattedDate,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 8,
                             fontWeight: FontWeight.bold,
                           ),
