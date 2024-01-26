@@ -15,11 +15,43 @@ class TaskScreen extends StatelessWidget {
             TopBar(),
             UserBar(),
             Container(
-              child: ChoiceChip(
-                label: Text("data"),
-                selected: false,
-              ),
-            ),
+                color: Colors.tealAccent,
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                            style: const ButtonStyle(
+                              padding:
+                                  MaterialStatePropertyAll(EdgeInsets.all(16)),
+                              backgroundColor: MaterialStatePropertyAll(
+                                Colors.black,
+                              ),
+                            ),
+                            onPressed: () {},
+                            child: const Text(
+                              "Assigned Tasks",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 72,
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text("History"),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                )),
           ],
         ),
       ),
