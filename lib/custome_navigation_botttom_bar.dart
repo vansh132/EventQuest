@@ -47,13 +47,13 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.announcement),
-            label: 'Announcement',
+            icon: Icon(Icons.article_rounded),
+            label: 'Announcements',
             backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'Task',
+            icon: Icon(Icons.checklist_rounded),
+            label: 'Tasks',
             backgroundColor: Colors.black,
           ),
         ],
