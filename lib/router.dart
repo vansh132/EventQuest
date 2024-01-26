@@ -4,7 +4,7 @@ import 'package:eventquest/screens/detailed_screens/event_detail_screen.dart';
 import 'package:eventquest/screens/event_screen.dart';
 import 'package:eventquest/screens/login_screen.dart';
 import 'package:eventquest/screens/registration_screen.dart';
-import 'package:eventquest/screens/signup_screen.dart';
+// import 'package:eventquest/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
@@ -38,11 +38,6 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const LoginScreen(),
-      );
-    case SignupScreen.routeName:
-      return MaterialPageRoute(
-        settings: routeSettings,
-        builder: (_) => const SignupScreen(),
       );
 
     default:
