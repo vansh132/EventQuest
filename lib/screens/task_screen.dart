@@ -14,7 +14,7 @@ class _TaskScreenState extends State<TaskScreen> {
   bool selected = true;
   @override
   Widget build(BuildContext context) {
-    List<Task> tasks = [
+    List<Task> assignedTasks = [
       Task(
         taskTitle: "Talent Show",
         taskDescription: "Create poster for it",
@@ -25,6 +25,25 @@ class _TaskScreenState extends State<TaskScreen> {
       ),
       Task(
         taskTitle: "Talent Show",
+        taskDescription: "Create poster for it",
+        taskType: "Poster",
+        assignedTo: "2347152",
+        assignedBy: "Helen K Joy",
+        taskStatus: "Completed",
+      ),
+    ];
+
+    List<Task> historyTasks = [
+      Task(
+        taskTitle: "XYZ Show",
+        taskDescription: "Create poster for it",
+        taskType: "Poster",
+        assignedTo: "2347152",
+        assignedBy: "Helen K Joy",
+        taskStatus: "Incomplete",
+      ),
+      Task(
+        taskTitle: "ABC Show",
         taskDescription: "Create poster for it",
         taskType: "Poster",
         assignedTo: "2347152",
@@ -60,7 +79,7 @@ class _TaskScreenState extends State<TaskScreen> {
 
     return Scaffold(
       body: Container(
-        color: Colors.amber,
+        // color: Colors.amber,
         child: Column(
           children: [
             TopBar(),
@@ -116,13 +135,15 @@ class _TaskScreenState extends State<TaskScreen> {
               ),
             ),
             Container(
-              margin: EdgeInsets.all(8),
-              padding: EdgeInsets.all(16),
+              margin: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(16),
               // color: Colors.greenAccent,
               height: 500,
               child: ListView.builder(
-                itemCount: tasks.length,
-                itemBuilder: (context, index) => TaskItem(tasks[index]),
+                itemCount:
+                    selected ? assignedTasks.length : historyTasks.length,
+                itemBuilder: (context, index) => TaskItem(
+                    selected ? assignedTasks[index] : historyTasks[index]),
               ),
             )
           ],
@@ -134,86 +155,94 @@ class _TaskScreenState extends State<TaskScreen> {
 
 Widget TaskItem(Task task) {
   return Container(
-    margin: EdgeInsets.symmetric(vertical: 8),
+    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
     decoration: BoxDecoration(
       color: Colors.white60,
       borderRadius: BorderRadius.circular(12),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.3), // Shadow color
+          spreadRadius: 5, // Spread radius
+          blurRadius: 7, // Blur radius
+          offset: const Offset(0, 3), // Offset in the x, y direction
+        ),
+      ],
     ),
     child: ListTile(
       title: Text(
         task.taskTitle,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.black,
           fontWeight: FontWeight.bold,
           letterSpacing: 1,
         ),
       ),
-
       subtitle: Column(
         children: [
-          Divider(),
+          const Divider(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "Type: ",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
+              Expanded(
+                flex: 3,
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      const TextSpan(
+                        text: "Type: ",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                        ),
                       ),
-                    ),
-                    TextSpan(
-                      text: task.taskType,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
+                      TextSpan(
+                        text: task.taskType,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-              RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "Status: ",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
+              Expanded(
+                flex: 2,
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      const TextSpan(
+                        text: "Status: ",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                        ),
                       ),
-                    ),
-                    TextSpan(
-                      text: task.taskStatus,
-                      style: task.taskStatus == "Incomplete"
-                          ? TextStyle(
-                              color: Colors.red,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                            )
-                          : TextStyle(
-                              color: Colors.green,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                            ),
-                    ),
-                  ],
+                      TextSpan(
+                        text: task.taskStatus,
+                        style: task.taskStatus == "Incomplete"
+                            ? const TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                              )
+                            : const TextStyle(
+                                color: Colors.green,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                              ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              if (task.file != null)
-                Text(
-                    'File: ${task.file!.path}'), // Display file path, modify as needed
-              if (task.remarks != null) Text('Remarks: ${task.remarks}'),
             ],
           ),
         ],
       ),
-      // Additional widgets for file, remarks, etc. can be added here
     ),
   );
 }
