@@ -18,21 +18,21 @@ int _selectedIndex = 0;
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
-    List<Widget> _widgetOptions = <Widget>[
-      HomeScreen(),
-      EventScreen(),
+    List<Widget> widgetOptions = <Widget>[
+      const HomeScreen(),
+      const EventScreen(),
       AnnouncementScreen(),
-      TaskScreen(),
+      const TaskScreen(),
     ];
 
-    void _onItemTapped(int index) {
+    void onItemTapped(int index) {
       setState(() {
         _selectedIndex = index;
       });
     }
 
     return Scaffold(
-      body: SafeArea(child: _widgetOptions.elementAt(_selectedIndex)),
+      body: SafeArea(child: widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
         items: const <BottomNavigationBarItem>[
@@ -59,7 +59,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         ],
         currentIndex: _selectedIndex,
         // selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
+        onTap: onItemTapped,
       ),
     );
   }

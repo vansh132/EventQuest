@@ -1,6 +1,5 @@
-import 'package:eventquest/custome_navigation_botttom_bar.dart';
+import 'package:eventquest/custom_navigation_botttom_bar.dart';
 import 'package:eventquest/screens/constants/utils.dart';
-import 'package:eventquest/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -36,7 +35,18 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff03071e),
+      appBar: AppBar(
+        backgroundColor: Color(0xff0D1B2A),
+        title: Text(
+          "EventQuest",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        centerTitle: true,
+      ),
+      backgroundColor: const Color(0xff0D1B2A),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -48,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 padding: const EdgeInsets.all(8),
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.30,
-                // child: Image.asset('assets/login_image.png'),
+                child: Image.asset('assets/images/login_image.png'),
               ),
               Container(
                 // color: Colors.red,
@@ -190,7 +200,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       onPressed: () {
                         showSnackBar(context,
-                            "Under maintainance, contact admin@presidency.edu.in for further procedure");
+                            "Under maintainance, contact admin@christuniversity.edu.in for further procedure");
                       },
                     ),
                   ],
@@ -207,10 +217,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          "Don't have account?",
+                          "\" Embrace each event; it's an opportunity for greatness \"",
                           style: TextStyle(color: Color(0xff8d99ae)),
                         ),
-                        TextButton(
+                        /* TextButton(
                           onPressed: () {
                             Navigator.of(context).pushNamed(
                               SignupScreen.routeName,
@@ -222,7 +232,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: Color(0xffACC8E4),
                             ),
                           ),
-                        )
+                        ) */
                       ],
                     )
                   ],

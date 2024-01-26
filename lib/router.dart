@@ -1,4 +1,4 @@
-import 'package:eventquest/custome_navigation_botttom_bar.dart';
+import 'package:eventquest/custom_navigation_botttom_bar.dart';
 import 'package:eventquest/screens/detailed_screens/announcement_detail_screen.dart';
 import 'package:eventquest/screens/detailed_screens/event_detail_screen.dart';
 import 'package:eventquest/screens/event_screen.dart';
