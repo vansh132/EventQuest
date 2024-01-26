@@ -55,9 +55,6 @@ class AnnouncementScreen extends StatelessWidget {
 
   Widget buildAnnouncementCard(
       Announcement announcement, BuildContext context) {
-    String formattedDate =
-        DateFormat('MMM d, y').format(DateTime.now().toLocal());
-
     String primaryImage = announcement.image!.isNotEmpty
         ? announcement.image!.first
         : "https://placeholder.com/80"; // Replace with your default image URL
@@ -132,14 +129,14 @@ class AnnouncementScreen extends StatelessWidget {
                           height: 65,
                         ),
                         const Text(
-                          "Date",
+                          "Date: ",
                           style: TextStyle(
                             fontSize: 8,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          formattedDate,
+                          "${announcement.publishedOn.day}/${announcement.publishedOn.month}/${announcement.publishedOn.year}",
                           style: const TextStyle(
                             fontSize: 8,
                             fontWeight: FontWeight.bold,
