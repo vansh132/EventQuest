@@ -37,7 +37,7 @@ class _EventScreenState extends State<EventScreen> {
       eventName: "Coding Competition",
       description:
           "Welcome to CodeCraft Challenge, an exciting coding competition tailored for computer science enthusiasts! Whether you are a seasoned coder or a novice programmer, this event is designed to bring out the best in you. Sharpen your problem-solving skills, enhance your algorithmic thinking, and showcase your coding prowess in a thrilling environment.",
-      publishedOn: DateTime.now().subtract(Duration(days: 5)),
+      publishedOn: DateTime.now().subtract(const Duration(days: 5)),
       eventImages:
           "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29hZGluZ3xlbnwwfHwwfHx8MA%3D%3D",
       eventLink: "https://codingcompetition.com",
@@ -52,7 +52,7 @@ class _EventScreenState extends State<EventScreen> {
       eventCategory: "Both",
       eventName: "Art Exhibition",
       description: "Explore the world of art through various exhibits.",
-      publishedOn: DateTime.now().subtract(Duration(days: 10)),
+      publishedOn: DateTime.now().subtract(const Duration(days: 10)),
       eventImages:
           "https://plus.unsplash.com/premium_photo-1661767490975-f31a02946f48?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       eventLink: "https://artexhibition.com",
@@ -74,11 +74,14 @@ class _EventScreenState extends State<EventScreen> {
 
     return Scaffold(
       body: Container(
-        color: Colors.amber,
+        // color: Colors.amber,
         child: Column(
           children: [
             TopBar(),
             UserBar(),
+            const SizedBox(
+              height: 8,
+            ),
             filterOption(context),
             const SizedBox(height: 20),
             Expanded(
@@ -190,7 +193,13 @@ class _EventScreenState extends State<EventScreen> {
     return Container(
       child: Column(
         children: [
-          Text('Select your preference:', style: textTheme.headline6),
+          Text(
+            'Select your preference:',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
           const SizedBox(height: 10.0),
           Wrap(
             spacing: 5.0,
@@ -215,7 +224,13 @@ class _EventScreenState extends State<EventScreen> {
                 }
 
                 return ChoiceChip(
-                  label: Text(optionText),
+                  
+                  label: Text(
+                    optionText,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                   selected: _value == index,
                   onSelected: (bool selected) {
                     setState(() {
