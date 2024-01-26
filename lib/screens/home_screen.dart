@@ -53,7 +53,8 @@ class HomeScreen extends StatelessWidget {
         eventName: "Talent Show",
         description: "Fresher's can show their talent",
         publishedOn: DateTime.now(),
-        eventImages: "",
+        eventImages:
+            "https://media.istockphoto.com/id/514363071/photo/just-one-moment-please.webp?b=1&s=170667a&w=0&k=20&c=8xY02WALsH-RYsCz83EBigqH4z3RQg76ZfOhgQjlefU=",
         eventLink: "",
         eventAmount: 200,
         contactPerson: "Helen K Joy",
@@ -186,13 +187,16 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       body: Container(
-        // color: Colors.amber,
+        // color: Color(0xff0D1B2A),
         child: SingleChildScrollView(
           child: Column(
             children: [
               TopBar(),
               UserBar(),
               Highlights(),
+              SizedBox(
+                height: 8,
+              ),
               RecentEvents(context, events),
               RecentAnnouncements(context, announcements),
             ],
@@ -208,7 +212,7 @@ Widget RecentAnnouncements(
   return Container(
     width: MediaQuery.of(context).size.width,
     padding: const EdgeInsets.all(16),
-    color: Colors.greenAccent,
+    // color: Colors.greenAccent,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -216,15 +220,27 @@ Widget RecentAnnouncements(
           "Recent Announcements",
           style: TextStyle(
             fontSize: 24,
+            color: Color(0xff0D1B2A),
             fontWeight: FontWeight.bold,
+            letterSpacing: 0.2,
           ),
         ),
         const SizedBox(
           height: 12,
         ),
         Container(
-          color: Colors.greenAccent,
+          // color: Colors.greenAccent,
           height: 200,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3), // Shadow color
+                spreadRadius: 5, // Spread radius
+                blurRadius: 7, // Blur radius
+                offset: Offset(0, 3), // Offset in the x, y direction
+              ),
+            ],
+          ),
           child: ListView.builder(
             scrollDirection: Axis.vertical,
             itemCount: announcements.length,
@@ -241,7 +257,7 @@ Widget RecentEvents(BuildContext context, List<Event> events) {
   return Container(
     width: MediaQuery.of(context).size.width,
     padding: const EdgeInsets.all(16),
-    color: Colors.deepOrange,
+    // color: Colors.deepOrange,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -249,11 +265,13 @@ Widget RecentEvents(BuildContext context, List<Event> events) {
           "Recent Events",
           style: TextStyle(
             fontSize: 24,
+            color: Color(0xff0D1B2A),
             fontWeight: FontWeight.bold,
+            letterSpacing: 0.2,
           ),
         ),
         const SizedBox(
-          height: 12,
+          height: 6,
         ),
         Container(
           // color: Colors.greenAccent,
