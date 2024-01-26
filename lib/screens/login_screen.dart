@@ -37,7 +37,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff03071e),
-      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -113,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         decoration: const InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Email',
+                            hintText: 'Register No',
                             prefixIcon: Icon(
                               Icons.mail_outline,
                               color: Color(0xff03071e),

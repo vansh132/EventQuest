@@ -12,9 +12,6 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   // AuthServices authServices = AuthServices();
   final _signUpKey = GlobalKey<FormState>();
-  final TextEditingController _fullName = TextEditingController();
-  final TextEditingController _college = TextEditingController();
-  final TextEditingController _phoneNumber = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confirmPassword = TextEditingController();
@@ -22,9 +19,7 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   void dispose() {
     super.dispose();
-    _fullName.dispose();
-    _college.dispose();
-    _phoneNumber.dispose();
+
     _email.dispose();
     _password.dispose();
     _confirmPassword.dispose();
@@ -103,90 +98,12 @@ class _SignupScreenState extends State<SignupScreen> {
                   padding:
                       const EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0),
                   child: TextFormField(
-                    controller: _fullName,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      prefixIcon: Icon(Icons.contacts_rounded),
-                      prefixIconColor: Color(0xFF03071E),
-                      hintText: "Full Name",
-                      hintStyle: TextStyle(
-                        color: Color(0xFF03071E),
-                        fontSize: 14,
-                      ),
-                      labelStyle: TextStyle(
-                        color: Color(0xFF03071E),
-                      ),
-                    ),
-                    validator: (val) {
-                      if (val == null || val.isEmpty) {
-                        return 'Enter your name';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0),
-                  child: TextFormField(
-                    controller: _college,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      prefixIcon: Icon(Icons.school_rounded),
-                      prefixIconColor: Color(0xFF03071E),
-                      hintText: "College",
-                      hintStyle: TextStyle(
-                        color: Color(0xFF03071E),
-                        fontSize: 14,
-                      ),
-                      labelStyle: TextStyle(
-                        color: Color(0xFF03071E),
-                      ),
-                    ),
-                    validator: (val) {
-                      if (val == null || val.isEmpty) {
-                        return 'Enter your college';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0),
-                  child: TextFormField(
-                    controller: _phoneNumber,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      prefixIcon: Icon(Icons.contact_emergency),
-                      prefixIconColor: Color(0xFF03071E),
-                      hintText: "Whatsapp Number",
-                      hintStyle: TextStyle(
-                        color: Color(0xFF03071E),
-                        fontSize: 14,
-                      ),
-                      labelStyle: TextStyle(
-                        color: Color(0xFF03071E),
-                      ),
-                    ),
-                    validator: (val) {
-                      if (val == null || val.isEmpty || val.length != 10) {
-                        return 'Enter valid phone number';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0),
-                  child: TextFormField(
                     controller: _email,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                       prefixIcon: Icon(Icons.email_rounded),
                       prefixIconColor: Color(0xFF03071E),
-                      hintText: "Email",
+                      hintText: "Register No",
                       hintStyle: TextStyle(
                         color: Color(0xFF03071E),
                         fontSize: 14,
@@ -340,21 +257,14 @@ class _SignupScreenState extends State<SignupScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
               SizedBox(
-                height: 54,
-                width: 54,
-                child: Image(
-                  image: AssetImage("assets/technozia_logo.png"),
-                ),
-              ),
-              SizedBox(
                 width: 16,
               ),
               Text(
-                "Technozia",
+                "EventQuest",
                 style: TextStyle(
                   fontSize: 28.0,
                   fontWeight: FontWeight.bold,
-                  // color: Colors.black87,
+                  color: Colors.white,
                   letterSpacing: 1.2,
                 ),
               ),
@@ -370,9 +280,9 @@ class _SignupScreenState extends State<SignupScreen> {
             child: const Text(
               "Welcome to a world of endless opportunities",
               style: TextStyle(
-                fontWeight: FontWeight.bold,
-                letterSpacing: 0.5,
-              ),
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.5,
+                  color: Colors.white),
             ),
           ),
           Container(
@@ -382,9 +292,9 @@ class _SignupScreenState extends State<SignupScreen> {
             child: const Text(
               "your adventure begins here!",
               style: TextStyle(
-                fontWeight: FontWeight.bold,
-                letterSpacing: 0.5,
-              ),
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.5,
+                  color: Colors.white),
             ),
           ),
         ],
