@@ -40,42 +40,42 @@ class EventDetailsScreen extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 5,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
                 child: Column(
                   children: [
-                    Text("Participation Instructions",
+                    const Text("Participation Instructions",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 17)),
                     const SizedBox(height: 12),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 65,
                         ),
-                        Column(
+                        const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               "Registration Fees:",
                               style: TextStyle(fontWeight: FontWeight.w600),
                             ),
-                            const SizedBox(height: 8),
+                            SizedBox(height: 8),
                             Text(
                               "Registration Deadline:",
                               style: TextStyle(fontWeight: FontWeight.w600),
                             ),
-                            const SizedBox(height: 8),
+                            SizedBox(height: 8),
                             Text(
                               "No Of Participation:",
                               style: TextStyle(fontWeight: FontWeight.w600),
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 30,
                         ),
                         Column(
@@ -105,15 +105,15 @@ class EventDetailsScreen extends StatelessWidget {
               },
               child: RichText(
                 text: TextSpan(
-                  style: TextStyle(fontSize: 18, color: Colors.black),
+                  style: const TextStyle(fontSize: 18, color: Colors.black),
                   children: [
-                    TextSpan(
+                    const TextSpan(
                       text: 'Event Link:',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     TextSpan(
                         text: ' ${event.eventLink}',
-                        style: TextStyle(
+                        style: const TextStyle(
                             decoration: TextDecoration.underline,
                             color: Colors.redAccent)),
                   ],
@@ -128,17 +128,17 @@ class EventDetailsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "Description:",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     RichText(
                       text: TextSpan(
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           color: Colors.black, // Set your preferred text color
                         ),
@@ -161,9 +161,9 @@ class EventDetailsScreen extends StatelessWidget {
                 children: [
                   RichText(
                     text: TextSpan(
-                      style: TextStyle(fontSize: 18, color: Colors.black),
+                      style: const TextStyle(fontSize: 18, color: Colors.black),
                       children: [
-                        TextSpan(
+                        const TextSpan(
                           text: 'Contact Person:',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
@@ -171,12 +171,12 @@ class EventDetailsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 8), // Adjust the height for spacing
+                  const SizedBox(height: 8), // Adjust the height for spacing
                   RichText(
                     text: TextSpan(
-                      style: TextStyle(fontSize: 18, color: Colors.black),
+                      style: const TextStyle(fontSize: 18, color: Colors.black),
                       children: [
-                        TextSpan(
+                        const TextSpan(
                           text: 'Contact Number:',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
@@ -193,12 +193,12 @@ class EventDetailsScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xff003049),
+                    backgroundColor: const Color(0xff003049),
                     foregroundColor: Colors.white),
                 onPressed: () {
                   Navigator.pushNamed(context, RegistrationScreen.routeName);
                 },
-                child: Text(
+                child: const Text(
                   'Register',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),

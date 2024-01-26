@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eventquest/models/announcement.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:photo_view/photo_view.dart';
 
@@ -14,10 +14,10 @@ class AnnouncementDetailScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Announcement Detail'),
+        title: const Text('Announcement Detail'),
       ),
       body: Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -49,18 +49,18 @@ class AnnouncementDetailScreen extends StatelessWidget {
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.symmetric(horizontal: 5.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.0),
                           boxShadow: [
-                            BoxShadow(
+                            const BoxShadow(
                               color: Colors.grey,
                               spreadRadius: 2,
                               blurRadius: 5,
                               offset: Offset(0, 3),
                             ),
                           ],
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [Colors.grey, Colors.blueGrey],
@@ -90,25 +90,25 @@ class AnnouncementDetailScreen extends StatelessWidget {
                   children: [
                     Text(
                       announcement.title,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       'Date: ${DateFormat('MMM d, y').format(DateTime.now().toLocal())}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Expanded(
                       child: SingleChildScrollView(
                         child: Text(
                           announcement.description,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                           ),
                           textAlign: TextAlign.justify,
@@ -142,7 +142,7 @@ class FullScreenImage extends StatelessWidget {
           imageProvider: NetworkImage(url),
           minScale: PhotoViewComputedScale.contained,
           maxScale: PhotoViewComputedScale.covered * 2,
-          backgroundDecoration: BoxDecoration(
+          backgroundDecoration: const BoxDecoration(
             color: Colors.black,
           ),
         ),

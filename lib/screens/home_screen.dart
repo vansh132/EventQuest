@@ -69,7 +69,7 @@ class HomeScreen extends StatelessWidget {
         eventName: "Coding Competition",
         description:
             "Welcome to CodeCraft Challenge, an exciting coding competition tailored for computer science enthusiasts! Whether you are a seasoned coder or a novice programmer, this event is designed to bring out the best in you. Sharpen your problem-solving skills, enhance your algorithmic thinking, and showcase your coding prowess in a thrilling environment.",
-        publishedOn: DateTime.now().subtract(Duration(days: 5)),
+        publishedOn: DateTime.now().subtract(const Duration(days: 5)),
         eventImages:
             "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29hZGluZ3xlbnwwfHwwfHx8MA%3D%3D",
         eventLink: "https://codingcompetition.com",
@@ -84,7 +84,7 @@ class HomeScreen extends StatelessWidget {
         eventCategory: "Both",
         eventName: "Art Exhibition",
         description: "Explore the world of art through various exhibits.",
-        publishedOn: DateTime.now().subtract(Duration(days: 10)),
+        publishedOn: DateTime.now().subtract(const Duration(days: 10)),
         eventImages:
             "https://plus.unsplash.com/premium_photo-1661767490975-f31a02946f48?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         eventLink: "https://artexhibition.com",
@@ -104,8 +104,8 @@ class HomeScreen extends StatelessWidget {
             children: [
               TopBar(),
               UserBar(),
-              Highlights(),
-              SizedBox(
+              const Highlights(),
+              const SizedBox(
                 height: 8,
               ),
               RecentEvents(context, events),
@@ -148,7 +148,7 @@ Widget RecentAnnouncements(
                 color: Colors.grey.withOpacity(0.3), // Shadow color
                 spreadRadius: 5, // Spread radius
                 blurRadius: 7, // Blur radius
-                offset: Offset(0, 3), // Offset in the x, y direction
+                offset: const Offset(0, 3), // Offset in the x, y direction
               ),
             ],
           ),
@@ -220,7 +220,7 @@ Widget AnnouncementItem(BuildContext context, Announcement announcement) {
             height: 128,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              image: DecorationImage(
+              image: const DecorationImage(
                 image: NetworkImage(
                   scale: 1,
                   "https://img.freepik.com/free-photo/business-job-interview-concept_1421-77.jpg",
@@ -236,7 +236,7 @@ Widget AnnouncementItem(BuildContext context, Announcement announcement) {
             child: Container(
               height: 128,
               // color: Colors.amber,
-              margin: EdgeInsets.symmetric(horizontal: 6),
+              margin: const EdgeInsets.symmetric(horizontal: 6),
               child: Column(
                 children: [
                   Expanded(
@@ -245,7 +245,7 @@ Widget AnnouncementItem(BuildContext context, Announcement announcement) {
                       alignment: Alignment.center,
                       child: Text(
                         announcement.title,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -254,7 +254,7 @@ Widget AnnouncementItem(BuildContext context, Announcement announcement) {
                       ),
                     ),
                   ),
-                  Divider(
+                  const Divider(
                     indent: 16,
                     color: Colors.black38,
                     endIndent: 16,
@@ -265,7 +265,7 @@ Widget AnnouncementItem(BuildContext context, Announcement announcement) {
                       children: [
                         Text(
                           announcement.publishedBy,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                             letterSpacing: 0.5,
@@ -274,7 +274,7 @@ Widget AnnouncementItem(BuildContext context, Announcement announcement) {
                         Text(
                           DateFormat('MMM d, y')
                               .format(announcement.publishedOn),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 8,
                             fontWeight: FontWeight.w500,
                             letterSpacing: 0.5,
@@ -316,7 +316,7 @@ Widget EventItem(Event event, BuildContext context) {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Container(
-        margin: EdgeInsets.only(top: 95),
+        margin: const EdgeInsets.only(top: 95),
         child: Row(
           children: [
             Card(

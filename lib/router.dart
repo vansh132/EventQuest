@@ -12,7 +12,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
     case EventScreen.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => EventScreen(),
+        builder: (_) => const EventScreen(),
       );
     case EventDetailsScreen.routeName:
       return MaterialPageRoute(
@@ -27,22 +27,22 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
     case RegistrationScreen.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => RegistrationScreen(),
+        builder: (_) => const RegistrationScreen(),
       );
     case CustomBottomNavigationBar.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => CustomBottomNavigationBar(),
+        builder: (_) => const CustomBottomNavigationBar(),
       );
     case LoginScreen.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => LoginScreen(),
+        builder: (_) => const LoginScreen(),
       );
     case SignupScreen.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => SignupScreen(),
+        builder: (_) => const SignupScreen(),
       );
 
     default:

@@ -36,8 +36,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff0D1B2A),
-        title: Text(
+        backgroundColor: const Color(0xff0D1B2A),
+        title: const Text(
           "EventQuest",
           style: TextStyle(
             color: Colors.white,
@@ -64,9 +64,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 // color: Colors.red,
                 margin: const EdgeInsets.only(left: 24, top: 24),
                 padding: const EdgeInsets.all(8),
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
                       "Welcome, ",
                       style: TextStyle(
@@ -209,14 +209,14 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 52,
               ),
-              SizedBox(
+              const SizedBox(
                 width: double.infinity,
                 child: Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
+                        Text(
                           "\" Embrace each event; it's an opportunity for greatness \"",
                           style: TextStyle(color: Color(0xff8d99ae)),
                         ),

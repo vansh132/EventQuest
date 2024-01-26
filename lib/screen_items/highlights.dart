@@ -8,22 +8,26 @@ List<String> images = [
 ];
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text('Image Gallery')),
-        body: Highlights(),
+        appBar: AppBar(title: const Text('Image Gallery')),
+        body: const Highlights(),
       ),
     );
   }
 }
 
 class Highlights extends StatelessWidget {
+  const Highlights({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -68,7 +72,7 @@ class Highlights extends StatelessWidget {
 class FullScreenImage extends StatelessWidget {
   final String imageUrl;
 
-  FullScreenImage({required this.imageUrl});
+  const FullScreenImage({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {

@@ -193,7 +193,7 @@ class _EventScreenState extends State<EventScreen> {
     return Container(
       child: Column(
         children: [
-          Text(
+          const Text(
             'Select your preference:',
             style: TextStyle(
               fontSize: 22,
@@ -226,7 +226,7 @@ class _EventScreenState extends State<EventScreen> {
                 return ChoiceChip(
                   label: Text(
                     optionText,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.w700,
                     ),
                   ),
