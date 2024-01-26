@@ -188,7 +188,7 @@ class _EventScreenState extends State<EventScreen> {
   }
 
   Widget filterOption(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
+    // final TextTheme textTheme = Theme.of(context).textTheme;
 
     return Container(
       child: Column(
@@ -224,7 +224,6 @@ class _EventScreenState extends State<EventScreen> {
                 }
 
                 return ChoiceChip(
-                  
                   label: Text(
                     optionText,
                     style: TextStyle(

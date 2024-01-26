@@ -33,7 +33,7 @@ class AnnouncementScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.amber,
+        // color: Colors.amber,
         child: Column(
           children: [
             TopBar(),
