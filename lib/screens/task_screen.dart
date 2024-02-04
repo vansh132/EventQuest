@@ -138,7 +138,7 @@ class _TaskScreenState extends State<TaskScreen> {
               margin: const EdgeInsets.all(8),
               padding: const EdgeInsets.all(16),
               // color: Colors.greenAccent,
-              height: 500,
+              height: 400,
               child: ListView.builder(
                 itemCount:
                     selected ? assignedTasks.length : historyTasks.length,

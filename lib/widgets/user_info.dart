@@ -21,7 +21,7 @@ Widget UserBar() {
             Column(
               children: [
                 Text(
-                  "Vansh Shah",
+                  "Riya Shah",
                   style: TextStyle(
                     color: Color(
                       0xffFFCF33,
