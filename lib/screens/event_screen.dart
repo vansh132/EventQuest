@@ -49,7 +49,7 @@ class _EventScreenState extends State<EventScreen> {
     ),
     Event(
       eventId: "ghi789",
-      eventCategory: "Both",
+      eventCategory: "UG",
       eventName: "Art Exhibition",
       description: "Explore the world of art through various exhibits.",
       publishedOn: DateTime.now().subtract(const Duration(days: 10)),
@@ -73,8 +73,8 @@ class _EventScreenState extends State<EventScreen> {
             .toList();
 
     return Scaffold(
-      body: Container(
-        // color: Colors.amber,
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
             TopBar(),
@@ -188,9 +188,8 @@ class _EventScreenState extends State<EventScreen> {
   }
 
   Widget filterOption(BuildContext context) {
-    // final TextTheme textTheme = Theme.of(context).textTheme;
-
-    return Container(
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
       child: Column(
         children: [
           const Text(
@@ -202,9 +201,9 @@ class _EventScreenState extends State<EventScreen> {
           ),
           const SizedBox(height: 10.0),
           Wrap(
-            spacing: 5.0,
+            spacing: 20.0,
             children: List<Widget>.generate(
-              3,
+              2,
               (int index) {
                 String optionText = '';
 
@@ -215,9 +214,7 @@ class _EventScreenState extends State<EventScreen> {
                   case 1:
                     optionText = 'PG';
                     break;
-                  case 2:
-                    optionText = 'Both';
-                    break;
+
                   default:
                     optionText = '';
                     break;
@@ -255,8 +252,7 @@ class _EventScreenState extends State<EventScreen> {
         return 'UG';
       case 1:
         return 'PG';
-      case 2:
-        return 'Both';
+
       default:
         return '';
     }
