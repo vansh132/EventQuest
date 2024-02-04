@@ -32,6 +32,7 @@ class _TaskScreenState extends State<TaskScreen> {
         assignedTo: "2347152",
         assignedBy: "Helen K Joy",
         taskStatus: "Completed",
+        remarks: "feefef",
       ),
     ];
 

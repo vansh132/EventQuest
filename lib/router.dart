@@ -2,7 +2,6 @@ import 'package:eventquest/custom_navigation_botttom_bar.dart';
 import 'package:eventquest/screens/detailed_screens/announcement_detail_screen.dart';
 import 'package:eventquest/screens/detailed_screens/event_detail_screen.dart';
 import 'package:eventquest/screens/detailed_screens/task_detail_screen.dart';
-import 'package:eventquest/screens/event_screen.dart';
 import 'package:eventquest/screens/login_screen.dart';
 import 'package:eventquest/screens/registration_screen.dart';
 // import 'package:eventquest/screens/signup_screen.dart';

@@ -1,6 +1,8 @@
+import 'dart:io';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:eventquest/models/task.dart';
-import 'package:eventquest/widgets/top_bar.dart';
-import 'package:eventquest/widgets/user_info.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class TaskDetailScreen extends StatefulWidget {
@@ -14,6 +16,33 @@ class TaskDetailScreen extends StatefulWidget {
 }
 
 class _TaskDetailScreenState extends State<TaskDetailScreen> {
+  List<File> images = [];
+  void selectImages() async {
+    var res = await pickImages();
+    setState(() {
+      images = res;
+    });
+  }
+
+  Future<List<File>> pickImages() async {
+    List<File> images = [];
+    try {
+      var files = await FilePicker.platform.pickFiles(
+        type: FileType.image,
+        allowMultiple: true,
+      );
+
+      if (files != null && files.files.isNotEmpty) {
+        for (int i = 0; i < files.files.length; i++) {
+          images.add(File(files.files[i].path!));
+        }
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    return images;
+  }
+
   @override
   Widget build(BuildContext context) {
     final Task task = ModalRoute.of(context)!.settings.arguments as Task;
@@ -24,14 +53,14 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
           children: [
             TopbarTitle(context, task),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               // padding: EdgeInsets.all(8),
               child: Column(
                 children: [
                   Container(
                     alignment: Alignment.centerLeft,
                     width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: Colors.white70,
                       borderRadius: BorderRadius.circular(12),
@@ -49,7 +78,151 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       task.taskDescription,
                       textAlign: TextAlign.justify,
                     ),
-                  )
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white70,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3), // Shadow color
+                          spreadRadius: 1, // Spread radius
+                          blurRadius: 1, // Blur radius
+                          offset: const Offset(
+                              0, 3), // Offset in the x, y direction
+                        ),
+                      ],
+                    ),
+                    child: RichText(
+                      text: TextSpan(children: [
+                        const TextSpan(
+                            text: "Status: ",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            )),
+                        TextSpan(
+                          text: task.taskStatus,
+                          style: task.taskStatus == "Incomplete"
+                              ? const TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                )
+                              : const TextStyle(
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                ),
+                        ),
+                      ]),
+                      textAlign: TextAlign.justify,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  images.isNotEmpty
+                      ? CarouselSlider(
+                          items: images.map((i) {
+                            return Builder(
+                              builder: (context) => Image.file(
+                                i,
+                                fit: BoxFit.cover,
+                                height: 200,
+                              ),
+                            );
+                          }).toList(),
+                          options: CarouselOptions(
+                            viewportFraction: 1,
+                            height: 200,
+                          ),
+                        )
+                      : GestureDetector(
+                          onTap: selectImages,
+                          child: DottedBorder(
+                            radius: const Radius.circular(10),
+                            dashPattern: const [10, 4],
+                            borderType: BorderType.RRect,
+                            strokeCap: StrokeCap.round,
+                            child: Container(
+                              width: double.infinity,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                // color: Colors.red,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    Icons.folder_open_outlined,
+                                    size: 40,
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    "Select Product Images",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.grey.shade400,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    "Remarks",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Color(0xff0D1B2A),
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.2,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 6,
+                  ),
+                  Container(
+                    alignment: task.remarks != null
+                        ? Alignment.centerLeft
+                        : Alignment.center,
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white70,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3), // Shadow color
+                          spreadRadius: 1, // Spread radius
+                          blurRadius: 1, // Blur radius
+                          offset: const Offset(
+                              0, 3), // Offset in the x, y direction
+                        ),
+                      ],
+                    ),
+                    child: task.remarks != null
+                        ? Text(
+                            task.remarks.toString(),
+                            textAlign: TextAlign.justify,
+                          )
+                        : const Text("No Remarks"),
+                  ),
                 ],
               ),
             )
