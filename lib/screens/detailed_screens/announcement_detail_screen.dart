@@ -14,114 +14,136 @@ class AnnouncementDetailScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Announcement Detail'),
+        title: const Text('Announcement Details'),
       ),
       body: Container(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CarouselSlider(
-              options: CarouselOptions(
-                height: 200,
-                viewportFraction: 1.0,
-                enlargeCenterPage: false,
-                autoPlay: true,
-                aspectRatio: 2.0,
+            AnnouncementCarouselSlider(announcement: announcement),
+            AnnouncementDetailContent(announcement: announcement),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AnnouncementDetailContent extends StatelessWidget {
+  const AnnouncementDetailContent({
+    super.key,
+    required this.announcement,
+  });
+
+  final Announcement announcement;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              announcement.title,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
-              items: announcement.image!.map((url) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder:
-                                (context, animation, secondaryAnimation) {
-                              return FadeTransition(
-                                opacity: animation,
-                                child: FullScreenImage(url: url),
-                              );
-                            },
-                          ),
-                        );
-                      },
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                          boxShadow: [
-                            const BoxShadow(
-                              color: Colors.grey,
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: Offset(0, 3),
-                            ),
-                          ],
-                          gradient: const LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [Colors.grey, Colors.blueGrey],
-                          ),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: Hero(
-                            tag: 'announcement_image_${url.hashCode}',
-                            child: Image.network(
-                              url,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                );
-              }).toList(),
             ),
+            const SizedBox(height: 8),
+            Text(
+              'Date: ${DateFormat('MMM d, y').format(DateTime.now().toLocal())}',
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      announcement.title,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Date: ${DateFormat('MMM d, y').format(DateTime.now().toLocal())}',
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Text(
-                          announcement.description,
-                          style: const TextStyle(
-                            fontSize: 16,
-                          ),
-                          textAlign: TextAlign.justify,
-                        ),
-                      ),
-                    ),
-                  ],
+              child: SingleChildScrollView(
+                child: Text(
+                  announcement.description,
+                  style: const TextStyle(
+                    fontSize: 16,
+                  ),
+                  textAlign: TextAlign.justify,
                 ),
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class AnnouncementCarouselSlider extends StatelessWidget {
+  const AnnouncementCarouselSlider({
+    super.key,
+    required this.announcement,
+  });
+
+  final Announcement announcement;
+
+  @override
+  Widget build(BuildContext context) {
+    return CarouselSlider(
+      options: CarouselOptions(
+        height: 200,
+        viewportFraction: 1.0,
+        enlargeCenterPage: false,
+        autoPlay: true,
+        aspectRatio: 2.0,
+      ),
+      items: announcement.image!.map((url) {
+        return Builder(
+          builder: (BuildContext context) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: FullScreenImage(url: url),
+                      );
+                    },
+                  ),
+                );
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.grey,
+                      spreadRadius: 3,
+                      blurRadius: 5,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: Hero(
+                    tag: 'announcement_image_${url.hashCode}',
+                    child: Image.network(
+                      url,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      }).toList(),
     );
   }
 }
@@ -143,7 +165,7 @@ class FullScreenImage extends StatelessWidget {
           minScale: PhotoViewComputedScale.contained,
           maxScale: PhotoViewComputedScale.covered * 2,
           backgroundDecoration: const BoxDecoration(
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
       ),

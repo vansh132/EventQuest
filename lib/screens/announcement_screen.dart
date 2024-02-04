@@ -29,13 +29,13 @@ class AnnouncementScreen extends StatelessWidget {
     ),
   ];
 
-   AnnouncementScreen({super.key});
+  AnnouncementScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        // color: Colors.amber,
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
             TopBar(),
@@ -58,7 +58,7 @@ class AnnouncementScreen extends StatelessWidget {
       Announcement announcement, BuildContext context) {
     String primaryImage = announcement.image!.isNotEmpty
         ? announcement.image!.first
-        : "https://placeholder.com/80"; // Replace with your default image URL
+        : "https://placeholder.com/80";
 
     return GestureDetector(
       onTap: () {
