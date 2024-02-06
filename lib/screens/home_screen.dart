@@ -159,6 +159,21 @@ Widget RecentAnnouncements(
                 AnnouncementItem(context, announcements[index]),
           ),
         ),
+        Container(
+          margin: EdgeInsets.only(
+            top: 16,
+          ),
+          child: const Column(
+            children: [
+              ElevatedButton(
+                onPressed: null,
+                child: Text(
+                  "Faculty - Home Screen",
+                ),
+              ),
+            ],
+          ),
+        )
       ],
     ),
   );
