@@ -6,7 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 class EventDetailsScreen extends StatelessWidget {
   static const String routeName = '/event-detail-screen';
 
-  EventDetailsScreen();
+  const EventDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

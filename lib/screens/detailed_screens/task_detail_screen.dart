@@ -79,7 +79,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       textAlign: TextAlign.justify,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   Container(
@@ -126,7 +126,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       textAlign: TextAlign.justify,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   images.isNotEmpty
@@ -182,10 +182,10 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                             ),
                           ),
                         ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
-                  Text(
+                  const Text(
                     "Remarks",
                     style: TextStyle(
                       fontSize: 16,
@@ -194,7 +194,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       letterSpacing: 0.2,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 6,
                   ),
                   Container(

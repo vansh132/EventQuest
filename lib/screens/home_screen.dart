@@ -184,7 +184,7 @@ Widget RecentEvents(BuildContext context, List<Event> events) {
         const SizedBox(
           height: 6,
         ),
-        Container(
+        SizedBox(
           // color: Colors.greenAccent,
           height: 200,
           child: GridView.builder(

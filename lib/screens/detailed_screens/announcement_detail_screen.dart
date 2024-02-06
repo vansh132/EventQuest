@@ -7,6 +7,8 @@ import 'package:photo_view/photo_view.dart';
 class AnnouncementDetailScreen extends StatelessWidget {
   static const String routeName = '/announcement_detail';
 
+  const AnnouncementDetailScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final Announcement announcement =
@@ -151,7 +153,7 @@ class AnnouncementCarouselSlider extends StatelessWidget {
 class FullScreenImage extends StatelessWidget {
   final String url;
 
-  FullScreenImage({required this.url});
+  const FullScreenImage({super.key, required this.url});
 
   @override
   Widget build(BuildContext context) {

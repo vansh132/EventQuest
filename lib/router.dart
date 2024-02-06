@@ -12,7 +12,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
     case EventDetailsScreen.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => EventDetailsScreen(),
+        builder: (_) => const EventDetailsScreen(),
       );
     case TaskDetailScreen.routeName:
       return MaterialPageRoute(
@@ -22,7 +22,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
     case AnnouncementDetailScreen.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => AnnouncementDetailScreen(),
+        builder: (_) => const AnnouncementDetailScreen(),
       );
     case RegistrationScreen.routeName:
       return MaterialPageRoute(
