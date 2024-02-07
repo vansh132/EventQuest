@@ -118,7 +118,7 @@ class _EventScreenState extends State<EventScreen> {
             ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
               child: Image.network(
-                event.eventImages!,
+                event.eventImages,
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: 200,

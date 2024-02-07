@@ -1,9 +1,3 @@
-import 'dart:io';
-
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dotted_border/dotted_border.dart';
-import 'package:eventquest/models/event.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class AddEventScreen extends StatefulWidget {
@@ -15,49 +9,20 @@ class AddEventScreen extends StatefulWidget {
 class _AddEventScreenState extends State<AddEventScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  DateTime? _registartionDeadline;
+  // void _pickRegistrationDeadline() async {
+  //   DateTime? pickedDate = await showDatePicker(
+  //     context: context,
+  //     initialDate: DateTime.now(),
+  //     firstDate: DateTime.now(),
+  //     lastDate: DateTime(2100),
+  //   );
 
-  List<File> images = [];
-  void selectImages() async {
-    var res = await pickImages();
-    setState(() {
-      images = res;
-    });
-  }
-
-  void _pickRegistrationDeadline() async {
-    DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2100),
-    );
-
-    if (pickedDate != null) {
-      setState(() {
-        _registartionDeadline = pickedDate;
-      });
-    }
-  }
-
-  Future<List<File>> pickImages() async {
-    List<File> images = [];
-    try {
-      var files = await FilePicker.platform.pickFiles(
-        type: FileType.image,
-        allowMultiple: false,
-      );
-
-      if (files != null && files.files.isNotEmpty) {
-        for (int i = 0; i < files.files.length; i++) {
-          images.add(File(files.files[i].path!));
-        }
-      }
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-    return images;
-  }
+  //   if (pickedDate != null) {
+  //     setState(() {
+  //       _registartionDeadline = pickedDate;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

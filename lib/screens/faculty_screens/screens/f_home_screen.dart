@@ -299,7 +299,7 @@ Widget EventItem(Event event, BuildContext context) {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: NetworkImage(
-            event.eventImages!,
+            event.eventImages,
           ),
           fit: BoxFit.cover,
         ),
