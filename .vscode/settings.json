@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "D:/EventQuest/eventquest/linux"
+    "cmake.sourceDirectory": "D:/EventQuest/eventquest/linux",
+    "cmake.configureOnOpen": false
 }
