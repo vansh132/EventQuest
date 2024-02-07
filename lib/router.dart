@@ -2,6 +2,8 @@ import 'package:eventquest/custom_navigation_botttom_bar.dart';
 import 'package:eventquest/screens/detailed_screens/announcement_detail_screen.dart';
 import 'package:eventquest/screens/detailed_screens/event_detail_screen.dart';
 import 'package:eventquest/screens/detailed_screens/task_detail_screen.dart';
+import 'package:eventquest/screens/faculty_screens/crud_screen/add_event_screen.dart';
+import 'package:eventquest/screens/faculty_screens/crud_screen/edit_event_screen.dart';
 import 'package:eventquest/screens/faculty_screens/custom_navigation_bottom_bar.dart';
 import 'package:eventquest/screens/login_screen.dart';
 import 'package:eventquest/screens/registration_screen.dart';
@@ -34,6 +36,16 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const CustomBottomNavigationBar(),
+      );
+    case AddEventScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const AddEventScreen(),
+      );
+    case EditEventScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const EditEventScreen(),
       );
     case LoginScreen.routeName:
       return MaterialPageRoute(
