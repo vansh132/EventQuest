@@ -5,8 +5,8 @@ import 'package:eventquest/screens/detailed_screens/task_detail_screen.dart';
 import 'package:eventquest/screens/faculty_screens/crud_screen/add_event_screen.dart';
 import 'package:eventquest/screens/faculty_screens/crud_screen/edit_event_screen.dart';
 import 'package:eventquest/screens/faculty_screens/custom_navigation_bottom_bar.dart';
-import 'package:eventquest/screens/login_screen.dart';
-import 'package:eventquest/screens/registration_screen.dart';
+import 'package:eventquest/screens/student_screens/login_screen.dart';
+import 'package:eventquest/screens/student_screens/registration_screen.dart';
 // import 'package:eventquest/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 

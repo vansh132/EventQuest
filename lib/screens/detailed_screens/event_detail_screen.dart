@@ -1,5 +1,6 @@
 import 'package:eventquest/models/event.dart';
-import 'package:eventquest/screens/registration_screen.dart';
+import 'package:eventquest/screens/student_screens/registration_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 

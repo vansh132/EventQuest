@@ -1,6 +1,5 @@
-
 import 'package:eventquest/router.dart';
-import 'package:eventquest/screens/login_screen.dart';
+import 'package:eventquest/screens/student_screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
