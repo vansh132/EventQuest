@@ -39,27 +39,27 @@ class _FacultyCustomBottomBarState extends State<FacultyCustomBottomBar> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'fHome',
+            label: 'Home',
             backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.event),
-            label: 'fEvents',
+            label: 'Events',
             backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.article_rounded),
-            label: 'fAnnouncements',
+            label: 'Announcements',
             backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.checklist_rounded),
-            label: 'fTasks',
+            label: 'Tasks',
             backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.app_registration),
-            label: 'sRegistrations',
+            label: 'Registrations',
             backgroundColor: Colors.black,
           ),
         ],

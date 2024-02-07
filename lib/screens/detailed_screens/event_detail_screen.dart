@@ -23,7 +23,7 @@ class EventDetailsScreen extends StatelessWidget {
             children: [
               // Event Image
               Image.network(
-                event.eventImages!,
+                event.eventImages,
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: 200,
