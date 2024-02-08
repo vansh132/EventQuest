@@ -13,8 +13,6 @@ class _EditEventScreenState extends State<EditEventScreen> {
   final _formKey = GlobalKey<FormState>();
 
   String dropdownValue = 'UG';
-
-  DateTime? _registrationDeadline;
   @override
   Widget build(BuildContext context) {
     TextEditingController eventName = TextEditingController();
@@ -38,7 +36,13 @@ class _EditEventScreenState extends State<EditEventScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Event Name"),
+                Text(
+                  "Event Name",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 TextFormField(
                   controller: eventName,
                   decoration: InputDecoration(
@@ -48,7 +52,13 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                Text("Descriptions"),
+                Text(
+                  "Descriptions",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 TextFormField(
                   controller: description,
                   decoration: InputDecoration(
@@ -59,7 +69,10 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 ),
                 const Text(
                   "Event Type",
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
                 Container(
                   padding: const EdgeInsets.all(10.0),
@@ -89,7 +102,13 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   "Upload File yet to be added",
                   style: TextStyle(color: Colors.red),
                 ),
-                Text("Event Amount"),
+                Text(
+                  "Event Amount",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 TextFormField(
                   controller: eventAmount,
                   keyboardType: TextInputType.number,
@@ -100,7 +119,13 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                Text("No Of Participants"),
+                Text(
+                  "No Of Participants",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 TextFormField(
                   controller: noOfParticipants,
                   keyboardType: TextInputType.number,
@@ -111,7 +136,13 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                Text("Event Link"),
+                Text(
+                  "Event Link",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 TextFormField(
                   controller: eventLink,
                   decoration: InputDecoration(
@@ -121,7 +152,13 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                Text("Contact Name"),
+                Text(
+                  "Contact Name",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 TextFormField(
                   controller: contactName,
                   decoration: InputDecoration(
@@ -131,7 +168,13 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                Text("Contact No"),
+                Text(
+                  "Contact No",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 TextFormField(
                   controller: contactPerson,
                   keyboardType: TextInputType.number,
@@ -145,7 +188,10 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 // Date picker for Registration Deadline
                 const Text(
                   "Registration Deadline",
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
                 const SizedBox(
                   height: 10,
@@ -156,10 +202,10 @@ class _EditEventScreenState extends State<EditEventScreen> {
                       _pickRegistrationDeadline();
                     },
                     child: RegistartionDeadline()),
-                SizedBox(
+                const SizedBox(
                   height: 14,
                 ),
-                Center(
+                const Center(
                     child:
                         ElevatedButton(onPressed: null, child: Text('Submit')))
               ],
@@ -174,16 +220,16 @@ class _EditEventScreenState extends State<EditEventScreen> {
     Event eventData = ModalRoute.of(context)!.settings.arguments as Event;
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(
-        eventData.registartionDeadline == null
+        eventData.registartionDeadline != null
             ? 'Select Registration Deadline'
             : '${eventData.registartionDeadline.day} / ${eventData.registartionDeadline.month} / ${eventData.registartionDeadline.year}',
-        style: TextStyle(fontSize: 16),
+        style: const TextStyle(fontSize: 16),
       ),
     );
   }
