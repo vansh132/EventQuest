@@ -1,5 +1,4 @@
 import 'package:eventquest/models/announcement.dart';
-import 'package:eventquest/models/event.dart';
 import 'package:flutter/material.dart';
 
 class EditAnnouncementScreen extends StatefulWidget {
