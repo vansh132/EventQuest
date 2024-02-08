@@ -38,20 +38,21 @@ class _EditEventScreenState extends State<EditEventScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text("Event Name"),
                 TextFormField(
                   controller: eventName,
                   decoration: InputDecoration(
-                    labelText: eventData.eventName,
+                    hintText: eventData.eventName,
                   ),
                 ),
                 const SizedBox(
                   height: 14,
                 ),
+                Text("Descriptions"),
                 TextFormField(
                   controller: description,
-                  decoration: const InputDecoration(
-                    labelText: "Description",
-                  ),
+                  decoration: InputDecoration(
+                      hintText: eventData.description, hintMaxLines: 5),
                 ),
                 const SizedBox(
                   height: 16,
@@ -88,49 +89,54 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   "Upload File yet to be added",
                   style: TextStyle(color: Colors.red),
                 ),
+                Text("Event Amount"),
                 TextFormField(
                   controller: eventAmount,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    labelText: "Event Amount",
+                  decoration: InputDecoration(
+                    hintText: eventData.eventAmount.toString(),
                   ),
                 ),
                 const SizedBox(
                   height: 14,
                 ),
+                Text("No Of Participants"),
                 TextFormField(
                   controller: noOfParticipants,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    labelText: "No Of Participant",
+                  decoration: InputDecoration(
+                    hintText: eventData.noOfParticipants.toString(),
                   ),
                 ),
                 const SizedBox(
                   height: 14,
                 ),
+                Text("Event Link"),
                 TextFormField(
                   controller: eventLink,
-                  decoration: const InputDecoration(
-                    labelText: "Event Link",
+                  decoration: InputDecoration(
+                    hintText: eventData.eventLink,
                   ),
                 ),
                 const SizedBox(
                   height: 14,
                 ),
+                Text("Contact Name"),
                 TextFormField(
                   controller: contactName,
-                  decoration: const InputDecoration(
-                    labelText: "Contact Name",
+                  decoration: InputDecoration(
+                    hintText: eventData.contactPerson,
                   ),
                 ),
                 const SizedBox(
                   height: 14,
                 ),
+                Text("Contact No"),
                 TextFormField(
                   controller: contactPerson,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    labelText: "Contact Person",
+                  decoration: InputDecoration(
+                    hintText: eventData.contactNo.toString(),
                   ),
                 ),
                 const SizedBox(
@@ -144,6 +150,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 10,
                 ),
+
                 InkWell(
                     onTap: () {
                       _pickRegistrationDeadline();
@@ -164,6 +171,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
   }
 
   Widget RegistartionDeadline() {
+    Event eventData = ModalRoute.of(context)!.settings.arguments as Event;
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(10.0),
@@ -172,15 +180,16 @@ class _EditEventScreenState extends State<EditEventScreen> {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(
-        _registrationDeadline == null
+        eventData.registartionDeadline == null
             ? 'Select Registration Deadline'
-            : '${_registrationDeadline!.day} / ${_registrationDeadline!.month} / ${_registrationDeadline!.year}',
+            : '${eventData.registartionDeadline.day} / ${eventData.registartionDeadline.month} / ${eventData.registartionDeadline.year}',
         style: TextStyle(fontSize: 16),
       ),
     );
   }
 
   void _pickRegistrationDeadline() async {
+    Event eventData = ModalRoute.of(context)!.settings.arguments as Event;
     DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -190,7 +199,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
 
     if (pickedDate != null) {
       setState(() {
-        _registrationDeadline = pickedDate;
+        eventData.registartionDeadline = pickedDate;
       });
     }
   }
