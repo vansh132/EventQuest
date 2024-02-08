@@ -53,7 +53,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   height: 14,
                 ),
                 Text(
-                  "Descriptions",
+                  "Description",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
