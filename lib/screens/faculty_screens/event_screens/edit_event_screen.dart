@@ -113,7 +113,9 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   controller: eventAmount,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    hintText: eventData.eventAmount.toString(),
+                    hintText: eventData.eventAmount == 0.0
+                        ? 'Free'
+                        : eventData.eventAmount.toString(),
                   ),
                 ),
                 const SizedBox(
