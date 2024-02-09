@@ -10,7 +10,7 @@ class Event {
   String? eventLink;
   final String contactPerson;
   final int contactNo;
-  final DateTime registartionDeadline;
+  DateTime registartionDeadline;
 
   Event({
     required this.eventId,
