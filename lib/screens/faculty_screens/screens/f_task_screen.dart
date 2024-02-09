@@ -1,4 +1,5 @@
 import 'package:eventquest/models/task.dart';
+import 'package:eventquest/screens/faculty_screens/screens/task_screens/f_task_detail_screen.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -57,7 +58,8 @@ class _FacultyTaskScreenState extends State<FacultyTaskScreen> {
               height: 500,
               margin: EdgeInsets.symmetric(horizontal: 8),
               child: ListView.builder(
-                itemBuilder: (context, index) => TaskItem(tasks[index]),
+                itemBuilder: (context, index) =>
+                    taskItem(context, tasks[index]),
                 itemCount: tasks.length,
               ),
             )
@@ -74,39 +76,44 @@ class _FacultyTaskScreenState extends State<FacultyTaskScreen> {
   }
 }
 
-Widget TaskItem(Task task) {
-  return Container(
-    padding: EdgeInsets.all(8),
-    margin: EdgeInsets.all(8),
-    decoration: BoxDecoration(
-      color: Colors.white70,
-      borderRadius: BorderRadius.circular(12),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(0.3), // Shadow color
-          spreadRadius: 5, // Spread radius
-          blurRadius: 7, // Blur radius
-          offset: const Offset(0, 3), // Offset in the x, y direction
-        ),
-      ],
-    ),
-    child: ListTile(
-      title: Text(
-        task.taskTitle,
+Widget taskItem(BuildContext context, Task task) {
+  return GestureDetector(
+    onTap: () {
+      Navigator.pushNamed(context, FacultyTaskDetailScreen.routeName);
+    },
+    child: Container(
+      padding: EdgeInsets.all(8),
+      margin: EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.white70,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3), // Shadow color
+            spreadRadius: 5, // Spread radius
+            blurRadius: 7, // Blur radius
+            offset: const Offset(0, 3), // Offset in the x, y direction
+          ),
+        ],
       ),
-      trailing: Text(
-        task.taskStatus,
-        style: task.taskStatus == "Incomplete"
-            ? const TextStyle(
-                color: Colors.red,
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-              )
-            : const TextStyle(
-                color: Colors.green,
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-              ),
+      child: ListTile(
+        title: Text(
+          task.taskTitle,
+        ),
+        trailing: Text(
+          task.taskStatus,
+          style: task.taskStatus == "Incomplete"
+              ? const TextStyle(
+                  color: Colors.red,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                )
+              : const TextStyle(
+                  color: Colors.green,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                ),
+        ),
       ),
     ),
   );
