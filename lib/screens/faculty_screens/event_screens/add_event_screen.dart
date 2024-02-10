@@ -22,14 +22,16 @@ class _AddEventScreenState extends State<AddEventScreen> {
     TextEditingController eventLink = TextEditingController();
     TextEditingController contactPerson = TextEditingController();
     TextEditingController contactName = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Event Form'),
+        title: const Text('Event Form'),
       ),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(10.0),
           margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          // Form
           child: Form(
             key: _formKey,
             child: Column(
@@ -145,11 +147,11 @@ class _AddEventScreenState extends State<AddEventScreen> {
                     onTap: () {
                       _pickRegistrationDeadline();
                     },
-                    child: RegistartionDeadline()),
-                SizedBox(
+                    child: registartionDeadline()),
+                const SizedBox(
                   height: 14,
                 ),
-                Center(
+                const Center(
                     child:
                         ElevatedButton(onPressed: null, child: Text('Submit')))
               ],
@@ -160,10 +162,10 @@ class _AddEventScreenState extends State<AddEventScreen> {
     );
   }
 
-  Widget RegistartionDeadline() {
+  Widget registartionDeadline() {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(10),
@@ -172,7 +174,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
         _registrationDeadline == null
             ? 'Select Registration Deadline'
             : '${_registrationDeadline!.day} / ${_registrationDeadline!.month} / ${_registrationDeadline!.year}',
-        style: TextStyle(fontSize: 16),
+        style: const TextStyle(fontSize: 16),
       ),
     );
   }

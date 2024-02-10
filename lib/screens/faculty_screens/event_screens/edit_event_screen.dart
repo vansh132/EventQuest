@@ -36,7 +36,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Event Name",
                   style: TextStyle(
                     fontSize: 18,
@@ -52,7 +52,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                Text(
+                const Text(
                   "Description",
                   style: TextStyle(
                     fontSize: 18,
@@ -102,7 +102,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   "Upload File yet to be added",
                   style: TextStyle(color: Colors.red),
                 ),
-                Text(
+                const Text(
                   "Event Amount",
                   style: TextStyle(
                     fontSize: 18,
@@ -121,7 +121,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                Text(
+                const Text(
                   "No Of Participants",
                   style: TextStyle(
                     fontSize: 18,
@@ -138,7 +138,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                Text(
+                const Text(
                   "Event Link",
                   style: TextStyle(
                     fontSize: 18,
@@ -154,7 +154,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                Text(
+                const Text(
                   "Contact Name",
                   style: TextStyle(
                     fontSize: 18,
@@ -170,7 +170,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                Text(
+                const Text(
                   "Contact No",
                   style: TextStyle(
                     fontSize: 18,

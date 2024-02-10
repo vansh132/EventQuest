@@ -32,7 +32,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Announcement Title",
                   style: TextStyle(
                     fontSize: 18,
@@ -48,7 +48,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                Text(
+                const Text(
                   "Description",
                   style: TextStyle(
                     fontSize: 18,
@@ -71,7 +71,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                   "Upload File yet to be added",
                   style: TextStyle(color: Colors.red),
                 ),
-                Text(
+                const Text(
                   "Publish By",
                   style: TextStyle(
                     fontSize: 18,

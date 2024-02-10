@@ -2,7 +2,6 @@ import 'package:eventquest/models/announcement.dart';
 import 'package:eventquest/models/event.dart';
 import 'package:eventquest/screen_items/highlights.dart';
 import 'package:eventquest/screens/student_screens/event_screens/event_detail_screen.dart';
-
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
@@ -107,7 +106,7 @@ class FacultyHomeScreen extends StatelessWidget {
               const SizedBox(
                 height: 8,
               ),
-              RecentEvents(context, events),
+              recentEvents(context, events),
               RecentAnnouncements(context, announcements),
             ],
           ),
@@ -155,7 +154,7 @@ Widget RecentAnnouncements(
             scrollDirection: Axis.vertical,
             itemCount: announcements.length,
             itemBuilder: (context, index) =>
-                AnnouncementItem(context, announcements[index]),
+                announcementItem(context, announcements[index]),
           ),
         ),
       ],
@@ -163,7 +162,7 @@ Widget RecentAnnouncements(
   );
 }
 
-Widget RecentEvents(BuildContext context, List<Event> events) {
+Widget recentEvents(BuildContext context, List<Event> events) {
   return Container(
     width: MediaQuery.of(context).size.width,
     padding: const EdgeInsets.all(16),
@@ -194,7 +193,7 @@ Widget RecentEvents(BuildContext context, List<Event> events) {
               mainAxisSpacing: 4.0,
             ),
             itemCount: events.length,
-            itemBuilder: (context, index) => EventItem(events[index], context),
+            itemBuilder: (context, index) => eventItem(events[index], context),
           ),
         ),
       ],
@@ -202,7 +201,7 @@ Widget RecentEvents(BuildContext context, List<Event> events) {
   );
 }
 
-Widget AnnouncementItem(BuildContext context, Announcement announcement) {
+Widget announcementItem(BuildContext context, Announcement announcement) {
   return Container(
     // width: 180,
     margin: const EdgeInsets.all(8),
@@ -290,7 +289,7 @@ Widget AnnouncementItem(BuildContext context, Announcement announcement) {
   );
 }
 
-Widget EventItem(Event event, BuildContext context) {
+Widget eventItem(Event event, BuildContext context) {
   return GestureDetector(
     onTap: () => Navigator.pushNamed(context, EventDetailsScreen.routeName,
         arguments: event),

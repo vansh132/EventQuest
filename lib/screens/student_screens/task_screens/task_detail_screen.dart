@@ -1,7 +1,7 @@
 import 'dart:io';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:eventquest/models/task.dart';
+import 'package:eventquest/screens/constants/utils.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -17,10 +17,27 @@ class TaskDetailScreen extends StatefulWidget {
 
 class _TaskDetailScreenState extends State<TaskDetailScreen> {
   File image = File("");
+  bool submitted = false;
   void selectImages() async {
     var res = await pickImages();
     setState(() {
       image = res;
+    });
+  }
+
+  void clearImage() {
+    setState(() {
+      image = File("");
+    });
+  }
+
+  void submitImage() {
+    if (image.existsSync() == false) {
+      showSnackBar(context, "Please upload file");
+      return;
+    }
+    setState(() {
+      submitted = true;
     });
   }
 
@@ -49,9 +66,9 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            TopbarTitle(context, task),
+            topbarTitle(context, task),
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               // padding: EdgeInsets.all(8),
               child: Column(
                 children: [
@@ -172,59 +189,27 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                             ),
                           ),
                         ),
-                  /* images.isNotEmpty
-                      ? CarouselSlider(
-                          items: images.map((i) {
-                            return Builder(
-                              builder: (context) => Image.file(
-                                i,
-                                fit: BoxFit.cover,
-                                height: 200,
-                              ),
-                            );
-                          }).toList(),
-                          options: CarouselOptions(
-                            viewportFraction: 1,
-                            height: 200,
-                          ),
-                        )
-                      : GestureDetector(
-                          onTap: selectImages,
-                          child: DottedBorder(
-                            radius: const Radius.circular(10),
-                            dashPattern: const [10, 4],
-                            borderType: BorderType.RRect,
-                            strokeCap: StrokeCap.round,
-                            child: Container(
-                              width: double.infinity,
-                              height: 150,
-                              decoration: BoxDecoration(
-                                // color: Colors.red,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  const Icon(
-                                    Icons.folder_open_outlined,
-                                    size: 40,
-                                  ),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  Text(
-                                    "Upload Poster",
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.grey.shade400,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ), */
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton.icon(
+                        onPressed: submitted == true ? null : clearImage,
+                        label: const Text(
+                          "Clear",
+                        ),
+                        icon: const Icon(Icons.cancel_outlined),
+                      ),
+                      ElevatedButton.icon(
+                        onPressed: submitted == true ? null : submitImage,
+                        icon: const Icon(
+                            Icons.playlist_add_check_circle_outlined),
+                        label: const Text("Submit"),
+                      )
+                    ],
+                  ),
                   const SizedBox(
                     height: 16,
                   ),
@@ -276,24 +261,32 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
   }
 }
 
-Widget TopbarTitle(BuildContext context, Task task) {
+Widget topbarTitle(BuildContext context, Task task) {
   return Container(
+    height: MediaQuery.of(context).size.height * 0.1,
+    width: double.maxFinite,
     alignment: Alignment.center,
-    width: MediaQuery.of(context).size.width,
-    height: 112,
-    padding: const EdgeInsets.all(8),
-    decoration: const BoxDecoration(
-      color: Color(0xff0D1B2A),
-      borderRadius: BorderRadius.only(
-        bottomRight: Radius.circular(72),
+    decoration: BoxDecoration(
+      borderRadius: const BorderRadius.only(
+        bottomLeft: Radius.circular(24),
+        bottomRight: Radius.circular(24),
       ),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.5),
+          spreadRadius: 5,
+          blurRadius: 7,
+          offset: const Offset(3, 7),
+        ),
+      ],
+      color: const Color(0xff0D1B2A),
     ),
     child: Text(
       task.taskTitle,
       style: const TextStyle(
         fontSize: 28,
+        fontWeight: FontWeight.bold,
         color: Colors.white,
-        fontWeight: FontWeight.w700,
       ),
     ),
   );
