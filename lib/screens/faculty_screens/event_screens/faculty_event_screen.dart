@@ -1,7 +1,7 @@
 import 'package:eventquest/models/event.dart';
+import 'package:eventquest/screens/student_screens/event_screens/event_detail_screen.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/add_event_screen.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/edit_event_screen.dart';
-import 'package:eventquest/screens/student_screens/event_screens/event_detail_screen.dart';
 
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
@@ -108,7 +108,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
             AddEventScreen.routeName,
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -126,21 +126,21 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
-                icon: Icon(Icons.remove_red_eye),
+                icon: const Icon(Icons.remove_red_eye),
                 onPressed: () {
                   Navigator.pushNamed(context, EventDetailsScreen.routeName,
                       arguments: event);
                 },
               ),
               IconButton(
-                icon: Icon(Icons.edit),
+                icon: const Icon(Icons.edit),
                 onPressed: () {
                   Navigator.pushNamed(context, EditEventScreen.routeName,
                       arguments: event);
                 },
               ),
               IconButton(
-                icon: Icon(Icons.delete),
+                icon: const Icon(Icons.delete),
                 onPressed: () {
                   // Implement delete functionality here
                 },

@@ -64,197 +64,216 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            topbarTitle(context, task),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              // padding: EdgeInsets.all(8),
-              child: Column(
-                children: [
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white70,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3), // Shadow color
-                          spreadRadius: 1, // Spread radius
-                          blurRadius: 1, // Blur radius
-                          offset: const Offset(
-                              0, 3), // Offset in the x, y direction
-                        ),
-                      ],
-                    ),
-                    child: Text(
-                      task.taskDescription,
-                      textAlign: TextAlign.justify,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white70,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3), // Shadow color
-                          spreadRadius: 1, // Spread radius
-                          blurRadius: 1, // Blur radius
-                          offset: const Offset(
-                              0, 3), // Offset in the x, y direction
-                        ),
-                      ],
-                    ),
-                    child: RichText(
-                      text: TextSpan(children: [
-                        const TextSpan(
-                            text: "Status: ",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            )),
-                        TextSpan(
-                          text: task.taskStatus,
-                          style: task.taskStatus == "Incomplete"
-                              ? const TextStyle(
-                                  color: Colors.red,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16,
-                                )
-                              : const TextStyle(
-                                  color: Colors.green,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16,
-                                ),
-                        ),
-                      ]),
-                      textAlign: TextAlign.justify,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  image.existsSync() == true
-                      ? SizedBox(
-                          height: 200,
-                          width: 200,
-                          child: Image(
-                            image: FileImage(image),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              topbarTitle(context, task),
+              Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                // padding: EdgeInsets.all(8),
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      width: MediaQuery.of(context).size.width,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white70,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.3), // Shadow color
+                            spreadRadius: 1, // Spread radius
+                            blurRadius: 1, // Blur radius
+                            offset: const Offset(
+                                0, 3), // Offset in the x, y direction
                           ),
-                        )
-                      : GestureDetector(
-                          onTap: selectImages,
-                          child: DottedBorder(
-                            radius: const Radius.circular(10),
-                            dashPattern: const [10, 4],
-                            borderType: BorderType.RRect,
-                            strokeCap: StrokeCap.round,
-                            child: Container(
-                              width: double.infinity,
-                              height: 150,
-                              decoration: BoxDecoration(
-                                // color: Colors.red,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  const Icon(
-                                    Icons.folder_open_outlined,
-                                    size: 40,
-                                  ),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  Text(
-                                    "Upload Poster",
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.grey.shade400,
-                                    ),
+                        ],
+                      ),
+                      child: Text(
+                        task.taskDescription,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white70,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.3), // Shadow color
+                            spreadRadius: 1, // Spread radius
+                            blurRadius: 1, // Blur radius
+                            offset: const Offset(
+                                0, 3), // Offset in the x, y direction
+                          ),
+                        ],
+                      ),
+                      child: RichText(
+                        text: TextSpan(children: [
+                          const TextSpan(
+                              text: "Status: ",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              )),
+                          TextSpan(
+                            text: task.taskStatus,
+                            style: task.taskStatus == "Incomplete"
+                                ? const TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
                                   )
-                                ],
+                                : const TextStyle(
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                  ),
+                          ),
+                        ]),
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Guidelines",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color(0xff0D1B2A),
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.2,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 6,
+                    ),
+                    guidelines(context),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    image.existsSync() == true
+                        ? SizedBox(
+                            height: 200,
+                            width: 200,
+                            child: Image(
+                              image: FileImage(image),
+                            ),
+                          )
+                        : GestureDetector(
+                            onTap: selectImages,
+                            child: DottedBorder(
+                              radius: const Radius.circular(10),
+                              dashPattern: const [10, 4],
+                              borderType: BorderType.RRect,
+                              strokeCap: StrokeCap.round,
+                              child: Container(
+                                width: double.infinity,
+                                height: 150,
+                                decoration: BoxDecoration(
+                                  // color: Colors.red,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    const Icon(
+                                      Icons.folder_open_outlined,
+                                      size: 40,
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    Text(
+                                      "Upload Poster",
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.grey.shade400,
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton.icon(
-                        onPressed: submitted == true ? null : clearImage,
-                        label: const Text(
-                          "Clear",
-                        ),
-                        icon: const Icon(Icons.cancel_outlined),
-                      ),
-                      ElevatedButton.icon(
-                        onPressed: submitted == true ? null : submitImage,
-                        icon: const Icon(
-                            Icons.playlist_add_check_circle_outlined),
-                        label: const Text("Submit"),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const Text(
-                    "Remarks",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Color(0xff0D1B2A),
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.2,
+                    const SizedBox(
+                      height: 12,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 6,
-                  ),
-                  Container(
-                    alignment: task.remarks != null
-                        ? Alignment.centerLeft
-                        : Alignment.center,
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white70,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3), // Shadow color
-                          spreadRadius: 1, // Spread radius
-                          blurRadius: 1, // Blur radius
-                          offset: const Offset(
-                              0, 3), // Offset in the x, y direction
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton.icon(
+                          onPressed: submitted == true ? null : clearImage,
+                          label: const Text(
+                            "Clear",
+                          ),
+                          icon: const Icon(Icons.cancel_outlined),
                         ),
+                        ElevatedButton.icon(
+                          onPressed: submitted == true ? null : submitImage,
+                          icon: const Icon(
+                              Icons.playlist_add_check_circle_outlined),
+                          label: const Text("Submit"),
+                        )
                       ],
                     ),
-                    child: task.remarks != null
-                        ? Text(
-                            task.remarks.toString(),
-                            textAlign: TextAlign.justify,
-                          )
-                        : const Text("No Remarks"),
-                  ),
-                ],
-              ),
-            )
-          ],
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const Text(
+                      "Remarks",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color(0xff0D1B2A),
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.2,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 6,
+                    ),
+                    Container(
+                      alignment: task.remarks != null
+                          ? Alignment.centerLeft
+                          : Alignment.center,
+                      width: MediaQuery.of(context).size.width,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white70,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.3), // Shadow color
+                            spreadRadius: 1, // Spread radius
+                            blurRadius: 1, // Blur radius
+                            offset: const Offset(
+                                0, 3), // Offset in the x, y direction
+                          ),
+                        ],
+                      ),
+                      child: task.remarks != null
+                          ? Text(
+                              task.remarks.toString(),
+                              textAlign: TextAlign.justify,
+                            )
+                          : const Text("No Remarks"),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -287,6 +306,70 @@ Widget topbarTitle(BuildContext context, Task task) {
         fontSize: 28,
         fontWeight: FontWeight.bold,
         color: Colors.white,
+      ),
+    ),
+  );
+}
+
+Widget guidelines(BuildContext context) {
+  return Container(
+    height: 128,
+    alignment: Alignment.center,
+    width: MediaQuery.of(context).size.width,
+    padding: const EdgeInsets.all(8),
+    decoration: BoxDecoration(
+      color: Colors.white70,
+      borderRadius: BorderRadius.circular(12),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.3), // Shadow color
+          spreadRadius: 1, // Spread radius
+          blurRadius: 1, // Blur radius
+          offset: const Offset(0, 3), // Offset in the x, y direction
+        ),
+      ],
+    ),
+    child: Scrollbar(
+      thumbVisibility: true,
+      child: ListView(
+        children: const [
+          ListTile(
+            leading: Icon(Icons.arrow_right),
+            title: Text(
+              "Christ (Deemed to be University) logo should be on Top - Right.",
+              textAlign: TextAlign.justify,
+            ),
+            titleTextStyle: TextStyle(
+              fontSize: 14,
+              letterSpacing: 0.2,
+              color: Colors.black,
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.arrow_right),
+            title: Text(
+              "\"School of Science\" should be on Bottom - Center.",
+              textAlign: TextAlign.justify,
+            ),
+            titleTextStyle: TextStyle(
+              fontSize: 14,
+              letterSpacing: 0.2,
+              color: Colors.black,
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.arrow_right),
+            title: Text(
+              "\"Designed By: (Name) (Register no) (class)\" should be on Bottom - Right.",
+              textAlign: TextAlign.justify,
+            ),
+            titleTextStyle: TextStyle(
+              fontSize: 14,
+              letterSpacing: 0.2,
+              color: Colors.black,
+            ),
+          ),
+        ],
       ),
     ),
   );

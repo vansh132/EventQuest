@@ -1,6 +1,5 @@
 import 'package:eventquest/models/task.dart';
 import 'package:eventquest/screens/student_screens/task_screens/task_detail_screen.dart';
-
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +18,8 @@ class _TaskScreenState extends State<TaskScreen> {
     List<Task> assignedTasks = [
       Task(
         taskTitle: "Talent Show",
-        taskDescription: "Create poster for it",
+        taskDescription:
+            "Continuing our tradition, we are pleased to announce the forthcoming Talent Show scheduled for February 20th, 2024. This esteemed event will take place at 911, Central Block, providing an esteemed platform for our fresher students to exhibit their talents. The Talent Show serves as an avenue for showcasing diverse skills and abilities, fostering a culture of creativity and expression within our academic community. ",
         taskType: "Poster",
         assignedTo: "2347152",
         assignedBy: "Helen K Joy",
