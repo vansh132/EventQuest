@@ -16,31 +16,29 @@ class TaskDetailScreen extends StatefulWidget {
 }
 
 class _TaskDetailScreenState extends State<TaskDetailScreen> {
-  List<File> images = [];
+  File image = File("");
   void selectImages() async {
     var res = await pickImages();
     setState(() {
-      images = res;
+      image = res;
     });
   }
 
-  Future<List<File>> pickImages() async {
-    List<File> images = [];
+  Future<File> pickImages() async {
+    File image = File("");
     try {
       var files = await FilePicker.platform.pickFiles(
         type: FileType.image,
-        allowMultiple: true,
+        allowMultiple: false,
       );
 
       if (files != null && files.files.isNotEmpty) {
-        for (int i = 0; i < files.files.length; i++) {
-          images.add(File(files.files[i].path!));
-        }
+        image = File(files.files[0].path!);
       }
     } catch (e) {
       debugPrint(e.toString());
     }
-    return images;
+    return image;
   }
 
   @override
@@ -129,7 +127,52 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                   const SizedBox(
                     height: 20,
                   ),
-                  images.isNotEmpty
+                  image.existsSync() == true
+                      ? SizedBox(
+                          height: 200,
+                          width: 200,
+                          child: Image(
+                            image: FileImage(image),
+                          ),
+                        )
+                      : GestureDetector(
+                          onTap: selectImages,
+                          child: DottedBorder(
+                            radius: const Radius.circular(10),
+                            dashPattern: const [10, 4],
+                            borderType: BorderType.RRect,
+                            strokeCap: StrokeCap.round,
+                            child: Container(
+                              width: double.infinity,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                // color: Colors.red,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    Icons.folder_open_outlined,
+                                    size: 40,
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    "Upload Poster",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.grey.shade400,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                  /* images.isNotEmpty
                       ? CarouselSlider(
                           items: images.map((i) {
                             return Builder(
@@ -171,7 +214,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                                     height: 15,
                                   ),
                                   Text(
-                                    "Select Product Images",
+                                    "Upload Poster",
                                     style: TextStyle(
                                       fontSize: 15,
                                       color: Colors.grey.shade400,
@@ -181,7 +224,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                               ),
                             ),
                           ),
-                        ),
+                        ), */
                   const SizedBox(
                     height: 16,
                   ),
