@@ -148,6 +148,8 @@ class _EventScreenState extends State<EventScreen> {
               borderRadius: BorderRadius.circular(10),
               child: Image.asset(
                 event.eventImages,
+                height: 224,
+                width: double.infinity,
                 fit: BoxFit.cover,
               ),
             ),

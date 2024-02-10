@@ -22,11 +22,16 @@ class EventDetailsScreen extends StatelessWidget {
           child: Column(
             children: [
               // Event Image
-              Image.network(
-                event.eventImages,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: 200,
+              ClipRRect(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(12),
+                    bottomRight: Radius.circular(12)),
+                child: Image.asset(
+                  event.eventImages,
+                  height: 250,
+                  width: double.infinity,
+                  fit: BoxFit.fill,
+                ),
               ),
 
               // Event Amount and Registration Deadline
