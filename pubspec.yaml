@@ -76,9 +76,7 @@ flutter:
     - assets/fonts/Roboto-Regular.ttf
     - assets/fonts/Roboto-Thin.ttf
     - assets/fonts/Roboto-ThinItalic.ttf
-    - assets/images/christ-logo-color.png
-    - assets/images/login_image.png
-    - assets/images
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
