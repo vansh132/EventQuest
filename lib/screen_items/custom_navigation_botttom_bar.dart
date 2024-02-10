@@ -1,7 +1,8 @@
-import 'package:eventquest/screens/student_screens/announcement_screen.dart';
-import 'package:eventquest/screens/student_screens/event_screen.dart';
+import 'package:eventquest/screens/student_screens/announcement_screens/announcement_screen.dart';
+import 'package:eventquest/screens/student_screens/event_screens/event_screen.dart';
 import 'package:eventquest/screens/student_screens/home_screen.dart';
-import 'package:eventquest/screens/student_screens/task_screen.dart';
+import 'package:eventquest/screens/student_screens/task_screens/task_screen.dart';
+
 import 'package:flutter/material.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {

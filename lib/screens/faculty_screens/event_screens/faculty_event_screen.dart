@@ -1,7 +1,7 @@
 import 'package:eventquest/models/event.dart';
-import 'package:eventquest/screens/detailed_screens/event_detail_screen.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/add_event_screen.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/edit_event_screen.dart';
+import 'package:eventquest/screens/student_screens/event_screens/event_detail_screen.dart';
 
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';

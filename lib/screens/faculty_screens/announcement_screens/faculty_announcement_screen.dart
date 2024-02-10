@@ -1,7 +1,7 @@
 import 'package:eventquest/models/announcement.dart';
-import 'package:eventquest/screens/detailed_screens/announcement_detail_screen.dart';
 import 'package:eventquest/screens/faculty_screens/announcement_screens/add_announcement_screen.dart';
 import 'package:eventquest/screens/faculty_screens/announcement_screens/edit_announcement_screen.dart';
+import 'package:eventquest/screens/student_screens/announcement_screens/announcement_detail_screen.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';

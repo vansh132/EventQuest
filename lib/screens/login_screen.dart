@@ -1,4 +1,4 @@
-import 'package:eventquest/custom_navigation_botttom_bar.dart';
+import 'package:eventquest/screen_items/custom_navigation_botttom_bar.dart';
 import 'package:eventquest/screens/constants/utils.dart';
 import 'package:flutter/material.dart';
 

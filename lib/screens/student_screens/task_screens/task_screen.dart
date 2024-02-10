@@ -1,5 +1,6 @@
 import 'package:eventquest/models/task.dart';
-import 'package:eventquest/screens/detailed_screens/task_detail_screen.dart';
+import 'package:eventquest/screens/student_screens/task_screens/task_detail_screen.dart';
+
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
