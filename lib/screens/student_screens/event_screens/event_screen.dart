@@ -19,49 +19,77 @@ class _EventScreenState extends State<EventScreen> {
     Event(
       eventId: "abc132",
       eventCategory: "UG",
-      eventName: "Talent Show",
+      eventName: "BASIC FIRST AI",
       description:
-          "Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. ",
+          "Hi there! 👋\nExciting news! We're hosting a Certificate Programme in Basic First Aid on Thursday, 25 January 2024. It's a fantastic opportunity to learn life-saving skills, presented in collaboration with St. John's National Academy of Health Sciences and Christ University, Bangalore.\n🚀 Key Details:\nFee: Rs. 250/- only\nTime: 1:30 PM - 4:30 PM\nVenue: St. John's Medical College\nPlaces are limited to 35 per batch, so make sure to secure your spot ASAP!\n🔗 Scan the QR codes in the attached poster to register for Batch 2 or Batch 3.\nDon't miss out on this chance to become a part of the Rapid Action First Aid Team (RAFT) and make a difference! 🚑\nSee you there!",
+      eventLink: "https://basicfirstaid.org",
       publishedOn: DateTime.now(),
-      eventImages:
-          "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXZlbnR8ZW58MHx8MHx8fDA%3D",
-      eventLink: "https://github.com/",
+      eventImages: "assets/images/BASICFIRSTAI.jpeg",
       eventAmount: 200,
       contactPerson: "Helen K Joy",
       contactNo: 9099897859,
       noOfParticipants: 2,
-      registartionDeadline: DateTime(2024, 1, 31),
+      registartionDeadline: DateTime(2024, 2, 15),
     ),
     Event(
       eventId: "def456",
       eventCategory: "PG",
-      eventName: "Coding Competition",
+      eventName: "NRITTA",
       description:
-          "Welcome to CodeCraft Challenge, an exciting coding competition tailored for computer science enthusiasts! Whether you are a seasoned coder or a novice programmer, this event is designed to bring out the best in you. Sharpen your problem-solving skills, enhance your algorithmic thinking, and showcase your coding prowess in a thrilling environment.",
+          "Greetings from Student Welfare Office✨✨\n🕺💃 Ready to groove and show off your moves? We're hosting auditions for NRITTA, and we want YOU to be a part of the rhythm! 🌟 \n📅 Date: 12th, 13th and 14th  February 2024\n🕰️ Time: 4pm onwards \n📍 Location: Dance Studio, IVY Basement, Audi block \nDon't miss your chance to shine and be a part of Nritta! Spread the word, bring your friends, and let's make this audition a dance party to remember!",
       publishedOn: DateTime.now().subtract(const Duration(days: 5)),
-      eventImages:
-          "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29hZGluZ3xlbnwwfHwwfHx8MA%3D%3D",
+      eventImages: "assets/images/NRITTA.jpeg",
       eventLink: "https://codingcompetition.com",
       eventAmount: 0,
       contactPerson: "John Doe",
       contactNo: 9876543210,
-      noOfParticipants: 50,
-      registartionDeadline: DateTime(2024, 2, 15),
+      noOfParticipants: 6,
+      registartionDeadline: DateTime(2024, 2, 18),
+    ),
+    Event(
+      eventId: "ghi789",
+      eventCategory: "PG",
+      eventName: "INHSA",
+      description:
+          "🚀 INHSA 2024: Digital Health Innovation Conclave \nCalling all healthtech startups!\nUnlock your potential at the Innovate Health South Asia 2024 conclave and compete for The Best Startup Award!\n🗓️ Date: 3rd February 2024\n Venue: VRR Hotels & Convention Hall, E-City Phase 1, Bangalore\nBenefits include:\nStage time for presentation\nCash reward\nOpportunity to exhibit\nNetworking with investors and industry leaders\nMentorship and incubation support\nDon't miss this chance to shine amongst the best in the digital healthcare industry.\n👉 Register now by scanning the QR code or contact us at +91 9606904387 or admire.dighealth@iihmrbangalore.edu.in\nBest of luck, and we hope to see you there!",
+      publishedOn: DateTime.now().subtract(const Duration(days: 10)),
+      eventImages: "assets/images/INHSA.jpeg",
+      eventLink: "https://artexhibition.com",
+      eventAmount: 50,
+      contactPerson: "Alice Smith",
+      contactNo: 1234567890,
+      noOfParticipants: 30,
+      registartionDeadline: DateTime(2024, 2, 20),
     ),
     Event(
       eventId: "ghi789",
       eventCategory: "UG",
-      eventName: "Art Exhibition",
-      description: "Explore the world of art through various exhibits.",
+      eventName: "PITCHFIRK",
+      description:
+          "🚀 Pitchfork Event Alert at CHRIST University!\n🎓 The Department of Economics and Agasthya - The Entrepreneurship Cell presents an incredible opportunity for innovative minds!\n📍 *Venue:* Skyview Central Block\n *Date:* 15th February 2024\n⏰ *Submission Deadline:* 8th February 2024\n💡 Get ready to pitch your groundbreaking ideas and stand a chance to win amazing cash prizes:\n🥇 1st Place: ₹3500 INR\n🥈 2nd Place: ₹2500 INR\n🥉 3rd Place: ₹1500 INR\nFor more information and to submit your ideas, scan the QR code on the poster or contact:\n- Chaitanya: 7489813136\n- Swastika: 9438733368\n\nDon't miss out on this chance to showcase your entrepreneurial talent and win big! 🏆",
       publishedOn: DateTime.now().subtract(const Duration(days: 10)),
-      eventImages:
-          "https://plus.unsplash.com/premium_photo-1661767490975-f31a02946f48?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      eventImages: "assets/images/PITCHFIRK.jpeg",
       eventLink: "https://artexhibition.com",
       eventAmount: 50,
       contactPerson: "Alice Smith",
       contactNo: 1234567890,
       noOfParticipants: 30,
       registartionDeadline: DateTime(2024, 2, 28),
+    ),
+    Event(
+      eventId: "ghi789",
+      eventCategory: "UG",
+      eventName: "PRAYAS",
+      description:
+          "🌟 *PRAYAS 2024 at CHRIST University presents KALEIDO-QUEST!*\n\n✨ Join the Department of Commerce for a thrilling adventure and a variety of exciting events:\n\n🚀 *Among Us IRL* - 29th January\n🔴 *Red Light, Green Light* - 30th January\n⚪ *Monochrome Hues* - 31st January\n🎲 *Gganbu* - 1st February\n🔓 *Escape Room* - 2nd February\nGet ready to level up with these immersive experiences!\n\n📣 *Register Now* for an unforgettable journey filled with challenges and fun!\n\n🚀 Don't miss out on the action - seize the opportunity to be part of something extraordinary!\n\nFor additional details and registration, make sure to get in touch or follow the updates. Let's make PRAYAS 2024 a remarkable event together! 🌌",
+      publishedOn: DateTime.now().subtract(const Duration(days: 10)),
+      eventImages: "assets/images/PRAYAS.jpeg",
+      eventLink: "https://artexhibition.com",
+      eventAmount: 50,
+      contactPerson: "Alice Smith",
+      contactNo: 1234567890,
+      noOfParticipants: 30,
+      registartionDeadline: DateTime(2024, 2, 29),
     ),
   ];
 
@@ -117,12 +145,10 @@ class _EventScreenState extends State<EventScreen> {
         child: Column(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image.network(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
                 event.eventImages,
                 fit: BoxFit.cover,
-                width: double.infinity,
-                height: 200,
               ),
             ),
             Padding(
