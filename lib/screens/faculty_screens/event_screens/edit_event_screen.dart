@@ -228,9 +228,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(
-        eventData.registartionDeadline != null
-            ? 'Select Registration Deadline'
-            : '${eventData.registartionDeadline.day} / ${eventData.registartionDeadline.month} / ${eventData.registartionDeadline.year}',
+        '${eventData.registartionDeadline.day} / ${eventData.registartionDeadline.month} / ${eventData.registartionDeadline.year}',
         style: const TextStyle(fontSize: 16),
       ),
     );
