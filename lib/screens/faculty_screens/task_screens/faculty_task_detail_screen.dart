@@ -17,6 +17,12 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
     final Task task = ModalRoute.of(context)!.settings.arguments as Task;
 
     return Scaffold(
+      floatingActionButton: IconButton.filled(
+        onPressed: () {},
+        icon: Icon(
+          Icons.edit,
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -97,7 +103,7 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                         textAlign: TextAlign.justify,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     const Text(
@@ -117,7 +123,7 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                       width: 200,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(16),
-                        child: Image(
+                        child: const Image(
                           image: AssetImage("assets/images/INHSA.jpeg"),
                         ),
                       ),
