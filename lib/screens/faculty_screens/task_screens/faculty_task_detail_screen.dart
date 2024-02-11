@@ -23,7 +23,7 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
           Navigator.pushNamed(context, FacultyEditTaskScreen.routeName,
               arguments: task);
         },
-        icon: Icon(
+        icon: const Icon(
           Icons.edit,
         ),
       ),
@@ -173,6 +173,24 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                             )
                           : const Text("No Remarks"),
                     ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text("Add Remarks"),
+                    ),
+                    Divider(
+                      color: Colors.grey,
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    ElevatedButton.icon(
+                      onPressed: () {},
+                      icon: Icon(Icons.done_all_outlined),
+                      label: Text("Mark as Completed"),
+                    )
                   ],
                 ),
               )
