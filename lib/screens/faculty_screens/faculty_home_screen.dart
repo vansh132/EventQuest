@@ -1,6 +1,8 @@
 import 'package:eventquest/models/announcement.dart';
 import 'package:eventquest/models/event.dart';
+import 'package:eventquest/screen_items/faculty_custom_navigation_bottom_bar.dart';
 import 'package:eventquest/screen_items/highlights.dart';
+import 'package:eventquest/screens/student_screens/announcement_screens/announcement_detail_screen.dart';
 import 'package:eventquest/screens/student_screens/event_screens/event_detail_screen.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
@@ -8,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class FacultyHomeScreen extends StatelessWidget {
+  static const String routeName = 'home-screen';
   const FacultyHomeScreen({super.key});
 
   @override
@@ -18,30 +21,35 @@ class FacultyHomeScreen extends StatelessWidget {
         description:
             'Heartiest congratulations to all the brilliant students who have achieved remarkable success and secured placements! Your hard work, dedication, and exceptional skills have paved the way for this significant accomplishment. Wishing you a future filled with continued success, growth, and prosperity. Well done!Heartiest congratulations to all the brilliant students who have achieved remarkable success and secured placements! Your hard work, dedication, and exceptional skills have paved the way for this significant accomplishment. Wishing you a future filled with continued success, growth, and prosperity. Well done!Heartiest congratulations to all the brilliant students who have achieved remarkable success and secured placements! Your hard work, dedication, and exceptional skills have paved the way for this significant accomplishment. Wishing you a future filled with continued success, growth, and prosperity. Well done!',
         image: [
-          "https://media.istockphoto.com/id/514363071/photo/just-one-moment-please.webp?b=1&s=170667a&w=0&k=20&c=8xY02WALsH-RYsCz83EBigqH4z3RQg76ZfOhgQjlefU=",
+          "assets/images/placement.jpeg",
         ],
         publishedBy: "Helen K Joy",
         publishedOn: DateTime(2024, 1, 23),
       ),
       Announcement(
-        title: 'ESE Results',
+        title: 'Gateways',
         description:
-            'Heartiest congratulations to all the brilliant students who have achieved remarkable success and secured placements! Your hard work, dedication, and exceptional skills have paved the way for this significant accomplishment. Wishing you a future filled with continued success, growth, and prosperity. Well done!Heartiest congratulations to all the brilliant students who have achieved remarkable success and secured placements! Your hard work, dedication, and exceptional skills have paved the way for this significant accomplishment. Wishing you a future filled with continued success, growth, and prosperity. Well done!Heartiest congratulations to all the brilliant students who have achieved remarkable success and secured placements! Your hard work, dedication, and exceptional skills have paved the way for this significant accomplishment. Wishing you a future filled with continued success, growth, and prosperity. Well done!',
+            "Hey \n\nHope you're doing awesome! 🌟 We've got some seriously cool updates about Gateways 2023, and we couldn't wait to share the deets with you.\n\n📖 Event Brochure:\nGuess what? The Gateways 2023 Event Brochure just dropped! It's your backstage pass to all the cool stuff lined up. Check it out [https://heyzine.com/flip-book/628b52ff0e.html] and start planning your game plan.\n\n🎨 Event Poster:\nWe went all out on the poster this year, and it's basically a work of art. Seriously, you'll want to frame this. Get a sneak peak here!\n\n🎟️ Registration Link:\nReady to party with us? Hit up the registration link [ https://gateways.christuniversity.in/] and lock in your spot. It's gonna be epic, and we want you there with bells on!\n\nFeel free to spread the word – the more, the merrier! Can't wait to see you at Gateways 2023. 🚀\n\nCheers,\nTeam Gateways 2023.",
         image: [
-          "https://media.istockphoto.com/id/514363071/photo/just-one-moment-please.webp?b=1&s=170667a&w=0&k=20&c=8xY02WALsH-RYsCz83EBigqH4z3RQg76ZfOhgQjlefU=",
+          "assets/images/gateways.jpeg",
         ],
-        publishedBy: "Helen K Joy",
+        publishedBy: "Dr. Suresh K.",
         publishedOn: DateTime(2024, 1, 23),
       ),
       Announcement(
-        title: 'Nexus - Fest 2023',
+        title: 'Khristu Fest',
         description:
-            'Kudos to the festival winners for their remarkable achievements! Your dedication and talent have shone brightly, inspiring and captivating everyone. Heartfelt congratulations on your well-deserved success and recognition!Kudos to the festival winners for their remarkable achievements! Your dedication and talent have shone brightly, inspiring and captivating everyone. Heartfelt congratulations on your well-deserved success and recognition!Kudos to the festival winners for their remarkable achievements! Your dedication and talent have shone brightly, inspiring and captivating everyone. Heartfelt congratulations on your well-deserved success and recognition!Kudos to the festival winners for their remarkable achievements! Your dedication and talent have shone brightly, inspiring and captivating everyone. Heartfelt congratulations on your well-deserved success and recognition!Kudos to the festival winners for their remarkable achievements! Your dedication and talent have shone brightly, inspiring and captivating everyone. Heartfelt congratulations on your well-deserved success and recognition!Kudos to the festival winners for their remarkable achievements! Your dedication and talent have shone brightly, inspiring and captivating everyone. Heartfelt congratulations on your well-deserved success and recognition!Kudos to the festival winners for their remarkable achievements! Your dedication and talent have shone brightly, inspiring and captivating everyone. Heartfelt congratulations on your well-deserved success and recognition!Kudos to the festival winners for their remarkable achievements! Your dedication and talent have shone brightly, inspiring and captivating everyone. Heartfelt congratulations on your well-deserved success and recognition!Kudos to the festival winners for their remarkable achievements! Your dedication and talent have shone brightly, inspiring and captivating everyone. Heartfelt congratulations on your well-deserved success and recognition!Kudos to the festival winners for their remarkable achievements! Your dedication and talent have shone brightly, inspiring and captivating everyone. Heartfelt congratulations on your well-deserved success and recognition!Kudos to the festival winners for their remarkable achievements! Your dedication and talent have shone brightly, inspiring and captivating everyone. Heartfelt congratulations on your well-deserved success and recognition!Kudos to the festival winners for their remarkable achievements! Your dedication and talent have shone brightly, inspiring and captivating everyone. Heartfelt congratulations on your well-deserved success and recognition!',
-        image: [
-          "https://images.unsplash.com/photo-1658581872509-c8d19777bd24?q=80&w=2831&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-          "https://media.istockphoto.com/id/514363071/photo/just-one-moment-please.webp?b=1&s=170667a&w=0&k=20&c=8xY02WALsH-RYsCz83EBigqH4z3RQg76ZfOhgQjlefU="
-        ],
+            'Congratulations to the team from TECHFUSE at Christ Deemed to be University - Central Campus [MCA] for your outstanding achievement as Overall Champions! Your dedication and hard work have truly paid off, showcasing the spirit of excellence and teamwork. May this victory inspire you and your peers to reach new heights in all your future endeavours. Well done to everyone involved in this remarkable accomplishment!',
+        image: ["assets/images/kristu.jpeg"],
         publishedBy: "Dr. Sudhakar T",
+        publishedOn: DateTime(2024, 1, 10),
+      ),
+      Announcement(
+        title: 'Python Peer Learning',
+        description:
+            "Peer-to-peer learning is a highly beneficial educational approach where students engage with each other to attain educational goals, sharing knowledge and experiences to enrich their understanding. In this image, we observe a group of individuals in a classroom environment focused on a screen displaying what appears to be Python code, indicating a collaborative learning session on programming.\n\nThe importance of peer learning, especially in contexts such as learning Python or any other programming language, cannot be overstated. It fosters a supportive environment where learners can clarify their doubts, learn from each other\'s strengths, and work collaboratively to solve complex problems. Moreover, peer learning encourages the development of critical thinking and communication skills, as students must articulate their thoughts and ideas clearly.\n\nIt also builds confidence, as students validate their knowledge by teaching others, and it creates a sense of community, promoting a network of support that can be invaluable during the learning process and beyond.\n\nGreat work to all involved in the peer-to-peer learning session. Your collaborative efforts are not only enhancing your individual skills but are also strengthening your collective knowledge. Keep up the excellent work, and continue to support and learn from one another – it's through such shared dedication and teamwork that true learning flourishes. Best wishes on your coding journey!",
+        image: ["assets/images/pythonPeer.png"],
+        publishedBy: "Helen K Joy",
         publishedOn: DateTime(2024, 1, 10),
       ),
     ];
@@ -49,43 +57,56 @@ class FacultyHomeScreen extends StatelessWidget {
       Event(
         eventId: "abc132",
         eventCategory: "UG",
-        eventName: "Talent Show",
+        eventName: "BASIC FIRST AI",
         description:
-            "Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. Fresher's can show their talent. ",
+            "Hi there! 👋\nExciting news! We're hosting a Certificate Programme in Basic First Aid on Thursday, 25 January 2024. It's a fantastic opportunity to learn life-saving skills, presented in collaboration with St. John's National Academy of Health Sciences and Christ University, Bangalore.\n🚀 Key Details:\nFee: Rs. 250/- only\nTime: 1:30 PM - 4:30 PM\nVenue: St. John's Medical College\nPlaces are limited to 35 per batch, so make sure to secure your spot ASAP!\n🔗 Scan the QR codes in the attached poster to register for Batch 2 or Batch 3.\nDon't miss out on this chance to become a part of the Rapid Action First Aid Team (RAFT) and make a difference! 🚑\nSee you there!",
+        eventLink: "https://basicfirstaid.org",
         publishedOn: DateTime.now(),
-        eventImages:
-            "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXZlbnR8ZW58MHx8MHx8fDA%3D",
-        eventLink: "https://github.com/",
+        eventImages: "assets/images/BASICFIRSTAI.jpeg",
         eventAmount: 200,
         contactPerson: "Helen K Joy",
         contactNo: 9099897859,
         noOfParticipants: 2,
-        registartionDeadline: DateTime(2024, 1, 31),
+        registartionDeadline: DateTime(2024, 2, 15),
       ),
       Event(
         eventId: "def456",
         eventCategory: "PG",
-        eventName: "Coding Competition",
+        eventName: "NRITTA",
         description:
-            "Welcome to CodeCraft Challenge, an exciting coding competition tailored for computer science enthusiasts! Whether you are a seasoned coder or a novice programmer, this event is designed to bring out the best in you. Sharpen your problem-solving skills, enhance your algorithmic thinking, and showcase your coding prowess in a thrilling environment.",
+            "Greetings from Student Welfare Office✨✨\n🕺💃 Ready to groove and show off your moves? We're hosting auditions for NRITTA, and we want YOU to be a part of the rhythm! 🌟 \n📅 Date: 12th, 13th and 14th  February 2024\n🕰️ Time: 4pm onwards \n📍 Location: Dance Studio, IVY Basement, Audi block \nDon't miss your chance to shine and be a part of Nritta! Spread the word, bring your friends, and let's make this audition a dance party to remember!",
         publishedOn: DateTime.now().subtract(const Duration(days: 5)),
-        eventImages:
-            "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29hZGluZ3xlbnwwfHwwfHx8MA%3D%3D",
+        eventImages: "assets/images/NRITTA.jpeg",
         eventLink: "https://codingcompetition.com",
         eventAmount: 0,
         contactPerson: "John Doe",
         contactNo: 9876543210,
-        noOfParticipants: 50,
-        registartionDeadline: DateTime(2024, 2, 15),
+        noOfParticipants: 6,
+        registartionDeadline: DateTime(2024, 2, 18),
       ),
       Event(
         eventId: "ghi789",
-        eventCategory: "Both",
-        eventName: "Art Exhibition",
-        description: "Explore the world of art through various exhibits.",
+        eventCategory: "PG",
+        eventName: "INHSA",
+        description:
+            "🚀 INHSA 2024: Digital Health Innovation Conclave \nCalling all healthtech startups!\nUnlock your potential at the Innovate Health South Asia 2024 conclave and compete for The Best Startup Award!\n🗓️ Date: 3rd February 2024\n Venue: VRR Hotels & Convention Hall, E-City Phase 1, Bangalore\nBenefits include:\nStage time for presentation\nCash reward\nOpportunity to exhibit\nNetworking with investors and industry leaders\nMentorship and incubation support\nDon't miss this chance to shine amongst the best in the digital healthcare industry.\n👉 Register now by scanning the QR code or contact us at +91 9606904387 or admire.dighealth@iihmrbangalore.edu.in\nBest of luck, and we hope to see you there!",
         publishedOn: DateTime.now().subtract(const Duration(days: 10)),
-        eventImages:
-            "https://plus.unsplash.com/premium_photo-1661767490975-f31a02946f48?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        eventImages: "assets/images/INHSA.jpeg",
+        eventLink: "https://artexhibition.com",
+        eventAmount: 50,
+        contactPerson: "Alice Smith",
+        contactNo: 1234567890,
+        noOfParticipants: 30,
+        registartionDeadline: DateTime(2024, 2, 20),
+      ),
+      Event(
+        eventId: "ghi789",
+        eventCategory: "UG",
+        eventName: "PITCHFIRK",
+        description:
+            "🚀 Pitchfork Event Alert at CHRIST University!\n🎓 The Department of Economics and Agasthya - The Entrepreneurship Cell presents an incredible opportunity for innovative minds!\n📍 *Venue:* Skyview Central Block\n *Date:* 15th February 2024\n⏰ *Submission Deadline:* 8th February 2024\n💡 Get ready to pitch your groundbreaking ideas and stand a chance to win amazing cash prizes:\n🥇 1st Place: ₹3500 INR\n🥈 2nd Place: ₹2500 INR\n🥉 3rd Place: ₹1500 INR\nFor more information and to submit your ideas, scan the QR code on the poster or contact:\n- Chaitanya: 7489813136\n- Swastika: 9438733368\n\nDon't miss out on this chance to showcase your entrepreneurial talent and win big! 🏆",
+        publishedOn: DateTime.now().subtract(const Duration(days: 10)),
+        eventImages: "assets/images/PITCHFIRK.jpeg",
         eventLink: "https://artexhibition.com",
         eventAmount: 50,
         contactPerson: "Alice Smith",
@@ -93,7 +114,23 @@ class FacultyHomeScreen extends StatelessWidget {
         noOfParticipants: 30,
         registartionDeadline: DateTime(2024, 2, 28),
       ),
+      Event(
+        eventId: "ghi789",
+        eventCategory: "UG",
+        eventName: "PRAYAS",
+        description:
+            "🌟 *PRAYAS 2024 at CHRIST University presents KALEIDO-QUEST!*\n\n✨ Join the Department of Commerce for a thrilling adventure and a variety of exciting events:\n\n🚀 *Among Us IRL* - 29th January\n🔴 *Red Light, Green Light* - 30th January\n⚪ *Monochrome Hues* - 31st January\n🎲 *Gganbu* - 1st February\n🔓 *Escape Room* - 2nd February\nGet ready to level up with these immersive experiences!\n\n📣 *Register Now* for an unforgettable journey filled with challenges and fun!\n\n🚀 Don't miss out on the action - seize the opportunity to be part of something extraordinary!\n\nFor additional details and registration, make sure to get in touch or follow the updates. Let's make PRAYAS 2024 a remarkable event together! 🌌",
+        publishedOn: DateTime.now().subtract(const Duration(days: 10)),
+        eventImages: "assets/images/PRAYAS.jpeg",
+        eventLink: "https://artexhibition.com",
+        eventAmount: 50,
+        contactPerson: "Alice Smith",
+        contactNo: 1234567890,
+        noOfParticipants: 30,
+        registartionDeadline: DateTime(2024, 2, 29),
+      ),
     ];
+
     return Scaffold(
       body: Container(
         // color: Color(0xff0D1B2A),
@@ -154,9 +191,29 @@ Widget RecentAnnouncements(
             scrollDirection: Axis.vertical,
             itemCount: announcements.length,
             itemBuilder: (context, index) =>
-                announcementItem(context, announcements[index]),
+                AnnouncementItem(context, announcements[index]),
           ),
         ),
+        Container(
+          margin: EdgeInsets.only(
+            top: 16,
+          ),
+          child: Column(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    FacultyCustomBottomBar.routeName,
+                  );
+                },
+                child: Text(
+                  "Faculty - Home Screen",
+                ),
+              ),
+            ],
+          ),
+        )
       ],
     ),
   );
@@ -193,7 +250,7 @@ Widget recentEvents(BuildContext context, List<Event> events) {
               mainAxisSpacing: 4.0,
             ),
             itemCount: events.length,
-            itemBuilder: (context, index) => eventItem(events[index], context),
+            itemBuilder: (context, index) => EventItem(events[index], context),
           ),
         ),
       ],
@@ -201,172 +258,180 @@ Widget recentEvents(BuildContext context, List<Event> events) {
   );
 }
 
-Widget announcementItem(BuildContext context, Announcement announcement) {
-  return Container(
-    // width: 180,
-    margin: const EdgeInsets.all(8),
-    padding: const EdgeInsets.all(8),
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(12),
-    ),
-    child: Row(
-      children: [
-        Expanded(
-          flex: 3,
-          child: Container(
-            height: 128,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              image: const DecorationImage(
-                image: NetworkImage(
-                  scale: 1,
-                  "https://img.freepik.com/free-photo/business-job-interview-concept_1421-77.jpg",
+Widget AnnouncementItem(BuildContext context, Announcement announcement) {
+  return GestureDetector(
+    onTap: () => Navigator.pushNamed(
+        context, AnnouncementDetailScreen.routeName,
+        arguments: announcement),
+    child: Container(
+      // width: 180,
+      margin: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 2,
+            child: SizedBox(
+              height: 100, // Set the desired height
+              width: 100, // Set the desired width
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12.0),
+                child: Image.asset(
+                  announcement.image![0],
+                  fit: BoxFit.cover,
                 ),
-                fit: BoxFit.cover,
-                // scale: 140,
               ),
             ),
           ),
-        ),
-        Expanded(
-            flex: 4,
-            child: Container(
-              height: 128,
-              // color: Colors.amber,
-              margin: const EdgeInsets.symmetric(horizontal: 6),
-              child: Column(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        announcement.title,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+          Expanded(
+              flex: 4,
+              child: Container(
+                height: 128,
+                // color: Colors.amber,
+                margin: const EdgeInsets.symmetric(horizontal: 6),
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          announcement.title,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
                       ),
                     ),
-                  ),
-                  const Divider(
-                    indent: 16,
-                    color: Colors.black38,
-                    endIndent: 16,
-                  ),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          announcement.publishedBy,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            letterSpacing: 0.5,
-                          ),
-                        ),
-                        Text(
-                          DateFormat('MMM d, y')
-                              .format(announcement.publishedOn),
-                          style: const TextStyle(
-                            fontSize: 8,
-                            fontWeight: FontWeight.w500,
-                            letterSpacing: 0.5,
-                          ),
-                        ),
-                      ],
+                    const Divider(
+                      indent: 16,
+                      color: Colors.black38,
+                      endIndent: 16,
                     ),
-                  )
-                ],
-              ),
-            ))
-      ],
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            announcement.publishedBy,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                          Text(
+                            DateFormat('MMM d, y')
+                                .format(announcement.publishedOn),
+                            style: const TextStyle(
+                              fontSize: 8,
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ))
+        ],
+      ),
     ),
   );
 }
 
-Widget eventItem(Event event, BuildContext context) {
+Widget EventItem(Event event, BuildContext context) {
   return GestureDetector(
     onTap: () => Navigator.pushNamed(context, EventDetailsScreen.routeName,
         arguments: event),
     child: Container(
-      margin: const EdgeInsets.all(8),
+      // margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage(
-            event.eventImages,
-          ),
-          fit: BoxFit.cover,
-        ),
-        // gradient: LinearGradient(
-        //   begin: Alignment.topLeft, // Gradient direction
-        //   end: Alignment.bottomRight,
-        //   colors: [
-        //     Colors.amberAccent, // Black
-        //     Colors.grey, // Darker shade of gray
-        //   ],
-        // ),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Container(
-        margin: const EdgeInsets.only(top: 95),
-        child: Row(
-          children: [
-            Card(
-              color: Colors.white.withOpacity(0.9),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-              elevation: 4.0,
-              child: Container(
-                padding:
-                    const EdgeInsets.all(7), //TODO: needs to make it responsive
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      event.registartionDeadline.day.toString(),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Text(
-                      event.registartionDeadline.monthShort,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+      child: Stack(children: [
+        SizedBox(
+          height: double.infinity, // Set the desired height
+          width: double.infinity, // Set the desired width
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12.0),
+            child: Image.asset(
+              event.eventImages,
+              fit: BoxFit.cover,
             ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                //
+          ),
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              // margin: const EdgeInsets.only(top: 95),
+              child: Row(
                 children: [
-                  Text(
-                    event.eventName,
-                    style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                  Card(
+                    color: Colors.white.withOpacity(0.9),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    elevation: 4.0,
+                    child: Container(
+                      padding: const EdgeInsets.all(
+                          7), //TODO: needs to make it responsive
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            event.registartionDeadline.day.toString(),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text(
+                            event.registartionDeadline.monthShort,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: Colors.black54),
+                          child: Text(
+                            event.eventName,
+                            style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
           ],
         ),
-      ),
+      ]),
     ),
   );
 }
