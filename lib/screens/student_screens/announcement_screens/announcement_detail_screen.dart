@@ -1,16 +1,17 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eventquest/models/announcement.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:photo_view/photo_view.dart';
 
-class AnnouncementDetailScreen extends StatelessWidget {
+class AnnouncementDetailScreen extends ConsumerWidget {
   static const String routeName = '/announcement_detail';
 
   const AnnouncementDetailScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final Announcement announcement =
         ModalRoute.of(context)!.settings.arguments as Announcement;
 
@@ -100,7 +101,7 @@ class AnnouncementCarouselSlider extends StatelessWidget {
         autoPlay: true,
         aspectRatio: 2.0,
       ),
-      items: announcement.image!.map((url) {
+      items: [Image.asset("assets/images/placement.jpeg")].map((url) {
         return Builder(
           builder: (BuildContext context) {
             return GestureDetector(
@@ -111,7 +112,8 @@ class AnnouncementCarouselSlider extends StatelessWidget {
                     pageBuilder: (context, animation, secondaryAnimation) {
                       return FadeTransition(
                         opacity: animation,
-                        child: FullScreenImage(url: url),
+                        child: FullScreenImage(
+                            url: "assets/images/placement.jpeg"),
                       );
                     },
                   ),
@@ -136,12 +138,11 @@ class AnnouncementCarouselSlider extends StatelessWidget {
                   child: Hero(
                     tag: 'announcement_image_${url.hashCode}',
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12.0),
-                      child:  Image.asset(
-                url,
-                fit: BoxFit.fill,
-              )
-                    ),
+                        borderRadius: BorderRadius.circular(12.0),
+                        child: Image.asset(
+                          "assets/images/placement.jpeg",
+                          fit: BoxFit.fill,
+                        )),
                   ),
                 ),
               ),
