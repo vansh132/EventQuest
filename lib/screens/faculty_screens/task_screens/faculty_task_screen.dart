@@ -43,41 +43,38 @@ class _FacultyTaskScreenState extends State<FacultyTaskScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Column(
-          children: [
-            TopBar(),
-            SizedBox(
-              height: 16,
+      body: Column(
+        children: [
+          TopBar(),
+          const SizedBox(
+            height: 16,
+          ),
+          const Text(
+            "Tasks Created",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.2,
             ),
-            Text(
-              "Tasks Created",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 0.2,
-              ),
+          ),
+          const Divider(
+            color: Colors.grey,
+            indent: 36,
+            endIndent: 36,
+          ),
+          Container(
+            height: 500,
+            margin: const EdgeInsets.symmetric(horizontal: 8),
+            child: ListView.builder(
+              itemBuilder: (context, index) => taskItem(context, tasks[index]),
+              itemCount: tasks.length,
             ),
-            Divider(
-              color: Colors.grey,
-              indent: 36,
-              endIndent: 36,
-            ),
-            Container(
-              height: 500,
-              margin: EdgeInsets.symmetric(horizontal: 8),
-              child: ListView.builder(
-                itemBuilder: (context, index) =>
-                    taskItem(context, tasks[index]),
-                itemCount: tasks.length,
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        child: Icon(
+        child: const Icon(
           Icons.add,
         ),
       ),
@@ -92,8 +89,8 @@ Widget taskItem(BuildContext context, Task task) {
           arguments: task);
     },
     child: Container(
-      padding: EdgeInsets.all(8),
-      margin: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.white70,
         borderRadius: BorderRadius.circular(12),
