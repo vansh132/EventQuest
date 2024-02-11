@@ -14,6 +14,15 @@ class _FacultyTaskScreenState extends State<FacultyTaskScreen> {
   List<Task> tasks = [
     Task(
       taskTitle: "Talent Show",
+      taskDescription:
+          "Continuing our tradition, we are pleased to announce the forthcoming Talent Show scheduled for February 20th, 2024. This esteemed event will take place at 911, Central Block, providing an esteemed platform for our fresher students to exhibit their talents. The Talent Show serves as an avenue for showcasing diverse skills and abilities, fostering a culture of creativity and expression within our academic community. ",
+      taskType: "Poster",
+      assignedTo: "2347152",
+      assignedBy: "Helen K Joy",
+      taskStatus: "Incomplete",
+    ),
+    Task(
+      taskTitle: "Talent Show",
       taskDescription: "Create poster for it",
       taskType: "Poster",
       assignedTo: "2347152",
