@@ -79,7 +79,8 @@ class _FacultyTaskScreenState extends State<FacultyTaskScreen> {
 Widget taskItem(BuildContext context, Task task) {
   return GestureDetector(
     onTap: () {
-      Navigator.pushNamed(context, FacultyTaskDetailScreen.routeName);
+      Navigator.pushNamed(context, FacultyTaskDetailScreen.routeName,
+          arguments: task);
     },
     child: Container(
       padding: EdgeInsets.all(8),
