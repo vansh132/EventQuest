@@ -13,10 +13,11 @@ class AddEventScreen extends StatefulWidget {
 class _AddEventScreenState extends State<AddEventScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  String dropdownValue = 'UG';
+  String dropdownValue = "UG";
 
   DateTime? _registrationDeadline;
 
+//
   File image = File("");
   bool submitted = false;
   void selectImages() async {
