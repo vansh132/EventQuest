@@ -216,112 +216,106 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
   }
 
   Widget buildEventCard(Event event) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, EventDetailsScreen.routeName,
-            arguments: event);
-      },
-      child: Card(
-        margin: const EdgeInsets.all(8),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        elevation: 4.0,
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.remove_red_eye),
-                  onPressed: () {
-                    Navigator.pushNamed(context, EventDetailsScreen.routeName,
-                        arguments: event);
-                  },
-                ),
-                IconButton(
-                  icon: const Icon(Icons.edit),
-                  onPressed: () {
-                    Navigator.pushNamed(context, EditEventScreen.routeName,
-                        arguments: event);
-                  },
-                ),
-                IconButton(
-                  icon: const Icon(Icons.delete),
-                  onPressed: () {
-                    // Implement delete functionality here
-                  },
-                ),
-              ],
-            ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
-                event.eventImages,
-                height: 224,
-                width: double.infinity,
-                fit: BoxFit.cover,
+    return Card(
+      margin: const EdgeInsets.all(8),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      elevation: 4.0,
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.remove_red_eye),
+                onPressed: () {
+                  Navigator.pushNamed(context, EventDetailsScreen.routeName,
+                      arguments: event);
+                },
               ),
+              IconButton(
+                icon: const Icon(Icons.edit),
+                onPressed: () {
+                  Navigator.pushNamed(context, EditEventScreen.routeName,
+                      arguments: event);
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.delete),
+                onPressed: () {
+                  // Implement delete functionality here
+                },
+              ),
+            ],
+          ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.asset(
+              event.eventImages,
+              height: 224,
+              width: double.infinity,
+              fit: BoxFit.cover,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Card(
-                    color: Colors.white.withOpacity(0.7),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    elevation: 4.0,
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            event.registartionDeadline.day.toString(),
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Text(
-                            event.registartionDeadline.monthShort,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Card(
+                  color: Colors.white.withOpacity(0.7),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
-                  const SizedBox(width: 16),
-                  Expanded(
+                  elevation: 4.0,
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          event.eventName,
+                          event.registartionDeadline.day.toString(),
                           style: const TextStyle(
-                            fontSize: 18,
                             fontWeight: FontWeight.bold,
+                            fontSize: 16,
                           ),
                         ),
                         Text(
-                          event.description,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          textAlign: TextAlign.justify,
+                          event.registartionDeadline.monthShort,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
                         ),
                       ],
                     ),
                   ),
-                ],
-              ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        event.eventName,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        event.description,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
