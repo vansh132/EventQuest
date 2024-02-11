@@ -274,11 +274,19 @@ Widget AnnouncementItem(BuildContext context, Announcement announcement) {
       child: Row(
         children: [
           Expanded(
-              flex: 2,
-              child: Image.asset(
-                announcement.image![0],
-                fit: BoxFit.cover,
-              )),
+            flex: 2,
+            child: SizedBox(
+              height: 100, // Set the desired height
+              width: 100, // Set the desired width
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12.0),
+                child: Image.asset(
+                  announcement.image![0],
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
           Expanded(
               flex: 4,
               child: Container(
@@ -348,11 +356,15 @@ Widget EventItem(Event event, BuildContext context) {
       // margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.all(8),
       child: Stack(children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Image.asset(
-            event.eventImages,
-            fit: BoxFit.cover,
+        SizedBox(
+          height: double.infinity, // Set the desired height
+          width: double.infinity, // Set the desired width
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12.0),
+            child: Image.asset(
+              event.eventImages,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         Column(
