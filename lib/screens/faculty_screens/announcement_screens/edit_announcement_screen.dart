@@ -1,6 +1,5 @@
 import 'package:eventquest/models/announcement.dart';
 import 'package:eventquest/providers/announcement_notifier.dart';
-import 'package:eventquest/screens/faculty_screens/announcement_screens/faculty_announcement_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

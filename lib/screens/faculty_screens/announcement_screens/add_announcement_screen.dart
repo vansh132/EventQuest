@@ -36,7 +36,7 @@ class _AddAnnouncementScreenState extends ConsumerState<AddAnnouncementScreen> {
     final enteredDescription = description.text;
     final enteredPublishBy = publishBy.text;
     final enteredPublishOn = DateTime(2024, 1, 23);
-    final enteredImage = image;
+    // final enteredImage = image;
     final announcement = Announcement(
       id: "1",
       title: enteredTitle,
