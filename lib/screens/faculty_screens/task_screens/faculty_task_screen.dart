@@ -1,4 +1,5 @@
 import 'package:eventquest/models/task.dart';
+import 'package:eventquest/screens/faculty_screens/task_screens/faculty_add_task_screen.dart';
 import 'package:eventquest/screens/faculty_screens/task_screens/faculty_task_detail_screen.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +74,9 @@ class _FacultyTaskScreenState extends State<FacultyTaskScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, FacultyAddTaskScreen.routeName);
+        },
         child: const Icon(
           Icons.add,
         ),

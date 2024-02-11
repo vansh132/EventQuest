@@ -5,6 +5,7 @@ import 'package:eventquest/screens/faculty_screens/announcement_screens/edit_ann
 
 import 'package:eventquest/screens/faculty_screens/event_screens/add_event_screen.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/edit_event_screen.dart';
+import 'package:eventquest/screens/faculty_screens/task_screens/faculty_add_task_screen.dart';
 import 'package:eventquest/screens/faculty_screens/task_screens/faculty_edit_task_screen.dart';
 import 'package:eventquest/screens/faculty_screens/task_screens/faculty_task_detail_screen.dart';
 import 'package:eventquest/screens/login_screen.dart';
@@ -81,6 +82,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const FacultyEditTaskScreen(),
+      );
+    case FacultyAddTaskScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const FacultyAddTaskScreen(),
       );
     default:
       return MaterialPageRoute(
