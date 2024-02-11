@@ -1,4 +1,5 @@
 import 'package:eventquest/models/task.dart';
+import 'package:eventquest/screens/faculty_screens/task_screens/faculty_edit_task_screen.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,9 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
 
     return Scaffold(
       floatingActionButton: IconButton.filled(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, FacultyEditTaskScreen.routeName);
+        },
         icon: Icon(
           Icons.edit,
         ),
