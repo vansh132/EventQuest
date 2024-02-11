@@ -13,7 +13,7 @@ class AddAnnouncementScreen extends StatefulWidget {
 }
 
 class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
-  //TODO: Do it for multiple images
+  // TODO: Do it for multiple images
   File image = File("");
   bool submitted = false;
   void selectImages() async {
