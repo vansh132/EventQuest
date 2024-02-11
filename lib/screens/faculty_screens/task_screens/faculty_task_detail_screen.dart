@@ -135,61 +135,67 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                     const SizedBox(
                       height: 16,
                     ),
-                    const Text(
-                      "Remarks",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0xff0D1B2A),
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 0.2,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 6,
-                    ),
                     Container(
-                      alignment: task.remarks != null
-                          ? Alignment.centerLeft
-                          : Alignment.center,
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: Colors.white70,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.3), // Shadow color
-                            spreadRadius: 1, // Spread radius
-                            blurRadius: 1, // Blur radius
-                            offset: const Offset(
-                                0, 3), // Offset in the x, y direction
-                          ),
-                        ],
-                      ),
-                      child: task.remarks != null
-                          ? Text(
-                              task.remarks.toString(),
-                              textAlign: TextAlign.justify,
-                            )
-                          : const Text("No Remarks"),
-                    ),
+                        alignment: task.remarks != null
+                            ? Alignment.centerLeft
+                            : Alignment.center,
+                        width: MediaQuery.of(context).size.width,
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.white70,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              color:
+                                  Colors.grey.withOpacity(0.3), // Shadow color
+                              spreadRadius: 1, // Spread radius
+                              blurRadius: 1, // Blur radius
+                              offset: const Offset(
+                                  0, 3), // Offset in the x, y direction
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            const Text(
+                              "Remarks",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Color(0xff0D1B2A),
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.2,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 6,
+                            ),
+                            const Divider(
+                              indent: 16,
+                              endIndent: 16,
+                              color: Colors.grey,
+                            ),
+                            task.remarks != null
+                                ? Text(
+                                    task.remarks.toString(),
+                                    textAlign: TextAlign.justify,
+                                  )
+                                : const Text("No Remarks"),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            ElevatedButton(
+                              onPressed: () {},
+                              child: const Text("Add Remarks"),
+                            ),
+                          ],
+                        )),
                     const SizedBox(
-                      height: 4,
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text("Add Remarks"),
-                    ),
-                    Divider(
-                      color: Colors.grey,
-                    ),
-                    const SizedBox(
-                      height: 4,
+                      height: 16,
                     ),
                     ElevatedButton.icon(
                       onPressed: () {},
-                      icon: Icon(Icons.done_all_outlined),
-                      label: Text("Mark as Completed"),
+                      icon: const Icon(Icons.done_all_outlined),
+                      label: const Text("Mark as Completed"),
                     )
                   ],
                 ),
