@@ -20,7 +20,8 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
     return Scaffold(
       floatingActionButton: IconButton.filled(
         onPressed: () {
-          Navigator.pushNamed(context, FacultyEditTaskScreen.routeName);
+          Navigator.pushNamed(context, FacultyEditTaskScreen.routeName,
+              arguments: task);
         },
         icon: Icon(
           Icons.edit,
