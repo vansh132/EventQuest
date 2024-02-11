@@ -1,15 +1,20 @@
 import 'package:eventquest/models/announcement.dart';
+import 'package:eventquest/providers/announcement_notifier.dart';
+import 'package:eventquest/screens/faculty_screens/announcement_screens/faculty_announcement_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class EditAnnouncementScreen extends StatefulWidget {
+class EditAnnouncementScreen extends ConsumerStatefulWidget {
   static const String routeName = "edit_announcement_screen";
   const EditAnnouncementScreen({Key? key}) : super(key: key);
 
   @override
-  State<EditAnnouncementScreen> createState() => _EditAnnouncementScreenState();
+  ConsumerState<EditAnnouncementScreen> createState() =>
+      _EditAnnouncementScreenState();
 }
 
-class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
+class _EditAnnouncementScreenState
+    extends ConsumerState<EditAnnouncementScreen> {
   final _formKey = GlobalKey<FormState>();
 
   late TextEditingController title;
@@ -25,6 +30,25 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
     title = TextEditingController(text: announcementData.title);
     description = TextEditingController(text: announcementData.description);
     publishBy = TextEditingController(text: announcementData.publishedBy);
+  }
+
+  void _updateAnnouncement() {
+    final enteredTitle = title.text;
+    final enteredDescription = description.text;
+    final enteredPublishBy = publishBy.text;
+    final enteredPublishOn = DateTime(2024, 1, 23);
+    // final enteredImage = image;
+
+    final announcement = Announcement(
+      id: "1",
+      title: enteredTitle,
+      description: enteredDescription,
+      publishedBy: enteredPublishBy,
+      publishedOn: enteredPublishOn,
+    );
+
+    ref.read(announcementProvider.notifier).editAnnouncement(announcement);
+    Navigator.of(context).pop();
   }
 
   @override
@@ -123,7 +147,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                   child: ElevatedButton(
                     onPressed: isDataChanged()
                         ? () {
-                            // Perform update action here
+                            _updateAnnouncement();
                           }
                         : null,
                     child: Text('Submit'),

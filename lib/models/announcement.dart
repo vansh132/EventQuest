@@ -1,11 +1,13 @@
 class Announcement {
-  final String title;
-  final String description;
-  final List<String>? image;
-  final DateTime publishedOn;
-  final String publishedBy;
+  final String id;
+  String title;
+  String description;
+  List<String>? image;
+  DateTime publishedOn;
+  String publishedBy;
 
   Announcement({
+    required this.id,
     required this.title,
     required this.description,
     this.image,
