@@ -13,16 +13,46 @@ class _EditEventScreenState extends State<EditEventScreen> {
   final _formKey = GlobalKey<FormState>();
 
   String dropdownValue = 'UG';
+
+  late TextEditingController eventName;
+  late TextEditingController description;
+  late TextEditingController eventAmount;
+  late TextEditingController noOfParticipants;
+  late TextEditingController eventLink;
+  late TextEditingController contactPerson;
+  late TextEditingController contactName;
+  late Event eventData;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    eventData = ModalRoute.of(context)!.settings.arguments as Event;
+    eventName = TextEditingController(text: eventData.eventName);
+    description = TextEditingController(text: eventData.description);
+
+    eventAmount = TextEditingController(text: eventData.eventAmount.toString());
+
+    noOfParticipants =
+        TextEditingController(text: eventData.noOfParticipants.toString());
+    eventLink = TextEditingController(text: eventData.eventLink);
+    contactPerson = TextEditingController(text: eventData.contactPerson);
+    contactName = TextEditingController(text: eventData.contactNo.toString());
+  }
+
+  @override
+  void dispose() {
+    eventName.dispose();
+    description.dispose();
+    eventAmount.dispose();
+    noOfParticipants.dispose();
+    eventLink.dispose();
+    contactPerson.dispose();
+    contactName.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController eventName = TextEditingController();
-    TextEditingController description = TextEditingController();
-    TextEditingController eventAmount = TextEditingController();
-    TextEditingController noOfParticipants = TextEditingController();
-    TextEditingController eventLink = TextEditingController();
-    TextEditingController contactPerson = TextEditingController();
-    TextEditingController contactName = TextEditingController();
-    Event eventData = ModalRoute.of(context)!.settings.arguments as Event;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Update Event'),
@@ -45,9 +75,6 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 ),
                 TextFormField(
                   controller: eventName,
-                  decoration: InputDecoration(
-                    hintText: eventData.eventName,
-                  ),
                 ),
                 const SizedBox(
                   height: 14,
@@ -61,8 +88,8 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 ),
                 TextFormField(
                   controller: description,
-                  decoration: InputDecoration(
-                      hintText: eventData.description, hintMaxLines: 5),
+                  maxLines: 10,
+                  textAlign: TextAlign.justify,
                 ),
                 const SizedBox(
                   height: 16,
@@ -112,11 +139,6 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 TextFormField(
                   controller: eventAmount,
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    hintText: eventData.eventAmount == 0.0
-                        ? 'Free'
-                        : eventData.eventAmount.toString(),
-                  ),
                 ),
                 const SizedBox(
                   height: 14,
@@ -219,7 +241,6 @@ class _EditEventScreenState extends State<EditEventScreen> {
   }
 
   Widget RegistartionDeadline() {
-    Event eventData = ModalRoute.of(context)!.settings.arguments as Event;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(10.0),
@@ -235,7 +256,6 @@ class _EditEventScreenState extends State<EditEventScreen> {
   }
 
   void _pickRegistrationDeadline() async {
-    Event eventData = ModalRoute.of(context)!.settings.arguments as Event;
     DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),

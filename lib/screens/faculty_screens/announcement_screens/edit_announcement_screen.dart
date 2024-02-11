@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class EditAnnouncementScreen extends StatefulWidget {
   static const String routeName = "edit_announcement_screen";
-  const EditAnnouncementScreen({super.key});
+  const EditAnnouncementScreen({Key? key}) : super(key: key);
 
   @override
   State<EditAnnouncementScreen> createState() => _EditAnnouncementScreenState();
@@ -12,13 +12,37 @@ class EditAnnouncementScreen extends StatefulWidget {
 class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
   final _formKey = GlobalKey<FormState>();
 
+  late TextEditingController title;
+  late TextEditingController description;
+  late TextEditingController publishBy;
+  late Announcement announcementData;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    announcementData =
+        ModalRoute.of(context)!.settings.arguments as Announcement;
+    title = TextEditingController(text: announcementData.title);
+    description = TextEditingController(text: announcementData.description);
+    publishBy = TextEditingController(text: announcementData.publishedBy);
+  }
+
+  @override
+  void dispose() {
+    title.dispose();
+    description.dispose();
+    publishBy.dispose();
+    super.dispose();
+  }
+
+  bool isDataChanged() {
+    return title.text != announcementData.title ||
+        description.text != announcementData.description ||
+        publishBy.text != announcementData.publishedBy;
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController title = TextEditingController();
-    TextEditingController description = TextEditingController();
-    TextEditingController publishBy = TextEditingController();
-    Announcement announcementData =
-        ModalRoute.of(context)!.settings.arguments as Announcement;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Update Announcement'),
@@ -39,10 +63,13 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                TextFormField(
+                TextField(
                   controller: title,
+                  onChanged: (value) {
+                    setState(() {});
+                  },
                   decoration: InputDecoration(
-                    hintText: announcementData.title,
+                    hintText: "Enter announcement title",
                   ),
                 ),
                 const SizedBox(
@@ -55,17 +82,19 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                TextFormField(
+                TextField(
                   controller: description,
+                  onChanged: (value) {
+                    setState(() {});
+                  },
+                  maxLines: null,
                   decoration: InputDecoration(
-                    hintText: announcementData.description,
-                    hintMaxLines: 5,
+                    hintText: "Enter announcement description",
                   ),
                 ),
                 const SizedBox(
                   height: 16,
                 ),
-
                 //TODO: add update file field
                 const Text(
                   "Upload File yet to be added",
@@ -78,18 +107,25 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                TextFormField(
+                TextField(
                   controller: publishBy,
-                  decoration: InputDecoration(
-                    hintText: announcementData.publishedBy,
+                  onChanged: (value) {
+                    setState(() {});
+                  },
+                  decoration: const InputDecoration(
+                    hintText: "Enter publisher name",
                   ),
                 ),
                 const SizedBox(
                   height: 16,
                 ),
-                const Center(
+                Center(
                   child: ElevatedButton(
-                    onPressed: null,
+                    onPressed: isDataChanged()
+                        ? () {
+                            // Perform update action here
+                          }
+                        : null,
                     child: Text('Submit'),
                   ),
                 )

@@ -25,7 +25,7 @@ class _EventScreenState extends State<EventScreen> {
       eventLink: "https://basicfirstaid.org",
       publishedOn: DateTime.now(),
       eventImages: "assets/images/BASICFIRSTAI.jpeg",
-      eventAmount: 200,
+      eventAmount: 0,
       contactPerson: "Helen K Joy",
       contactNo: 9099897859,
       noOfParticipants: 2,
@@ -125,7 +125,8 @@ class _EventScreenState extends State<EventScreen> {
       eventId: "ghe029",
       eventCategory: "UG",
       eventName: "RAINING GEN",
-      description: "Greetings, tech enthusiasts! 🚀\n\nKristu Jayanti College's Department of Computer Science [PG] proudly presents \"Shells 2024 - Digital Horizon - Unleashing Tech Frontiers,\" the grand national intercollegiate IT fest. 🎉\n\nMark your calendars for an exhilarating digital adventure on the 8th (Online) and 9th February 2024, and compete for an attractive cash prize! 🏆\n\n🔹 Events include:\n\nDigital Tapestry\n\nTechnotrek\n\nBitquest\n\nBitquest 2024\n\nDigital Tapestry 2\nAnd many more...\n\n�� Venue:\nKristu Jayanti College's Department of ComputerComputer\n📍 Venue: Kristu Jayanti College [Autonomous], Bengaluru\nBengaluru - 56\n\nFor more information and to register, contact\nDon't miss out on the opportunity to showcase your skills and connect with fellow tech aficionados. Register now by scanning the QR code on the poster!\n\nFor more information, please reach out to the faculty and student coordinators listed on the poster.\n\nLet's ride the wave of innovation together at Shells 2024! 💻🌐\n\n#Shells2024 #ITFest #TechEvent #KristuJayantiCollege #IEEE #ACMW #BengaluruTech",
+      description:
+          "Greetings, tech enthusiasts! 🚀\n\nKristu Jayanti College's Department of Computer Science [PG] proudly presents \"Shells 2024 - Digital Horizon - Unleashing Tech Frontiers,\" the grand national intercollegiate IT fest. 🎉\n\nMark your calendars for an exhilarating digital adventure on the 8th (Online) and 9th February 2024, and compete for an attractive cash prize! 🏆\n\n🔹 Events include:\n\nDigital Tapestry\n\nTechnotrek\n\nBitquest\n\nBitquest 2024\n\nDigital Tapestry 2\nAnd many more...\n\n�� Venue:\nKristu Jayanti College's Department of ComputerComputer\n📍 Venue: Kristu Jayanti College [Autonomous], Bengaluru\nBengaluru - 56\n\nFor more information and to register, contact\nDon't miss out on the opportunity to showcase your skills and connect with fellow tech aficionados. Register now by scanning the QR code on the poster!\n\nFor more information, please reach out to the faculty and student coordinators listed on the poster.\n\nLet's ride the wave of innovation together at Shells 2024! 💻🌐\n\n#Shells2024 #ITFest #TechEvent #KristuJayantiCollege #IEEE #ACMW #BengaluruTech",
       publishedOn: DateTime.now().subtract(const Duration(days: 10)),
       eventImages: "assets/images/SHELLS.jpeg",
       eventLink: "https://artexhibition.com",
@@ -139,7 +140,8 @@ class _EventScreenState extends State<EventScreen> {
       eventId: "ghe024",
       eventCategory: "PG",
       eventName: "THE CLASSICS SOCIETY",
-      description: "Hello everyone!\n\nWe're thrilled to announce a guided field visit to the National Gallery of Modern Art, organized by The Classics Society of the School of Arts & Humanities. This enlightening excursion is an excellent opportunity for all art enthusiasts to delve into modern art marvels.\n\n🗓️ Date: 20th January 2024\n⏰ Time: 2:00 PM - 4:30 PM\n💷 Fee: ₹225/- (includes transport)\n\nSpots are limited, so please RSVP soon to secure your place. For more details or to confirm your attendance, reach out to the student coordinators Yatin or Poorvi at the numbers provided on the poster.\n\nDon't miss out on this cultural adventure! 🎨✨",
+      description:
+          "Hello everyone!\n\nWe're thrilled to announce a guided field visit to the National Gallery of Modern Art, organized by The Classics Society of the School of Arts & Humanities. This enlightening excursion is an excellent opportunity for all art enthusiasts to delve into modern art marvels.\n\n🗓️ Date: 20th January 2024\n⏰ Time: 2:00 PM - 4:30 PM\n💷 Fee: ₹225/- (includes transport)\n\nSpots are limited, so please RSVP soon to secure your place. For more details or to confirm your attendance, reach out to the student coordinators Yatin or Poorvi at the numbers provided on the poster.\n\nDon't miss out on this cultural adventure! 🎨✨",
       publishedOn: DateTime.now().subtract(const Duration(days: 10)),
       eventImages: "assets/images/THECLASSICSSOCIETY.jpeg",
       eventLink: "https://artexhibition.com",
@@ -153,7 +155,8 @@ class _EventScreenState extends State<EventScreen> {
       eventId: "ize024",
       eventCategory: "UG",
       eventName: "ZENITH",
-      description: "Good day, folks!\n\nWe're excited to announce the 'Zenith HR Fest 2024' on 19th January, centred around the cutting-edge theme of Industry 5.0. This fest is a fantastic platform for future HR leaders to showcase their talents and learn through competition.\n\n🗓️\nDate: 19th January 2024\n🎯 Events: Quiz, Treasure Hunt, Role-Play, Debate, and much more!\n💰 Win: Cash prizes up to ₹25,000!\n📚 Special Feature: Training Module Development\n\nDon't miss out on this exciting event! \nThere's a mix of group and individual events, ensuring there's something for everyone. Plus, you can participate in an online meme-making contest from the comfort of your home!\n\n📲 To register, simply scan the QR code on the poster or reach out to the student coordinators, Paridhi Saxena or Hari Prakash, for any queries.\n\nLet's make this a memorable event with your enthusiastic participation! 🌟🏆",
+      description:
+          "Good day, folks!\n\nWe're excited to announce the 'Zenith HR Fest 2024' on 19th January, centred around the cutting-edge theme of Industry 5.0. This fest is a fantastic platform for future HR leaders to showcase their talents and learn through competition.\n\n🗓️\nDate: 19th January 2024\n🎯 Events: Quiz, Treasure Hunt, Role-Play, Debate, and much more!\n💰 Win: Cash prizes up to ₹25,000!\n📚 Special Feature: Training Module Development\n\nDon't miss out on this exciting event! \nThere's a mix of group and individual events, ensuring there's something for everyone. Plus, you can participate in an online meme-making contest from the comfort of your home!\n\n📲 To register, simply scan the QR code on the poster or reach out to the student coordinators, Paridhi Saxena or Hari Prakash, for any queries.\n\nLet's make this a memorable event with your enthusiastic participation! 🌟🏆",
       publishedOn: DateTime.now().subtract(const Duration(days: 10)),
       eventImages: "assets/images/ZENITH.jpeg",
       eventLink: "https://artexhibition.com",

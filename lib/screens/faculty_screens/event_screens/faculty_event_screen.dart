@@ -27,7 +27,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
       eventLink: "https://basicfirstaid.org",
       publishedOn: DateTime.now(),
       eventImages: "assets/images/BASICFIRSTAI.jpeg",
-      eventAmount: 200,
+      eventAmount: 0,
       contactPerson: "Helen K Joy",
       contactNo: 9099897859,
       noOfParticipants: 2,
