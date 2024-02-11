@@ -42,7 +42,7 @@ class FacultyAnnouncementScreen extends StatelessWidget {
       description:
           "Peer-to-peer learning is a highly beneficial educational approach where students engage with each other to attain educational goals, sharing knowledge and experiences to enrich their understanding. In this image, we observe a group of individuals in a classroom environment focused on a screen displaying what appears to be Python code, indicating a collaborative learning session on programming.\n\nThe importance of peer learning, especially in contexts such as learning Python or any other programming language, cannot be overstated. It fosters a supportive environment where learners can clarify their doubts, learn from each other\'s strengths, and work collaboratively to solve complex problems. Moreover, peer learning encourages the development of critical thinking and communication skills, as students must articulate their thoughts and ideas clearly.\n\nIt also builds confidence, as students validate their knowledge by teaching others, and it creates a sense of community, promoting a network of support that can be invaluable during the learning process and beyond.\n\nGreat work to all involved in the peer-to-peer learning session. Your collaborative efforts are not only enhancing your individual skills but are also strengthening your collective knowledge. Keep up the excellent work, and continue to support and learn from one another – it's through such shared dedication and teamwork that true learning flourishes. Best wishes on your coding journey!",
       image: ["assets/images/pythonPeer.png"],
-      publishedBy: "Helen K Joy",
+      publishedBy: "Dr. Kavitha R",
       publishedOn: DateTime(2024, 1, 10),
     ),
   ];
