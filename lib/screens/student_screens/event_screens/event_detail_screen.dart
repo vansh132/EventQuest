@@ -1,13 +1,12 @@
 import 'package:eventquest/models/event.dart';
 import 'package:eventquest/screens/student_screens/registration_screens/registration_screen.dart';
-
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EventDetailsScreen extends StatelessWidget {
   static const String routeName = '/event-detail-screen';
 
-  const EventDetailsScreen({super.key});
+  const EventDetailsScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +20,31 @@ class EventDetailsScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Event Image
-              ClipRRect(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(12),
-                    bottomRight: Radius.circular(12)),
-                child: Image.asset(
-                  event.eventImages,
-                  height: 250,
-                  width: double.infinity,
-                  fit: BoxFit.fill,
+              // Event Image with Hero Animation
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          HeroImageScreen(image: event.eventImages),
+                    ),
+                  );
+                },
+                child: Hero(
+                  tag: event.eventImages, // Unique tag for the hero animation
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(12),
+                      bottomRight: Radius.circular(12),
+                    ),
+                    child: Image.asset(
+                      event.eventImages,
+                      height: 250,
+                      width: double.infinity,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
                 ),
               ),
 
@@ -105,7 +119,6 @@ class EventDetailsScreen extends StatelessWidget {
               ),
 
               // Event Link
-
               InkWell(
                 onTap: () {
                   _launchURL(event.eventLink!);
@@ -221,13 +234,36 @@ class EventDetailsScreen extends StatelessWidget {
   }
 
   void _launchURL(String url) async {
-    // ignore: deprecated_member_use
     if (await canLaunch(url)) {
-      // ignore: deprecated_member_use
       await launch(url);
     } else {
-      // Print the error or handle it appropriately
       print('Could not launch $url');
     }
+  }
+}
+
+class HeroImageScreen extends StatelessWidget {
+  final String image;
+
+  const HeroImageScreen({required this.image});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GestureDetector(
+        onTap: () {
+          Navigator.pop(context); // Go back when tapped on the image
+        },
+        child: Center(
+          child: Hero(
+            tag: image, // Same tag as used in the source screen
+            child: Image.asset(
+              image,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

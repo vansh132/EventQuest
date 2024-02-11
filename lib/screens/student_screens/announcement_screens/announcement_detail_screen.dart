@@ -135,9 +135,12 @@ class AnnouncementCarouselSlider extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20.0),
                   child: Hero(
                     tag: 'announcement_image_${url.hashCode}',
-                    child: Image.network(
-                      url,
-                      fit: BoxFit.cover,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child:  Image.asset(
+                url,
+                fit: BoxFit.fill,
+              )
                     ),
                   ),
                 ),
@@ -163,7 +166,7 @@ class FullScreenImage extends StatelessWidget {
           Navigator.pop(context); // Navigate back to the detail screen
         },
         child: PhotoView(
-          imageProvider: NetworkImage(url),
+          imageProvider: AssetImage(url),
           minScale: PhotoViewComputedScale.contained,
           maxScale: PhotoViewComputedScale.covered * 2,
           backgroundDecoration: const BoxDecoration(
