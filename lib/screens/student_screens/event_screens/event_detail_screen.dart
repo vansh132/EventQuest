@@ -121,7 +121,7 @@ class EventDetailsScreen extends StatelessWidget {
               // Event Link
               InkWell(
                 onTap: () {
-                  _launchURL(event.eventLink!);
+                  _launchURL(event.eventLink);
                 },
                 child: RichText(
                   text: TextSpan(
