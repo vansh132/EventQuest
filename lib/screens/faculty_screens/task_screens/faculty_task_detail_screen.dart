@@ -184,7 +184,35 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                               height: 4,
                             ),
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return Dialog(
+                                      child: Container(
+                                        padding: EdgeInsets.all(16),
+                                        height: 200,
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text("Give Remarks: "),
+                                              TextFormField(
+                                                minLines: 1,
+                                                maxLines: 3,
+                                              ),
+                                              ElevatedButton(
+                                                  onPressed: () {},
+                                                  child: Text("Add Remark"))
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
                               child: const Text("Add Remarks"),
                             ),
                           ],
