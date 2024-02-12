@@ -127,7 +127,7 @@ class _EditAnnouncementScreenState
                   onChanged: (value) {
                     setState(() {});
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "Enter announcement title",
                   ),
                 ),

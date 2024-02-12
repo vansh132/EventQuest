@@ -21,7 +21,7 @@ class _FacultyCustomBottomBarState extends State<FacultyCustomBottomBar> {
   Widget build(BuildContext context) {
     List<Widget> widgetOptions = <Widget>[
       const FacultyHomeScreen(),
-      const FacultyEventScreen(),
+      FacultyEventScreen(),
       FacultyAnnouncementScreen(),
       const FacultyTaskScreen(),
       RegistrationDetailsScreen(),

@@ -1,15 +1,15 @@
 class Event {
   final String eventId;
-  final String eventName;
-  final String description;
+  String eventName;
+  String description;
   double eventAmount;
-  final String eventImages;
-  final String eventCategory;
-  final DateTime publishedOn;
-  final int noOfParticipants;
-  String? eventLink;
-  final String contactPerson;
-  final int contactNo;
+  String eventImages;
+  String eventCategory;
+  DateTime publishedOn;
+  int noOfParticipants;
+  String eventLink;
+  String contactPerson;
+  int contactNo;
   DateTime registartionDeadline;
 
   Event({
@@ -21,7 +21,7 @@ class Event {
     required this.eventCategory,
     required this.publishedOn,
     required this.noOfParticipants,
-    this.eventLink,
+    required this.eventLink,
     required this.contactPerson,
     required this.contactNo,
     required this.registartionDeadline,

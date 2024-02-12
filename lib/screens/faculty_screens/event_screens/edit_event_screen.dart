@@ -1,15 +1,17 @@
 import 'package:eventquest/models/event.dart';
+import 'package:eventquest/providers/event_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class EditEventScreen extends StatefulWidget {
+class EditEventScreen extends ConsumerStatefulWidget {
   static const String routeName = "edit_event_screen";
   const EditEventScreen({super.key});
 
   @override
-  State<EditEventScreen> createState() => _EditEventScreenState();
+  ConsumerState<EditEventScreen> createState() => _EditEventScreenState();
 }
 
-class _EditEventScreenState extends State<EditEventScreen> {
+class _EditEventScreenState extends ConsumerState<EditEventScreen> {
   final _formKey = GlobalKey<FormState>();
 
   String dropdownValue = 'UG';
@@ -20,7 +22,8 @@ class _EditEventScreenState extends State<EditEventScreen> {
   late TextEditingController noOfParticipants;
   late TextEditingController eventLink;
   late TextEditingController contactPerson;
-  late TextEditingController contactName;
+  late TextEditingController contactNo;
+  late TextEditingController registrationDeadline;
   late Event eventData;
 
   @override
@@ -36,7 +39,9 @@ class _EditEventScreenState extends State<EditEventScreen> {
         TextEditingController(text: eventData.noOfParticipants.toString());
     eventLink = TextEditingController(text: eventData.eventLink);
     contactPerson = TextEditingController(text: eventData.contactPerson);
-    contactName = TextEditingController(text: eventData.contactNo.toString());
+    contactNo = TextEditingController(text: eventData.contactNo.toString());
+    registrationDeadline =
+        TextEditingController(text: eventData.registartionDeadline.toString());
   }
 
   @override
@@ -47,8 +52,37 @@ class _EditEventScreenState extends State<EditEventScreen> {
     noOfParticipants.dispose();
     eventLink.dispose();
     contactPerson.dispose();
-    contactName.dispose();
+    contactNo.dispose();
+    registrationDeadline.dispose();
     super.dispose();
+  }
+
+  void _updateEvent() {
+    final enteredEventName = eventName.text;
+    final enteredDescription = description.text;
+    final enteredEventAmount = eventAmount.text;
+    final enteredNoOfParticipants = noOfParticipants.text;
+    final enteredEventLink = eventLink.text;
+    final enteredContactName = contactPerson.text;
+    final enteredContactNo = contactNo.text;
+    // final enteredRegistrationDeadline = registrationDeadline.text;
+    final event = Event(
+        eventId: "1",
+        eventName: enteredEventName,
+        description: enteredDescription,
+        eventAmount: double.parse(enteredEventAmount),
+        noOfParticipants: int.parse(enteredNoOfParticipants),
+        eventLink: enteredEventLink,
+        contactPerson: enteredContactName,
+        contactNo: int.parse(enteredContactNo),
+        eventImages: "assets/images/PRAYAS.jpeg",
+        eventCategory: dropdownValue,
+        publishedOn: DateTime(2024, 3, 3),
+        registartionDeadline: DateTime(2024, 3, 3)); // Needs to be dynamic
+
+    ref.read(eventProvider.notifier).updateEvent(event);
+
+    Navigator.of(context).pop();
   }
 
   @override
@@ -184,7 +218,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   ),
                 ),
                 TextFormField(
-                  controller: contactName,
+                  controller: contactNo,
                   decoration: InputDecoration(
                     hintText: eventData.contactPerson,
                   ),
@@ -229,9 +263,9 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                const Center(
-                    child:
-                        ElevatedButton(onPressed: null, child: Text('Submit')))
+                Center(
+                    child: ElevatedButton(
+                        onPressed: _updateEvent, child: Text('Submit')))
               ],
             ),
           ),

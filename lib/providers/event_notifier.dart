@@ -1,12 +1,12 @@
-import 'package:eventquest/models/announcement.dart';
 import 'package:eventquest/models/event.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class EventNotifier extends StateNotifier<List<Event>> {
   EventNotifier() : super(const []);
 
-  void addAnnouncement(Event event) {
+  void addEvent(Event event) {
     final newEvent = Event(
+        eventLink: event.eventLink,
         eventId: event.eventId,
         eventName: event.eventName,
         description: event.description,
@@ -21,24 +21,31 @@ class EventNotifier extends StateNotifier<List<Event>> {
     state = [newEvent, ...state];
   }
 
-  // void editAnnouncement(Event updatedEvent) {
-  //   state = state.map((event) {
-  //     if (event.id == updatedevent.id) {
-  //       event.title = updatedevent.title;
-  //       event.description = updatedevent.description;
-  //       event.publishedBy = updatedevent.publishedBy;
+  void updateEvent(Event updatedEvent) {
+    state = state.map((event) {
+      if (event.eventId == updatedEvent.eventId) {
+        event.eventName = updatedEvent.eventName;
+        event.description = updatedEvent.description;
+        event.eventAmount = updatedEvent.eventAmount;
+        event.eventImages = updatedEvent.eventImages;
+        event.eventCategory = updatedEvent.eventCategory;
+        event.publishedOn = updatedEvent.publishedOn;
+        event.noOfParticipants = updatedEvent.noOfParticipants;
+        event.contactNo = updatedEvent.contactNo;
+        event.contactPerson = updatedEvent.contactPerson;
+        event.registartionDeadline = updatedEvent.registartionDeadline;
 
-  //       return updatedAnnouncement;
-  //     }
+        return updatedEvent;
+      }
 
-  //     return announcement;
-  //   }).toList();
-  // }
+      return event;
+    }).toList();
+  }
 
   void removeEvent(Event event) {
     state = [...state.where((element) => element != event)];
   }
 }
 
-final announcementProvider =
+final eventProvider =
     StateNotifierProvider<EventNotifier, List<Event>>((ref) => EventNotifier());
