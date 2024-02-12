@@ -82,7 +82,7 @@ class _EditEventScreenState extends ConsumerState<EditEventScreen> {
 
     ref.read(eventProvider.notifier).updateEvent(event);
 
-    Navigator.of(context).pop();
+    Navigator.pop(context, true);
   }
 
   @override

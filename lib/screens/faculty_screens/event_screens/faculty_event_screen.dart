@@ -200,7 +200,7 @@ class _FacultyEventScreenState extends ConsumerState<FacultyEventScreen> {
                   child: ListView.builder(
                     itemCount: filteredEvents.length,
                     itemBuilder: (context, index) {
-                      return buildEventCard(filteredEvents[index]);
+                      return buildEventCard(context, filteredEvents[index]);
                     },
                   ),
                 ),
@@ -210,16 +210,18 @@ class _FacultyEventScreenState extends ConsumerState<FacultyEventScreen> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.pushNamed(
-              context,
-              AddEventScreen.routeName,
-            );
+            Navigator.pushNamed(context, AddEventScreen.routeName)
+                .then((result) {
+              if (result != null && result == true) {
+                setState(() {});
+              }
+            });
           },
           child: const Icon(Icons.add),
         ));
   }
 
-  Widget buildEventCard(Event event) {
+  Widget buildEventCard(BuildContext context, Event event) {
     return Card(
       margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
@@ -242,13 +244,20 @@ class _FacultyEventScreenState extends ConsumerState<FacultyEventScreen> {
                 icon: const Icon(Icons.edit),
                 onPressed: () {
                   Navigator.pushNamed(context, EditEventScreen.routeName,
-                      arguments: event);
+                          arguments: event)
+                      .then((result) {
+                    if (result != null && result == true) {
+                      setState(() {});
+                    }
+                  });
                 },
               ),
               IconButton(
                 icon: const Icon(Icons.delete),
                 onPressed: () {
-                  // Implement delete functionality here
+                  setState(() {
+                    ref.read(eventProvider.notifier).removeEvent(event);
+                  });
                 },
               ),
             ],

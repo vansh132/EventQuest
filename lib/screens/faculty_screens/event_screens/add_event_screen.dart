@@ -53,7 +53,7 @@ class _AddEventScreenState extends ConsumerState<AddEventScreen> {
 
     ref.read(eventProvider.notifier).addEvent(event);
 
-    Navigator.of(context).pop();
+    Navigator.pop(context, true);
   }
 
   File image = File("");
