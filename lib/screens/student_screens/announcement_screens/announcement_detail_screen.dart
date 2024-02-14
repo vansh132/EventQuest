@@ -1,17 +1,16 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eventquest/models/announcement.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:photo_view/photo_view.dart';
 
-class AnnouncementDetailScreen extends ConsumerWidget {
+class AnnouncementDetailScreen extends StatelessWidget {
   static const String routeName = '/announcement_detail';
 
   const AnnouncementDetailScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final Announcement announcement =
         ModalRoute.of(context)!.settings.arguments as Announcement;
 
@@ -101,7 +100,7 @@ class AnnouncementCarouselSlider extends StatelessWidget {
         autoPlay: true,
         aspectRatio: 2.0,
       ),
-      items: [Image.asset("assets/images/placement.jpeg")].map((url) {
+      items: announcement.image!.map((url) {
         return Builder(
           builder: (BuildContext context) {
             return GestureDetector(
@@ -112,8 +111,7 @@ class AnnouncementCarouselSlider extends StatelessWidget {
                     pageBuilder: (context, animation, secondaryAnimation) {
                       return FadeTransition(
                         opacity: animation,
-                        child: FullScreenImage(
-                            url: "assets/images/placement.jpeg"),
+                        child: FullScreenImage(url: url),
                       );
                     },
                   ),
@@ -140,7 +138,7 @@ class AnnouncementCarouselSlider extends StatelessWidget {
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(12.0),
                         child: Image.asset(
-                          "assets/images/placement.jpeg",
+                          url,
                           fit: BoxFit.fill,
                         )),
                   ),

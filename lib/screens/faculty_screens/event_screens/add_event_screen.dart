@@ -1,61 +1,23 @@
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
-import 'package:eventquest/models/event.dart';
-import 'package:eventquest/providers/event_notifier.dart';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddEventScreen extends ConsumerStatefulWidget {
+class AddEventScreen extends StatefulWidget {
   static const String routeName = "add-event-screen";
   @override
   _AddEventScreenState createState() => _AddEventScreenState();
 }
 
-class _AddEventScreenState extends ConsumerState<AddEventScreen> {
+class _AddEventScreenState extends State<AddEventScreen> {
   final _formKey = GlobalKey<FormState>();
 
   String dropdownValue = "UG";
 
   DateTime? _registrationDeadline;
 
-  final eventName = TextEditingController();
-  final description = TextEditingController();
-  final eventAmount = TextEditingController();
-  final noOfParticipants = TextEditingController();
-  final eventLink = TextEditingController();
-  final contactNo = TextEditingController();
-  final contactName = TextEditingController();
-
-  void _saveEvent() {
-    final enteredEventName = eventName.text;
-    final enteredDescription = description.text;
-    final enteredEventAmount = eventAmount.text;
-    final enteredNoOfParticipants = noOfParticipants.text;
-    final enteredEventLink = eventLink.text;
-    final enteredContactName = contactName.text;
-    final enteredContactNo = contactNo.text;
-    final event = Event(
-        eventId: "1",
-        eventName: enteredEventName,
-        description: enteredDescription,
-        eventAmount: double.parse(enteredEventAmount),
-        noOfParticipants: int.parse(enteredNoOfParticipants),
-        eventLink: enteredEventLink,
-        contactPerson: enteredContactName,
-        contactNo: int.parse(enteredContactNo),
-        eventImages: "assets/images/PRAYAS.jpeg",
-        eventCategory: dropdownValue,
-        publishedOn: DateTime(2024, 3, 3),
-        registartionDeadline: _registrationDeadline!);
-
-    ref.read(eventProvider.notifier).addEvent(event);
-
-    Navigator.pop(context, true);
-  }
-
+//
   File image = File("");
   bool submitted = false;
   void selectImages() async {
@@ -100,6 +62,14 @@ class _AddEventScreenState extends ConsumerState<AddEventScreen> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController eventName = TextEditingController();
+    TextEditingController description = TextEditingController();
+    TextEditingController eventAmount = TextEditingController();
+    TextEditingController noOfParticipants = TextEditingController();
+    TextEditingController eventLink = TextEditingController();
+    TextEditingController contactPerson = TextEditingController();
+    TextEditingController contactName = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Event Form'),
@@ -274,10 +244,10 @@ class _AddEventScreenState extends ConsumerState<AddEventScreen> {
                   height: 14,
                 ),
                 TextFormField(
-                  controller: contactNo,
+                  controller: contactPerson,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                    labelText: "Contact No",
+                    labelText: "Contact Person",
                   ),
                 ),
                 const SizedBox(
@@ -299,9 +269,9 @@ class _AddEventScreenState extends ConsumerState<AddEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                Center(
-                    child: ElevatedButton(
-                        onPressed: _saveEvent, child: const Text('Submit')))
+                const Center(
+                    child:
+                        ElevatedButton(onPressed: null, child: Text('Submit')))
               ],
             ),
           ),

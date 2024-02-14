@@ -1,21 +1,15 @@
-import 'dart:io';
-
-import 'package:dotted_border/dotted_border.dart';
 import 'package:eventquest/models/event.dart';
-import 'package:eventquest/providers/event_notifier.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class EditEventScreen extends ConsumerStatefulWidget {
+class EditEventScreen extends StatefulWidget {
   static const String routeName = "edit_event_screen";
   const EditEventScreen({super.key});
 
   @override
-  ConsumerState<EditEventScreen> createState() => _EditEventScreenState();
+  State<EditEventScreen> createState() => _EditEventScreenState();
 }
 
-class _EditEventScreenState extends ConsumerState<EditEventScreen> {
+class _EditEventScreenState extends State<EditEventScreen> {
   final _formKey = GlobalKey<FormState>();
 
   String dropdownValue = 'UG';
@@ -26,8 +20,7 @@ class _EditEventScreenState extends ConsumerState<EditEventScreen> {
   late TextEditingController noOfParticipants;
   late TextEditingController eventLink;
   late TextEditingController contactPerson;
-  late TextEditingController contactNo;
-  late TextEditingController registrationDeadline;
+  late TextEditingController contactName;
   late Event eventData;
 
   @override
@@ -43,9 +36,7 @@ class _EditEventScreenState extends ConsumerState<EditEventScreen> {
         TextEditingController(text: eventData.noOfParticipants.toString());
     eventLink = TextEditingController(text: eventData.eventLink);
     contactPerson = TextEditingController(text: eventData.contactPerson);
-    contactNo = TextEditingController(text: eventData.contactNo.toString());
-    registrationDeadline =
-        TextEditingController(text: eventData.registartionDeadline.toString());
+    contactName = TextEditingController(text: eventData.contactNo.toString());
   }
 
   @override
@@ -56,79 +47,8 @@ class _EditEventScreenState extends ConsumerState<EditEventScreen> {
     noOfParticipants.dispose();
     eventLink.dispose();
     contactPerson.dispose();
-    contactNo.dispose();
-    registrationDeadline.dispose();
+    contactName.dispose();
     super.dispose();
-  }
-
-  void _updateEvent() {
-    final enteredEventName = eventName.text;
-    final enteredDescription = description.text;
-    final enteredEventAmount = eventAmount.text;
-    final enteredNoOfParticipants = noOfParticipants.text;
-    final enteredEventLink = eventLink.text;
-    final enteredContactName = contactPerson.text;
-    final enteredContactNo = contactNo.text;
-    // final enteredRegistrationDeadline = registrationDeadline.text;
-    final event = Event(
-        eventId: "1",
-        eventName: enteredEventName,
-        description: enteredDescription,
-        eventAmount: double.parse(enteredEventAmount),
-        noOfParticipants: int.parse(enteredNoOfParticipants),
-        eventLink: enteredEventLink,
-        contactPerson: enteredContactName,
-        contactNo: int.parse(enteredContactNo),
-        eventImages: "assets/images/PRAYAS.jpeg",
-        eventCategory: dropdownValue,
-        publishedOn: DateTime(2024, 3, 3),
-        registartionDeadline: DateTime(2024, 3, 3)); // Needs to be dynamic
-
-    ref.read(eventProvider.notifier).updateEvent(event);
-
-    Navigator.pop(context, true);
-  }
-
-  File image = File("");
-  bool submitted = false;
-  void selectImages() async {
-    var res = await pickImages();
-    setState(() {
-      image = res;
-    });
-  }
-
-  void clearImage() {
-    setState(() {
-      image = File("");
-    });
-  }
-
-  // void submitImage() {
-  //   if (image.existsSync() == false) {
-  //     showSnackBar(context, "Please upload file");
-  //     return;
-  //   }
-  //   setState(() {
-  //     submitted = true;
-  //   });
-  // }
-
-  Future<File> pickImages() async {
-    File image = File("");
-    try {
-      var files = await FilePicker.platform.pickFiles(
-        type: FileType.image,
-        allowMultiple: false,
-      );
-
-      if (files != null && files.files.isNotEmpty) {
-        image = File(files.files[0].path!);
-      }
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-    return image;
   }
 
   @override
@@ -204,77 +124,10 @@ class _EditEventScreenState extends ConsumerState<EditEventScreen> {
                     },
                   ),
                 ),
+                //TODO: add update file field
                 const Text(
-                  "Upload Image",
-                  style: TextStyle(fontSize: 18),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                image.existsSync() == true
-                    ? Center(
-                        child: SizedBox(
-                          height: 200,
-                          width: 200,
-                          child: Image(
-                            image: FileImage(image),
-                          ),
-                        ),
-                      )
-                    : GestureDetector(
-                        onTap: selectImages,
-                        child: DottedBorder(
-                          radius: const Radius.circular(10),
-                          dashPattern: const [10, 4],
-                          borderType: BorderType.RRect,
-                          strokeCap: StrokeCap.round,
-                          child: Container(
-                            width: double.infinity,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              // color: Colors.red,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.folder_open_outlined,
-                                  size: 40,
-                                ),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                Text(
-                                  "Upload Event Image",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.grey.shade400,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ElevatedButton.icon(
-                      onPressed: submitted == true ? null : clearImage,
-                      label: const Text(
-                        "Clear",
-                      ),
-                      icon: const Icon(Icons.cancel_outlined),
-                    ),
-                    // ElevatedButton.icon(
-                    //   onPressed: submitted == true ? null : submitImage,
-                    //   icon:
-                    //       const Icon(Icons.playlist_add_check_circle_outlined),
-                    //   label: const Text("Submit"),
-                    // )
-                  ],
+                  "Upload File yet to be added",
+                  style: TextStyle(color: Colors.red),
                 ),
                 const Text(
                   "Event Amount",
@@ -331,7 +184,7 @@ class _EditEventScreenState extends ConsumerState<EditEventScreen> {
                   ),
                 ),
                 TextFormField(
-                  controller: contactNo,
+                  controller: contactName,
                   decoration: InputDecoration(
                     hintText: eventData.contactPerson,
                   ),
@@ -376,9 +229,9 @@ class _EditEventScreenState extends ConsumerState<EditEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                Center(
-                    child: ElevatedButton(
-                        onPressed: _updateEvent, child: Text('Submit')))
+                const Center(
+                    child:
+                        ElevatedButton(onPressed: null, child: Text('Submit')))
               ],
             ),
           ),
