@@ -1,6 +1,6 @@
 class Registration {
   final String userId;
-  final String eventId;
+  final String eventId; // object
   final List<TeamMember> teamDetails;
   final String paymentStatus;
 
