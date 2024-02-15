@@ -1,0 +1,34 @@
+import 'dart:convert';
+
+import 'package:eventquest/constants/error_handling.dart';
+import 'package:eventquest/constants/global_variable.dart';
+import 'package:eventquest/provider/user_provider.dart';
+import 'package:eventquest/screens/constants/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+
+class UserService {
+  void signIn(
+      {required BuildContext context,
+      required String username,
+      required String password}) async {
+    try {
+      http.Response res = await http.post(Uri.parse("$url/api/signin"),
+          body: jsonEncode({'username': username, 'password': password}),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8'
+          });
+
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () async {
+            Provider.of<UserProvider>(context, listen: false).setUser(res.body);
+          });
+      Navigator.pushNamedAndRemoveUntil(context, "/", (route) => false);
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+}

@@ -36,17 +36,17 @@ userRouter.post('/api/signin', async (req, res) => {
 
         if (!user) {
             // console.log("dowsnt exits")
-            return res.json({ msg: "User with this username does not exist" })
+            return res.status(400).json({ msg: "User with this username does not exist" })
         }
 
         const isMatch = await bcryptjs.compare(password, user.password);
 
         if (!isMatch) {
-            return res.json({ msg: "Incorrect Password" })
+            return res.status(400).json({ msg: "Incorrect Password" })
         }
 
         // console.log(user._doc)
-        res.json(user._doc)
+        res.status(200).json(user._doc)
     } catch (error) {
         res.status(500).json({ error: error.message })
     }

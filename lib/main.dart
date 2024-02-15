@@ -1,11 +1,18 @@
+import 'package:eventquest/provider/user_provider.dart';
 import 'package:eventquest/router.dart';
+import 'package:eventquest/screen_items/custom_navigation_botttom_bar.dart';
+import 'package:eventquest/screen_items/faculty_custom_navigation_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/provider.dart';
 
 import 'screens/login_screen.dart';
 
 void main() {
-  runApp(ProviderScope(child: const MyApp()));
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (context) => UserProvider(),
+    )
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -20,7 +27,11 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: const LoginScreen(),
+      home: Provider.of<UserProvider>(context).user.type == "student"
+          ? CustomBottomNavigationBar()
+          : Provider.of<UserProvider>(context).user.type == "faculty"
+              ? FacultyCustomBottomBar()
+              : LoginScreen(),
     );
   }
 }

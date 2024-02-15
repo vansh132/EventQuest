@@ -1,5 +1,5 @@
-import 'package:eventquest/screen_items/custom_navigation_botttom_bar.dart';
 import 'package:eventquest/screens/constants/utils.dart';
+import 'package:eventquest/services/user_services.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,23 +12,23 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final signInForm = GlobalKey<FormState>();
-  // final AuthServices authServices = AuthServices();
-  final TextEditingController _email = TextEditingController();
+  final UserService userService = UserService();
+  final TextEditingController _username = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
   @override
   void dispose() {
     super.dispose();
-    _email.dispose();
+    _username.dispose();
     _password.dispose();
   }
 
   void signIn() {
-    // authServices.signInUser(
-    //   context: context,
-    //   email: _email.text,
-    //   password: _password.text,
-    // );
+    userService.signIn(
+      context: context,
+      username: _username.text,
+      password: _password.text,
+    );
     setState(() {});
   }
 
@@ -108,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: const Color(0xffddd5d8),
                       ),
                       child: TextFormField(
-                        controller: _email,
+                        controller: _username,
                         autofocus: false,
                         style: const TextStyle(
                           color: Color(0xff03071e),
@@ -180,8 +180,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(
-                            context, CustomBottomNavigationBar.routeName);
+                        if (signInForm.currentState!.validate()) {
+                          signIn();
+                        }
                       },
                       child: const Icon(
                         size: 48,
