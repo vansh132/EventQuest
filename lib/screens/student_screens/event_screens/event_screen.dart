@@ -18,10 +18,11 @@ class _EventScreenState extends State<EventScreen> {
   int? _value;
 
   EventServices eventServices = EventServices();
+  // Future<List<Event>> _data;
   List<Event> events = [];
-  void getAllPost() async {
+  Future<void> getAllPost() async {
     events = await eventServices.getAllEvents(context);
-    setState(() {});
+    // setState(() {});
   }
 
   @override
@@ -29,6 +30,7 @@ class _EventScreenState extends State<EventScreen> {
     super.initState();
     getAllPost();
   }
+
   /* List<Event> events = [
     Event(
       eventId: "abc132",
@@ -181,6 +183,7 @@ class _EventScreenState extends State<EventScreen> {
       eventRegistartionDeadline: DateTime(2024, 3, 3),
     ),
   ]; */
+  String optionText = 'UG';
 
   @override
   Widget build(BuildContext context) {
@@ -202,16 +205,25 @@ class _EventScreenState extends State<EventScreen> {
             ),
             filterOption(context),
             const SizedBox(height: 20),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListView.builder(
-                  itemCount: filteredEvents.length,
-                  itemBuilder: (context, index) {
-                    return buildEventCard(filteredEvents[index]);
-                  },
-                ),
-              ),
+            FutureBuilder(
+              future: getAllPost(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return CircularProgressIndicator();
+                } else {
+                  return Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListView.builder(
+                        itemCount: filteredEvents.length,
+                        itemBuilder: (context, index) {
+                          return buildEventCard(filteredEvents[index]);
+                        },
+                      ),
+                    ),
+                  );
+                }
+              },
             ),
           ],
         ),
@@ -324,7 +336,7 @@ class _EventScreenState extends State<EventScreen> {
             children: List<Widget>.generate(
               2,
               (int index) {
-                String optionText = '';
+                // String optionText = 'UG';
 
                 switch (index) {
                   case 0:
@@ -349,7 +361,7 @@ class _EventScreenState extends State<EventScreen> {
                   selected: _value == index,
                   onSelected: (bool selected) {
                     setState(() {
-                      _value = selected ? index : null;
+                      _value = selected ? index : 0;
                     });
                   },
                 );
