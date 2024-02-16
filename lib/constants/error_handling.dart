@@ -7,6 +7,7 @@ void httpErrorHandle({
   required void Function(String) onError,
   required VoidCallback onSuccess,
 }) {
+  print("object");
   switch (response.statusCode) {
     case 200:
       onSuccess();
