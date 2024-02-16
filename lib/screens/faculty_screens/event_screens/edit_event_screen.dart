@@ -28,15 +28,16 @@ class _EditEventScreenState extends State<EditEventScreen> {
     super.didChangeDependencies();
     eventData = ModalRoute.of(context)!.settings.arguments as Event;
     eventName = TextEditingController(text: eventData.eventName);
-    description = TextEditingController(text: eventData.description);
+    description = TextEditingController(text: eventData.eventDescription);
 
     eventAmount = TextEditingController(text: eventData.eventAmount.toString());
 
     noOfParticipants =
-        TextEditingController(text: eventData.noOfParticipants.toString());
+        TextEditingController(text: eventData.eventNoOfParticipants.toString());
     eventLink = TextEditingController(text: eventData.eventLink);
-    contactPerson = TextEditingController(text: eventData.contactPerson);
-    contactName = TextEditingController(text: eventData.contactNo.toString());
+    contactPerson = TextEditingController(text: eventData.eventContactPerson);
+    contactName =
+        TextEditingController(text: eventData.eventContactNo.toString());
   }
 
   @override
@@ -154,7 +155,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   controller: noOfParticipants,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    hintText: eventData.noOfParticipants.toString(),
+                    hintText: eventData.eventNoOfParticipants.toString(),
                   ),
                 ),
                 const SizedBox(
@@ -186,7 +187,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 TextFormField(
                   controller: contactName,
                   decoration: InputDecoration(
-                    hintText: eventData.contactPerson,
+                    hintText: eventData.eventContactPerson,
                   ),
                 ),
                 const SizedBox(
@@ -203,7 +204,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   controller: contactPerson,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    hintText: eventData.contactNo.toString(),
+                    hintText: eventData.eventContactNo.toString(),
                   ),
                 ),
                 const SizedBox(
@@ -249,7 +250,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(
-        '${eventData.registartionDeadline.day} / ${eventData.registartionDeadline.month} / ${eventData.registartionDeadline.year}',
+        '${eventData.eventRegistartionDeadline.day} / ${eventData.eventRegistartionDeadline.month} / ${eventData.eventRegistartionDeadline.year}',
         style: const TextStyle(fontSize: 16),
       ),
     );
@@ -265,7 +266,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
 
     if (pickedDate != null) {
       setState(() {
-        eventData.registartionDeadline = pickedDate;
+        eventData.eventRegistartionDeadline = pickedDate;
       });
     }
   }

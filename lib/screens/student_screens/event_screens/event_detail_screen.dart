@@ -27,19 +27,19 @@ class EventDetailsScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          HeroImageScreen(image: event.eventImages),
+                          HeroImageScreen(image: event.eventImage),
                     ),
                   );
                 },
                 child: Hero(
-                  tag: event.eventImages, // Unique tag for the hero animation
+                  tag: event.eventImage, // Unique tag for the hero animation
                   child: ClipRRect(
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(12),
                       bottomRight: Radius.circular(12),
                     ),
                     child: Image.asset(
-                      event.eventImages,
+                      event.eventImage,
                       height: 250,
                       width: double.infinity,
                       fit: BoxFit.fill,
@@ -105,10 +105,10 @@ class EventDetailsScreen extends StatelessWidget {
                               Text(event.eventAmount.toString()),
                               const SizedBox(height: 8),
                               Text(
-                                "${event.registartionDeadline.day}/${event.registartionDeadline.month}/${event.registartionDeadline.year}",
+                                "${event.eventRegistartionDeadline.day}/${event.eventRegistartionDeadline.month}/${event.eventRegistartionDeadline.year}",
                               ),
                               const SizedBox(height: 8),
-                              Text(event.noOfParticipants.toString()),
+                              Text(event.eventNoOfParticipants.toString()),
                             ],
                           )
                         ],
@@ -163,7 +163,7 @@ class EventDetailsScreen extends StatelessWidget {
                             color: Colors.black,
                           ),
                           children: [
-                            TextSpan(text: event.description),
+                            TextSpan(text: event.eventDescription),
                           ],
                         ),
                         textAlign: TextAlign.justify,
@@ -188,7 +188,7 @@ class EventDetailsScreen extends StatelessWidget {
                             text: 'Contact Person:',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          TextSpan(text: ' ${event.contactPerson}'),
+                          TextSpan(text: ' ${event.eventContactPerson}'),
                         ],
                       ),
                     ),
@@ -202,7 +202,7 @@ class EventDetailsScreen extends StatelessWidget {
                             text: 'Contact Number:',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          TextSpan(text: ' ${event.contactNo}'),
+                          TextSpan(text: ' ${event.eventContactNo}'),
                         ],
                       ),
                     ),

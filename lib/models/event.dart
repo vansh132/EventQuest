@@ -1,29 +1,29 @@
 class Event {
   final String eventId;
   String eventName;
-  String description;
+  String eventDescription;
   double eventAmount;
-  String eventImages;
+  String eventImage;
   String eventCategory;
-  DateTime publishedOn;
-  int noOfParticipants;
+  DateTime eventPublishedOn;
+  int eventNoOfParticipants;
   String eventLink;
-  String contactPerson;
-  int contactNo;
-  DateTime registartionDeadline;
+  String eventContactPerson;
+  int eventContactNo;
+  DateTime eventRegistartionDeadline;
 
   Event({
     required this.eventId,
     required this.eventName,
-    required this.description,
+    required this.eventDescription,
     required this.eventAmount,
-    required this.eventImages,
+    required this.eventImage,
     required this.eventCategory,
-    required this.publishedOn,
-    required this.noOfParticipants,
+    required this.eventPublishedOn,
+    required this.eventNoOfParticipants,
     required this.eventLink,
-    required this.contactPerson,
-    required this.contactNo,
-    required this.registartionDeadline,
+    required this.eventContactPerson,
+    required this.eventContactNo,
+    required this.eventRegistartionDeadline,
   });
 }

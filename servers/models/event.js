@@ -13,7 +13,7 @@ const eventSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    eventImages: {
+    eventImage: {
         type: String,
         required: true
     },
