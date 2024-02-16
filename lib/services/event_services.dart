@@ -17,6 +17,7 @@ class EventServices {
       showSnackBar(context, errorMessage);
     }
 
+    // Event List
     List<Event> eventList = [];
 
     try {
