@@ -13,12 +13,10 @@ const eventSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    eventImages: [
-        {
-            type: String,
-            required: true
-        }
-    ],
+    eventImages: {
+        type: String,
+        required: true
+    },
     eventCategory: {
         type: String,
         required: true,
@@ -33,7 +31,7 @@ const eventSchema = mongoose.Schema({
         required: true
     },
     eventLink: {
-        type: URL,
+        type: String,
         required: true
     },
     eventContactPerson: {
@@ -48,6 +46,10 @@ const eventSchema = mongoose.Schema({
         type: Date,
         required: true
     },
+    eventPublishedBy: {
+        type: String,
+        required: true
+    }
 })
 
 const Event = mongoose.model('Events', eventSchema);
