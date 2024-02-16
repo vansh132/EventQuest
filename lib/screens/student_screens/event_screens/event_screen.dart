@@ -1,5 +1,6 @@
 import 'package:eventquest/models/event.dart';
 import 'package:eventquest/screens/student_screens/event_screens/event_detail_screen.dart';
+import 'package:eventquest/services/event_services.dart';
 
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
@@ -15,7 +16,21 @@ class EventScreen extends StatefulWidget {
 
 class _EventScreenState extends State<EventScreen> {
   int? _value;
-  List<Event> events = [
+
+  EventServices eventServices = EventServices();
+  List<Event> events = [];
+  void getAllPost() async {
+    events = await eventServices.getAllEvents(context);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getAllPost();
+  }
+  /* List<Event> events = [
     Event(
       eventId: "abc132",
       eventCategory: "UG",
@@ -166,7 +181,7 @@ class _EventScreenState extends State<EventScreen> {
       eventNoOfParticipants: 30,
       eventRegistartionDeadline: DateTime(2024, 3, 3),
     ),
-  ];
+  ]; */
 
   @override
   Widget build(BuildContext context) {
