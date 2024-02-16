@@ -20,9 +20,10 @@ class _EventScreenState extends State<EventScreen> {
   EventServices eventServices = EventServices();
   // Future<List<Event>> _data;
   List<Event> events = [];
-  Future<void> getAllPost() async {
+  Future<List<Event>> getAllPost() async {
     events = await eventServices.getAllEvents(context);
     // setState(() {});
+    return events;
   }
 
   @override
@@ -183,7 +184,7 @@ class _EventScreenState extends State<EventScreen> {
       eventRegistartionDeadline: DateTime(2024, 3, 3),
     ),
   ]; */
-  String optionText = 'UG';
+  // String optionText = 'UG';
 
   @override
   Widget build(BuildContext context) {
@@ -207,21 +208,23 @@ class _EventScreenState extends State<EventScreen> {
             const SizedBox(height: 20),
             FutureBuilder(
               future: getAllPost(),
+              initialData: events,
               builder: (context, snapshot) {
+                print(snapshot.data);
                 if (snapshot.hasData) {
-                  return CircularProgressIndicator();
-                } else {
                   return Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ListView.builder(
-                        itemCount: filteredEvents.length,
+                        itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
-                          return buildEventCard(filteredEvents[index]);
+                          return buildEventCard(snapshot.data![index]);
                         },
                       ),
                     ),
                   );
+                } else {
+                  return CircularProgressIndicator();
                 }
               },
             ),
@@ -336,7 +339,7 @@ class _EventScreenState extends State<EventScreen> {
             children: List<Widget>.generate(
               2,
               (int index) {
-                // String optionText = 'UG';
+                String optionText = 'UG';
 
                 switch (index) {
                   case 0:
@@ -361,7 +364,7 @@ class _EventScreenState extends State<EventScreen> {
                   selected: _value == index,
                   onSelected: (bool selected) {
                     setState(() {
-                      _value = selected ? index : 0;
+                      _value = selected ? index : null;
                     });
                   },
                 );
