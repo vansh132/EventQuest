@@ -220,6 +220,7 @@ class _EventScreenState extends State<EventScreen> {
   }
 
   Widget buildEventCard(Event event) {
+    var date = event.eventRegistrationDeadline.split("T")[0];
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, EventDetailsScreen.routeName,
@@ -258,14 +259,14 @@ class _EventScreenState extends State<EventScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            event.eventRegistrationDeadline.toString(),
+                            date.split("-")[2],
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
                           ),
                           Text(
-                            event.eventRegistrationDeadline.toString(),
+                            month(int.parse(date.split("-")[1])),
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -375,24 +376,38 @@ class _EventScreenState extends State<EventScreen> {
         return '';
     }
   }
-}
 
-extension MonthToString on DateTime {
-  String get monthShort {
-    return [
-      '',
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ][month];
+  String month(int? index) {
+    switch (index) {
+      case 00:
+        return '';
+      case 01:
+        return 'Jan';
+      case 02:
+        return 'Feb';
+      case 03:
+        return 'Mar';
+      case 04:
+        return 'Apr';
+      case 05:
+        return 'May';
+      case 06:
+        return 'Jun';
+      case 07:
+        return 'Jul';
+      case 08:
+        return 'Aug';
+      case 09:
+        return 'Sep';
+      case 10:
+        return 'Oct';
+      case 11:
+        return 'Nov';
+      case 12:
+        return 'Dec';
+
+      default:
+        return '';
+    }
   }
 }

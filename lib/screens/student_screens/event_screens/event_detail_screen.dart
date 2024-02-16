@@ -105,7 +105,7 @@ class EventDetailsScreen extends StatelessWidget {
                               Text(event.eventAmount.toString()),
                               const SizedBox(height: 8),
                               Text(
-                                event.eventRegistrationDeadline,
+                                event.eventRegistrationDeadline.split("T")[0],
                               ),
                               const SizedBox(height: 8),
                               Text(event.eventNoOfParticipants.toString()),
