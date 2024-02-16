@@ -13,6 +13,10 @@ class UserService {
       {required BuildContext context,
       required String username,
       required String password}) async {
+    void handleHttpError(String errorMessage) {
+      showSnackBar(context, errorMessage);
+    }
+
     try {
       http.Response res = await http.post(Uri.parse("$url/api/signin"),
           body: jsonEncode({'username': username, 'password': password}),
@@ -21,14 +25,18 @@ class UserService {
           });
 
       httpErrorHandle(
-          response: res,
-          context: context,
-          onSuccess: () async {
-            Provider.of<UserProvider>(context, listen: false).setUser(res.body);
-          });
-      Navigator.pushNamedAndRemoveUntil(context, "/", (route) => false);
+        response: res,
+        onSuccess: () async {
+          Provider.of<UserProvider>(context, listen: false).setUser(res.body);
+          Navigator.pushNamedAndRemoveUntil(context, "/", (route) => false);
+        },
+        onError: (errorMessage) {
+          showSnackBar(context, errorMessage);
+        },
+      );
     } catch (e) {
-      showSnackBar(context, e.toString());
+      final errorMessage = "Error occurred: ${e.toString()}";
+      handleHttpError(errorMessage);
     }
   }
 }
