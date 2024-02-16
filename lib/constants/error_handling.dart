@@ -1,10 +1,6 @@
 import 'dart:convert';
-
-import 'package:eventquest/screens/constants/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
-import 'package:flutter/material.dart'; // Import for VoidCallback
 
 void httpErrorHandle({
   required http.Response response,
