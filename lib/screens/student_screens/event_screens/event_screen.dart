@@ -26,7 +26,6 @@ class _EventScreenState extends State<EventScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getAllPost();
   }
