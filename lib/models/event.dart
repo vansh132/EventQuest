@@ -13,7 +13,7 @@ class Event {
   String eventContactPerson;
   int eventContactNo;
   DateTime eventRegistartionDeadline;
-
+  // Constructor
   Event({
     required this.eventId,
     required this.eventName,
