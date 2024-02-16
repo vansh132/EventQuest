@@ -29,9 +29,9 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
       eventImage: "assets/images/BASICFIRSTAI.jpeg",
       eventAmount: 0,
       eventContactPerson: "Helen K Joy",
-      eventContactNo: 9099897859,
+      eventContactPersonNo: 9099897859,
       eventNoOfParticipants: 2,
-      eventRegistartionDeadline: DateTime(2024, 2, 15),
+      eventRegistrationDeadline: DateTime(2024, 2, 15),
     ),
     Event(
       eventId: "def456",
@@ -44,9 +44,9 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
       eventLink: "https://codingcompetition.com",
       eventAmount: 0,
       eventContactPerson: "John Doe",
-      eventContactNo: 9876543210,
+      eventContactPersonNo: 9876543210,
       eventNoOfParticipants: 6,
-      eventRegistartionDeadline: DateTime(2024, 2, 18),
+      eventRegistrationDeadline: DateTime(2024, 2, 18),
     ),
     Event(
       eventId: "ghi789",
@@ -59,9 +59,9 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
       eventLink: "https://artexhibition.com",
       eventAmount: 50,
       eventContactPerson: "Alice Smith",
-      eventContactNo: 1234567890,
+      eventContactPersonNo: 1234567890,
       eventNoOfParticipants: 30,
-      eventRegistartionDeadline: DateTime(2024, 2, 20),
+      eventRegistrationDeadline: DateTime(2024, 2, 20),
     ),
     Event(
       eventId: "ghi799",
@@ -74,9 +74,9 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
       eventLink: "https://artexhibition.com",
       eventAmount: 50,
       eventContactPerson: "Alice Smith",
-      eventContactNo: 1234567890,
+      eventContactPersonNo: 1234567890,
       eventNoOfParticipants: 30,
-      eventRegistartionDeadline: DateTime(2024, 2, 28),
+      eventRegistrationDeadline: DateTime(2024, 2, 28),
     ),
     Event(
       eventId: "ghi719",
@@ -89,9 +89,9 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
       eventLink: "https://artexhibition.com",
       eventAmount: 50,
       eventContactPerson: "Alice Smith",
-      eventContactNo: 1234567890,
+      eventContactPersonNo: 1234567890,
       eventNoOfParticipants: 30,
-      eventRegistartionDeadline: DateTime(2024, 2, 29),
+      eventRegistrationDeadline: DateTime(2024, 2, 29),
     ),
     Event(
       eventId: "ghi729",
@@ -104,9 +104,9 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
       eventLink: "https://artexhibition.com",
       eventAmount: 50,
       eventContactPerson: "Alice Smith",
-      eventContactNo: 1234567890,
+      eventContactPersonNo: 1234567890,
       eventNoOfParticipants: 30,
-      eventRegistartionDeadline: DateTime(2024, 3, 3),
+      eventRegistrationDeadline: DateTime(2024, 3, 3),
     ),
     Event(
       eventId: "ghe729",
@@ -119,9 +119,9 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
       eventLink: "https://artexhibition.com",
       eventAmount: 50,
       eventContactPerson: "Alice Smith",
-      eventContactNo: 1234567890,
+      eventContactPersonNo: 1234567890,
       eventNoOfParticipants: 30,
-      eventRegistartionDeadline: DateTime(2024, 3, 3),
+      eventRegistrationDeadline: DateTime(2024, 3, 3),
     ),
     Event(
       eventId: "ghe029",
@@ -134,9 +134,9 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
       eventLink: "https://artexhibition.com",
       eventAmount: 50,
       eventContactPerson: "Alice Smith",
-      eventContactNo: 1234567890,
+      eventContactPersonNo: 1234567890,
       eventNoOfParticipants: 30,
-      eventRegistartionDeadline: DateTime(2024, 3, 3),
+      eventRegistrationDeadline: DateTime(2024, 3, 3),
     ),
     Event(
       eventId: "ghe024",
@@ -149,9 +149,9 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
       eventLink: "https://artexhibition.com",
       eventAmount: 50,
       eventContactPerson: "Alice Smith",
-      eventContactNo: 1234567890,
+      eventContactPersonNo: 1234567890,
       eventNoOfParticipants: 30,
-      eventRegistartionDeadline: DateTime(2024, 3, 3),
+      eventRegistrationDeadline: DateTime(2024, 3, 3),
     ),
     Event(
       eventId: "ize024",
@@ -164,9 +164,9 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
       eventLink: "https://artexhibition.com",
       eventAmount: 50,
       eventContactPerson: "Alice Smith",
-      eventContactNo: 1234567890,
+      eventContactPersonNo: 1234567890,
       eventNoOfParticipants: 30,
-      eventRegistartionDeadline: DateTime(2024, 3, 3),
+      eventRegistrationDeadline: DateTime(2024, 3, 3),
     ),
   ];
 
@@ -274,14 +274,14 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          event.eventRegistartionDeadline.day.toString(),
+                          event.eventRegistrationDeadline.day.toString(),
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),
                         ),
                         Text(
-                          event.eventRegistartionDeadline.monthShort,
+                          event.eventRegistrationDeadline.monthShort,
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,

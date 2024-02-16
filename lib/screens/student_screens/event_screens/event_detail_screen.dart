@@ -105,7 +105,7 @@ class EventDetailsScreen extends StatelessWidget {
                               Text(event.eventAmount.toString()),
                               const SizedBox(height: 8),
                               Text(
-                                "${event.eventRegistartionDeadline.day}/${event.eventRegistartionDeadline.month}/${event.eventRegistartionDeadline.year}",
+                                "${event.eventRegistrationDeadline.day}/${event.eventRegistrationDeadline.month}/${event.eventRegistrationDeadline.year}",
                               ),
                               const SizedBox(height: 8),
                               Text(event.eventNoOfParticipants.toString()),
@@ -202,7 +202,7 @@ class EventDetailsScreen extends StatelessWidget {
                             text: 'Contact Number:',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          TextSpan(text: ' ${event.eventContactNo}'),
+                          TextSpan(text: ' ${event.eventContactPersonNo}'),
                         ],
                       ),
                     ),

@@ -1,6 +1,8 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:eventquest/services/event_services.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +19,32 @@ class _AddEventScreenState extends State<AddEventScreen> {
 
   DateTime? _registrationDeadline;
 
-//
+  EventServices eventServices = EventServices();
+
+  TextEditingController eventName = TextEditingController();
+  TextEditingController description = TextEditingController();
+  TextEditingController eventAmount = TextEditingController();
+  TextEditingController noOfParticipants = TextEditingController();
+  TextEditingController eventLink = TextEditingController();
+  TextEditingController contactPerson = TextEditingController();
+  TextEditingController contactName = TextEditingController();
+
+  void addEvent() {
+    eventServices.addEvent(
+        context: context,
+        eventName: eventName.text,
+        eventDescription: description.text,
+        eventAmount: double.parse(eventAmount.text),
+        eventImage: image,
+        eventCategory: dropdownValue,
+        eventPublishedOn: DateTime.now(),
+        eventNoOfParticipants: int.parse(noOfParticipants.text),
+        eventLink: eventLink.text,
+        eventContactPerson: contactName.text,
+        eventContactNo: int.parse(contactPerson.text),
+        eventRegistartionDeadline: DateTime.now());
+  }
+
   File image = File("");
   bool submitted = false;
   void selectImages() async {
@@ -32,16 +59,6 @@ class _AddEventScreenState extends State<AddEventScreen> {
       image = File("");
     });
   }
-
-  // void submitImage() {
-  //   if (image.existsSync() == false) {
-  //     showSnackBar(context, "Please upload file");
-  //     return;
-  //   }
-  //   setState(() {
-  //     submitted = true;
-  //   });
-  // }
 
   Future<File> pickImages() async {
     File image = File("");
@@ -62,14 +79,6 @@ class _AddEventScreenState extends State<AddEventScreen> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController eventName = TextEditingController();
-    TextEditingController description = TextEditingController();
-    TextEditingController eventAmount = TextEditingController();
-    TextEditingController noOfParticipants = TextEditingController();
-    TextEditingController eventLink = TextEditingController();
-    TextEditingController contactPerson = TextEditingController();
-    TextEditingController contactName = TextEditingController();
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Event Form'),
@@ -269,9 +278,9 @@ class _AddEventScreenState extends State<AddEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                const Center(
-                    child:
-                        ElevatedButton(onPressed: null, child: Text('Submit')))
+                Center(
+                    child: ElevatedButton(
+                        onPressed: addEvent, child: Text('Submit')))
               ],
             ),
           ),

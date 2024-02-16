@@ -4,15 +4,15 @@ class Event {
   final String eventId;
   String eventName;
   String eventDescription;
-  double eventAmount;
+  num eventAmount;
   String eventImage;
   String eventCategory;
   DateTime eventPublishedOn;
   int eventNoOfParticipants;
   String eventLink;
   String eventContactPerson;
-  int eventContactNo;
-  DateTime eventRegistartionDeadline;
+  int eventContactPersonNo;
+  DateTime eventRegistrationDeadline;
   // Constructor
   Event({
     required this.eventId,
@@ -25,8 +25,8 @@ class Event {
     required this.eventNoOfParticipants,
     required this.eventLink,
     required this.eventContactPerson,
-    required this.eventContactNo,
-    required this.eventRegistartionDeadline,
+    required this.eventContactPersonNo,
+    required this.eventRegistrationDeadline,
   });
 
   Map<String, dynamic> toMap() {
@@ -38,16 +38,12 @@ class Event {
     result.addAll({'eventAmount': eventAmount});
     result.addAll({'eventImage': eventImage});
     result.addAll({'eventCategory': eventCategory});
-    result
-        .addAll({'eventPublishedOn': eventPublishedOn.millisecondsSinceEpoch});
+    result.addAll({'eventPublishedOn': eventPublishedOn});
     result.addAll({'eventNoOfParticipants': eventNoOfParticipants});
     result.addAll({'eventLink': eventLink});
     result.addAll({'eventContactPerson': eventContactPerson});
-    result.addAll({'eventContactNo': eventContactNo});
-    result.addAll({
-      'eventRegistartionDeadline':
-          eventRegistartionDeadline.millisecondsSinceEpoch
-    });
+    result.addAll({'eventContactPersonNo': eventContactPersonNo});
+    result.addAll({'eventRegistrationDeadline': eventRegistrationDeadline});
 
     return result;
   }
@@ -57,17 +53,15 @@ class Event {
       eventId: map['_id'] ?? '',
       eventName: map['eventName'] ?? '',
       eventDescription: map['eventDescription'] ?? '',
-      eventAmount: map['eventAmount']?.toDouble() ?? 0.0,
+      eventAmount: map['eventAmount'] ?? 0.0,
       eventImage: map['eventImage'] ?? '',
       eventCategory: map['eventCategory'] ?? '',
-      eventPublishedOn:
-          DateTime.fromMillisecondsSinceEpoch(map['eventPublishedOn']),
-      eventNoOfParticipants: map['eventNoOfParticipants']?.toInt() ?? 0,
+      eventPublishedOn: map['eventPublishedOn'],
+      eventNoOfParticipants: map['eventNoOfParticipants'] ?? 0,
       eventLink: map['eventLink'] ?? '',
       eventContactPerson: map['eventContactPerson'] ?? '',
-      eventContactNo: map['eventContactNo']?.toInt() ?? 0,
-      eventRegistartionDeadline:
-          DateTime.fromMillisecondsSinceEpoch(map['eventRegistartionDeadline']),
+      eventContactPersonNo: map['eventContactPersonNo'] ?? 0,
+      eventRegistrationDeadline: map['eventRegistrationDeadline'],
     );
   }
 

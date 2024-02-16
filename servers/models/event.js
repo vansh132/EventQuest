@@ -1,3 +1,4 @@
+const { Double } = require('mongodb');
 const mongoose = require('mongoose');
 
 const eventSchema = mongoose.Schema({
@@ -48,7 +49,6 @@ const eventSchema = mongoose.Schema({
     },
     eventPublishedBy: {
         type: String,
-        required: true
     }
 })
 

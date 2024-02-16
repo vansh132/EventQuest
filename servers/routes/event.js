@@ -4,8 +4,8 @@ const eventRouter = express.Router()
 
 eventRouter.post('/api/add-event', async (req, res) => {
     try {
-        const { eventName, eventDescription, eventAmount, eventImage, eventCategory, eventPublishedOn, eventNoOfParticipants, eventLink, eventContactPerson, eventContactPersonNo, eventRegistrationDeadline, eventPublishedBy } = req.body
-        let event = new Event({ eventName, eventDescription, eventAmount, eventImage, eventCategory, eventPublishedOn, eventNoOfParticipants, eventLink, eventContactPerson, eventContactPersonNo, eventRegistrationDeadline, eventPublishedBy })
+        const { eventName, eventDescription, eventAmount, eventImage, eventCategory, eventPublishedOn, eventNoOfParticipants, eventLink, eventContactPerson, eventContactPersonNo, eventRegistrationDeadline, } = req.body
+        let event = new Event({ eventName, eventDescription, eventAmount, eventImage, eventCategory, eventPublishedOn, eventNoOfParticipants, eventLink, eventContactPerson, eventContactPersonNo, eventRegistrationDeadline, })
         event = await event.save()
         res.json(event)
     } catch (error) {

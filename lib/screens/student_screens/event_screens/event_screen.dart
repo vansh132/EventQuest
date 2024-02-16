@@ -258,14 +258,14 @@ class _EventScreenState extends State<EventScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            event.eventRegistartionDeadline.day.toString(),
+                            event.eventRegistrationDeadline.day.toString(),
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
                           ),
                           Text(
-                            event.eventRegistartionDeadline.monthShort,
+                            event.eventRegistrationDeadline.monthShort,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
