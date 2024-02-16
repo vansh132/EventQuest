@@ -235,7 +235,7 @@ class _EventScreenState extends State<EventScreen> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
+              child: Image.network(
                 event.eventImage,
                 height: 224,
                 width: double.infinity,
@@ -258,14 +258,14 @@ class _EventScreenState extends State<EventScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            event.eventRegistrationDeadline.day.toString(),
+                            event.eventRegistrationDeadline.toString(),
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
                           ),
                           Text(
-                            event.eventRegistrationDeadline.monthShort,
+                            event.eventRegistrationDeadline.toString(),
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,

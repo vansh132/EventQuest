@@ -250,7 +250,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(
-        '${eventData.eventRegistrationDeadline.day} / ${eventData.eventRegistrationDeadline.month} / ${eventData.eventRegistrationDeadline.year}',
+        eventData.eventRegistrationDeadline,
         style: const TextStyle(fontSize: 16),
       ),
     );
@@ -266,7 +266,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
 
     if (pickedDate != null) {
       setState(() {
-        eventData.eventRegistrationDeadline = pickedDate;
+        eventData.eventRegistrationDeadline = pickedDate.toString();
       });
     }
   }

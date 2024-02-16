@@ -7,12 +7,12 @@ class Event {
   num eventAmount;
   String eventImage;
   String eventCategory;
-  DateTime eventPublishedOn;
+  String eventPublishedOn;
   int eventNoOfParticipants;
   String eventLink;
   String eventContactPerson;
   int eventContactPersonNo;
-  DateTime eventRegistrationDeadline;
+  String eventRegistrationDeadline;
   // Constructor
   Event({
     required this.eventId,
@@ -67,5 +67,6 @@ class Event {
 
   String toJson() => json.encode(toMap());
 
-  factory Event.fromJson(String source) => Event.fromMap(json.decode(source));
+  factory Event.fromJson(String source) =>
+      Event.fromMap(json.decode(source) as Map<String, dynamic>);
 }

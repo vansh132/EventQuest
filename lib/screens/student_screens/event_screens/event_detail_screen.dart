@@ -38,7 +38,7 @@ class EventDetailsScreen extends StatelessWidget {
                       bottomLeft: Radius.circular(12),
                       bottomRight: Radius.circular(12),
                     ),
-                    child: Image.asset(
+                    child: Image.network(
                       event.eventImage,
                       height: 250,
                       width: double.infinity,
@@ -105,7 +105,7 @@ class EventDetailsScreen extends StatelessWidget {
                               Text(event.eventAmount.toString()),
                               const SizedBox(height: 8),
                               Text(
-                                "${event.eventRegistrationDeadline.day}/${event.eventRegistrationDeadline.month}/${event.eventRegistrationDeadline.year}",
+                                event.eventRegistrationDeadline,
                               ),
                               const SizedBox(height: 8),
                               Text(event.eventNoOfParticipants.toString()),
@@ -257,7 +257,7 @@ class HeroImageScreen extends StatelessWidget {
         child: Center(
           child: Hero(
             tag: image, // Same tag as used in the source screen
-            child: Image.asset(
+            child: Image.network(
               image,
               fit: BoxFit.cover,
             ),

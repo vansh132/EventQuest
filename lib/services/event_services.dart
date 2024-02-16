@@ -80,12 +80,12 @@ class EventServices {
           eventAmount: eventAmount,
           eventImage: imageUrl,
           eventCategory: eventCategory,
-          eventPublishedOn: eventPublishedOn,
+          eventPublishedOn: eventPublishedOn.toString(),
           eventNoOfParticipants: eventNoOfParticipants,
           eventLink: eventLink,
           eventContactPerson: eventContactPerson,
           eventContactPersonNo: eventContactNo,
-          eventRegistrationDeadline: eventRegistartionDeadline);
+          eventRegistrationDeadline: eventRegistartionDeadline.toString());
       print(event.toJson());
       http.Response res = await http.post(
         Uri.parse('$url/api/add-event'),
