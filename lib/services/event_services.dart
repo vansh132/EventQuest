@@ -46,6 +46,74 @@ class EventServices {
     return eventList;
   }
 
+  Future<List<Event>> getAllUgEvents(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    void handleHttpError(String errorMessage) {
+      showSnackBar(context, errorMessage);
+    }
+
+    // Event List
+    List<Event> eventList = [];
+
+    try {
+      http.Response res = await http.get(Uri.parse("$url/api/events/ug"),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8'
+          });
+
+      httpErrorHandle(
+          response: res,
+          onError: (errMessage) {
+            showSnackBar(context, errMessage);
+          },
+          onSuccess: () {
+            for (int i = 0; i < jsonDecode(res.body).length; i++) {
+              eventList
+                  .add(Event.fromJson(jsonEncode(jsonDecode(res.body)[i])));
+            }
+          });
+    } catch (e) {
+      final errorMessage = "Error occurred: ${e.toString()}";
+      handleHttpError(errorMessage);
+    }
+    return eventList;
+  }
+
+  Future<List<Event>> getAllPgEvents(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    void handleHttpError(String errorMessage) {
+      showSnackBar(context, errorMessage);
+    }
+
+    // Event List
+    List<Event> eventList = [];
+
+    try {
+      http.Response res = await http.get(Uri.parse("$url/api/events/pg"),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8'
+          });
+
+      httpErrorHandle(
+          response: res,
+          onError: (errMessage) {
+            showSnackBar(context, errMessage);
+          },
+          onSuccess: () {
+            for (int i = 0; i < jsonDecode(res.body).length; i++) {
+              eventList
+                  .add(Event.fromJson(jsonEncode(jsonDecode(res.body)[i])));
+            }
+          });
+    } catch (e) {
+      final errorMessage = "Error occurred: ${e.toString()}";
+      handleHttpError(errorMessage);
+    }
+    return eventList;
+  }
+
   Future<void> addEvent(
       {required BuildContext context,
       required String eventName,
@@ -103,6 +171,61 @@ class EventServices {
           onSuccess: () {
             showSnackBar(context, "Event Added Successfully");
             Navigator.pop(context);
+          });
+    } catch (e) {
+      final errorMessage = "Error occurred: ${e.toString()}";
+      handleHttpError(errorMessage);
+    }
+  }
+
+  void updateEvent(
+      {required BuildContext context,
+      required String eventId,
+      required String eventName,
+      required String eventDescription,
+      required double eventAmount,
+      required File eventImage,
+      required String eventCategory,
+      required DateTime eventPublishedOn,
+      required int eventNoOfParticipants,
+      required String eventLink,
+      required String eventContactPerson,
+      required int eventContactNo,
+      required DateTime eventRegistartionDeadline}) async {
+    // final user = Provider.of<UserProvider>(context, listen: false).user;
+    final userData = {
+      "_id": eventId,
+      "eventName": eventName,
+      "eventDescription": eventDescription,
+      "eventAmount": eventAmount,
+      "eventImage": "imageUrl",
+      "eventCategory": eventCategory,
+      "eventPublishedOn": eventPublishedOn.toString(),
+      "eventNoOfParticipants": eventNoOfParticipants,
+      "eventLink": eventLink,
+      "eventContactPerson": eventContactPerson,
+      "eventContactPersonNo": eventContactNo,
+      "eventRegistrationDeadline": eventRegistartionDeadline.toString()
+    };
+    void handleHttpError(String errorMessage) {
+      showSnackBar(context, errorMessage);
+    }
+
+    try {
+      http.Response res =
+          await http.put(Uri.parse("$url/api/update-event/$eventId"),
+              headers: <String, String>{
+                "Content-Type": 'application/json; charset=UTF-8',
+                // 'x-auth-token': userProvider.user.token,
+              },
+              body: jsonEncode(userData));
+      httpErrorHandle(
+          response: res,
+          onError: (errMessage) {
+            showSnackBar(context, errMessage);
+          },
+          onSuccess: () {
+            showSnackBar(context, "Event Updated!! Please Refresh.");
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";

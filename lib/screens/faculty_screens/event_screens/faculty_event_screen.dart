@@ -2,6 +2,7 @@ import 'package:eventquest/models/event.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/add_event_screen.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/edit_event_screen.dart';
 import 'package:eventquest/screens/student_screens/event_screens/event_detail_screen.dart';
+import 'package:eventquest/services/event_services.dart';
 
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
@@ -169,6 +170,18 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
     //   eventRegistrationDeadline: DateTime(2024, 3, 3),
     // ),
   ];
+  EventServices eventServices = EventServices();
+  Future<List<Event>> getAllPost() async {
+    events = await eventServices.getAllEvents(context);
+    // setState(() {});
+    return events;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getAllPost();
+  }
 
   @override
   Widget build(BuildContext context) {

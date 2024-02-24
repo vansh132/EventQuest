@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:eventquest/models/event.dart';
+import 'package:eventquest/services/event_services.dart';
 import 'package:flutter/material.dart';
 
 class EditEventScreen extends StatefulWidget {
@@ -15,40 +18,59 @@ class _EditEventScreenState extends State<EditEventScreen> {
   String dropdownValue = 'UG';
 
   late TextEditingController eventName;
-  late TextEditingController description;
+  late TextEditingController eventDescription;
   late TextEditingController eventAmount;
-  late TextEditingController noOfParticipants;
+  late TextEditingController eventNoOfParticipants;
   late TextEditingController eventLink;
-  late TextEditingController contactPerson;
-  late TextEditingController contactName;
+  late TextEditingController eventContactPerson;
+  late TextEditingController eventContactNo;
   late Event eventData;
+  EventServices eventServices = EventServices();
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     eventData = ModalRoute.of(context)!.settings.arguments as Event;
     eventName = TextEditingController(text: eventData.eventName);
-    description = TextEditingController(text: eventData.eventDescription);
+    eventDescription = TextEditingController(text: eventData.eventDescription);
 
     eventAmount = TextEditingController(text: eventData.eventAmount.toString());
 
-    noOfParticipants =
+    eventNoOfParticipants =
         TextEditingController(text: eventData.eventNoOfParticipants.toString());
     eventLink = TextEditingController(text: eventData.eventLink);
-    contactPerson = TextEditingController(text: eventData.eventContactPerson);
-    contactName =
+    eventContactPerson =
+        TextEditingController(text: eventData.eventContactPerson);
+    eventContactNo =
         TextEditingController(text: eventData.eventContactPersonNo.toString());
+  }
+
+  void updateEvent() {
+    eventServices.updateEvent(
+        context: context,
+        eventId: eventData.eventId,
+        eventName: eventName.text,
+        eventDescription: eventDescription.text,
+        eventAmount: double.parse(eventAmount.text),
+        eventImage: File(""),
+        eventCategory: dropdownValue,
+        eventPublishedOn: DateTime.now(),
+        eventNoOfParticipants: int.parse(eventNoOfParticipants.text),
+        eventLink: eventLink.text,
+        eventContactPerson: eventContactPerson.text,
+        eventContactNo: int.parse(eventContactNo.text),
+        eventRegistartionDeadline: DateTime.now());
   }
 
   @override
   void dispose() {
     eventName.dispose();
-    description.dispose();
+    eventDescription.dispose();
     eventAmount.dispose();
-    noOfParticipants.dispose();
+    eventNoOfParticipants.dispose();
     eventLink.dispose();
-    contactPerson.dispose();
-    contactName.dispose();
+    eventContactPerson.dispose();
+    eventContactNo.dispose();
     super.dispose();
   }
 
@@ -88,7 +110,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   ),
                 ),
                 TextFormField(
-                  controller: description,
+                  controller: eventDescription,
                   maxLines: 10,
                   textAlign: TextAlign.justify,
                 ),
@@ -152,7 +174,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   ),
                 ),
                 TextFormField(
-                  controller: noOfParticipants,
+                  controller: eventNoOfParticipants,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     hintText: eventData.eventNoOfParticipants.toString(),
@@ -185,7 +207,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   ),
                 ),
                 TextFormField(
-                  controller: contactName,
+                  controller: eventContactNo,
                   decoration: InputDecoration(
                     hintText: eventData.eventContactPerson,
                   ),
@@ -201,7 +223,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   ),
                 ),
                 TextFormField(
-                  controller: contactPerson,
+                  controller: eventContactPerson,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     hintText: eventData.eventContactPersonNo.toString(),
@@ -230,9 +252,9 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                const Center(
-                    child:
-                        ElevatedButton(onPressed: null, child: Text('Submit')))
+                Center(
+                    child: ElevatedButton(
+                        onPressed: updateEvent, child: Text('Submit')))
               ],
             ),
           ),

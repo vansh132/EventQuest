@@ -23,4 +23,36 @@ eventRouter.get('/api/events', async (req, res) => {
     }
 })
 
+eventRouter.get('/api/events/ug', async (req, res) => {
+    try {
+        const ugEvents = await Event.find({ eventCategory: "UG" })
+        res.json(ugEvents)
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+})
+
+eventRouter.get('/api/events/pg', async (req, res) => {
+    try {
+        const pgEvents = await Event.find({ eventCategory: "PG" })
+        res.json(pgEvents)
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+})
+
+eventRouter.put('/api/update-event/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const event = await Event.findByIdAndUpdate(id, req.body)
+        if (!event) {
+            return res.status(400).json({ message: `cannot find an event with ID ${id}` })
+        }
+        const updatedEvent = await Event.findById(id)
+        res.status(200).json(updatedEvent);
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+})
+
 module.exports = eventRouter;
