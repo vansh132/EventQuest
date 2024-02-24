@@ -55,4 +55,15 @@ eventRouter.put('/api/update-event/:id', async (req, res) => {
     }
 })
 
+eventRouter.post('/api/delete-event', async (req, res) => {
+    try {
+        const { id } = req.body;
+        const event = await Event.findByIdAndDelete(id);
+
+        res.status(200).json(event);
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+})
+
 module.exports = eventRouter;

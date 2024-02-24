@@ -28,6 +28,9 @@ class _EventScreenState extends State<EventScreen> {
     } else {
       events = await eventServices.getAllEvents(context);
     }
+    setState(() {
+      events;
+    });
     return events;
   }
 

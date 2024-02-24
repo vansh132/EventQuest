@@ -225,11 +225,45 @@ class EventServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            showSnackBar(context, "Event Updated!! Please Refresh.");
+            showSnackBar(context, "Event Updated!! ");
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";
       handleHttpError(errorMessage);
+    }
+  }
+
+  void deleteEvent({
+    required BuildContext context,
+    required Event event,
+    required VoidCallback onSuccess,
+  }) async {
+    void handleHttpError(String errorMessage) {
+      showSnackBar(context, errorMessage);
+    }
+
+    try {
+      http.Response res = await http.post(
+        Uri.parse('$url/api/delete-event'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          // 'x-auth-token': userProvider.user.token,
+        },
+        body: jsonEncode({
+          'id': event.eventId,
+        }),
+      );
+
+      httpErrorHandle(
+          response: res,
+          onError: (errMessage) {
+            showSnackBar(context, errMessage);
+          },
+          onSuccess: () {
+            showSnackBar(context, "Event Deleted!!");
+          });
+    } catch (e) {
+      showSnackBar(context, e.toString());
     }
   }
 }
