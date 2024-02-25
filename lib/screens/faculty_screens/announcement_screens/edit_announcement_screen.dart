@@ -14,7 +14,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
 
   late TextEditingController title;
   late TextEditingController description;
-  late TextEditingController publishBy;
+
   late Announcement announcementData;
 
   @override
@@ -22,23 +22,22 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
     super.didChangeDependencies();
     announcementData =
         ModalRoute.of(context)!.settings.arguments as Announcement;
-    title = TextEditingController(text: announcementData.title);
-    description = TextEditingController(text: announcementData.description);
-    publishBy = TextEditingController(text: announcementData.publishedBy);
+    title = TextEditingController(text: announcementData.announcementTitle);
+    description =
+        TextEditingController(text: announcementData.announcementDescription);
   }
 
   @override
   void dispose() {
     title.dispose();
     description.dispose();
-    publishBy.dispose();
+
     super.dispose();
   }
 
   bool isDataChanged() {
-    return title.text != announcementData.title ||
-        description.text != announcementData.description ||
-        publishBy.text != announcementData.publishedBy;
+    return title.text != announcementData.announcementTitle ||
+        description.text != announcementData.announcementDescription;
   }
 
   @override
@@ -100,22 +99,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                   "Upload File yet to be added",
                   style: TextStyle(color: Colors.red),
                 ),
-                const Text(
-                  "Publish By",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                TextField(
-                  controller: publishBy,
-                  onChanged: (value) {
-                    setState(() {});
-                  },
-                  decoration: const InputDecoration(
-                    hintText: "Enter publisher name",
-                  ),
-                ),
+
                 const SizedBox(
                   height: 16,
                 ),

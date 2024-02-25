@@ -42,6 +42,7 @@ class AnnouncementDetailContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var date = announcement.announcementPublishedOn.split("T")[0];
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -49,7 +50,7 @@ class AnnouncementDetailContent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              announcement.title,
+              announcement.announcementTitle,
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -57,7 +58,7 @@ class AnnouncementDetailContent extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Date: ${DateFormat('MMM d, y').format(DateTime.now().toLocal())}',
+              'Date: $date',
               style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
@@ -67,7 +68,7 @@ class AnnouncementDetailContent extends StatelessWidget {
             Expanded(
               child: SingleChildScrollView(
                 child: Text(
-                  announcement.description,
+                  announcement.announcementDescription,
                   style: const TextStyle(
                     fontSize: 16,
                   ),
@@ -100,7 +101,7 @@ class AnnouncementCarouselSlider extends StatelessWidget {
         autoPlay: true,
         aspectRatio: 2.0,
       ),
-      items: announcement.image!.map((url) {
+      items: announcement.announcementImages!.map((url) {
         return Builder(
           builder: (BuildContext context) {
             return GestureDetector(
@@ -137,7 +138,7 @@ class AnnouncementCarouselSlider extends StatelessWidget {
                     tag: 'announcement_image_${url.hashCode}',
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(12.0),
-                        child: Image.asset(
+                        child: Image.network(
                           url,
                           fit: BoxFit.fill,
                         )),
@@ -165,7 +166,7 @@ class FullScreenImage extends StatelessWidget {
           Navigator.pop(context); // Navigate back to the detail screen
         },
         child: PhotoView(
-          imageProvider: AssetImage(url),
+          imageProvider: NetworkImage(url),
           minScale: PhotoViewComputedScale.contained,
           maxScale: PhotoViewComputedScale.covered * 2,
           backgroundDecoration: const BoxDecoration(

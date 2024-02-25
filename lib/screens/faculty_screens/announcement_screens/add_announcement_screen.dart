@@ -1,6 +1,9 @@
 import 'dart:io';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
+
+import 'package:eventquest/services/announcement_services.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -14,17 +17,17 @@ class AddAnnouncementScreen extends StatefulWidget {
 
 class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
   // TODO: Do it for multiple images
-  File image = File("");
+  List<File> images = [];
   bool submitted = false;
   void selectImages() async {
     var res = await pickImages();
     setState(() {
-      image = res;
+      images = res;
     });
   }
 
-  Future<File> pickImages() async {
-    File image = File("");
+  Future<List<File>> pickImages() async {
+    List<File> images = [];
     try {
       var files = await FilePicker.platform.pickFiles(
         type: FileType.image,
@@ -32,26 +35,38 @@ class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
       );
 
       if (files != null && files.files.isNotEmpty) {
-        image = File(files.files[0].path!);
+        for (int i = 0; i < files.files.length; i++) {
+          images.add(File(files.files[i].path!));
+        }
       }
     } catch (e) {
       debugPrint(e.toString());
     }
-    return image;
+    return images;
   }
 
   void clearImage() {
     setState(() {
-      image = File("");
+      images = [];
     });
+  }
+
+  AnnouncementServices announcementServices = AnnouncementServices();
+
+  TextEditingController announcementTitle = TextEditingController();
+  TextEditingController announcementDescription = TextEditingController();
+
+  void addAnnouncement() {
+    announcementServices.addAnnouncement(
+        context: context,
+        announcementTitle: announcementTitle.text,
+        announcementDescription: announcementDescription.text,
+        announcementImages: images,
+        announcementPublishedOn: DateTime.now().toString());
   }
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController title = TextEditingController();
-    TextEditingController description = TextEditingController();
-    TextEditingController publishBy = TextEditingController();
-
     final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
@@ -67,7 +82,7 @@ class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextFormField(
-                  controller: title,
+                  controller: announcementTitle,
                   decoration: const InputDecoration(
                     labelText: "Announcement Title",
                   ),
@@ -76,7 +91,7 @@ class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
                   height: 14,
                 ),
                 TextFormField(
-                  controller: description,
+                  controller: announcementDescription,
                   decoration: const InputDecoration(
                     labelText: "Description",
                   ),
@@ -91,14 +106,20 @@ class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
                 SizedBox(
                   height: 8,
                 ),
-                image.existsSync() == true
-                    ? Center(
-                        child: SizedBox(
+                images.isNotEmpty
+                    ? CarouselSlider(
+                        items: images.map((i) {
+                          return Builder(
+                            builder: (context) => Image.file(
+                              i,
+                              fit: BoxFit.cover,
+                              height: 200,
+                            ),
+                          );
+                        }).toList(),
+                        options: CarouselOptions(
+                          viewportFraction: 1,
                           height: 200,
-                          width: 200,
-                          child: Image(
-                            image: FileImage(image),
-                          ),
                         ),
                       )
                     : GestureDetector(
@@ -149,18 +170,12 @@ class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
                     ),
                   ],
                 ),
-                TextFormField(
-                  controller: publishBy,
-                  decoration: const InputDecoration(
-                    labelText: "Publish By",
-                  ),
-                ),
                 const SizedBox(
                   height: 14,
                 ),
-                const Center(
-                    child:
-                        ElevatedButton(onPressed: null, child: Text('Submit')))
+                Center(
+                    child: ElevatedButton(
+                        onPressed: addAnnouncement, child: Text('Submit')))
               ],
             ),
           ),
