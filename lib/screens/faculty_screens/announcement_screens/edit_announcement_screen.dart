@@ -1,4 +1,10 @@
+import 'dart:io';
+
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:eventquest/models/announcement.dart';
+import 'package:eventquest/services/announcement_services.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class EditAnnouncementScreen extends StatefulWidget {
@@ -12,8 +18,8 @@ class EditAnnouncementScreen extends StatefulWidget {
 class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  late TextEditingController title;
-  late TextEditingController description;
+  late TextEditingController announcementTitle;
+  late TextEditingController announcementDescription;
 
   late Announcement announcementData;
 
@@ -22,22 +28,70 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
     super.didChangeDependencies();
     announcementData =
         ModalRoute.of(context)!.settings.arguments as Announcement;
-    title = TextEditingController(text: announcementData.announcementTitle);
-    description =
+    announcementTitle =
+        TextEditingController(text: announcementData.announcementTitle);
+    announcementDescription =
         TextEditingController(text: announcementData.announcementDescription);
   }
 
   @override
   void dispose() {
-    title.dispose();
-    description.dispose();
+    announcementTitle.dispose();
+    announcementDescription.dispose();
 
     super.dispose();
   }
 
   bool isDataChanged() {
-    return title.text != announcementData.announcementTitle ||
-        description.text != announcementData.announcementDescription;
+    return announcementTitle.text != announcementData.announcementTitle ||
+        announcementDescription.text !=
+            announcementData.announcementDescription ||
+        announcementImages != announcementData.announcementImages;
+  }
+
+  List<File> announcementImages = [];
+  bool submitted = false;
+  void selectImages() async {
+    var res = await pickImages();
+    setState(() {
+      announcementImages = res;
+    });
+  }
+
+  Future<List<File>> pickImages() async {
+    List<File> announcementImages = [];
+    try {
+      var files = await FilePicker.platform.pickFiles(
+        type: FileType.image,
+        allowMultiple: true,
+      );
+
+      if (files != null && files.files.isNotEmpty) {
+        for (int i = 0; i < files.files.length; i++) {
+          announcementImages.add(File(files.files[i].path!));
+        }
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    return announcementImages;
+  }
+
+  void clearImage() {
+    setState(() {
+      announcementImages = [];
+    });
+  }
+
+  AnnouncementServices announcementServices = AnnouncementServices();
+
+  void updateAnnouncement() {
+    announcementServices.updateAnnouncement(
+        context: context,
+        announcementId: announcementData.announcementId,
+        announcementTitle: announcementTitle.text,
+        announcementDescription: announcementDescription.text,
+        announcementImages: announcementImages);
   }
 
   @override
@@ -63,7 +117,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                   ),
                 ),
                 TextField(
-                  controller: title,
+                  controller: announcementTitle,
                   onChanged: (value) {
                     setState(() {});
                   },
@@ -82,24 +136,92 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                   ),
                 ),
                 TextField(
-                  controller: description,
+                  controller: announcementDescription,
                   onChanged: (value) {
                     setState(() {});
                   },
-                  maxLines: null,
-                  decoration: InputDecoration(
+                  maxLines: 4,
+                  decoration: const InputDecoration(
                     hintText: "Enter announcement description",
                   ),
                 ),
                 const SizedBox(
                   height: 16,
                 ),
-                //TODO: add update file field
-                const Text(
-                  "Upload File yet to be added",
-                  style: TextStyle(color: Colors.red),
+                const SizedBox(
+                  height: 16,
                 ),
-
+                const Text(
+                  "Upload Image",
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                announcementImages.isNotEmpty
+                    ? CarouselSlider(
+                        items: announcementImages.map((i) {
+                          return Builder(
+                            builder: (context) => Image.file(
+                              i,
+                              fit: BoxFit.cover,
+                              height: 200,
+                            ),
+                          );
+                        }).toList(),
+                        options: CarouselOptions(
+                          viewportFraction: 1,
+                          height: 200,
+                        ),
+                      )
+                    : GestureDetector(
+                        onTap: selectImages,
+                        child: DottedBorder(
+                          radius: const Radius.circular(10),
+                          dashPattern: const [10, 4],
+                          borderType: BorderType.RRect,
+                          strokeCap: StrokeCap.round,
+                          child: Container(
+                            width: double.infinity,
+                            height: 150,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.folder_open_outlined,
+                                  size: 40,
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                Text(
+                                  "Upload Announcement Images",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.grey.shade400,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton.icon(
+                      onPressed: submitted == true ? null : clearImage,
+                      label: const Text(
+                        "Clear",
+                      ),
+                      icon: const Icon(Icons.cancel_outlined),
+                    ),
+                  ],
+                ),
                 const SizedBox(
                   height: 16,
                 ),
@@ -107,7 +229,8 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                   child: ElevatedButton(
                     onPressed: isDataChanged()
                         ? () {
-                            // Perform update action here
+                            updateAnnouncement();
+                            Navigator.pop(context);
                           }
                         : null,
                     child: Text('Submit'),

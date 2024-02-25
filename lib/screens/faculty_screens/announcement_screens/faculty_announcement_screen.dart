@@ -64,7 +64,9 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
 
   Future<List<Announcement>> getAllAnnouncement() async {
     announcements = await announcementServices.getAllAnnouncements(context);
-    // print(announcements);
+    setState(() {
+      announcements;
+    });
     return announcements;
   }
 
@@ -83,33 +85,30 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
           children: [
             TopBar(),
             UserBar(),
-            Expanded(
-              child: FutureBuilder(
-                  future: getAllAnnouncement(),
-                  initialData: announcements,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ListView.builder(
-                            itemCount: snapshot.data!.length,
-                            itemBuilder: (context, index) {
-                              return buildAnnouncementCard(
-                                  snapshot.data![index]);
-                            },
-                          ),
+            FutureBuilder(
+                future: getAllAnnouncement(),
+                initialData: announcements,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListView.builder(
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (context, index) {
+                            return buildAnnouncementCard(snapshot.data![index]);
+                          },
                         ),
-                      );
-                    } else if (snapshot.data == null) {
-                      return const Center(
-                        child: Text("No data found"),
-                      );
-                    } else {
-                      return const CircularProgressIndicator();
-                    }
-                  }),
-            ),
+                      ),
+                    );
+                  } else if (snapshot.data == null) {
+                    return const Center(
+                      child: Text("No data found"),
+                    );
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                }),
           ],
         ),
       ),
@@ -127,143 +126,141 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
 
   Widget buildAnnouncementCard(Announcement announcement) {
     var date = announcement.announcementPublishedOn.split("T")[0];
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(
-          context,
-          AnnouncementDetailScreen.routeName,
-          arguments: announcement,
-        );
-      },
-      child: Hero(
-        tag: 'announcement_image_${announcement.hashCode}',
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            elevation: 4.0,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+    return Hero(
+      tag: 'announcement_image_${announcement.hashCode}',
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          elevation: 4.0,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Wrap the image with a Container to set fixed size
+                    Container(
+                      height: 100, // Set the desired height
+                      width: 100, // Set the desired width
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12.0),
+                        child: announcement.announcementImages!.isEmpty
+                            ? const Text("No image")
+                            : Image.network(
+                                announcement.announcementImages![0],
+                                fit: BoxFit.cover,
+                              ),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      flex: 3,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            announcement.announcementTitle,
+                            style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            announcement.announcementDescription,
+                            style: const TextStyle(fontSize: 12),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "By: ${announcement.announcementPublishedBy}",
+                            style: const TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          const SizedBox(
+                            height: 65,
+                          ),
+                          const Text(
+                            "Date: ",
+                            style: TextStyle(
+                              fontSize: 8,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            date,
+                            style: const TextStyle(
+                              fontSize: 8,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 40),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Wrap the image with a Container to set fixed size
-                      Container(
-                        height: 100, // Set the desired height
-                        width: 100, // Set the desired width
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12.0),
-                          child: announcement.announcementImages!.isEmpty
-                              ? const Text("No image")
-                              : Image.network(
-                                  announcement.announcementImages![0],
-                                  fit: BoxFit.cover,
-                                ),
-                        ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            AnnouncementDetailScreen.routeName,
+                            arguments: announcement,
+                          );
+                        },
+                        child: Text('View'),
                       ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        flex: 3,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              announcement.announcementTitle,
-                              style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              announcement.announcementDescription,
-                              style: const TextStyle(fontSize: 12),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              "By: ${announcement.announcementPublishedBy}",
-                              style: const TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            EditAnnouncementScreen.routeName,
+                            arguments: announcement,
+                          );
+                        },
+                        child: Text('Edit'),
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            const SizedBox(
-                              height: 65,
-                            ),
-                            const Text(
-                              "Date: ",
-                              style: TextStyle(
-                                fontSize: 8,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              date,
-                              style: const TextStyle(
-                                fontSize: 8,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
+                      ElevatedButton(
+                        onPressed: () {
+                          announcementServices.deleteAnnouncement(
+                              context: context,
+                              announcement: announcement,
+                              onSuccess: () {
+                                setState(() {
+                                  announcements;
+                                });
+                              });
+                        },
+                        child: Text('Delete'),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 40),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                              context,
-                              AnnouncementDetailScreen.routeName,
-                              arguments: announcement,
-                            );
-                          },
-                          child: Text('View'),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                              context,
-                              EditAnnouncementScreen.routeName,
-                              arguments: announcement,
-                            );
-                          },
-                          child: Text('Edit'),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            // Implement delete functionality
-                          },
-                          child: Text('Delete'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

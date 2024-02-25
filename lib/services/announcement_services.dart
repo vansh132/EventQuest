@@ -78,7 +78,7 @@ class AnnouncementServices {
           announcementImages: imageUrl,
           announcementPublishedBy: user.user.username,
           announcementPublishedOn: announcementPublishedOn);
-      print(announcement.toJson());
+
       http.Response res = await http.post(
         Uri.parse('$url/api/add-announcement'),
         headers: <String, String>{
@@ -95,6 +95,81 @@ class AnnouncementServices {
           onSuccess: () {
             showSnackBar(context, "Announcement Added Successfully");
             Navigator.pop(context);
+          });
+    } catch (e) {
+      final errorMessage = "Error occurred: ${e.toString()}";
+      handleHttpError(errorMessage);
+    }
+  }
+
+  void updateAnnouncement({
+    required BuildContext context,
+    required String announcementId,
+    required String announcementTitle,
+    required String announcementDescription,
+    required List<File> announcementImages,
+  }) async {
+    // final user = Provider.of<UserProvider>(context, listen: false).user;
+    final announcementData = {
+      "_id": announcementId,
+      "announcementTitle": announcementTitle,
+      "announcementDescription": announcementDescription,
+      "announcementImage": announcementImages,
+    };
+    void handleHttpError(String errorMessage) {
+      showSnackBar(context, errorMessage);
+    }
+
+    try {
+      http.Response res = await http.put(
+          Uri.parse("$url/api/update-announcement/$announcementId"),
+          headers: <String, String>{
+            "Content-Type": 'application/json; charset=UTF-8',
+            // 'x-auth-token': userProvider.user.token,
+          },
+          body: jsonEncode(announcementData));
+
+      httpErrorHandle(
+          response: res,
+          onError: (errMessage) {
+            showSnackBar(context, errMessage);
+          },
+          onSuccess: () {
+            showSnackBar(context, "Announcement Updated!! ");
+          });
+    } catch (e) {
+      final errorMessage = "Error occurred: ${e.toString()}";
+      handleHttpError(errorMessage);
+    }
+  }
+
+  void deleteAnnouncement(
+      {required BuildContext context,
+      required Announcement announcement,
+      required VoidCallback onSuccess}) async {
+    void handleHttpError(String errorMessage) {
+      showSnackBar(context, errorMessage);
+    }
+
+    try {
+      http.Response res = await http.post(
+        Uri.parse('$url/api/delete-announcement'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          // 'x-auth-token': userProvider.user.token,
+        },
+        body: jsonEncode({
+          'id': announcement.announcementId,
+        }),
+      );
+
+      httpErrorHandle(
+          response: res,
+          onError: (errMessage) {
+            showSnackBar(context, errMessage);
+          },
+          onSuccess: () {
+            showSnackBar(context, "Announcement Deleted!!");
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";

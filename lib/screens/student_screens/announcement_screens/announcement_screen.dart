@@ -60,7 +60,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
 
   Future<List<Announcement>> getAllAnnouncement() async {
     announcements = await announcementServices.getAllAnnouncements(context);
-    // print(announcements);
+
     return announcements;
   }
 
