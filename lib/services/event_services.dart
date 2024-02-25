@@ -187,12 +187,12 @@ class EventServices {
       required int eventContactNo,
       required DateTime eventRegistartionDeadline}) async {
     // final user = Provider.of<UserProvider>(context, listen: false).user;
-    final userData = {
+    final eventData = {
       "_id": eventId,
       "eventName": eventName,
       "eventDescription": eventDescription,
       "eventAmount": eventAmount,
-      "eventImage": "imageUrl",
+      "eventImage": eventImage,
       "eventCategory": eventCategory,
       "eventPublishedOn": eventPublishedOn.toString(),
       "eventNoOfParticipants": eventNoOfParticipants,
@@ -201,6 +201,7 @@ class EventServices {
       "eventContactPersonNo": eventContactNo,
       "eventRegistrationDeadline": eventRegistartionDeadline.toString()
     };
+
     void handleHttpError(String errorMessage) {
       showSnackBar(context, errorMessage);
     }
@@ -212,7 +213,7 @@ class EventServices {
                 "Content-Type": 'application/json; charset=UTF-8',
                 // 'x-auth-token': userProvider.user.token,
               },
-              body: jsonEncode(userData));
+              body: jsonEncode(eventData));
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
