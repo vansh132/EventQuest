@@ -2,6 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const userRouter = require('./routes/user')
 const eventRouter = require('./routes/event')
+const announcementRouter = require('./routes/announcement')
+
 
 const app = express()
 
@@ -13,6 +15,7 @@ app.use(express.json());
 //Routes
 app.use(userRouter)
 app.use(eventRouter)
+app.use(announcementRouter)
 
 mongoose
   .connect(DB)
