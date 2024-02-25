@@ -1,6 +1,4 @@
-import 'dart:ffi';
 import 'dart:io';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:eventquest/services/event_services.dart';
 import 'package:file_picker/file_picker.dart';
@@ -202,12 +200,6 @@ class _AddEventScreenState extends State<AddEventScreen> {
                       ),
                       icon: const Icon(Icons.cancel_outlined),
                     ),
-                    // ElevatedButton.icon(
-                    //   onPressed: submitted == true ? null : submitImage,
-                    //   icon:
-                    //       const Icon(Icons.playlist_add_check_circle_outlined),
-                    //   label: const Text("Submit"),
-                    // )
                   ],
                 ),
                 const SizedBox(

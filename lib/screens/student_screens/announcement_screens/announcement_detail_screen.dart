@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eventquest/models/announcement.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:photo_view/photo_view.dart';
 
 class AnnouncementDetailScreen extends StatelessWidget {

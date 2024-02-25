@@ -5,16 +5,14 @@ import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:eventquest/constants/error_handling.dart';
 import 'package:eventquest/constants/global_variable.dart';
 import 'package:eventquest/models/event.dart';
-import 'package:eventquest/provider/user_provider.dart';
+
 import 'package:eventquest/screens/constants/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 import 'package:http/http.dart' as http;
 
 class EventServices {
   Future<List<Event>> getAllEvents(BuildContext context) async {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
-
     void handleHttpError(String errorMessage) {
       showSnackBar(context, errorMessage);
     }
@@ -47,8 +45,6 @@ class EventServices {
   }
 
   Future<List<Event>> getAllUgEvents(BuildContext context) async {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
-
     void handleHttpError(String errorMessage) {
       showSnackBar(context, errorMessage);
     }
@@ -81,8 +77,6 @@ class EventServices {
   }
 
   Future<List<Event>> getAllPgEvents(BuildContext context) async {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
-
     void handleHttpError(String errorMessage) {
       showSnackBar(context, errorMessage);
     }
