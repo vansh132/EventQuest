@@ -41,14 +41,17 @@ eventRouter.get('/api/events/pg', async (req, res) => {
     }
 })
 
-eventRouter.put('/api/update-event/:id', async (req, res) => {
+eventRouter.post('/api/update-event/:id', async (req, res) => {
     try {
         const { id } = req.params;
+        console.log(req.body)
         const event = await Event.findByIdAndUpdate(id, req.body)
+        console.log(event.eventRegistrationDeadline)
         if (!event) {
             return res.status(400).json({ message: `cannot find an event with ID ${id}` })
         }
         const updatedEvent = await Event.findById(id)
+        // console.log(updatedEvent);
         res.status(200).json(updatedEvent);
     } catch (error) {
         res.status(500).json({ error: error.message })

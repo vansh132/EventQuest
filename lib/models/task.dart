@@ -10,17 +10,17 @@ class Task {
   String? taskFile;
   List<String>? remarks;
   final bool taskStatus;
-
-  Task(
-      {this.taskId = '',
-      required this.taskTitle,
-      required this.taskDescription,
-      required this.taskType,
-      required this.assignedTo,
-      required this.assignedBy,
-      this.taskFile,
-      this.remarks,
-      required this.taskStatus});
+  Task({
+    this.taskId = '',
+    required this.taskTitle,
+    required this.taskDescription,
+    required this.taskType,
+    required this.assignedTo,
+    required this.assignedBy,
+    this.taskFile,
+    this.remarks,
+    required this.taskStatus,
+  });
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
@@ -31,8 +31,9 @@ class Task {
     result.addAll({'taskType': taskType});
     result.addAll({'assignedTo': assignedTo});
     result.addAll({'assignedBy': assignedBy});
-    result.addAll({'taskFile': taskFile});
-
+    if (taskFile != null) {
+      result.addAll({'taskFile': taskFile});
+    }
     if (remarks != null) {
       result.addAll({'remarks': remarks});
     }
@@ -49,14 +50,13 @@ class Task {
       taskType: map['taskType'] ?? '',
       assignedTo: map['assignedTo'] ?? '',
       assignedBy: map['assignedBy'] ?? '',
-      taskFile: map['file'] ?? "",
-      remarks: map['remarks'] ?? "",
+      taskFile: map['taskFile'],
+      remarks: List<String>.from(map['remarks']),
       taskStatus: map['taskStatus'] ?? false,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Task.fromJson(String source) =>
-      Task.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Task.fromJson(String source) => Task.fromMap(json.decode(source));
 }

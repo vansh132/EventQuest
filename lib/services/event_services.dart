@@ -223,7 +223,7 @@ class EventServices {
 
     try {
       http.Response res =
-          await http.put(Uri.parse("$url/api/update-event/$eventId"),
+          await http.post(Uri.parse("$url/api/update-event/$eventId"),
               headers: <String, String>{
                 "Content-Type": 'application/json; charset=UTF-8',
                 // 'x-auth-token': userProvider.user.token,

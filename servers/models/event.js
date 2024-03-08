@@ -43,7 +43,7 @@ const eventSchema = mongoose.Schema({
         required: true
     },
     eventRegistrationDeadline: {
-        type: Date,
+        type: String,
         required: true
     },
     eventPublishedBy: {

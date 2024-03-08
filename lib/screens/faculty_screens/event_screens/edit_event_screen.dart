@@ -101,7 +101,6 @@ class _EditEventScreenState extends State<EditEventScreen> {
         eventContactNo: int.parse(eventContactNo.text),
         eventRegistartionDeadline:
             DateTime.parse(eventData.eventRegistrationDeadline));
-    print(eventData.eventRegistrationDeadline);
   }
 
   @override
@@ -393,8 +392,8 @@ class _EditEventScreenState extends State<EditEventScreen> {
     DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.parse(eventData.eventRegistrationDeadline),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2100),
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
     );
 
     if (pickedDate != null) {
