@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 class Task {
+  String taskId;
   final String taskTitle;
   final String taskDescription;
   final String taskType;
@@ -12,17 +13,20 @@ class Task {
   final bool taskStatus;
 
   Task(
-      {required this.taskTitle,
+      {this.taskId = '',
+      required this.taskTitle,
       required this.taskDescription,
-      this.remarks,
       required this.taskType,
       required this.assignedTo,
       required this.assignedBy,
+      this.file,
+      this.remarks,
       required this.taskStatus});
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
 
+    result.addAll({'taskId': taskId});
     result.addAll({'taskTitle': taskTitle});
     result.addAll({'taskDescription': taskDescription});
     result.addAll({'taskType': taskType});
@@ -41,6 +45,7 @@ class Task {
 
   factory Task.fromMap(Map<String, dynamic> map) {
     return Task(
+      taskId: map['taskId'] ?? '',
       taskTitle: map['taskTitle'] ?? '',
       taskDescription: map['taskDescription'] ?? '',
       taskType: map['taskType'] ?? '',
