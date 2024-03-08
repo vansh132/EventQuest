@@ -111,7 +111,7 @@ Widget taskItem(BuildContext context, Task task) {
           task.taskTitle,
         ),
         trailing: Text(
-          task.taskStatus ? "Completed" : "Incompleted",
+          task.taskStatus ? "Completed" :"Incompleted",
           style: !task.taskStatus
               ? const TextStyle(
                   color: Colors.red,
