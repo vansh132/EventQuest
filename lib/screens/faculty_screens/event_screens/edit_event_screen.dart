@@ -101,6 +101,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
         eventContactNo: int.parse(eventContactNo.text),
         eventRegistartionDeadline:
             DateTime.parse(eventData.eventRegistrationDeadline));
+    print(eventData.eventRegistrationDeadline);
   }
 
   @override
@@ -373,6 +374,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
   }
 
   Widget RegistartionDeadline() {
+    var date = eventData.eventRegistrationDeadline.split("T")[0];
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(10.0),
@@ -381,7 +383,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(
-        eventData.eventRegistrationDeadline,
+        date,
         style: const TextStyle(fontSize: 16),
       ),
     );
@@ -390,7 +392,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
   void _pickRegistrationDeadline() async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: DateTime.parse(eventData.eventRegistrationDeadline),
       firstDate: DateTime.now(),
       lastDate: DateTime(2100),
     );

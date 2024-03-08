@@ -12,6 +12,7 @@ class EventDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Event event = ModalRoute.of(context)!.settings.arguments as Event;
+    var date = event.eventRegistrationDeadline.split("T")[0];
     return Scaffold(
       appBar: AppBar(
         title: Text(event.eventName),
@@ -106,7 +107,7 @@ class EventDetailsScreen extends StatelessWidget {
                               Text(event.eventAmount.toString()),
                               const SizedBox(height: 8),
                               Text(
-                                event.eventRegistrationDeadline.split("T")[0],
+                                date,
                               ),
                               const SizedBox(height: 8),
                               Text(event.eventNoOfParticipants.toString()),
@@ -132,8 +133,7 @@ class EventDetailsScreen extends StatelessWidget {
                         text: ' ${event.eventLink}',
                         recognizer: TapGestureRecognizer()
                           ..onTap = () async {
-                            var url =
-                                "https://www.youtube.com/channel/UCwxiHP2Ryd-aR0SWKjYguxw?view_as=subscriber";
+                            var url = event.eventLink;
                             if (await canLaunch(url)) {
                               await launch(url);
                             } else {
@@ -237,14 +237,6 @@ class EventDetailsScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      print('Could not launch $url');
-    }
   }
 }
 
