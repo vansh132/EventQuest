@@ -28,16 +28,18 @@ class _EventScreenState extends State<EventScreen> {
     } else {
       events = await eventServices.getAllEvents(context);
     }
-    setState(() {
-      events;
-    });
+    // setState(() {
+    //   events;
+    // });
     return events;
   }
 
+
   @override
-  void initState() {
+  void initState()  {
     super.initState();
     getAllPost();
+
   }
 
   @override

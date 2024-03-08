@@ -148,7 +148,7 @@ class EventServices {
           eventContactPerson: eventContactPerson,
           eventContactPersonNo: eventContactNo,
           eventRegistrationDeadline: eventRegistartionDeadline.toString());
-      print(event.toJson());
+      // print(event.toJson());
       http.Response res = await http.post(
         Uri.parse('$url/api/add-event'),
         headers: <String, String>{
