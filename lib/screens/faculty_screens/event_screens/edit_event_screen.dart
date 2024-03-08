@@ -47,7 +47,6 @@ class _EditEventScreenState extends State<EditEventScreen> {
         TextEditingController(text: eventData.eventContactPersonNo.toString());
   }
 
-
   File image = File("");
 
   bool submitted = false;
@@ -66,8 +65,6 @@ class _EditEventScreenState extends State<EditEventScreen> {
       image = File("");
     });
   }
-
-
 
   Future<File> pickImages() async {
     File image = File("");
@@ -95,7 +92,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
         eventAmount: double.parse(eventAmount.text),
         eventImage: image,
         eventCategory: dropdownValue,
-        eventPublishedOn: DateTime.now(),
+        eventPublishedOn: DateTime.parse(eventData.eventPublishedOn),
         eventNoOfParticipants: int.parse(eventNoOfParticipants.text),
         eventLink: eventLink.text,
         eventContactPerson: eventContactPerson.text,
@@ -197,56 +194,55 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 8,
                 ),
-                updateImageFlag == false ?
-                Image(image: NetworkImage(eventData.eventImage))
-                :
-                image.existsSync() == true
-                    ? Center(
-                        child: SizedBox(
-                          height: 200,
-                          width: 200,
-                          child: Image(
-                            image: FileImage(image),
-                          ),
-                        ),
-                      )
-                    : GestureDetector(
-                        onTap: selectImages,
-                        child: DottedBorder(
-                          radius: const Radius.circular(10),
-                          dashPattern: const [10, 4],
-                          borderType: BorderType.RRect,
-                          strokeCap: StrokeCap.round,
-                          child: Container(
-                            width: double.infinity,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              // color: Colors.red,
-                              borderRadius: BorderRadius.circular(10),
+                updateImageFlag == false
+                    ? Image(image: NetworkImage(eventData.eventImage))
+                    : image.existsSync() == true
+                        ? Center(
+                            child: SizedBox(
+                              height: 200,
+                              width: 200,
+                              child: Image(
+                                image: FileImage(image),
+                              ),
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.folder_open_outlined,
-                                  size: 40,
+                          )
+                        : GestureDetector(
+                            onTap: selectImages,
+                            child: DottedBorder(
+                              radius: const Radius.circular(10),
+                              dashPattern: const [10, 4],
+                              borderType: BorderType.RRect,
+                              strokeCap: StrokeCap.round,
+                              child: Container(
+                                width: double.infinity,
+                                height: 150,
+                                decoration: BoxDecoration(
+                                  // color: Colors.red,
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                                const SizedBox(
-                                  height: 15,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    const Icon(
+                                      Icons.folder_open_outlined,
+                                      size: 40,
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    Text(
+                                      "Upload Event Image",
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.grey.shade400,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                Text(
-                                  "Upload Event Image",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.grey.shade400,
-                                  ),
-                                )
-                              ],
+                              ),
                             ),
                           ),
-                        ),
-                      ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -257,7 +253,6 @@ class _EditEventScreenState extends State<EditEventScreen> {
                       ),
                       icon: const Icon(Icons.cancel_outlined),
                     ),
-
                   ],
                 ),
                 const SizedBox(
