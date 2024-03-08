@@ -38,11 +38,3 @@ const taskSchema = mongoose.Schema({
 const Task = mongoose.model('Tasks', taskSchema);
 module.exports = Task;
 
-// final String taskTitle;
-// final String taskDescription;
-// final String taskType;
-// final String assignedTo;
-// final String assignedBy;
-// File? file;
-// String? remarks;
-// final String taskStatus;
