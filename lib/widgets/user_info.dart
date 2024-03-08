@@ -1,6 +1,12 @@
+import 'package:eventquest/models/user.dart';
+import 'package:eventquest/provider/user_provider.dart';
+import 'package:eventquest/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-Widget UserBar() {
+Widget UserBar(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
   return Container(
     margin: const EdgeInsets.all(8),
     padding: const EdgeInsets.all(16),
@@ -11,7 +17,7 @@ Widget UserBar() {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Row(
+         Row(
           children: [
             Icon(Icons.person_2_rounded,
                 color: Color.fromARGB(255, 245, 211, 97)),
@@ -21,7 +27,7 @@ Widget UserBar() {
             Column(
               children: [
                 Text(
-                  "Riya Shah",
+                  userProvider.user.username,
                   style: TextStyle(
                     color: Color(
                       0xffFFCF33,
@@ -32,7 +38,8 @@ Widget UserBar() {
                   ),
                 ),
                 Text(
-                  "2347152",
+                  userProvider.user.type,
+
                   style: TextStyle(
                     color: Color(
                       0xffFFCF33,
@@ -47,7 +54,10 @@ Widget UserBar() {
           ],
         ),
         TextButton.icon(
-          onPressed: () {},
+          onPressed: () {
+            userProvider.setUser("");
+            Navigator.pushNamedAndRemoveUntil(context, LoginScreen.routeName, (route) => false);
+          },
           icon: const Icon(
             Icons.logout_rounded,
             color: Color(0xffe8e8e4),

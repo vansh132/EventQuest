@@ -1,5 +1,6 @@
 import 'package:eventquest/models/announcement.dart';
 import 'package:eventquest/models/event.dart';
+import 'package:eventquest/provider/user_provider.dart';
 import 'package:eventquest/screen_items/faculty_custom_navigation_bottom_bar.dart';
 import 'package:eventquest/screen_items/highlights.dart';
 import 'package:eventquest/screens/student_screens/announcement_screens/announcement_detail_screen.dart';
@@ -7,6 +8,7 @@ import 'package:eventquest/screens/student_screens/event_screens/event_detail_sc
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FacultyHomeScreen extends StatelessWidget {
   static const String routeName = 'home-screen';
@@ -15,124 +17,12 @@ class FacultyHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Announcement> announcements = [
-      // Announcement(
-      //   id: "1",
-      //   announcementTitle: 'Placement',
-      //   announcementDescription:
-      //       'Heartiest congratulations to all the brilliant students who have achieved remarkable success and secured placements! Your hard work, dedication, and exceptional skills have paved the way for this significant accomplishment. Wishing you a future filled with continued success, growth, and prosperity. Well done!Heartiest congratulations to all the brilliant students who have achieved remarkable success and secured placements! Your hard work, dedication, and exceptional skills have paved the way for this significant accomplishment. Wishing you a future filled with continued success, growth, and prosperity. Well done!Heartiest congratulations to all the brilliant students who have achieved remarkable success and secured placements! Your hard work, dedication, and exceptional skills have paved the way for this significant accomplishment. Wishing you a future filled with continued success, growth, and prosperity. Well done!',
-      //   announcementImages: [
-      //     "assets/images/placement.jpeg",
-      //   ],
-      //   announcementPublishedBy: "Helen K Joy",
-      //   announcementPublishedOn: DateTime(2024, 1, 23),
-      // ),
-      // Announcement(
-      //   id: "2",
-      //   announcementTitle: 'Gateways',
-      //   announcementDescription:
-      //       "Hey \n\nHope you're doing awesome! 🌟 We've got some seriously cool updates about Gateways 2023, and we couldn't wait to share the deets with you.\n\n📖 Event Brochure:\nGuess what? The Gateways 2023 Event Brochure just dropped! It's your backstage pass to all the cool stuff lined up. Check it out [https://heyzine.com/flip-book/628b52ff0e.html] and start planning your game plan.\n\n🎨 Event Poster:\nWe went all out on the poster this year, and it's basically a work of art. Seriously, you'll want to frame this. Get a sneak peak here!\n\n🎟️ Registration Link:\nReady to party with us? Hit up the registration link [ https://gateways.christuniversity.in/] and lock in your spot. It's gonna be epic, and we want you there with bells on!\n\nFeel free to spread the word – the more, the merrier! Can't wait to see you at Gateways 2023. 🚀\n\nCheers,\nTeam Gateways 2023.",
-      //   announcementImages: [
-      //     "assets/images/gateways.jpeg",
-      //   ],
-      //   announcementPublishedBy: "Dr. Suresh K.",
-      //   announcementPublishedOn: DateTime(2024, 1, 23),
-      // ),
-      // Announcement(
-      //   id: "3",
-      //   announcementTitle: 'Khristu Fest',
-      //   announcementDescription:
-      //       'Congratulations to the team from TECHFUSE at Christ Deemed to be University - Central Campus [MCA] for your outstanding achievement as Overall Champions! Your dedication and hard work have truly paid off, showcasing the spirit of excellence and teamwork. May this victory inspire you and your peers to reach new heights in all your future endeavours. Well done to everyone involved in this remarkable accomplishment!',
-      //   announcementImages: ["assets/images/kristu.jpeg"],
-      //   announcementPublishedBy: "Dr. Sudhakar T",
-      //   announcementPublishedOn: DateTime(2024, 1, 10),
-      // ),
-      // Announcement(
-      //   id: "4",
-      //   announcementTitle: 'Python Peer Learning',
-      //   announcementDescription:
-      //       "Peer-to-peer learning is a highly beneficial educational approach where students engage with each other to attain educational goals, sharing knowledge and experiences to enrich their understanding. In this image, we observe a group of individuals in a classroom environment focused on a screen displaying what appears to be Python code, indicating a collaborative learning session on programming.\n\nThe importance of peer learning, especially in contexts such as learning Python or any other programming language, cannot be overstated. It fosters a supportive environment where learners can clarify their doubts, learn from each other\'s strengths, and work collaboratively to solve complex problems. Moreover, peer learning encourages the development of critical thinking and communication skills, as students must articulate their thoughts and ideas clearly.\n\nIt also builds confidence, as students validate their knowledge by teaching others, and it creates a sense of community, promoting a network of support that can be invaluable during the learning process and beyond.\n\nGreat work to all involved in the peer-to-peer learning session. Your collaborative efforts are not only enhancing your individual skills but are also strengthening your collective knowledge. Keep up the excellent work, and continue to support and learn from one another – it's through such shared dedication and teamwork that true learning flourishes. Best wishes on your coding journey!",
-      //   announcementImages: ["assets/images/pythonPeer.png"],
-      //   announcementPublishedBy: "Dr. Kavitha R",
-      //   announcementPublishedOn: DateTime(2024, 1, 10),
-      // ),
+
     ];
     List<Event> events = [
-      // Event(
-      //   eventId: "abc132",
-      //   eventCategory: "UG",
-      //   eventName: "BASIC FIRST AI",
-      //   eventDescription:
-      //       "Hi there! 👋\nExciting news! We're hosting a Certificate Programme in Basic First Aid on Thursday, 25 January 2024. It's a fantastic opportunity to learn life-saving skills, presented in collaboration with St. John's National Academy of Health Sciences and Christ University, Bangalore.\n🚀 Key Details:\nFee: Rs. 250/- only\nTime: 1:30 PM - 4:30 PM\nVenue: St. John's Medical College\nPlaces are limited to 35 per batch, so make sure to secure your spot ASAP!\n🔗 Scan the QR codes in the attached poster to register for Batch 2 or Batch 3.\nDon't miss out on this chance to become a part of the Rapid Action First Aid Team (RAFT) and make a difference! 🚑\nSee you there!",
-      //   eventLink: "https://basicfirstaid.org",
-      //   eventPublishedOn: DateTime.now(),
-      //   eventImage: "assets/images/BASICFIRSTAI.jpeg",
-      //   eventAmount: 200,
-      //   eventContactPerson: "Helen K Joy",
-      //   eventContactPersonNo: 9099897859,
-      //   eventNoOfParticipants: 2,
-      //   eventRegistrationDeadline: DateTime(2024, 2, 15),
-      // ),
-      // Event(
-      //   eventId: "def456",
-      //   eventCategory: "PG",
-      //   eventName: "NRITTA",
-      //   eventDescription:
-      //       "Greetings from Student Welfare Office✨✨\n🕺💃 Ready to groove and show off your moves? We're hosting auditions for NRITTA, and we want YOU to be a part of the rhythm! 🌟 \n📅 Date: 12th, 13th and 14th  February 2024\n🕰️ Time: 4pm onwards \n📍 Location: Dance Studio, IVY Basement, Audi block \nDon't miss your chance to shine and be a part of Nritta! Spread the word, bring your friends, and let's make this audition a dance party to remember!",
-      //   eventPublishedOn: DateTime.now().subtract(const Duration(days: 5)),
-      //   eventImage: "assets/images/NRITTA.jpeg",
-      //   eventLink: "https://codingcompetition.com",
-      //   eventAmount: 0,
-      //   eventContactPerson: "John Doe",
-      //   eventContactPersonNo: 9876543210,
-      //   eventNoOfParticipants: 6,
-      //   eventRegistrationDeadline: DateTime(2024, 2, 18),
-      // ),
-      // Event(
-      //   eventId: "ghi789",
-      //   eventCategory: "PG",
-      //   eventName: "INHSA",
-      //   eventDescription:
-      //       "🚀 INHSA 2024: Digital Health Innovation Conclave \nCalling all healthtech startups!\nUnlock your potential at the Innovate Health South Asia 2024 conclave and compete for The Best Startup Award!\n🗓️ Date: 3rd February 2024\n Venue: VRR Hotels & Convention Hall, E-City Phase 1, Bangalore\nBenefits include:\nStage time for presentation\nCash reward\nOpportunity to exhibit\nNetworking with investors and industry leaders\nMentorship and incubation support\nDon't miss this chance to shine amongst the best in the digital healthcare industry.\n👉 Register now by scanning the QR code or contact us at +91 9606904387 or admire.dighealth@iihmrbangalore.edu.in\nBest of luck, and we hope to see you there!",
-      //   eventPublishedOn: DateTime.now().subtract(const Duration(days: 10)),
-      //   eventImage: "assets/images/INHSA.jpeg",
-      //   eventLink: "https://artexhibition.com",
-      //   eventAmount: 50,
-      //   eventContactPerson: "Alice Smith",
-      //   eventContactPersonNo: 1234567890,
-      //   eventNoOfParticipants: 30,
-      //   eventRegistrationDeadline: DateTime(2024, 2, 20),
-      // ),
-      // Event(
-      //   eventId: "ghi789",
-      //   eventCategory: "UG",
-      //   eventName: "PITCHFIRK",
-      //   eventDescription:
-      //       "🚀 Pitchfork Event Alert at CHRIST University!\n🎓 The Department of Economics and Agasthya - The Entrepreneurship Cell presents an incredible opportunity for innovative minds!\n📍 *Venue:* Skyview Central Block\n *Date:* 15th February 2024\n⏰ *Submission Deadline:* 8th February 2024\n💡 Get ready to pitch your groundbreaking ideas and stand a chance to win amazing cash prizes:\n🥇 1st Place: ₹3500 INR\n🥈 2nd Place: ₹2500 INR\n🥉 3rd Place: ₹1500 INR\nFor more information and to submit your ideas, scan the QR code on the poster or contact:\n- Chaitanya: 7489813136\n- Swastika: 9438733368\n\nDon't miss out on this chance to showcase your entrepreneurial talent and win big! 🏆",
-      //   eventPublishedOn: DateTime.now().subtract(const Duration(days: 10)),
-      //   eventImage: "assets/images/PITCHFIRK.jpeg",
-      //   eventLink: "https://artexhibition.com",
-      //   eventAmount: 50,
-      //   eventContactPerson: "Alice Smith",
-      //   eventContactPersonNo: 1234567890,
-      //   eventNoOfParticipants: 30,
-      //   eventRegistrationDeadline: DateTime(2024, 2, 28),
-      // ),
-      // Event(
-      //   eventId: "ghi789",
-      //   eventCategory: "UG",
-      //   eventName: "PRAYAS",
-      //   eventDescription:
-      //       "🌟 *PRAYAS 2024 at CHRIST University presents KALEIDO-QUEST!*\n\n✨ Join the Department of Commerce for a thrilling adventure and a variety of exciting events:\n\n🚀 *Among Us IRL* - 29th January\n🔴 *Red Light, Green Light* - 30th January\n⚪ *Monochrome Hues* - 31st January\n🎲 *Gganbu* - 1st February\n🔓 *Escape Room* - 2nd February\nGet ready to level up with these immersive experiences!\n\n📣 *Register Now* for an unforgettable journey filled with challenges and fun!\n\n🚀 Don't miss out on the action - seize the opportunity to be part of something extraordinary!\n\nFor additional details and registration, make sure to get in touch or follow the updates. Let's make PRAYAS 2024 a remarkable event together! 🌌",
-      //   eventPublishedOn: DateTime.now().subtract(const Duration(days: 10)),
-      //   eventImage: "assets/images/PRAYAS.jpeg",
-      //   eventLink: "https://artexhibition.com",
-      //   eventAmount: 50,
-      //   eventContactPerson: "Alice Smith",
-      //   eventContactPersonNo: 1234567890,
-      //   eventNoOfParticipants: 30,
-      //   eventRegistrationDeadline: DateTime(2024, 2, 29),
-      // ),
+
     ];
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     return Scaffold(
       body: Container(
@@ -141,7 +31,7 @@ class FacultyHomeScreen extends StatelessWidget {
           child: Column(
             children: [
               TopBar(),
-              UserBar(),
+              UserBar(context),
               const Highlights(),
               const SizedBox(
                 height: 8,

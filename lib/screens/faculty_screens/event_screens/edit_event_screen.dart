@@ -257,12 +257,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                       ),
                       icon: const Icon(Icons.cancel_outlined),
                     ),
-                    // ElevatedButton.icon(
-                    //   onPressed: submitted == true ? null : submitImage,
-                    //   icon:
-                    //       const Icon(Icons.playlist_add_check_circle_outlined),
-                    //   label: const Text("Submit"),
-                    // )
+
                   ],
                 ),
                 const SizedBox(
