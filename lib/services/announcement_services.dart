@@ -109,18 +109,31 @@ class AnnouncementServices {
     required String announcementDescription,
     required List<File> announcementImages,
   }) async {
-    // final user = Provider.of<UserProvider>(context, listen: false).user;
+    final cloudinary = CloudinaryPublic("dq1q5mtdo", "fwsfdscu");
+      List<String> imageUrl = [];
+      for (var i = 0; i < announcementImages.length; i++) {
+        CloudinaryResponse cloudinaryRes = await cloudinary.uploadFile(
+          CloudinaryFile.fromFile(
+            announcementImages[i].path,
+            folder: "Announcements",
+          ),
+        );
+        imageUrl.add(cloudinaryRes.secureUrl);
+      }
+      print(imageUrl);
     final announcementData = {
       "_id": announcementId,
       "announcementTitle": announcementTitle,
       "announcementDescription": announcementDescription,
-      "announcementImage": announcementImages,
+      "announcementImages": imageUrl,
     };
     void handleHttpError(String errorMessage) {
       showSnackBar(context, errorMessage);
     }
 
     try {
+
+
       http.Response res = await http.put(
           Uri.parse("$url/api/update-announcement/$announcementId"),
           headers: <String, String>{

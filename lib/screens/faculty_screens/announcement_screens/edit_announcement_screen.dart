@@ -230,7 +230,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                     onPressed: isDataChanged()
                         ? () {
                             updateAnnouncement();
-                            Navigator.pop(context);
+                            // Navigator.pop(context);
                           }
                         : null,
                     child: Text('Submit'),

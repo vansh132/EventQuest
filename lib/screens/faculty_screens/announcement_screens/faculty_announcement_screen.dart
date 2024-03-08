@@ -64,9 +64,7 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
 
   Future<List<Announcement>> getAllAnnouncement() async {
     announcements = await announcementServices.getAllAnnouncements(context);
-    setState(() {
-      announcements;
-    });
+
     return announcements;
   }
 
