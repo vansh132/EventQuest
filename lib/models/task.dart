@@ -8,15 +8,10 @@ class Task {
   final String assignedBy;
   File? file;
   String? remarks;
-  final String taskStatus;
-  Task({
-    required this.taskTitle,
-    required this.taskDescription,
-    required this.taskType,
-    required this.assignedTo,
-    required this.assignedBy,
-    this.file,
-    this.remarks,
-    required this.taskStatus,
-  });
+  final bool taskStatus;
+
+  Task({required this.taskTitle, required this.taskDescription,  this.remarks, required this.taskType, required this.assignedTo, required this.assignedBy, required this.taskStatus});
+
+
+
 }

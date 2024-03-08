@@ -25,7 +25,7 @@ taskRouter.get('/api/tasks', async (req, res) => {
     }
 })
 
-taskRouter.get('/api/highlights', async (req, res) => {
+taskRouter.get('xts', async (req, res) => {
     try {
         const events = await Event.find({})
         const announcements = await Announcement.find({})

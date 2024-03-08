@@ -127,7 +127,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                               )),
                           TextSpan(
                             text: task.taskStatus ? "Completed" : "Incompleted",
-                            style: !task.taskStatus == "Incomplete"
+                            style: !task.taskStatus
                                 ? const TextStyle(
                                     color: Colors.red,
                                     fontWeight: FontWeight.w500,
@@ -312,6 +312,7 @@ Widget topbarTitle(BuildContext context, Task task) {
 }
 
 Widget guidelines(BuildContext context) {
+  // ScrollController scrollController = ScrollController();
   return Container(
     height: 128,
     alignment: Alignment.center,
@@ -330,6 +331,7 @@ Widget guidelines(BuildContext context) {
       ],
     ),
     child: Scrollbar(
+      // controller: scrollController,
       thumbVisibility: true,
       child: ListView(
         children: const [
