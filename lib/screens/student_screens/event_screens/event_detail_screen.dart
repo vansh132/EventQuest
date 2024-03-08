@@ -13,6 +13,7 @@ class EventDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Event event = ModalRoute.of(context)!.settings.arguments as Event;
     var date = event.eventRegistrationDeadline.split("T")[0];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(event.eventName),
@@ -107,7 +108,7 @@ class EventDetailsScreen extends StatelessWidget {
                               Text(event.eventAmount.toString()),
                               const SizedBox(height: 8),
                               Text(
-                                date,
+                                date.split(" ")[0],
                               ),
                               const SizedBox(height: 8),
                               Text(event.eventNoOfParticipants.toString()),

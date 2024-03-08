@@ -95,9 +95,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
 
   Widget buildEventCard(Event event) {
     var date = event.eventRegistrationDeadline.split("T")[0];
-    print(date);
-    var newDate = date.split(" 2")[0];
-    // print(newDate.split());
+
     return Card(
       margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
@@ -163,14 +161,14 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "${newDate.split(" ").skip(2)}",
+                          date.split(" ")[0].split("-")[2],
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),
                         ),
                         Text(
-                          date.split(" ")[1],
+                          month(int.parse(date.split(" ")[0].split("-")[1])),
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,

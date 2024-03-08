@@ -101,6 +101,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
         eventContactNo: int.parse(eventContactNo.text),
         eventRegistartionDeadline:
             DateTime.parse(eventData.eventRegistrationDeadline));
+    print(eventData.eventRegistrationDeadline);
   }
 
   @override

@@ -263,6 +263,7 @@ Widget AnnouncementItem(BuildContext context, Announcement announcement) {
 
 Widget EventItem(Event event, BuildContext context) {
   var date = event.eventRegistrationDeadline.split("T")[0];
+
   return GestureDetector(
     onTap: () => Navigator.pushNamed(context, EventDetailsScreen.routeName,
         arguments: event),
@@ -284,33 +285,63 @@ Widget EventItem(Event event, BuildContext context) {
         Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Card(
-              color: Colors.white.withOpacity(0.9),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              elevation: 4.0,
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      date.split("-")[2],
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
+            Container(
+              // margin: const EdgeInsets.only(top: 95),
+              child: Row(
+                children: [
+                  Card(
+                    color: Colors.white.withOpacity(0.9),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    elevation: 4.0,
+                    child: Container(
+                      padding: const EdgeInsets.all(
+                          7), //TODO: needs to make it responsive
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            date.split(" ")[0].split("-")[2],
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text(
+                            month(int.parse(date.split(" ")[0].split("-")[1])),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    Text(
-                      month(int.parse(date.split("-")[1])),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: Colors.black54),
+                          child: Text(
+                            event.eventName,
+                            style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],
