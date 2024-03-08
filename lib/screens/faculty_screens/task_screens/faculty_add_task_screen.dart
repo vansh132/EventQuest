@@ -1,3 +1,4 @@
+import 'package:eventquest/services/task_services.dart';
 import 'package:flutter/material.dart';
 
 class FacultyAddTaskScreen extends StatefulWidget {
@@ -10,6 +11,17 @@ class FacultyAddTaskScreen extends StatefulWidget {
 
 class _FacultyAddTaskScreenState extends State<FacultyAddTaskScreen> {
   final _facultyTaskFormKey = GlobalKey<FormState>();
+  final TaskServices taskServices = TaskServices();
+
+  void addTask() {
+    taskServices.addTask(
+      context: context,
+      taskTitle: taskTitle.text,
+      taskDescription: taskdescription.text,
+      taskType: dropdownValue,
+      assignedTo: taskAssignedTo.text,
+    );
+  }
 
   TextEditingController taskTitle = TextEditingController();
   TextEditingController taskdescription = TextEditingController();
@@ -91,7 +103,7 @@ class _FacultyAddTaskScreenState extends State<FacultyAddTaskScreen> {
                     ),
                     Center(
                       child: ElevatedButton(
-                          onPressed: () {}, child: const Text("Create Task")),
+                          onPressed: addTask, child: const Text("Create Task")),
                     )
                   ],
                 )),

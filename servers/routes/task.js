@@ -25,7 +25,23 @@ taskRouter.get('/api/tasks', async (req, res) => {
     }
 })
 
-taskRouter.get('xts', async (req, res) => {
+taskRouter.get('/api/tasks/:assignedBy', async (req, res) => {
+    try {
+        const {assignedBy} = req.params
+        const tasks = await Task.find({assignedBy: assignedBy})
+        // console.log(tasks.length)
+        if (tasks.length == 0) {
+            return res.status(400).json({ message: `cannot find an tasks with username: ${assignedBy}` })
+
+        }
+        res.json(tasks)
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+})
+
+
+taskRouter.get('/api/highlights', async (req, res) => {
     try {
         const events = await Event.find({})
         const announcements = await Announcement.find({})

@@ -1,6 +1,7 @@
 import 'package:eventquest/models/task.dart';
 import 'package:eventquest/screens/faculty_screens/task_screens/faculty_add_task_screen.dart';
 import 'package:eventquest/screens/faculty_screens/task_screens/faculty_task_detail_screen.dart';
+import 'package:eventquest/services/task_services.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -13,34 +14,49 @@ class FacultyTaskScreen extends StatefulWidget {
 
 class _FacultyTaskScreenState extends State<FacultyTaskScreen> {
   List<Task> tasks = [
-    Task(
-      taskTitle: "Talent Show",
-      taskDescription:
-          "Continuing our tradition, we are pleased to announce the forthcoming Talent Show scheduled for February 20th, 2024. This esteemed event will take place at 911, Central Block, providing an esteemed platform for our fresher students to exhibit their talents. The Talent Show serves as an avenue for showcasing diverse skills and abilities, fostering a culture of creativity and expression within our academic community. ",
-      taskType: "Poster",
-      assignedTo: "2347152",
-      assignedBy: "Helen K Joy",
-      taskStatus: false,
-    ),
-    Task(
-      taskTitle: "Talent Show",
-      taskDescription: "Create poster for it",
-      taskType: "Poster",
-      assignedTo: "2347152",
-      assignedBy: "Helen K Joy",
-      taskStatus: false,
-    ),
-    Task(
-      taskTitle: "Talent Show",
-      taskDescription:
-          "Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it",
-      taskType: "Poster",
-      assignedTo: "2347152",
-      assignedBy: "Helen K Joy",
-      taskStatus: true,
-      remarks: "feefef",
-    ),
+    // Task(
+    //   taskTitle: "Talent Show",
+    //   taskDescription:
+    //       "Continuing our tradition, we are pleased to announce the forthcoming Talent Show scheduled for February 20th, 2024. This esteemed event will take place at 911, Central Block, providing an esteemed platform for our fresher students to exhibit their talents. The Talent Show serves as an avenue for showcasing diverse skills and abilities, fostering a culture of creativity and expression within our academic community. ",
+    //   taskType: "Poster",
+    //   assignedTo: "2347152",
+    //   assignedBy: "Helen K Joy",
+    //   taskStatus: false,
+    // ),
+    // Task(
+    //   taskTitle: "Talent Show",
+    //   taskDescription: "Create poster for it",
+    //   taskType: "Poster",
+    //   assignedTo: "2347152",
+    //   assignedBy: "Helen K Joy",
+    //   taskStatus: false,
+    // ),
+    // Task(
+    //   taskTitle: "Talent Show",
+    //   taskDescription:
+    //       "Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it",
+    //   taskType: "Poster",
+    //   assignedTo: "2347152",
+    //   assignedBy: "Helen K Joy",
+    //   taskStatus: true,
+    //   remarks: "feefef",
+    // ),
   ];
+
+  TaskServices taskServices = TaskServices();
+
+  Future<List<Task>> getAllTask() async {
+    tasks = await taskServices.getAllTasks(context);
+
+    return tasks;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getAllTask();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,9 +82,24 @@ class _FacultyTaskScreenState extends State<FacultyTaskScreen> {
           Container(
             height: 500,
             margin: const EdgeInsets.symmetric(horizontal: 8),
-            child: ListView.builder(
-              itemBuilder: (context, index) => taskItem(context, tasks[index]),
-              itemCount: tasks.length,
+            child: FutureBuilder(
+              future: getAllTask(),
+              initialData: tasks,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                    itemBuilder: (context, index) =>
+                        taskItem(context, snapshot.data![index]),
+                    itemCount: tasks.length,
+                  );
+                } else if (snapshot.data == null) {
+                  return const Center(
+                    child: Text("No data found"),
+                  );
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              },
             ),
           )
         ],
@@ -111,7 +142,7 @@ Widget taskItem(BuildContext context, Task task) {
           task.taskTitle,
         ),
         trailing: Text(
-          task.taskStatus ? "Completed" :"Incompleted",
+          task.taskStatus ? "Completed" : "Incompleted",
           style: !task.taskStatus
               ? const TextStyle(
                   color: Colors.red,

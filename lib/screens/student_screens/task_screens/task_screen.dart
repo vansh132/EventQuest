@@ -33,7 +33,7 @@ class _TaskScreenState extends State<TaskScreen> {
         assignedTo: "2347152",
         assignedBy: "Helen K Joy",
         taskStatus: true,
-        remarks: "feefef",
+        remarks: ["feefef"],
       ),
     ];
 
@@ -80,7 +80,6 @@ class _TaskScreenState extends State<TaskScreen> {
       letterSpacing: 0.3,
       fontSize: 14,
     );
-
 
     return Scaffold(
       body: Container(

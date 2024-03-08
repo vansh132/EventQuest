@@ -23,11 +23,11 @@ const taskSchema = mongoose.Schema({
     },
     taskFile: {
         type: String,
-        required: true
+        required: false
     },
     remarks: [{
         type: String,
-        required: true
+        required: false
     }],
     taskStatus: {
         type: Boolean,

@@ -1,15 +1,14 @@
 import 'dart:convert';
-import 'dart:io';
 
 class Task {
-  String taskId;
+  final String taskId;
   final String taskTitle;
   final String taskDescription;
   final String taskType;
   final String assignedTo;
   final String assignedBy;
-  File? file;
-  String? remarks;
+  String? taskFile;
+  List<String>? remarks;
   final bool taskStatus;
 
   Task(
@@ -19,7 +18,7 @@ class Task {
       required this.taskType,
       required this.assignedTo,
       required this.assignedBy,
-      this.file,
+      this.taskFile,
       this.remarks,
       required this.taskStatus});
 
@@ -32,9 +31,8 @@ class Task {
     result.addAll({'taskType': taskType});
     result.addAll({'assignedTo': assignedTo});
     result.addAll({'assignedBy': assignedBy});
-    if (file != null) {
-      // result.addAll({'file': file!.toMap()});
-    }
+    result.addAll({'taskFile': taskFile});
+
     if (remarks != null) {
       result.addAll({'remarks': remarks});
     }
@@ -45,19 +43,20 @@ class Task {
 
   factory Task.fromMap(Map<String, dynamic> map) {
     return Task(
-      taskId: map['taskId'] ?? '',
+      taskId: map['_id'] ?? '',
       taskTitle: map['taskTitle'] ?? '',
       taskDescription: map['taskDescription'] ?? '',
       taskType: map['taskType'] ?? '',
       assignedTo: map['assignedTo'] ?? '',
       assignedBy: map['assignedBy'] ?? '',
-      // file: map['file'] != null ? File.fromMap(map['file']) : null,
-      remarks: map['remarks'],
+      taskFile: map['file'] ?? "",
+      remarks: map['remarks'] ?? "",
       taskStatus: map['taskStatus'] ?? false,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Task.fromJson(String source) => Task.fromMap(json.decode(source));
+  factory Task.fromJson(String source) =>
+      Task.fromMap(json.decode(source) as Map<String, dynamic>);
 }
