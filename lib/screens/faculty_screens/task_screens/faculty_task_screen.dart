@@ -46,7 +46,7 @@ class _FacultyTaskScreenState extends State<FacultyTaskScreen> {
   TaskServices taskServices = TaskServices();
 
   Future<List<Task>> getAllTask() async {
-    tasks = await taskServices.getAllTasks(context);
+    tasks = await taskServices.getAllTasksForFaculty(context);
 
     return tasks;
   }

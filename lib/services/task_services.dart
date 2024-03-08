@@ -89,6 +89,39 @@ class TaskServices {
     return taskList;
   }
 
+  Future<List<Task>> getAllTasksForFaculty(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false).user;
+    void handleHttpError(String errorMessage) {
+      showSnackBar(context, errorMessage);
+    }
+
+    // Event List
+    List<Task> taskList = [];
+
+    try {
+      http.Response res = await http.get(
+          Uri.parse("$url/api/tasks/${userProvider.username}"),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8'
+          });
+
+      httpErrorHandle(
+          response: res,
+          onError: (errMessage) {
+            showSnackBar(context, errMessage);
+          },
+          onSuccess: () {
+            for (int i = 0; i < jsonDecode(res.body).length; i++) {
+              taskList.add(Task.fromJson(jsonEncode(jsonDecode(res.body)[i])));
+            }
+          });
+    } catch (e) {
+      final errorMessage = "Error occurred: ${e.toString()}";
+      handleHttpError(errorMessage);
+    }
+    return taskList;
+  }
+
   Future<List<Task>> getAllCompletedTasks(BuildContext context) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false).user;
     void handleHttpError(String errorMessage) {
