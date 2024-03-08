@@ -198,8 +198,10 @@ class EventServices {
         ),
       );
       imageUrl = cloudinaryRes.secureUrl;
+    } else {
+      imageUrl = existImage;
     }
-    imageUrl = existImage;
+
     final eventData = {
       "_id": eventId,
       "eventName": eventName,
