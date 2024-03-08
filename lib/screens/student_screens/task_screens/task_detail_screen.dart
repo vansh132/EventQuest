@@ -146,7 +146,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Text(
+                    const Text(
                       "Guidelines",
                       style: TextStyle(
                         fontSize: 16,
@@ -159,75 +159,86 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       height: 6,
                     ),
                     guidelines(context),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
-                    image.existsSync() == true
-                        ? SizedBox(
-                            height: 200,
-                            width: 200,
-                            child: Image(
-                              image: FileImage(image),
-                            ),
-                          )
-                        : GestureDetector(
-                            onTap: selectImages,
-                            child: DottedBorder(
-                              radius: const Radius.circular(10),
-                              dashPattern: const [10, 4],
-                              borderType: BorderType.RRect,
-                              strokeCap: StrokeCap.round,
-                              child: Container(
-                                width: double.infinity,
-                                height: 150,
-                                decoration: BoxDecoration(
-                                  // color: Colors.red,
-                                  borderRadius: BorderRadius.circular(10),
+                    //TODO: add hero widget here...
+                    task.taskStatus
+                        ? Image(
+                            height: 224,
+                            image: NetworkImage(task.taskFile as String))
+                        : image.existsSync() == true
+                            ? SizedBox(
+                                height: 200,
+                                width: 200,
+                                child: Image(
+                                  image: FileImage(image),
                                 ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    const Icon(
-                                      Icons.folder_open_outlined,
-                                      size: 40,
+                              )
+                            : GestureDetector(
+                                onTap: selectImages,
+                                child: DottedBorder(
+                                  radius: const Radius.circular(10),
+                                  dashPattern: const [10, 4],
+                                  borderType: BorderType.RRect,
+                                  strokeCap: StrokeCap.round,
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 150,
+                                    decoration: BoxDecoration(
+                                      // color: Colors.red,
+                                      borderRadius: BorderRadius.circular(10),
                                     ),
-                                    const SizedBox(
-                                      height: 15,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        const Icon(
+                                          Icons.folder_open_outlined,
+                                          size: 40,
+                                        ),
+                                        const SizedBox(
+                                          height: 15,
+                                        ),
+                                        Text(
+                                          "Upload Poster",
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.grey.shade400,
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                    Text(
-                                      "Upload Poster",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.grey.shade400,
-                                      ),
-                                    )
-                                  ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
                     const SizedBox(
                       height: 12,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        ElevatedButton.icon(
-                          onPressed: submitted == true ? null : clearImage,
-                          label: const Text(
-                            "Clear",
+                    task.taskStatus
+                        ? const SizedBox()
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              ElevatedButton.icon(
+                                onPressed:
+                                    submitted == true ? null : clearImage,
+                                label: const Text(
+                                  "Clear",
+                                ),
+                                icon: const Icon(Icons.cancel_outlined),
+                              ),
+                              ElevatedButton.icon(
+                                onPressed:
+                                    submitted == true ? null : submitImage,
+                                icon: const Icon(
+                                    Icons.playlist_add_check_circle_outlined),
+                                label: const Text("Submit"),
+                              )
+                            ],
                           ),
-                          icon: const Icon(Icons.cancel_outlined),
-                        ),
-                        ElevatedButton.icon(
-                          onPressed: submitted == true ? null : submitImage,
-                          icon: const Icon(
-                              Icons.playlist_add_check_circle_outlined),
-                          label: const Text("Submit"),
-                        )
-                      ],
-                    ),
                     const SizedBox(
                       height: 16,
                     ),
