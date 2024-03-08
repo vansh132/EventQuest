@@ -186,13 +186,23 @@ class EventServices {
       required String eventContactPerson,
       required int eventContactNo,
       required DateTime eventRegistartionDeadline}) async {
+    String imageUrl = "";
+
     // final user = Provider.of<UserProvider>(context, listen: false).user;
+    final cloudinary = CloudinaryPublic('dq1q5mtdo', 'fwsfdscu');
+      CloudinaryResponse cloudinaryRes = await cloudinary.uploadFile(
+        CloudinaryFile.fromFile(
+          eventImage.path,
+          folder: "Events",
+        ),
+      );
+      imageUrl = cloudinaryRes.secureUrl;
     final eventData = {
       "_id": eventId,
       "eventName": eventName,
       "eventDescription": eventDescription,
       "eventAmount": eventAmount,
-      "eventImage": eventImage,
+      "eventImage": imageUrl,
       "eventCategory": eventCategory,
       "eventPublishedOn": eventPublishedOn.toString(),
       "eventNoOfParticipants": eventNoOfParticipants,

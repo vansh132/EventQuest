@@ -28,9 +28,6 @@ class _EventScreenState extends State<EventScreen> {
     } else {
       events = await eventServices.getAllEvents(context);
     }
-    // setState(() {
-    //   events;
-    // });
     return events;
   }
 
@@ -39,7 +36,6 @@ class _EventScreenState extends State<EventScreen> {
   void initState()  {
     super.initState();
     getAllPost();
-
   }
 
   @override
