@@ -1,4 +1,3 @@
-import 'package:eventquest/models/user.dart';
 import 'package:eventquest/provider/user_provider.dart';
 import 'package:eventquest/screens/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -55,8 +54,7 @@ Widget UserBar(BuildContext context) {
         ),
         TextButton.icon(
           onPressed: () {
-            userProvider.setUser("");
-            Navigator.pushNamedAndRemoveUntil(context, LoginScreen.routeName, (route) => false);
+
           },
           icon: const Icon(
             Icons.logout_rounded,
