@@ -188,7 +188,6 @@ class EventServices {
       required DateTime eventRegistartionDeadline}) async {
     String imageUrl = "";
 
-    // final user = Provider.of<UserProvider>(context, listen: false).user;
     final cloudinary = CloudinaryPublic('dq1q5mtdo', 'fwsfdscu');
       CloudinaryResponse cloudinaryRes = await cloudinary.uploadFile(
         CloudinaryFile.fromFile(

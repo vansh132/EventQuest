@@ -47,8 +47,12 @@ class _EditEventScreenState extends State<EditEventScreen> {
         TextEditingController(text: eventData.eventContactPersonNo.toString());
   }
 
+
   File image = File("");
+
   bool submitted = false;
+  bool updateImageFlag = false;
+
   void selectImages() async {
     var res = await pickImages();
     setState(() {
@@ -58,9 +62,12 @@ class _EditEventScreenState extends State<EditEventScreen> {
 
   void clearImage() {
     setState(() {
+      updateImageFlag = true;
       image = File("");
     });
   }
+
+
 
   Future<File> pickImages() async {
     File image = File("");
@@ -110,6 +117,8 @@ class _EditEventScreenState extends State<EditEventScreen> {
 
   @override
   Widget build(BuildContext context) {
+    eventData = ModalRoute.of(context)!.settings.arguments as Event;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Update Event'),
@@ -185,9 +194,12 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   "Upload Image",
                   style: TextStyle(fontSize: 18),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
+                updateImageFlag == false ?
+                Image(image: NetworkImage(eventData.eventImage))
+                :
                 image.existsSync() == true
                     ? Center(
                         child: SizedBox(
