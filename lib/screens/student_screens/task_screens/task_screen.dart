@@ -1,5 +1,6 @@
 import 'package:eventquest/models/task.dart';
 import 'package:eventquest/screens/student_screens/task_screens/task_detail_screen.dart';
+import 'package:eventquest/services/task_services.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
@@ -13,74 +14,74 @@ class TaskScreen extends StatefulWidget {
 
 class _TaskScreenState extends State<TaskScreen> {
   bool selected = true;
+
+  List<Task> assignedTasks = [
+    // Task(
+    //   taskTitle: "Talent Show",
+    //   taskDescription:
+    //       "Continuing our tradition, we are pleased to announce the forthcoming Talent Show scheduled for February 20th, 2024. This esteemed event will take place at 911, Central Block, providing an esteemed platform for our fresher students to exhibit their talents. The Talent Show serves as an avenue for showcasing diverse skills and abilities, fostering a culture of creativity and expression within our academic community. ",
+    //   taskType: "Poster",
+    //   assignedTo: "2347152",
+    //   assignedBy: "Helen K Joy",
+    //   taskStatus: false,
+    // ),
+    // Task(
+    //   taskTitle: "Talent Show",
+    //   taskDescription:
+    //       "Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it",
+    //   taskType: "Poster",
+    //   assignedTo: "2347152",
+    //   assignedBy: "Helen K Joy",
+    //   taskStatus: true,
+    //   remarks: ["feefef"],
+    // ),
+  ];
+
+  TaskServices taskServices = TaskServices();
+
+  Future<List<Task>> getAllTask() async {
+    if (selected) {
+      assignedTasks = await taskServices.getAllTasks(context);
+    } else {
+      assignedTasks = await taskServices.getAllCompletedTasks(context);
+    }
+
+    return assignedTasks;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getAllTask();
+  }
+
+  ButtonStyle selectedButtonStyle = const ButtonStyle(
+    padding: MaterialStatePropertyAll(EdgeInsets.all(16)),
+    backgroundColor: MaterialStatePropertyAll(
+      Colors.black,
+    ),
+  );
+
+  ButtonStyle unselectedButtonStyle = const ButtonStyle(
+    padding: MaterialStatePropertyAll(EdgeInsets.all(16)),
+  );
+
+  TextStyle selectedTextStyle = const TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 0.3,
+    fontSize: 14,
+  );
+
+  TextStyle unselectedTextStyle = const TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 0.3,
+    fontSize: 14,
+  );
+
   @override
   Widget build(BuildContext context) {
-    List<Task> assignedTasks = [
-      Task(
-        taskTitle: "Talent Show",
-        taskDescription:
-            "Continuing our tradition, we are pleased to announce the forthcoming Talent Show scheduled for February 20th, 2024. This esteemed event will take place at 911, Central Block, providing an esteemed platform for our fresher students to exhibit their talents. The Talent Show serves as an avenue for showcasing diverse skills and abilities, fostering a culture of creativity and expression within our academic community. ",
-        taskType: "Poster",
-        assignedTo: "2347152",
-        assignedBy: "Helen K Joy",
-        taskStatus: false,
-      ),
-      Task(
-        taskTitle: "Talent Show",
-        taskDescription:
-            "Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it Create poster for it",
-        taskType: "Poster",
-        assignedTo: "2347152",
-        assignedBy: "Helen K Joy",
-        taskStatus: true,
-        remarks: ["feefef"],
-      ),
-    ];
-
-    List<Task> historyTasks = [
-      Task(
-        taskTitle: "XYZ Show",
-        taskDescription: "Create poster for it",
-        taskType: "Poster",
-        assignedTo: "2347152",
-        assignedBy: "Helen K Joy",
-        taskStatus: false,
-      ),
-      Task(
-        taskTitle: "ABC Show",
-        taskDescription: "Create poster for it",
-        taskType: "Poster",
-        assignedTo: "2347152",
-        assignedBy: "Helen K Joy",
-        taskStatus: true,
-      ),
-    ];
-
-    ButtonStyle selectedButtonStyle = const ButtonStyle(
-      padding: MaterialStatePropertyAll(EdgeInsets.all(16)),
-      backgroundColor: MaterialStatePropertyAll(
-        Colors.black,
-      ),
-    );
-
-    ButtonStyle unselectedButtonStyle = const ButtonStyle(
-      padding: MaterialStatePropertyAll(EdgeInsets.all(16)),
-    );
-
-    TextStyle selectedTextStyle = const TextStyle(
-      color: Colors.white,
-      fontWeight: FontWeight.bold,
-      letterSpacing: 0.3,
-      fontSize: 14,
-    );
-
-    TextStyle unselectedTextStyle = const TextStyle(
-      color: Colors.black,
-      fontWeight: FontWeight.bold,
-      letterSpacing: 0.3,
-      fontSize: 14,
-    );
-
     return Scaffold(
       body: Container(
         // color: Colors.amber,
@@ -144,13 +145,24 @@ class _TaskScreenState extends State<TaskScreen> {
               padding: const EdgeInsets.all(16),
               // color: Colors.greenAccent,
               height: 400,
-              child: ListView.builder(
-                itemCount:
-                    selected ? assignedTasks.length : historyTasks.length,
-                itemBuilder: (context, index) => TaskItem(
-                  selected ? assignedTasks[index] : historyTasks[index],
-                  context,
-                ),
+              child: FutureBuilder(
+                future: getAllTask(),
+                initialData: assignedTasks,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemBuilder: (context, index) =>
+                          TaskItem(snapshot.data![index], context),
+                      itemCount: snapshot.data!.length,
+                    );
+                  } else if (snapshot.data == null) {
+                    return const Center(
+                      child: Text("No data found"),
+                    );
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                },
               ),
             )
           ],

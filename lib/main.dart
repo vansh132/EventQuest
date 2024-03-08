@@ -27,9 +27,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: Provider.of<UserProvider>(context).user.type == "student"
+      home: Provider.of<UserProvider>(context).user.type == "Student"
           ? CustomBottomNavigationBar()
-          : Provider.of<UserProvider>(context).user.type == "faculty"
+          : Provider.of<UserProvider>(context).user.type == "Faculty"
               ? FacultyCustomBottomBar()
               : LoginScreen(),
     );

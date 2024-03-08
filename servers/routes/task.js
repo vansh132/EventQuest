@@ -40,6 +40,36 @@ taskRouter.get('/api/tasks/:assignedBy', async (req, res) => {
     }
 })
 
+taskRouter.get('/api/tasks/assignedTo/:assignedTo', async (req, res) => {
+    try {
+        const {assignedTo} = req.params
+        const tasks = await Task.find({assignedTo: assignedTo, taskStatus: false})
+        // console.log(tasks.length)
+        if (tasks.length == 0) {
+            return res.status(400).json({ message: `cannot find an tasks with username: ${assignedTo}` })
+
+        }
+        res.json(tasks)
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+})
+
+taskRouter.get('/api/tasks/assignedTo/history/:assignedTo', async (req, res) => {
+    try {
+        const {assignedTo} = req.params
+        const tasks = await Task.find({assignedTo: assignedTo, taskStatus: true})
+        // console.log(tasks.length)
+        if (tasks.length == 0) {
+            return res.status(400).json({ message: `cannot find an tasks with username: ${assignedTo}` })
+
+        }
+        res.json(tasks)
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+})
+
 
 taskRouter.get('/api/highlights', async (req, res) => {
     try {
