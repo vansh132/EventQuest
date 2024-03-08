@@ -90,8 +90,8 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                                 fontWeight: FontWeight.w500,
                               )),
                           TextSpan(
-                            text: task.taskStatus,
-                            style: task.taskStatus == "Incomplete"
+                            text: task.taskStatus ? "Completed" : "Incompleted",
+                            style: !task.taskStatus
                                 ? const TextStyle(
                                     color: Colors.red,
                                     fontWeight: FontWeight.w500,

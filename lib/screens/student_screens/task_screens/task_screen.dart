@@ -23,7 +23,7 @@ class _TaskScreenState extends State<TaskScreen> {
         taskType: "Poster",
         assignedTo: "2347152",
         assignedBy: "Helen K Joy",
-        taskStatus: "Incomplete",
+        taskStatus: false,
       ),
       Task(
         taskTitle: "Talent Show",
@@ -32,7 +32,7 @@ class _TaskScreenState extends State<TaskScreen> {
         taskType: "Poster",
         assignedTo: "2347152",
         assignedBy: "Helen K Joy",
-        taskStatus: "Completed",
+        taskStatus: true,
         remarks: "feefef",
       ),
     ];
@@ -44,7 +44,7 @@ class _TaskScreenState extends State<TaskScreen> {
         taskType: "Poster",
         assignedTo: "2347152",
         assignedBy: "Helen K Joy",
-        taskStatus: "Incomplete",
+        taskStatus: false,
       ),
       Task(
         taskTitle: "ABC Show",
@@ -52,7 +52,7 @@ class _TaskScreenState extends State<TaskScreen> {
         taskType: "Poster",
         assignedTo: "2347152",
         assignedBy: "Helen K Joy",
-        taskStatus: "Completed",
+        taskStatus: true,
       ),
     ];
 
@@ -236,8 +236,8 @@ Widget TaskItem(Task task, BuildContext context) {
                           ),
                         ),
                         TextSpan(
-                          text: task.taskStatus,
-                          style: task.taskStatus == "Incomplete"
+                          text: task.taskStatus ? "Completed" : "Incompleted",
+                          style: !task.taskStatus
                               ? const TextStyle(
                                   color: Colors.red,
                                   fontWeight: FontWeight.w500,
