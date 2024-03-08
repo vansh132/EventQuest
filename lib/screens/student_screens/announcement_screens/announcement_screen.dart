@@ -1,11 +1,9 @@
 import 'package:eventquest/models/announcement.dart';
-import 'package:eventquest/provider/user_provider.dart';
 import 'package:eventquest/screens/student_screens/announcement_screens/announcement_detail_screen.dart';
 import 'package:eventquest/services/announcement_services.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class AnnouncementScreen extends StatefulWidget {
   AnnouncementScreen({super.key});
@@ -74,7 +72,6 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     return Scaffold(
       body: SizedBox(

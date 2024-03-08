@@ -1,10 +1,8 @@
 import 'package:eventquest/models/task.dart';
-import 'package:eventquest/provider/user_provider.dart';
 import 'package:eventquest/screens/student_screens/task_screens/task_detail_screen.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class TaskScreen extends StatefulWidget {
   const TaskScreen({super.key});
@@ -82,7 +80,6 @@ class _TaskScreenState extends State<TaskScreen> {
       letterSpacing: 0.3,
       fontSize: 14,
     );
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
 
 
     return Scaffold(

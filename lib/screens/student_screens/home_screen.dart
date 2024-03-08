@@ -1,6 +1,5 @@
 import 'package:eventquest/models/announcement.dart';
 import 'package:eventquest/models/event.dart';
-import 'package:eventquest/provider/user_provider.dart';
 import 'package:eventquest/screen_items/faculty_custom_navigation_bottom_bar.dart';
 import 'package:eventquest/screen_items/highlights.dart';
 import 'package:eventquest/screens/student_screens/announcement_screens/announcement_detail_screen.dart';
@@ -8,7 +7,6 @@ import 'package:eventquest/screens/student_screens/event_screens/event_detail_sc
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String routeName = 'home-screen';
@@ -23,7 +21,6 @@ class HomeScreen extends StatelessWidget {
 
     ];
 
-    final user = Provider.of<UserProvider>(context, listen: false);
 
 
     return Scaffold(
