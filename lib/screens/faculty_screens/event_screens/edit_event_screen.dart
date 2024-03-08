@@ -86,6 +86,8 @@ class _EditEventScreenState extends State<EditEventScreen> {
   void updateEvent() {
     eventServices.updateEvent(
         context: context,
+        existImage: eventData.eventImage,
+        imageUpdateFlag: updateImageFlag,
         eventId: eventData.eventId,
         eventName: eventName.text,
         eventDescription: eventDescription.text,

@@ -174,6 +174,8 @@ class EventServices {
 
   void updateEvent(
       {required BuildContext context,
+      required String existImage,
+      required bool imageUpdateFlag,
       required String eventId,
       required String eventName,
       required String eventDescription,
@@ -187,8 +189,8 @@ class EventServices {
       required int eventContactNo,
       required DateTime eventRegistartionDeadline}) async {
     String imageUrl = "";
-
-    final cloudinary = CloudinaryPublic('dq1q5mtdo', 'fwsfdscu');
+    if (imageUpdateFlag == true) {
+      final cloudinary = CloudinaryPublic('dq1q5mtdo', 'fwsfdscu');
       CloudinaryResponse cloudinaryRes = await cloudinary.uploadFile(
         CloudinaryFile.fromFile(
           eventImage.path,
@@ -196,6 +198,8 @@ class EventServices {
         ),
       );
       imageUrl = cloudinaryRes.secureUrl;
+    }
+    imageUrl = existImage;
     final eventData = {
       "_id": eventId,
       "eventName": eventName,
