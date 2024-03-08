@@ -1,5 +1,6 @@
 import 'package:eventquest/models/event.dart';
 import 'package:eventquest/screens/student_screens/registration_screens/registration_screen.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -119,25 +120,30 @@ class EventDetailsScreen extends StatelessWidget {
               ),
 
               // Event Link
-              InkWell(
-                onTap: () {
-                  _launchURL(event.eventLink);
-                },
-                child: RichText(
-                  text: TextSpan(
-                    style: const TextStyle(fontSize: 18, color: Colors.black),
-                    children: [
-                      const TextSpan(
-                        text: 'Event Link:',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      TextSpan(
-                          text: ' ${event.eventLink}',
-                          style: const TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.redAccent)),
-                    ],
-                  ),
+              RichText(
+                text: TextSpan(
+                  style: const TextStyle(fontSize: 18, color: Colors.black),
+                  children: [
+                    const TextSpan(
+                      text: 'Event Link:',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    TextSpan(
+                        text: ' ${event.eventLink}',
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () async {
+                            var url =
+                                "https://www.youtube.com/channel/UCwxiHP2Ryd-aR0SWKjYguxw?view_as=subscriber";
+                            if (await canLaunch(url)) {
+                              await launch(url);
+                            } else {
+                              throw 'Could not launch $url';
+                            }
+                          },
+                        style: const TextStyle(
+                            decoration: TextDecoration.underline,
+                            color: Colors.redAccent)),
+                  ],
                 ),
               ),
 
