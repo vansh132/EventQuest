@@ -7,7 +7,6 @@ import 'package:eventquest/screens/student_screens/event_screens/event_detail_sc
 import 'package:eventquest/services/announcement_services.dart';
 import 'package:eventquest/services/event_services.dart';
 import 'package:eventquest/services/task_services.dart';
-import 'package:eventquest/themes.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';

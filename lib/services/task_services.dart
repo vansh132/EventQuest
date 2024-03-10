@@ -186,7 +186,6 @@ class TaskServices {
                   ImageClass.fromJson(jsonEncode(jsonDecode(res.body)[i])));
             }
           });
-      print(images);
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";
       handleHttpError(errorMessage);
@@ -213,13 +212,11 @@ class TaskServices {
     }
 
     final posterImages = {"taskFile": imageUrl};
-    print(taskId);
     try {
       http.Response res =
           await http.post(Uri.parse("$url/api/add-poster/$taskId"),
               headers: <String, String>{
                 "Content-Type": 'application/json; charset=UTF-8',
-                // 'x-auth-token': userProvider.user.token,
               },
               body: jsonEncode(posterImages));
       httpErrorHandle(

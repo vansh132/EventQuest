@@ -127,7 +127,7 @@ taskRouter.post("/api/add-poster/:taskId", async (req, res) => {
     if (!task) {
       return res.status(400).json({ message: `cannot find an task` });
     }
-    const updatedTask = await Task.findById(id);
+    const updatedTask = await Task.findById(taskId);
     res.status(200).json(updatedTask);
   } catch (error) {
     res.status(500).json({ error: error.message });
