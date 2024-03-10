@@ -3,7 +3,7 @@ import 'package:eventquest/screens/faculty_screens/announcement_screens/add_anno
 import 'package:eventquest/screens/faculty_screens/announcement_screens/edit_announcement_screen.dart';
 import 'package:eventquest/screens/student_screens/announcement_screens/announcement_detail_screen.dart';
 import 'package:eventquest/services/announcement_services.dart';
-
+import 'package:intl/intl.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +76,6 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
@@ -118,13 +117,14 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
             AddAnnouncementScreen.routeName,
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
 
   Widget buildAnnouncementCard(Announcement announcement) {
     var date = announcement.announcementPublishedOn.split("T")[0];
+    final DateFormat formatter = DateFormat('dd-MM-yyyy');
     return Hero(
       tag: 'announcement_image_${announcement.hashCode}',
       child: Container(
@@ -191,7 +191,7 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                     Expanded(
                       flex: 1,
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(
                             height: 65,
@@ -204,7 +204,7 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                             ),
                           ),
                           Text(
-                            date,
+                            formatter.format(DateTime.parse(date)),
                             style: const TextStyle(
                               fontSize: 8,
                               fontWeight: FontWeight.bold,
@@ -215,11 +215,11 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 20,
+                const SizedBox(
+                  height: 8,
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 40),
+                  margin: const EdgeInsets.symmetric(horizontal: 43),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -231,7 +231,7 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                             arguments: announcement,
                           );
                         },
-                        child: Text('View'),
+                        child: const Text('View'),
                       ),
                       ElevatedButton(
                         onPressed: () {
@@ -241,7 +241,7 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                             arguments: announcement,
                           );
                         },
-                        child: Text('Edit'),
+                        child: const Text('Edit'),
                       ),
                       ElevatedButton(
                         onPressed: () {
@@ -254,7 +254,7 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                                 });
                               });
                         },
-                        child: Text('Delete'),
+                        child: const Text('Delete'),
                       ),
                     ],
                   ),

@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eventquest/models/announcement.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:photo_view/photo_view.dart';
 
 class AnnouncementDetailScreen extends StatelessWidget {
@@ -42,6 +43,7 @@ class AnnouncementDetailContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var date = announcement.announcementPublishedOn.split("T")[0];
+    final DateFormat formatter = DateFormat('dd-MM-yyyy');
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -57,7 +59,7 @@ class AnnouncementDetailContent extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Date: $date',
+              'Date: ${formatter.format(DateTime.parse(date))}',
               style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
