@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:eventquest/constants/error_handling.dart';
 import 'package:eventquest/constants/global_variable.dart';
 import 'package:eventquest/models/image.dart';
@@ -190,5 +192,47 @@ class TaskServices {
       handleHttpError(errorMessage);
     }
     return images;
+  }
+
+  Future<void> addPoster({
+    required BuildContext context,
+    required String taskId,
+    required File posterImage,
+  }) async {
+    String imageUrl = "";
+    final cloudinary = CloudinaryPublic('dq1q5mtdo', 'fwsfdscu');
+    CloudinaryResponse cloudinaryRes = await cloudinary.uploadFile(
+      CloudinaryFile.fromFile(
+        posterImage.path,
+        folder: "Task - Poster",
+      ),
+    );
+    imageUrl = cloudinaryRes.secureUrl;
+    void handleHttpError(String errorMessage) {
+      showSnackBar(context, errorMessage);
+    }
+
+    final posterImages = {"taskFile": imageUrl};
+    print(taskId);
+    try {
+      http.Response res =
+          await http.post(Uri.parse("$url/api/add-poster/$taskId"),
+              headers: <String, String>{
+                "Content-Type": 'application/json; charset=UTF-8',
+                // 'x-auth-token': userProvider.user.token,
+              },
+              body: jsonEncode(posterImages));
+      httpErrorHandle(
+          response: res,
+          onError: (errMessage) {
+            showSnackBar(context, errMessage);
+          },
+          onSuccess: () {
+            showSnackBar(context, "Poster Uploaded!! ");
+          });
+    } catch (e) {
+      final errorMessage = "Error occurred: ${e.toString()}";
+      handleHttpError(errorMessage);
+    }
   }
 }

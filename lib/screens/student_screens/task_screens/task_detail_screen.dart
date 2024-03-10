@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:eventquest/models/task.dart';
 import 'package:eventquest/screens/constants/utils.dart';
+import 'package:eventquest/services/task_services.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,7 @@ class TaskDetailScreen extends StatefulWidget {
 class _TaskDetailScreenState extends State<TaskDetailScreen> {
   File image = File("");
   bool submitted = false;
+  TaskServices taskServices = TaskServices();
   void selectImages() async {
     var res = await pickImages();
     setState(() {
@@ -31,10 +33,15 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
     });
   }
 
-  void submitImage() {
+  void submitImage() async {
+    final Task task = ModalRoute.of(context)!.settings.arguments as Task;
+    print(image);
     if (image.existsSync() == false) {
       showSnackBar(context, "Please upload file");
       return;
+    } else {
+      await taskServices.addPoster(
+          context: context, taskId: task.taskId, posterImage: image);
     }
     setState(() {
       submitted = true;
@@ -323,7 +330,7 @@ Widget topbarTitle(BuildContext context, Task task) {
 }
 
 Widget guidelines(BuildContext context) {
-  // ScrollController scrollController = ScrollController();
+  ScrollController scrollController = ScrollController();
   return Container(
     height: 128,
     alignment: Alignment.center,
@@ -342,9 +349,10 @@ Widget guidelines(BuildContext context) {
       ],
     ),
     child: Scrollbar(
-      // controller: scrollController,
+      controller: scrollController,
       thumbVisibility: true,
       child: ListView(
+        controller: scrollController,
         children: const [
           ListTile(
             leading: Icon(Icons.arrow_right),
