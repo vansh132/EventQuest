@@ -3,33 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 Widget UserBar(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+  final userProvider = Provider.of<UserProvider>(context, listen: false);
 
   return Container(
     margin: const EdgeInsets.all(8),
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(24),
-      color: const Color(0xff0D1B2A),
+      color: const Color(0xff012a4a),
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-         Row(
+        Row(
           children: [
-            Icon(Icons.person_2_rounded,
-                color: Color.fromARGB(255, 245, 211, 97)),
+            const Icon(Icons.person_2_rounded,
+                color: Color.fromARGB(255, 204, 169, 57)),
             SizedBox(
               width: 12,
             ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   userProvider.user.username,
-                  style: TextStyle(
-                    color: Color(
-                      0xffFFCF33,
-                    ),
+                  style: const TextStyle(
+                    color: Color(0xffefefd0),
                     fontWeight: FontWeight.bold,
                     letterSpacing: 0.3,
                     fontSize: 16,
@@ -37,12 +36,9 @@ Widget UserBar(BuildContext context) {
                 ),
                 Text(
                   userProvider.user.type,
-
-                  style: TextStyle(
-                    color: Color(
-                      0xffFFCF33,
-                    ),
-                    fontWeight: FontWeight.w400,
+                  style: const TextStyle(
+                    color: Color.fromARGB(255, 251, 251, 213),
+                    fontWeight: FontWeight.bold,
                     letterSpacing: 0.3,
                     fontSize: 14,
                   ),
@@ -52,17 +48,16 @@ Widget UserBar(BuildContext context) {
           ],
         ),
         TextButton.icon(
-          onPressed: () {
-
-          },
+          onPressed: () {},
           icon: const Icon(
             Icons.logout_rounded,
-            color: Color(0xffe8e8e4),
+            color: Color.fromARGB(255, 204, 169, 57),
           ),
           label: const Text(
             "Log Out",
             style: TextStyle(
-              color: Color(0xffe8e8e4),
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 204, 169, 57),
             ),
           ),
         )

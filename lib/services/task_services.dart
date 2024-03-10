@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:eventquest/constants/error_handling.dart';
 import 'package:eventquest/constants/global_variable.dart';
+import 'package:eventquest/models/image.dart';
 import 'package:eventquest/models/task.dart';
 import 'package:eventquest/provider/user_provider.dart';
 import 'package:eventquest/screens/constants/utils.dart';
@@ -154,5 +155,40 @@ class TaskServices {
       handleHttpError(errorMessage);
     }
     return taskList;
+  }
+
+  Future<List<ImageClass>> getAllImages(BuildContext context) async {
+    // final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    void handleHttpError(String errorMessage) {
+      showSnackBar(context, errorMessage);
+    }
+
+    // Announcement List
+    List<ImageClass> images = [];
+
+    try {
+      http.Response res = await http.get(Uri.parse("$url/api/highlights"),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8'
+          });
+
+      httpErrorHandle(
+          response: res,
+          onError: (errMessage) {
+            showSnackBar(context, errMessage);
+          },
+          onSuccess: () {
+            for (int i = 0; i < jsonDecode(res.body).length; i++) {
+              images.add(
+                  ImageClass.fromJson(jsonEncode(jsonDecode(res.body)[i])));
+            }
+          });
+      print(images);
+    } catch (e) {
+      final errorMessage = "Error occurred: ${e.toString()}";
+      handleHttpError(errorMessage);
+    }
+    return images;
   }
 }

@@ -173,6 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 Widget AnnouncementItem(BuildContext context, Announcement announcement) {
+  var date = announcement.announcementPublishedOn.split("T")[0];
   return GestureDetector(
     onTap: () => Navigator.pushNamed(
         context, AnnouncementDetailScreen.routeName,
@@ -242,7 +243,7 @@ Widget AnnouncementItem(BuildContext context, Announcement announcement) {
                             ),
                           ),
                           Text(
-                            announcement.announcementPublishedOn.toString(),
+                            date,
                             style: const TextStyle(
                               fontSize: 8,
                               fontWeight: FontWeight.w500,

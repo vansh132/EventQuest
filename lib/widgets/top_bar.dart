@@ -4,7 +4,7 @@ Widget TopBar() {
   return Container(
     padding: const EdgeInsets.all(16),
     decoration: const BoxDecoration(
-      color: Color(0xff0D1B2A),
+      color: Color(0xff012a4a),
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -14,7 +14,7 @@ Widget TopBar() {
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: Color(0xffefefd0),
             fontFamily: 'Roboto-Black',
           ),
         ),
