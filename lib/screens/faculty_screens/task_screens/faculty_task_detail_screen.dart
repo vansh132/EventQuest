@@ -1,5 +1,6 @@
 import 'package:eventquest/models/task.dart';
 import 'package:eventquest/screens/faculty_screens/task_screens/faculty_edit_task_screen.dart';
+import 'package:eventquest/services/task_services.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -13,20 +14,55 @@ class FacultyTaskDetailScreen extends StatefulWidget {
 }
 
 class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
+  TextEditingController remarkController = TextEditingController();
+
+  Task task = Task(
+      taskTitle: "",
+      taskDescription: "",
+      taskType: "",
+      assignedTo: "",
+      assignedBy: "",
+      taskStatus: false);
+  TaskServices taskServices = TaskServices();
+
+  void addRemark() async {
+    await taskServices.addRemarks(
+        context: context, taskId: task.taskId, remarks: remarkController.text);
+  }
+
+  void markAsCompleted() async {
+    await taskServices.markAsCompleted(
+        context: context, taskId: task.taskId, taskStatus: true);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    task = ModalRoute.of(context)!.settings.arguments as Task;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    remarkController.text = "";
+    // TODO: implement initState
+  }
+
   @override
   Widget build(BuildContext context) {
-    final Task task = ModalRoute.of(context)!.settings.arguments as Task;
-
+    // final Task tempTask = ModalRoute.of(context)!.settings.arguments as Task;
     return Scaffold(
-      floatingActionButton: IconButton.filled(
-        onPressed: () {
-          Navigator.pushNamed(context, FacultyEditTaskScreen.routeName,
-              arguments: task);
-        },
-        icon: const Icon(
-          Icons.edit,
-        ),
-      ),
+      floatingActionButton: task.taskStatus
+          ? const IconButton(onPressed: null, icon: Icon(Icons.edit))
+          : IconButton.filled(
+              onPressed: () {
+                Navigator.pushNamed(context, FacultyEditTaskScreen.routeName,
+                    arguments: task);
+              },
+              icon: const Icon(
+                Icons.edit,
+              ),
+            ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -127,8 +163,9 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                       width: 200,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(16),
-                        child: const Image(
-                          image: AssetImage("assets/images/INHSA.jpeg"),
+                        child: Image(
+                          image: NetworkImage(task.taskFile ??
+                              "https://dummyimage.com/600x400/87878a/000000.jpg&text=Image"),
                         ),
                       ),
                     ),
@@ -183,48 +220,66 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                             const SizedBox(
                               height: 4,
                             ),
-                            ElevatedButton(
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return Dialog(
-                                      child: Container(
-                                        padding: EdgeInsets.all(16),
-                                        height: 200,
-                                        child: SingleChildScrollView(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text("Give Remarks: "),
-                                              TextFormField(
-                                                minLines: 1,
-                                                maxLines: 3,
+                            task.taskStatus
+                                ? const SizedBox()
+                                : ElevatedButton(
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return Dialog(
+                                            child: Container(
+                                              padding: const EdgeInsets.all(16),
+                                              height: 200,
+                                              child: SingleChildScrollView(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    const Text(
+                                                        "Give Remarks: "),
+                                                    TextFormField(
+                                                      controller:
+                                                          remarkController,
+                                                      minLines: 1,
+                                                      maxLines: 3,
+                                                    ),
+                                                    ElevatedButton(
+                                                        onPressed: addRemark,
+                                                        child: const Text(
+                                                            "Add Remark"))
+                                                  ],
+                                                ),
                                               ),
-                                              ElevatedButton(
-                                                  onPressed: () {},
-                                                  child: Text("Add Remark"))
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                              child: const Text("Add Remarks"),
-                            ),
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: const Text("Add Remarks"),
+                                  ),
                           ],
                         )),
                     const SizedBox(
                       height: 16,
                     ),
-                    ElevatedButton.icon(
-                      onPressed: () {},
-                      icon: const Icon(Icons.done_all_outlined),
-                      label: const Text("Mark as Completed"),
-                    )
+                    task.taskStatus
+                        ? const ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStatePropertyAll(Colors.green)),
+                            onPressed: null,
+                            child: Text(
+                              "Task Completed",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ))
+                        : ElevatedButton.icon(
+                            onPressed: markAsCompleted,
+                            icon: const Icon(Icons.done_all_outlined),
+                            label: const Text("Mark as Completed"),
+                          )
                   ],
                 ),
               )

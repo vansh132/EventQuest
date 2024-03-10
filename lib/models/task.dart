@@ -8,7 +8,7 @@ class Task {
   final String assignedTo;
   final String assignedBy;
   String? taskFile;
-  List<String>? remarks;
+  String? remarks;
   final bool taskStatus;
   Task({
     this.taskId = '',
@@ -51,12 +51,13 @@ class Task {
       assignedTo: map['assignedTo'] ?? '',
       assignedBy: map['assignedBy'] ?? '',
       taskFile: map['taskFile'],
-      remarks: List<String>.from(map['remarks']),
+      remarks: map['remarks'],
       taskStatus: map['taskStatus'] ?? false,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Task.fromJson(String source) => Task.fromMap(json.decode(source));
+  factory Task.fromJson(String source) =>
+      Task.fromMap(json.decode(source) as Map<String, dynamic>);
 }

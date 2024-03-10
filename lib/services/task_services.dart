@@ -232,4 +232,66 @@ class TaskServices {
       handleHttpError(errorMessage);
     }
   }
+
+  Future<void> addRemarks({
+    required BuildContext context,
+    required String taskId,
+    required String remarks,
+  }) async {
+    void handleHttpError(String errorMessage) {
+      showSnackBar(context, errorMessage);
+    }
+
+    final remark = {"remarks": remarks};
+    try {
+      http.Response res =
+          await http.post(Uri.parse("$url/api/add-poster/$taskId"),
+              headers: <String, String>{
+                "Content-Type": 'application/json; charset=UTF-8',
+              },
+              body: jsonEncode(remark));
+      httpErrorHandle(
+          response: res,
+          onError: (errMessage) {
+            showSnackBar(context, errMessage);
+          },
+          onSuccess: () {
+            showSnackBar(context, "Poster Uploaded!! ");
+          });
+    } catch (e) {
+      final errorMessage = "Error occurred: ${e.toString()}";
+      handleHttpError(errorMessage);
+    }
+  }
+
+  Future<void> markAsCompleted({
+    required BuildContext context,
+    required String taskId,
+    required bool taskStatus,
+  }) async {
+    void handleHttpError(String errorMessage) {
+      showSnackBar(context, errorMessage);
+    }
+
+    final taskCompleted = {"taskStatus": taskStatus};
+    try {
+      http.Response res =
+          await http.post(Uri.parse("$url/api/add-poster/$taskId"),
+              headers: <String, String>{
+                "Content-Type": 'application/json; charset=UTF-8',
+              },
+              body: jsonEncode(taskCompleted));
+      httpErrorHandle(
+          response: res,
+          onError: (errMessage) {
+            showSnackBar(context, errMessage);
+          },
+          onSuccess: () {
+            showSnackBar(context, "Poster Uploaded!! ");
+          });
+    } catch (e) {
+      final errorMessage = "Error occurred: ${e.toString()}";
+      handleHttpError(errorMessage);
+    }
+  }
 }

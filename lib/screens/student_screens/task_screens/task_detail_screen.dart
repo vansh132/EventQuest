@@ -188,11 +188,13 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                     task.taskStatus
                         ? Image(
                             height: 224,
-                            image: NetworkImage(task.taskFile as String))
+                            image: NetworkImage(task.taskFile ??
+                                "https://dummyimage.com/600x400/87878a/000000.jpg&text=Image"))
                         : task.taskFile != ""
                             ? Image(
                                 height: 224,
-                                image: NetworkImage(task.taskFile as String))
+                                image: NetworkImage(task.taskFile ??
+                                    "https://dummyimage.com/600x400/87878a/000000.jpg&text=Image"))
                             : image.existsSync() == true
                                 ? SizedBox(
                                     height: 200,
