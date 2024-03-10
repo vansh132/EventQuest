@@ -2,6 +2,7 @@ import 'package:eventquest/models/event.dart';
 import 'package:eventquest/screens/student_screens/registration_screens/registration_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EventDetailsScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class EventDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Event event = ModalRoute.of(context)!.settings.arguments as Event;
     var date = event.eventRegistrationDeadline.split("T")[0];
-
+    final DateFormat formatter = DateFormat('dd-MM-yyyy');
     return Scaffold(
       appBar: AppBar(
         title: Text(event.eventName),
@@ -108,7 +109,8 @@ class EventDetailsScreen extends StatelessWidget {
                               Text(event.eventAmount.toString()),
                               const SizedBox(height: 8),
                               Text(
-                                date.split(" ")[0],
+                                formatter
+                                    .format(DateTime.parse(date.split(" ")[0])),
                               ),
                               const SizedBox(height: 8),
                               Text(event.eventNoOfParticipants.toString()),

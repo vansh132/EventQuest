@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:eventquest/constants/error_handling.dart';
 import 'package:eventquest/constants/global_variable.dart';
-import 'package:eventquest/models/image.dart';
 import 'package:eventquest/models/task.dart';
 import 'package:eventquest/provider/user_provider.dart';
 import 'package:eventquest/screens/constants/utils.dart';
@@ -159,7 +158,7 @@ class TaskServices {
     return taskList;
   }
 
-  Future<List<ImageClass>> getAllImages(BuildContext context) async {
+  Future<List<String>> getAllImages(BuildContext context) async {
     // final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     void handleHttpError(String errorMessage) {
@@ -167,7 +166,7 @@ class TaskServices {
     }
 
     // Announcement List
-    List<ImageClass> images = [];
+    List<String> images = [];
 
     try {
       http.Response res = await http.get(Uri.parse("$url/api/highlights"),
@@ -181,9 +180,12 @@ class TaskServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
+            // print("efef");
+            // print("vansh - " + jsonEncode((jsonDecode(res.body)[0])));
             for (int i = 0; i < jsonDecode(res.body).length; i++) {
-              images.add(
-                  ImageClass.fromJson(jsonEncode(jsonDecode(res.body)[i])));
+              images.add(jsonDecode(jsonEncode(jsonDecode(res.body)[i])));
+              // print(res.body);
+              // print(images);
             }
           });
     } catch (e) {

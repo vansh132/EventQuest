@@ -8,6 +8,7 @@ import 'package:eventquest/services/event_services.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = 'home-screen';
@@ -174,6 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 Widget AnnouncementItem(BuildContext context, Announcement announcement) {
   var date = announcement.announcementPublishedOn.split("T")[0];
+  final DateFormat formatter = DateFormat('dd-MM-yyyy');
   return GestureDetector(
     onTap: () => Navigator.pushNamed(
         context, AnnouncementDetailScreen.routeName,
@@ -243,7 +245,7 @@ Widget AnnouncementItem(BuildContext context, Announcement announcement) {
                             ),
                           ),
                           Text(
-                            date,
+                            formatter.format(DateTime.parse(date)),
                             style: const TextStyle(
                               fontSize: 8,
                               fontWeight: FontWeight.w500,

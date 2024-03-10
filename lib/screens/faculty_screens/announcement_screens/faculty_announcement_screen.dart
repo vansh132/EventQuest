@@ -219,7 +219,7 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                   height: 8,
                 ),
                 Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 43),
+                  margin: const EdgeInsets.symmetric(horizontal: 40),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

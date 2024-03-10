@@ -1,6 +1,5 @@
 import 'package:eventquest/models/announcement.dart';
 import 'package:eventquest/models/event.dart';
-import 'package:eventquest/models/image.dart';
 import 'package:eventquest/screen_items/highlights.dart';
 import 'package:eventquest/screens/student_screens/announcement_screens/announcement_detail_screen.dart';
 import 'package:eventquest/screens/student_screens/event_screens/event_detail_screen.dart';
@@ -10,6 +9,7 @@ import 'package:eventquest/services/task_services.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class FacultyHomeScreen extends StatefulWidget {
   static const String routeName = 'home-screen';
@@ -33,15 +33,6 @@ class _FacultyHomeScreenState extends State<FacultyHomeScreen> {
     announcements = await announcementServices.getAllAnnouncements(context);
 
     return announcements;
-  }
-
-  List<ImageClass> image = [];
-
-  Future<List<ImageClass>> getAllImages() async {
-    TaskServices taskServices = TaskServices();
-    image = await taskServices.getAllImages(context);
-
-    return image;
   }
 
   @override
@@ -184,6 +175,7 @@ class _FacultyHomeScreenState extends State<FacultyHomeScreen> {
 
 Widget AnnouncementItem(BuildContext context, Announcement announcement) {
   var date = announcement.announcementPublishedOn.split("T")[0];
+  final DateFormat formatter = DateFormat('dd-MM-yyyy');
   return GestureDetector(
     onTap: () => Navigator.pushNamed(
         context, AnnouncementDetailScreen.routeName,
@@ -253,7 +245,7 @@ Widget AnnouncementItem(BuildContext context, Announcement announcement) {
                             ),
                           ),
                           Text(
-                            date,
+                            formatter.format(DateTime.parse(date)),
                             style: const TextStyle(
                               fontSize: 8,
                               fontWeight: FontWeight.w500,
