@@ -10,7 +10,7 @@ Widget UserBar(BuildContext context) {
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(24),
-      color: const Color(0xff012a4a),
+      color: Color.fromARGB(240, 1, 42, 74),
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

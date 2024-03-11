@@ -3,6 +3,7 @@ import 'package:eventquest/screens/faculty_screens/event_screens/add_event_scree
 import 'package:eventquest/screens/faculty_screens/event_screens/edit_event_screen.dart';
 import 'package:eventquest/screens/student_screens/event_screens/event_detail_screen.dart';
 import 'package:eventquest/services/event_services.dart';
+import 'package:eventquest/themes.dart';
 
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
@@ -83,13 +84,17 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: AppColors.mainColor,
           onPressed: () {
             Navigator.pushNamed(
               context,
               AddEventScreen.routeName,
             );
           },
-          child: const Icon(Icons.add),
+          child: const Icon(
+            Icons.add,
+            color: Color(0xffffffff),
+          ),
         ));
   }
 
@@ -97,6 +102,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
     var date = event.eventRegistrationDeadline.split("T")[0];
 
     return Card(
+      color: Color(0xfffbfcf8),
       margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
@@ -108,6 +114,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
+                color: Color(0xff012a4a),
                 icon: const Icon(Icons.remove_red_eye),
                 onPressed: () {
                   Navigator.pushNamed(context, EventDetailsScreen.routeName,
@@ -115,6 +122,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                 },
               ),
               IconButton(
+                color: Color(0xff012a4a),
                 icon: const Icon(Icons.edit),
                 onPressed: () {
                   Navigator.pushNamed(context, EditEventScreen.routeName,
@@ -122,6 +130,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                 },
               ),
               IconButton(
+                color: Color(0xff012a4a),
                 icon: const Icon(Icons.delete),
                 onPressed: () {
                   eventServices.deleteEvent(
@@ -150,7 +159,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
             child: Row(
               children: [
                 Card(
-                  color: Colors.white.withOpacity(0.7),
+                  color: Color(0xffd4d7df),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -241,9 +250,11 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                 }
 
                 return ChoiceChip(
+                  selectedColor: Color(0xffd4d7df),
                   label: Text(
                     optionText,
                     style: const TextStyle(
+                      color: Color(0xff012a4a),
                       fontWeight: FontWeight.w700,
                     ),
                   ),

@@ -4,7 +4,7 @@ Widget TopBar() {
   return Container(
     padding: const EdgeInsets.all(16),
     decoration: const BoxDecoration(
-      color: Color(0xff012a4a),
+      color: Color(0xff002848),
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

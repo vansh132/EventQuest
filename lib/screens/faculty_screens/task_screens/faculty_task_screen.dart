@@ -2,6 +2,7 @@ import 'package:eventquest/models/task.dart';
 import 'package:eventquest/screens/faculty_screens/task_screens/faculty_add_task_screen.dart';
 import 'package:eventquest/screens/faculty_screens/task_screens/faculty_task_detail_screen.dart';
 import 'package:eventquest/services/task_services.dart';
+import 'package:eventquest/themes.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -69,6 +70,7 @@ class _FacultyTaskScreenState extends State<FacultyTaskScreen> {
           const Text(
             "Tasks Created",
             style: TextStyle(
+              color: Color(0xff012a4a),
               fontSize: 20,
               fontWeight: FontWeight.bold,
               letterSpacing: 0.2,
@@ -105,11 +107,13 @@ class _FacultyTaskScreenState extends State<FacultyTaskScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.mainColor,
         onPressed: () {
           Navigator.pushNamed(context, FacultyAddTaskScreen.routeName);
         },
         child: const Icon(
           Icons.add,
+          color: Colors.white,
         ),
       ),
     );
@@ -126,11 +130,11 @@ Widget taskItem(BuildContext context, Task task) {
       padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.white70,
+        color: Color(0xfffbfcf8),
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.3), // Shadow color
+            color: Colors.grey.withOpacity(0.2), // Shadow color
             spreadRadius: 5, // Spread radius
             blurRadius: 7, // Blur radius
             offset: const Offset(0, 3), // Offset in the x, y direction
@@ -140,18 +144,22 @@ Widget taskItem(BuildContext context, Task task) {
       child: ListTile(
         title: Text(
           task.taskTitle,
+          style: TextStyle(
+            color: Color(0xff012a4a),
+            fontWeight: FontWeight.w600,
+          ),
         ),
         trailing: Text(
           task.taskStatus ? "Completed" : "Incompleted",
           style: !task.taskStatus
               ? const TextStyle(
                   color: Colors.red,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.bold,
                   fontSize: 16,
                 )
               : const TextStyle(
                   color: Colors.green,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
         ),
