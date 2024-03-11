@@ -41,7 +41,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
         eventLink: eventLink.text,
         eventContactPerson: contactName.text,
         eventContactNo: int.parse(contactPerson.text),
-        eventRegistartionDeadline: DateTime.now());
+        eventRegistartionDeadline: _registrationDeadline!);
   }
 
   File image = File("");
