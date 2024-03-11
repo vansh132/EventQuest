@@ -296,4 +296,39 @@ class TaskServices {
       handleHttpError(errorMessage);
     }
   }
+
+  Future<void> editTask({
+    required BuildContext context,
+    required String taskId,
+    required String taskName,
+    required String taskDescription,
+  }) async {
+    void handleHttpError(String errorMessage) {
+      showSnackBar(context, errorMessage);
+    }
+
+    final taskCompleted = {
+      "taskTitle": taskName,
+      "taskDescription": taskDescription,
+    };
+    try {
+      http.Response res =
+          await http.post(Uri.parse("$url/api/add-poster/$taskId"),
+              headers: <String, String>{
+                "Content-Type": 'application/json; charset=UTF-8',
+              },
+              body: jsonEncode(taskCompleted));
+      httpErrorHandle(
+          response: res,
+          onError: (errMessage) {
+            showSnackBar(context, errMessage);
+          },
+          onSuccess: () {
+            showSnackBar(context, "Task updated!! ");
+          });
+    } catch (e) {
+      final errorMessage = "Error occurred: ${e.toString()}";
+      handleHttpError(errorMessage);
+    }
+  }
 }

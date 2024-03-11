@@ -1,4 +1,5 @@
 import 'package:eventquest/models/task.dart';
+import 'package:eventquest/services/task_services.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -15,8 +16,18 @@ class _FacultyEditTaskScreenState extends State<FacultyEditTaskScreen> {
 
   late TextEditingController title;
   late TextEditingController description;
+  TaskServices taskServices = TaskServices();
 
   late Task taskData;
+
+  void editTask() async {
+    taskServices.editTask(
+      context: context,
+      taskId: taskData.taskId,
+      taskName: title.text,
+      taskDescription: description.text,
+    );
+  }
 
   @override
   void didChangeDependencies() {
@@ -30,7 +41,7 @@ class _FacultyEditTaskScreenState extends State<FacultyEditTaskScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: editTask,
         child: Icon(
           Icons.save,
         ),
