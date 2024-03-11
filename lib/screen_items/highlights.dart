@@ -119,7 +119,7 @@ class FullScreenImage extends StatelessWidget {
             tag: imageUrl,
             child: Image.network(
               imageUrl,
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
               height: MediaQuery.of(context).size.height - 200,
               width: MediaQuery.of(context).size.width,
             ),

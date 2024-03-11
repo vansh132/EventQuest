@@ -41,27 +41,27 @@ class _FacultyCustomBottomBarState extends State<FacultyCustomBottomBar> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-            backgroundColor: Color(0xff012a4a),
+            backgroundColor: Color(0xff002848),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.event),
             label: 'Events',
-            backgroundColor: Color(0xff012a4a),
+            backgroundColor: Color(0xff002848),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.article_rounded),
             label: 'Announcements',
-            backgroundColor: Color(0xff012a4a),
+            backgroundColor: Color(0xff002848),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.checklist_rounded),
             label: 'Tasks',
-            backgroundColor: Color(0xff012a4a),
+            backgroundColor: Color(0xff002848),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.app_registration),
             label: 'Registrations',
-            backgroundColor: Color(0xff012a4a),
+            backgroundColor: Color(0xff002848),
           ),
         ],
         currentIndex: _selectedIndex,

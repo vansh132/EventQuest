@@ -260,7 +260,7 @@ class HeroImageScreen extends StatelessWidget {
             tag: image, // Same tag as used in the source screen
             child: Image.network(
               image,
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
             ),
           ),
         ),
