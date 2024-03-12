@@ -31,16 +31,14 @@ class _EventScreenState extends State<EventScreen> {
     return events;
   }
 
-
   @override
-  void initState()  {
+  void initState() {
     super.initState();
     getAllPost();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
@@ -124,7 +122,7 @@ class _EventScreenState extends State<EventScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            date.split("-")[2],
+                            date.split(" ")[0].split("-")[2],
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,

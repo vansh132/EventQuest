@@ -35,27 +35,27 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     return Scaffold(
       body: SafeArea(child: widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xff002848),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-            backgroundColor: Colors.black,
+            backgroundColor: Color(0xff002848),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.event),
             label: 'Events',
-            backgroundColor: Colors.black,
+            backgroundColor: Color(0xff002848),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.article_rounded),
             label: 'Announcements',
-            backgroundColor: Colors.black,
+            backgroundColor: Color(0xff002848),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.checklist_rounded),
             label: 'Tasks',
-            backgroundColor: Colors.black,
+            backgroundColor: Color(0xff002848),
           ),
         ],
         currentIndex: _selectedIndex,

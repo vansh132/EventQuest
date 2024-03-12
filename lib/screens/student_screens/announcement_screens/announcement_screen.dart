@@ -4,6 +4,7 @@ import 'package:eventquest/services/announcement_services.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AnnouncementScreen extends StatefulWidget {
   AnnouncementScreen({super.key});
@@ -72,7 +73,6 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
@@ -112,6 +112,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
 
   Widget buildAnnouncementCard(Announcement announcement) {
     var date = announcement.announcementPublishedOn.split("T")[0];
+    final DateFormat formatter = DateFormat('dd-MM-yyyy');
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(
@@ -157,14 +158,14 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                         Text(
                           announcement.announcementTitle,
                           style: const TextStyle(
-                            fontSize: 15,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(height: 8),
                         Text(
                           announcement.announcementDescription,
-                          style: const TextStyle(fontSize: 12),
+                          style: const TextStyle(fontSize: 13),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                         ),
@@ -174,17 +175,20 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                         Text(
                           "By: ${announcement.announcementPublishedBy}",
                           style: const TextStyle(
-                            fontSize: 10,
+                            fontSize: 11,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
                     ),
                   ),
+                  const SizedBox(
+                    width: 10,
+                  ),
                   Expanded(
                     flex: 1,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(
                           height: 65,
@@ -197,7 +201,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                           ),
                         ),
                         Text(
-                          date,
+                          formatter.format(DateTime.parse(date)),
                           style: const TextStyle(
                             fontSize: 8,
                             fontWeight: FontWeight.bold,

@@ -207,13 +207,13 @@ Widget AnnouncementItem(BuildContext context, Announcement announcement) {
           Expanded(
               flex: 4,
               child: Container(
-                height: 128,
+                height: MediaQuery.of(context).size.height * 0.1,
                 // color: Colors.amber,
                 margin: const EdgeInsets.symmetric(horizontal: 6),
                 child: Column(
                   children: [
                     Expanded(
-                      flex: 2,
+                      flex: 1,
                       child: Container(
                         alignment: Alignment.center,
                         child: Text(

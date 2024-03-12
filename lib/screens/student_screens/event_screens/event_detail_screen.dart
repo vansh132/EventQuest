@@ -13,6 +13,7 @@ class EventDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Event event = ModalRoute.of(context)!.settings.arguments as Event;
+
     var date = event.eventRegistrationDeadline.split("T")[0];
     final DateFormat formatter = DateFormat('dd-MM-yyyy');
     return Scaffold(
@@ -106,7 +107,9 @@ class EventDetailsScreen extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(event.eventAmount.toString()),
+                              Text(event.eventAmount == 0
+                                  ? 'Free'
+                                  : event.eventAmount.toString()),
                               const SizedBox(height: 8),
                               Text(
                                 formatter
