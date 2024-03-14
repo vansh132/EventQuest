@@ -1,4 +1,5 @@
 import 'package:eventquest/provider/user_provider.dart';
+import 'package:eventquest/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -48,7 +49,10 @@ Widget UserBar(BuildContext context) {
           ],
         ),
         TextButton.icon(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                LoginScreen.routeName, (route) => false);
+          },
           icon: const Icon(
             Icons.logout_rounded,
             color: Color.fromARGB(255, 204, 169, 57),
