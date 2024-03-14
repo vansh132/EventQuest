@@ -20,7 +20,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
 
   late TextEditingController announcementTitle;
   late TextEditingController announcementDescription;
-
+  bool updateImageFlag = false;
   late Announcement announcementData;
 
   @override
@@ -79,6 +79,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
 
   void clearImage() {
     setState(() {
+      updateImageFlag = true;
       announcementImages = [];
     });
   }
@@ -88,6 +89,8 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
   void updateAnnouncement() {
     announcementServices.updateAnnouncement(
         context: context,
+        existingImages: announcementData.announcementImages as List<String>,
+        imageUpdateFlag: updateImageFlag,
         announcementId: announcementData.announcementId,
         announcementTitle: announcementTitle.text,
         announcementDescription: announcementDescription.text,
@@ -158,11 +161,11 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                 SizedBox(
                   height: 8,
                 ),
-                announcementImages.isNotEmpty
+                updateImageFlag == false
                     ? CarouselSlider(
-                        items: announcementImages.map((i) {
+                        items: announcementData.announcementImages!.map((i) {
                           return Builder(
-                            builder: (context) => Image.file(
+                            builder: (context) => Image.network(
                               i,
                               fit: BoxFit.cover,
                               height: 200,
@@ -174,42 +177,58 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                           height: 200,
                         ),
                       )
-                    : GestureDetector(
-                        onTap: selectImages,
-                        child: DottedBorder(
-                          radius: const Radius.circular(10),
-                          dashPattern: const [10, 4],
-                          borderType: BorderType.RRect,
-                          strokeCap: StrokeCap.round,
-                          child: Container(
-                            width: double.infinity,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                    : announcementImages.isNotEmpty
+                        ? CarouselSlider(
+                            items: announcementImages.map((i) {
+                              return Builder(
+                                builder: (context) => Image.file(
+                                  i,
+                                  fit: BoxFit.cover,
+                                  height: 200,
+                                ),
+                              );
+                            }).toList(),
+                            options: CarouselOptions(
+                              viewportFraction: 1,
+                              height: 200,
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.folder_open_outlined,
-                                  size: 40,
+                          )
+                        : GestureDetector(
+                            onTap: selectImages,
+                            child: DottedBorder(
+                              radius: const Radius.circular(10),
+                              dashPattern: const [10, 4],
+                              borderType: BorderType.RRect,
+                              strokeCap: StrokeCap.round,
+                              child: Container(
+                                width: double.infinity,
+                                height: 150,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                                const SizedBox(
-                                  height: 15,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    const Icon(
+                                      Icons.folder_open_outlined,
+                                      size: 40,
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    Text(
+                                      "Upload Announcement Images",
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.grey.shade400,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                Text(
-                                  "Upload Announcement Images",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.grey.shade400,
-                                  ),
-                                )
-                              ],
+                              ),
                             ),
                           ),
-                        ),
-                      ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

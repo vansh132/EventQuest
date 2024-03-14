@@ -104,13 +104,17 @@ class AnnouncementServices {
 
   void updateAnnouncement({
     required BuildContext context,
+    required bool imageUpdateFlag,
+    required List<String> existingImages,
     required String announcementId,
     required String announcementTitle,
     required String announcementDescription,
     required List<File> announcementImages,
   }) async {
     final cloudinary = CloudinaryPublic("dq1q5mtdo", "fwsfdscu");
-      List<String> imageUrl = [];
+    List<String> imageUrl = [];
+
+    if (imageUpdateFlag == true) {
       for (var i = 0; i < announcementImages.length; i++) {
         CloudinaryResponse cloudinaryRes = await cloudinary.uploadFile(
           CloudinaryFile.fromFile(
@@ -120,7 +124,11 @@ class AnnouncementServices {
         );
         imageUrl.add(cloudinaryRes.secureUrl);
       }
-      print(imageUrl);
+    } else {
+      imageUrl = existingImages;
+    }
+
+    print(imageUrl);
     final announcementData = {
       "_id": announcementId,
       "announcementTitle": announcementTitle,
@@ -132,8 +140,6 @@ class AnnouncementServices {
     }
 
     try {
-
-
       http.Response res = await http.put(
           Uri.parse("$url/api/update-announcement/$announcementId"),
           headers: <String, String>{
