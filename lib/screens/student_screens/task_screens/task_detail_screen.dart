@@ -189,12 +189,12 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                         ? Image(
                             height: 224,
                             image: NetworkImage(task.taskFile ??
-                                "https://dummyimage.com/600x400/87878a/000000.jpg&text=Image"))
+                                "https://res.cloudinary.com/dq1q5mtdo/image/upload/f_auto,q_auto/v1/Dummy-images/uo2rk3gkixuyqdznlhqs"))
                         : task.taskFile != ""
                             ? Image(
                                 height: 224,
                                 image: NetworkImage(task.taskFile ??
-                                    "https://dummyimage.com/600x400/87878a/000000.jpg&text=Image"))
+                                    "https://res.cloudinary.com/dq1q5mtdo/image/upload/f_auto,q_auto/v1/Dummy-images/uo2rk3gkixuyqdznlhqs"))
                             : image.existsSync() == true
                                 ? SizedBox(
                                     height: 200,
