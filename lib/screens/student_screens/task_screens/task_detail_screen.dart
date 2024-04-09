@@ -63,9 +63,10 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
         type: FileType.image,
         allowMultiple: false,
       );
-
       if (files != null && files.files.isNotEmpty) {
         image = File(files.files[0].path!);
+        print("vansh132" + files.toString());
+        print("vansh132" + files.files[1].toString());
       }
     } catch (e) {
       debugPrint(e.toString());

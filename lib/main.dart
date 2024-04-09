@@ -22,13 +22,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      // theme: ThemeData(fontFamily: 'Roboto'),
+      theme: ThemeData(
+        fontFamily: 'Roboto',
+      ),
       onGenerateRoute: (settings) => generateRoute(settings),
       home: Provider.of<UserProvider>(context).user.type == "Student"
-          ? CustomBottomNavigationBar()
+          ? const CustomBottomNavigationBar()
           : Provider.of<UserProvider>(context).user.type == "Faculty"
-              ? FacultyCustomBottomBar()
-              : LoginScreen(),
+              ? const FacultyCustomBottomBar()
+              : const LoginScreen(),
     );
   }
 }
