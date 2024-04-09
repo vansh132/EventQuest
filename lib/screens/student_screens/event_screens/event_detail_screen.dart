@@ -1,8 +1,11 @@
 import 'package:eventquest/models/event.dart';
+import 'package:eventquest/models/user.dart';
+import 'package:eventquest/provider/user_provider.dart';
 import 'package:eventquest/screens/student_screens/registration_screens/registration_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EventDetailsScreen extends StatelessWidget {
@@ -13,7 +16,7 @@ class EventDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Event event = ModalRoute.of(context)!.settings.arguments as Event;
-
+    final user = Provider.of<UserProvider>(context, listen: false).user;
     var date = event.eventRegistrationDeadline.split("T")[0];
     final DateFormat formatter = DateFormat('dd-MM-yyyy');
     return Scaffold(
@@ -221,23 +224,26 @@ class EventDetailsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-
-              // Registration Button
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff003049),
-                      foregroundColor: Colors.white),
-                  onPressed: () {
-                    Navigator.pushNamed(context, RegistrationScreen.routeName);
-                  },
-                  child: const Text(
-                    'Register',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+              if (user.type == 'Student')
+                // Registration Button
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xff003049),
+                        foregroundColor: Colors.white),
+                    onPressed: () {
+                      Navigator.pushNamed(
+                          context, RegistrationScreen.routeName);
+                    },
+                    child: const Text(
+                      'Register',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-              ),
+                )
+              else
+                Container()
             ],
           ),
         ),
