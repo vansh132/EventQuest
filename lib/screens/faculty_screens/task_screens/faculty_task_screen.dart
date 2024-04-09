@@ -88,15 +88,16 @@ class _FacultyTaskScreenState extends State<FacultyTaskScreen> {
               future: getAllTask(),
               initialData: tasks,
               builder: (context, snapshot) {
+                if (snapshot.data!.isEmpty) {
+                  return const Center(
+                    child: Text("No data found"),
+                  );
+                }
                 if (snapshot.hasData) {
                   return ListView.builder(
                     itemBuilder: (context, index) =>
                         taskItem(context, snapshot.data![index]),
                     itemCount: tasks.length,
-                  );
-                } else if (snapshot.data == null) {
-                  return const Center(
-                    child: Text("No data found"),
                   );
                 } else {
                   return const CircularProgressIndicator();

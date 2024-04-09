@@ -126,6 +126,7 @@ class TaskServices {
 
   Future<List<Task>> getAllCompletedTasks(BuildContext context) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false).user;
+
     void handleHttpError(String errorMessage) {
       showSnackBar(context, errorMessage);
     }
