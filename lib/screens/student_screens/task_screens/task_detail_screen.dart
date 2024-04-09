@@ -65,8 +65,8 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
       );
       if (files != null && files.files.isNotEmpty) {
         image = File(files.files[0].path!);
-        print("vansh132" + files.toString());
-        print("vansh132" + files.files[1].toString());
+        // image file name
+        print("vansh132" + files.files[0].name);
       }
     } catch (e) {
       debugPrint(e.toString());
@@ -74,6 +74,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
     return image;
   }
 
+//vansh132[PlatformFile(path /data/user/0/com.example.eventquest/cache/file_picker/Screenshot_20240228-213616_IntentExample.jpg, name: Screenshot_20240228-213616_IntentExample.jpg, bytes: null, readStream: null, size: 429533)]
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();

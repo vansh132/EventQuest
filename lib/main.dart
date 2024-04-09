@@ -1,3 +1,4 @@
+import 'package:eventquest/constants/custom_theme.dart';
 import 'package:eventquest/provider/user_provider.dart';
 import 'package:eventquest/router.dart';
 import 'package:eventquest/screen_items/custom_navigation_botttom_bar.dart';
@@ -20,11 +21,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        fontFamily: 'Roboto',
-      ),
+      theme: returnTheme(textTheme),
       onGenerateRoute: (settings) => generateRoute(settings),
       home: Provider.of<UserProvider>(context).user.type == "Student"
           ? const CustomBottomNavigationBar()
