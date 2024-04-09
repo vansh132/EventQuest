@@ -2,13 +2,14 @@ class Registration {
   final String userId;
   final String eventId; // object
   final List<TeamMember> teamDetails;
-  final String paymentStatus;
+  final String studentCategory;
 
-  Registration(
-      {required this.userId, //whole object
-      required this.eventId,
-      required this.teamDetails,
-      required this.paymentStatus});
+  Registration({
+    required this.userId,
+    required this.eventId,
+    required this.teamDetails,
+    required this.studentCategory,
+  });
 }
 
 class TeamMember {
