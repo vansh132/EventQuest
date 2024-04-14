@@ -19,6 +19,7 @@ class TaskDetailScreen extends StatefulWidget {
 class _TaskDetailScreenState extends State<TaskDetailScreen> {
   File image = File("");
   bool submitted = false;
+  bool validation = false;
   Task task = Task(
       taskTitle: "",
       taskDescription: "",
@@ -67,6 +68,11 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
         image = File(files.files[0].path!);
         // image file name
         print("vansh132" + files.files[0].name);
+        if (files.files[0].name.split(".")[0] == "christ") {
+          setState(() {
+            validation = true;
+          });
+        }
       }
     } catch (e) {
       debugPrint(e.toString());
@@ -74,7 +80,6 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
     return image;
   }
 
-//vansh132[PlatformFile(path /data/user/0/com.example.eventquest/cache/file_picker/Screenshot_20240228-213616_IntentExample.jpg, name: Screenshot_20240228-213616_IntentExample.jpg, bytes: null, readStream: null, size: 429533)]
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -248,6 +253,9 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
 
                     const SizedBox(
                       height: 12,
+                    ),
+                    Text(
+                      validation.toString(),
                     ),
                     task.taskStatus
                         ? const SizedBox()
