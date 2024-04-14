@@ -1,6 +1,7 @@
 import 'package:eventquest/screens/constants/utils.dart';
 import 'package:eventquest/services/user_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = '/login-screen';
@@ -210,33 +211,15 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 52,
               ),
-              const SizedBox(
+              Container(
                 width: double.infinity,
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "\" Embrace each event; it's an opportunity for greatness \"",
-                          style: TextStyle(color: Color(0xff8d99ae)),
-                        ),
-                        /* TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pushNamed(
-                              SignupScreen.routeName,
-                            );
-                          },
-                          child: const Text(
-                            "Sign up",
-                            style: TextStyle(
-                              color: Color(0xffACC8E4),
-                            ),
-                          ),
-                        ) */
-                      ],
-                    )
-                  ],
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "\" Every moment, a chance for greatness. \"",
+                    style: TextStyle(color: Color(0xff8d99ae)),
+                    softWrap: true,
+                  ),
                 ),
               )
             ],

@@ -19,7 +19,7 @@ class TaskDetailScreen extends StatefulWidget {
 class _TaskDetailScreenState extends State<TaskDetailScreen> {
   File image = File("");
   bool submitted = false;
-  bool validation = false;
+  int validation = 0;
   Task task = Task(
       taskTitle: "",
       taskDescription: "",
@@ -38,6 +38,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
 
   void clearImage() {
     setState(() {
+      validation = 0;
       task.taskFile = "";
       image = File("");
     });
@@ -68,9 +69,80 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
         image = File(files.files[0].path!);
         // image file name
         print("vansh132" + files.files[0].name);
-        if (files.files[0].name.split(".")[0] == "christ") {
+        if (files.files[0].name.split("-")[0] == "christ") {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return Dialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CircularProgressIndicator(),
+                      SizedBox(height: 16),
+                      Text(
+                        "Processing...",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+
+          // Adding delay of 2 seconds
+          await Future.delayed(const Duration(seconds: 2));
+
+          Navigator.pop(context); // Dismiss the dialog
           setState(() {
-            validation = true;
+            validation = 1;
+          });
+        } else {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return Dialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CircularProgressIndicator(),
+                      SizedBox(height: 16),
+                      Text(
+                        "Processing...",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+
+          // Adding delay of 2 seconds
+          await Future.delayed(const Duration(seconds: 2));
+          Navigator.pop(context); // Dismiss the dialog
+          setState(() {
+            validation = 2;
+            // task.taskFile = "";
+            // image = File("");
           });
         }
       }
@@ -103,6 +175,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                 // padding: EdgeInsets.all(8),
                 child: Column(
                   children: [
+                    // Task Description
                     Container(
                       alignment: Alignment.centerLeft,
                       width: MediaQuery.of(context).size.width,
@@ -128,6 +201,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                     const SizedBox(
                       height: 12,
                     ),
+                    // Task Status
                     Container(
                       alignment: Alignment.center,
                       width: MediaQuery.of(context).size.width,
@@ -175,6 +249,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                     const SizedBox(
                       height: 20,
                     ),
+                    // Guidelines
                     const Text(
                       "Guidelines",
                       style: TextStyle(
@@ -192,6 +267,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       height: 16,
                     ),
                     //TODO: add hero widget here...
+                    //Poster
                     task.taskStatus
                         ? Image(
                             height: 224,
@@ -254,18 +330,45 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                     const SizedBox(
                       height: 12,
                     ),
-                    Text(
-                      validation.toString(),
-                    ),
+                    validation == 0
+                        ? SizedBox()
+                        : validation == 1
+                            ? Container(
+                                padding: EdgeInsets.all(12.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: Text(
+                                  "Poster Validated",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              )
+                            : Container(
+                                padding: EdgeInsets.all(12.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: Text(
+                                  "One of the guidelines have been violated",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
                     task.taskStatus
                         ? const SizedBox()
                         : Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               ElevatedButton.icon(
-                                onPressed: () {
-                                  submitted == true ? null : clearImage();
-                                },
+                                onPressed:
+                                    submitted == true ? null : clearImage,
                                 label: Text(
                                   task.taskFile == ""
                                       ? "Clear"
@@ -274,8 +377,11 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                                 icon: const Icon(Icons.cancel_outlined),
                               ),
                               ElevatedButton.icon(
-                                onPressed:
-                                    submitted == true ? null : submitImage,
+                                onPressed: submitted == true
+                                    ? null
+                                    : validation == 2
+                                        ? null
+                                        : submitImage,
                                 icon: const Icon(
                                     Icons.playlist_add_check_circle_outlined),
                                 label: const Text("Submit"),
