@@ -233,8 +233,8 @@ class EventDetailsScreen extends StatelessWidget {
                         backgroundColor: const Color(0xff003049),
                         foregroundColor: Colors.white),
                     onPressed: () {
-                      Navigator.pushNamed(
-                          context, RegistrationScreen.routeName);
+                      Navigator.pushNamed(context, RegistrationScreen.routeName,
+                          arguments: event);
                     },
                     child: const Text(
                       'Register',

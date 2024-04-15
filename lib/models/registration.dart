@@ -1,19 +1,18 @@
 class Registration {
-  final String userId;
-  final String eventId; // object
-  final List<TeamMember> teamDetails;
-  final String studentCategory;
+  final String registrationId;
+  final String eventName;
+  final String userName;
+  final num eventAmount;
+  final List<String> participantsName;
+  final List<String> participantsCategory;
+  final List<int> participantsRegisterNo;
 
-  Registration({
-    required this.userId,
-    required this.eventId,
-    required this.teamDetails,
-    required this.studentCategory,
-  });
-}
-
-class TeamMember {
-  final String name;
-
-  TeamMember({required this.name});
+  Registration(
+      {required this.registrationId,
+      required this.eventName,
+      required this.userName,
+      required this.eventAmount,
+      required this.participantsName,
+      required this.participantsCategory,
+      required this.participantsRegisterNo});
 }

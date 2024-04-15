@@ -4,7 +4,7 @@ const userRouter = require('./routes/user')
 const eventRouter = require('./routes/event')
 const announcementRouter = require('./routes/announcement')
 const taskRouter = require('./routes/task')
-
+const registerRouter = require('./routes/register')
 
 const app = express()
 
@@ -18,6 +18,7 @@ app.use(userRouter)
 app.use(eventRouter)
 app.use(announcementRouter)
 app.use(taskRouter)
+app.use(registerRouter)
 
 mongoose
   .connect(DB)
