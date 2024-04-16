@@ -7,7 +7,7 @@ const registerSchema = mongoose.Schema({
     },
 
     eventAmount: {
-        type: Number,
+        type: String,
         required: true
     },
 
@@ -18,7 +18,7 @@ const registerSchema = mongoose.Schema({
     },
 
     eventNoOfParticipants: {
-        type: Number,
+        type: String,
         required: true
     },
 
