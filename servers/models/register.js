@@ -11,21 +11,6 @@ const registerSchema = mongoose.Schema({
         required: true
     },
 
-    eventCategory: {
-        type: String,
-        required: true,
-
-    },
-
-    eventNoOfParticipants: {
-        type: String,
-        required: true
-    },
-
-    userName: {
-        type: String,
-        required: true
-    },
     participantsName:
         [{
             type: String,

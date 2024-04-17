@@ -1,4 +1,5 @@
 import 'package:eventquest/models/event.dart';
+import 'package:eventquest/services/registration_services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,10 +21,31 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   List<String> participantsRegisterNo = [];
   List<String> participantsCategory = [];
 
+  RegistrationServices registrationServices = RegistrationServices();
+  late Event event;
+
+  @override
+  void didChangeDependencies() {
+    event = ModalRoute.of(context)!.settings.arguments as Event;
+    super.didChangeDependencies();
+  }
+
+  void addRegistration() {
+    registrationServices.addRegistration(
+        context: context,
+        eventName: event.eventName,
+        userName: UserProvider().user.username,
+        eventAmount: event.eventAmount.toString(),
+        participantsName: participantsName,
+        participantsCategory: participantsCategory,
+        participantsRegisterNo: participantsRegisterNo);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final Event event = ModalRoute.of(context)!.settings.arguments as Event;
+    // final Event event = ModalRoute.of(context)!.settings.arguments as Event;
     final user = Provider.of<UserProvider>(context, listen: false).user;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Registration Form'),
@@ -90,6 +112,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   print(user.username);
                   print(event.eventAmount);
                   print(event.eventNoOfParticipants);
+                  addRegistration();
                 },
                 child: const Center(child: Text('Submit')),
               ),

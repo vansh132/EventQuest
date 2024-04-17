@@ -40,4 +40,51 @@ class RegistrationServices {
     }
     return registrationList;
   }
+
+  Future<void> addRegistration({
+    required BuildContext context,
+    required String eventName,
+    required String userName,
+    required String eventAmount,
+    required List<String> participantsName,
+    required List<String> participantsCategory,
+    required List<String> participantsRegisterNo,
+  }) async {
+    void handleHttpError(String errorMessage) {
+      showSnackBar(context, errorMessage);
+    }
+
+    try {
+      Registration registration = Registration(
+        registrationId: '',
+        eventName: eventName,
+        userName: userName,
+        eventAmount: eventAmount,
+        participantsName: participantsName,
+        participantsCategory: participantsCategory,
+        participantsRegisterNo: participantsRegisterNo,
+      );
+
+      http.Response res = await http.post(
+        Uri.parse('$url/api/add-registration'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: registration.toJson(),
+      );
+      print(registration);
+      httpErrorHandle(
+          response: res,
+          onError: (errMessage) {
+            showSnackBar(context, errMessage);
+          },
+          onSuccess: () {
+            showSnackBar(context, "Task Added Successfully");
+            // Navigator.pop(context);
+          });
+    } catch (e) {
+      final errorMessage = "Error occurred: ${e.toString()}";
+      handleHttpError(errorMessage);
+    }
+  }
 }
