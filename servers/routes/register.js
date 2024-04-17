@@ -14,11 +14,14 @@ registerRouter.get('/api/registrations', async (req, res) => {
 
 registerRouter.post('/api/add-registration', async (req, res) => {
     try {
-        const { eventName, eventAmount, participantsName, participantsRegisterNo, participantsCategory } = req.body
+        const { eventName, eventAmount, eventCategory, eventNoOfParticipants, userName, participantsName, participantsRegisterNo, participantsCategory } = req.body
         let register = new Register({
-            eventName, eventAmount, participantsName, participantsRegisterNo, participantsCategory
+            eventName, eventAmount, eventCategory, eventNoOfParticipants, userName, participantsName, participantsRegisterNo, participantsCategory
         })
-        register = await register.save();
+        if (eventCategory == participantsCategory)
+            register = await register.save();
+        else
+            return
         res.json(register);
 
     } catch (error) {
