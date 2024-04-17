@@ -1,7 +1,8 @@
 import 'package:eventquest/screens/faculty_screens/announcement_screens/faculty_announcement_screen.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/faculty_event_screen.dart';
-import 'package:eventquest/screens/faculty_screens/event_screens/faculty_registration_details_screen.dart';
+
 import 'package:eventquest/screens/faculty_screens/faculty_home_screen.dart';
+import 'package:eventquest/screens/faculty_screens/registration_screen/faculty_registration_screen.dart';
 
 import 'package:eventquest/screens/faculty_screens/task_screens/faculty_task_screen.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class _FacultyCustomBottomBarState extends State<FacultyCustomBottomBar> {
       FacultyEventScreen(),
       FacultyAnnouncementScreen(),
       const FacultyTaskScreen(),
-      RegistrationDetailsScreen(),
+      FacultyRegistrationScreen(),
     ];
 
     void onItemTapped(int index) {

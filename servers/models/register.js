@@ -1,0 +1,46 @@
+const mongoose = require('mongoose');
+
+const registerSchema = mongoose.Schema({
+    eventName: {
+        type: String,
+        required: true
+    },
+
+    eventAmount: {
+        type: String,
+        required: true
+    },
+
+    eventCategory: {
+        type: String,
+        required: true,
+
+    },
+
+    eventNoOfParticipants: {
+        type: String,
+        required: true
+    },
+
+    userName: {
+        type: String,
+        required: true
+    },
+    participantsName:
+        [{
+            type: String,
+            required: true
+        }],
+
+    participantsRegisterNo: [{
+        type: String,
+        required: true
+    }],
+    participantsCategory: [{
+        type: String,
+        required: true
+    }]
+})
+
+const Registration = mongoose.model('Registration', registerSchema);
+module.exports = Registration;
