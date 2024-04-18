@@ -1,3 +1,4 @@
+import 'package:eventquest/constants/custom_colors.dart';
 import 'package:eventquest/models/announcement.dart';
 import 'package:eventquest/models/event.dart';
 import 'package:eventquest/screen_items/highlights.dart';
@@ -44,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CustomColors.bgLight,
       body: Container(
         // color: Color(0xff0D1B2A),
         child: SingleChildScrollView(
@@ -73,11 +75,11 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             "Recent Announcements",
             style: TextStyle(
               fontSize: 24,
-              color: Color(0xff0D1B2A),
+              color: CustomColors.textBlackColor,
               fontWeight: FontWeight.bold,
               letterSpacing: 0.2,
             ),
@@ -129,11 +131,11 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             "Recent Events",
             style: TextStyle(
               fontSize: 24,
-              color: Color(0xff0D1B2A),
+              color: CustomColors.textBlackColor,
               fontWeight: FontWeight.bold,
               letterSpacing: 0.2,
             ),
@@ -293,7 +295,7 @@ Widget EventItem(Event event, BuildContext context) {
               child: Row(
                 children: [
                   Card(
-                    color: Colors.white.withOpacity(0.9),
+                    color: CustomColors.bgLight,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0),
                     ),
@@ -335,10 +337,10 @@ Widget EventItem(Event event, BuildContext context) {
                               color: Colors.black54),
                           child: Text(
                             event.eventName,
-                            style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .copyWith(color: Colors.white),
                           ),
                         ),
                       ],

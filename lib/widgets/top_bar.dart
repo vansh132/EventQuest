@@ -1,20 +1,21 @@
+import 'package:eventquest/constants/custom_colors.dart';
 import 'package:flutter/material.dart';
 
 Widget TopBar() {
   return Container(
     padding: const EdgeInsets.all(16),
-    decoration: const BoxDecoration(
-      color: Color(0xff002848),
+    decoration: BoxDecoration(
+      color: CustomColors.bgDark,
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
+        Text(
           "EventQuest",
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: Color(0xffefefd0),
+            color: CustomColors.secondaryLightTextColor,
             fontFamily: 'Roboto-Black',
           ),
         ),

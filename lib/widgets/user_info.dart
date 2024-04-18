@@ -1,3 +1,4 @@
+import 'package:eventquest/constants/custom_colors.dart';
 import 'package:eventquest/provider/user_provider.dart';
 import 'package:eventquest/screens/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,15 +12,15 @@ Widget UserBar(BuildContext context) {
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(24),
-      color: Color.fromARGB(242, 0, 36, 62),
+      color: CustomColors.bgDark,
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           children: [
-            const Icon(Icons.person_2_rounded,
-                color: Color.fromARGB(255, 204, 169, 57)),
+            Icon(Icons.person_2_rounded,
+                color: CustomColors.secondaryTextColor),
             SizedBox(
               width: 12,
             ),
@@ -28,8 +29,8 @@ Widget UserBar(BuildContext context) {
               children: [
                 Text(
                   userProvider.user.username,
-                  style: const TextStyle(
-                    color: Color(0xffefefd0),
+                  style: TextStyle(
+                    color: CustomColors.secondaryLightTextColor,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 0.3,
                     fontSize: 16,
@@ -37,8 +38,8 @@ Widget UserBar(BuildContext context) {
                 ),
                 Text(
                   userProvider.user.type,
-                  style: const TextStyle(
-                    color: Color.fromARGB(255, 251, 251, 213),
+                  style: TextStyle(
+                    color: CustomColors.secondaryLightTextColor,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 0.3,
                     fontSize: 14,
@@ -53,15 +54,15 @@ Widget UserBar(BuildContext context) {
             Navigator.of(context).pushNamedAndRemoveUntil(
                 LoginScreen.routeName, (route) => false);
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.logout_rounded,
-            color: Color.fromARGB(255, 204, 169, 57),
+            color: CustomColors.secondaryTextColor,
           ),
-          label: const Text(
+          label: Text(
             "Log Out",
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 204, 169, 57),
+              color: CustomColors.secondaryTextColor,
             ),
           ),
         )
