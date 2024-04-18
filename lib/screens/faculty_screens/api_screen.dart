@@ -1,0 +1,72 @@
+import 'package:eventquest/constants/custom_colors.dart';
+import 'package:eventquest/models/event.dart';
+import 'package:flutter/material.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
+
+class ApiScreen extends StatefulWidget {
+  static const String routeName = '/api-screen';
+  const ApiScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ApiScreen> createState() => _ApiScreenState();
+}
+
+class _ApiScreenState extends State<ApiScreen> {
+  @override
+  Widget build(BuildContext context) {
+    final String generatedText =
+        ModalRoute.of(context)!.settings.arguments as String;
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+            child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              // Text(
+              //   _event.eventName + " Report",
+              //   style: Theme.of(context).textTheme.titleLarge,
+              // ),
+              Container(
+                padding: EdgeInsets.all(20),
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: CustomColors.textBlackColor,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: CustomColors.bgLight.withOpacity(0.8),
+                      spreadRadius: 3,
+                      blurRadius: 5,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      generatedText,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        )),
+      ),
+    );
+  }
+}

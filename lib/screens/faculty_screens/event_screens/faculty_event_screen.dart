@@ -34,9 +34,9 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
     } else {
       events = await eventServices.getAllEvents(context);
     }
-    setState(() {
-      events;
-    });
+    // setState(() {
+    //   events;
+    // });
     return events;
   }
 

@@ -2,6 +2,7 @@ import 'package:eventquest/screen_items/custom_navigation_botttom_bar.dart';
 import 'package:eventquest/screen_items/faculty_custom_navigation_bottom_bar.dart';
 import 'package:eventquest/screens/faculty_screens/announcement_screens/add_announcement_screen.dart';
 import 'package:eventquest/screens/faculty_screens/announcement_screens/edit_announcement_screen.dart';
+import 'package:eventquest/screens/faculty_screens/api_screen.dart';
 
 import 'package:eventquest/screens/faculty_screens/event_screens/add_event_screen.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/edit_event_screen.dart';
@@ -93,6 +94,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const FacultyRegistrationScreen(),
+      );
+    case ApiScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const ApiScreen(),
       );
     default:
       return MaterialPageRoute(

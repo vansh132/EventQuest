@@ -1,20 +1,52 @@
 import 'package:eventquest/models/event.dart';
 import 'package:eventquest/provider/user_provider.dart';
+import 'package:eventquest/screens/faculty_screens/api_screen.dart';
 import 'package:eventquest/screens/student_screens/registration_screens/registration_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class EventDetailsScreen extends StatelessWidget {
+class EventDetailsScreen extends StatefulWidget {
   static const String routeName = '/event-detail-screen';
 
   const EventDetailsScreen({Key? key});
 
   @override
+  State<EventDetailsScreen> createState() => _EventDetailsScreenState();
+}
+
+class _EventDetailsScreenState extends State<EventDetailsScreen> {
+  late GenerativeModel model;
+  late Event text;
+
+  String generated = '';
+  @override
+  void initState() {
+    model = GenerativeModel(
+        model: 'gemini-pro', apiKey: 'AIzaSyAc3ogEYhmEBlQdPDkVXpg0EbTw_2KA7M4');
+    super.initState();
+  }
+
+  generate() async {
+    final prompt = [
+      Content.text("Please Make a descriptive report on " +
+          text.eventDescription +
+          "For University")
+    ];
+    final response = await model.generateContent(prompt);
+    setState(() {
+      generated = response.text!;
+    });
+    Navigator.pushNamed(context, ApiScreen.routeName, arguments: generated);
+  }
+
+  @override
   Widget build(BuildContext context) {
     final Event event = ModalRoute.of(context)!.settings.arguments as Event;
+    text = event;
     final user = Provider.of<UserProvider>(context, listen: false).user;
     var date = event.eventRegistrationDeadline.split("T")[0];
     final DateFormat formatter = DateFormat('dd-MM-yyyy');
@@ -242,7 +274,19 @@ class EventDetailsScreen extends StatelessWidget {
                   ),
                 )
               else
-                Container()
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xff003049),
+                        foregroundColor: Colors.white),
+                    onPressed: generate,
+                    child: const Text(
+                      'Generate Report',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                )
             ],
           ),
         ),
