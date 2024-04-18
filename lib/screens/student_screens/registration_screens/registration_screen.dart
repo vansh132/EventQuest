@@ -22,20 +22,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   List<String> participantsCategory = [];
 
   RegistrationServices registrationServices = RegistrationServices();
-  late Event event;
-
-  @override
-  void didChangeDependencies() {
-    event = ModalRoute.of(context)!.settings.arguments as Event;
-    super.didChangeDependencies();
-  }
 
   void addRegistration() {
     registrationServices.addRegistration(
         context: context,
-        eventName: event.eventName,
-        userName: UserProvider().user.username,
-        eventAmount: event.eventAmount.toString(),
         participantsName: participantsName,
         participantsCategory: participantsCategory,
         participantsRegisterNo: participantsRegisterNo);
@@ -43,7 +33,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final Event event = ModalRoute.of(context)!.settings.arguments as Event;
+    final Event event = ModalRoute.of(context)!.settings.arguments as Event;
     final user = Provider.of<UserProvider>(context, listen: false).user;
 
     return Scaffold(

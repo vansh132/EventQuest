@@ -46,35 +46,85 @@ class _FacultyRegistrationScreenState extends State<FacultyRegistrationScreen> {
                     child: Text('Error: ${snapshot.error}'),
                   );
                 } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                  // Group registrations by event name
+                  Map<String, List<Registration>> groupedRegistrations = {};
+                  snapshot.data!.forEach((registration) {
+                    if (!groupedRegistrations
+                        .containsKey(registration.eventName)) {
+                      groupedRegistrations[registration.eventName] = [];
+                    }
+                    groupedRegistrations[registration.eventName]!
+                        .add(registration);
+                  });
+
                   return Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: DataTable(
-                          columnSpacing: 10,
-                          columns: [
-                            const DataColumn(label: Text('Event Name')),
-                            const DataColumn(label: Text('User Name')),
-                            const DataColumn(label: Text('Event Amount')),
-                            const DataColumn(label: Text('Participants Name')),
-                            const DataColumn(
-                                label: Text('Participants Category')),
-                            const DataColumn(
-                                label: Text('Participants Register No')),
-                          ],
-                          rows: snapshot.data!.map((registration) {
-                            return DataRow(cells: [
-                              DataCell(Text(registration.eventName)),
-                              DataCell(Text(registration.userName)),
-                              DataCell(Text(registration.eventAmount)),
-                              DataCell(Text(
-                                  registration.participantsName.toString())),
-                              DataCell(Text(registration.participantsCategory
-                                  .toString())),
-                              DataCell(Text(registration.participantsRegisterNo
-                                  .toString())),
-                            ]);
+                        scrollDirection: Axis.vertical,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: groupedRegistrations.entries.map((entry) {
+                            String eventName = entry.key;
+                            List<Registration> registrations = entry.value;
+
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  eventName,
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: DataTable(
+                                    columnSpacing: 10,
+                                    columns: [
+                                      DataColumn(label: Text('User Name')),
+                                      DataColumn(label: Text('Event Amount')),
+                                      DataColumn(
+                                          label: Text('Participants Name')),
+                                      DataColumn(
+                                          label: Text('Participants Category')),
+                                      DataColumn(
+                                          label:
+                                              Text('Participants Register No')),
+                                    ],
+                                    rows: registrations.map((registration) {
+                                      return DataRow(cells: [
+                                        DataCell(Flexible(
+                                            child:
+                                                Text(registration.userName))),
+                                        DataCell(Flexible(
+                                            child: Text(
+                                                registration.eventAmount))),
+                                        DataCell(Flexible(
+                                            child: Text(registration
+                                                .participantsName
+                                                .toString()
+                                                .replaceAll(
+                                                    RegExp(r'[\[\]]'), '')))),
+                                        DataCell(Flexible(
+                                            child: Text(registration
+                                                .participantsCategory
+                                                .toString()
+                                                .replaceAll(
+                                                    RegExp(r'[\[\]]'), '')))),
+                                        DataCell(Flexible(
+                                            child: Text(registration
+                                                .participantsRegisterNo
+                                                .toString()
+                                                .replaceAll(
+                                                    RegExp(r'[\[\]]'), '')))),
+                                      ]);
+                                    }).toList(),
+                                  ),
+                                ),
+                              ],
+                            );
                           }).toList(),
                         ),
                       ),

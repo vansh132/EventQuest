@@ -2,11 +2,14 @@ import 'dart:convert';
 
 import 'package:eventquest/constants/error_handling.dart';
 import 'package:eventquest/constants/global_variable.dart';
+import 'package:eventquest/models/event.dart';
 import 'package:eventquest/models/registration.dart';
+import 'package:eventquest/provider/user_provider.dart';
 import 'package:eventquest/screens/constants/utils.dart';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class RegistrationServices {
   Future<List<Registration>> getAllRegistrations(BuildContext context) async {
@@ -43,9 +46,6 @@ class RegistrationServices {
 
   Future<void> addRegistration({
     required BuildContext context,
-    required String eventName,
-    required String userName,
-    required String eventAmount,
     required List<String> participantsName,
     required List<String> participantsCategory,
     required List<String> participantsRegisterNo,
@@ -54,12 +54,16 @@ class RegistrationServices {
       showSnackBar(context, errorMessage);
     }
 
+    final user = Provider.of<UserProvider>(context, listen: false);
+    final Event event = ModalRoute.of(context)!.settings.arguments as Event;
     try {
       Registration registration = Registration(
         registrationId: '',
-        eventName: eventName,
-        userName: userName,
-        eventAmount: eventAmount,
+        eventName: event.eventName,
+        userName: user.user.username,
+        eventAmount: event.eventAmount.toString(),
+        eventCategory: event.eventCategory,
+        eventNoOfParticipants: event.eventNoOfParticipants.toString(),
         participantsName: participantsName,
         participantsCategory: participantsCategory,
         participantsRegisterNo: participantsRegisterNo,
@@ -79,7 +83,7 @@ class RegistrationServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            showSnackBar(context, "Task Added Successfully");
+            showSnackBar(context, "Registered Successfully");
             // Navigator.pop(context);
           });
     } catch (e) {

@@ -18,10 +18,7 @@ registerRouter.post('/api/add-registration', async (req, res) => {
         let register = new Register({
             eventName, eventAmount, eventCategory, eventNoOfParticipants, userName, participantsName, participantsRegisterNo, participantsCategory
         })
-        if (eventCategory == participantsCategory)
-            register = await register.save();
-        else
-            return
+        register = await register.save();
         res.json(register);
 
     } catch (error) {

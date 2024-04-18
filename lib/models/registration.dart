@@ -5,6 +5,8 @@ class Registration {
   final String eventName;
   final String userName;
   final String eventAmount;
+  final String eventCategory;
+  final String eventNoOfParticipants;
   final List<String> participantsName;
   final List<String> participantsCategory;
   final List<String> participantsRegisterNo;
@@ -14,6 +16,8 @@ class Registration {
       required this.eventName,
       required this.userName,
       required this.eventAmount,
+      required this.eventCategory,
+      required this.eventNoOfParticipants,
       required this.participantsName,
       required this.participantsCategory,
       required this.participantsRegisterNo});
@@ -25,6 +29,8 @@ class Registration {
     result.addAll({'eventName': eventName});
     result.addAll({'userName': userName});
     result.addAll({'eventAmount': eventAmount});
+    result.addAll({'eventCategory': eventCategory});
+    result.addAll({'eventNoOfParticipants': eventNoOfParticipants});
     result.addAll({'participantsName': participantsName});
     result.addAll({'participantsCategory': participantsCategory});
     result.addAll({'participantsRegisterNo': participantsRegisterNo});
@@ -38,6 +44,8 @@ class Registration {
       eventName: map['eventName'] ?? '',
       userName: map['userName'] ?? '',
       eventAmount: map['eventAmount'] ?? '',
+      eventCategory: map['eventCategory'] ?? '',
+      eventNoOfParticipants: map['eventNoOfParticipants'] ?? '',
       participantsName: List<String>.from(map['participantsName']),
       participantsCategory: List<String>.from(map['participantsCategory']),
       participantsRegisterNo: List<String>.from(map['participantsRegisterNo']),
