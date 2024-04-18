@@ -83,89 +83,91 @@ class _TaskScreenState extends State<TaskScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        // color: Colors.amber,
-        child: Column(
-          children: [
-            TopBar(),
-            UserBar(context),
-            //TODO: Search bar can be added (last)
-            Container(
-              // color: Colors.tealAccent,
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TextButton(
-                          style: selected
-                              ? selectedButtonStyle
-                              : unselectedButtonStyle,
-                          onPressed: () {
-                            setState(() {
-                              selected = true;
-                            });
-                          },
-                          child: Text(
-                            "Assigned Tasks",
+      body: SingleChildScrollView(
+        child: Container(
+          // color: Colors.amber,
+          child: Column(
+            children: [
+              TopBar(),
+              UserBar(context),
+              //TODO: Search bar can be added (last)
+              Container(
+                // color: Colors.tealAccent,
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
                             style: selected
-                                ? selectedTextStyle
-                                : unselectedTextStyle,
+                                ? selectedButtonStyle
+                                : unselectedButtonStyle,
+                            onPressed: () {
+                              setState(() {
+                                selected = true;
+                              });
+                            },
+                            child: Text(
+                              "Assigned Tasks",
+                              style: selected
+                                  ? selectedTextStyle
+                                  : unselectedTextStyle,
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 72,
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              selected = false;
-                            });
-                          },
-                          style: selected
-                              ? unselectedButtonStyle
-                              : selectedButtonStyle,
-                          child: Text(
-                            "History",
+                          const SizedBox(
+                            width: 72,
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              setState(() {
+                                selected = false;
+                              });
+                            },
                             style: selected
-                                ? unselectedTextStyle
-                                : selectedTextStyle,
+                                ? unselectedButtonStyle
+                                : selectedButtonStyle,
+                            child: Text(
+                              "History",
+                              style: selected
+                                  ? unselectedTextStyle
+                                  : selectedTextStyle,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(8),
-              padding: const EdgeInsets.all(16),
-              // color: Colors.greenAccent,
-              height: 400,
-              child: FutureBuilder(
-                future: getAllTask(),
-                initialData: assignedTasks,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                      itemBuilder: (context, index) =>
-                          TaskItem(snapshot.data![index], context),
-                      itemCount: snapshot.data!.length,
-                    );
-                  } else if (snapshot.data == null) {
-                    return const Center(
-                      child: Text("No data found"),
-                    );
-                  } else {
-                    return const CircularProgressIndicator();
-                  }
-                },
-              ),
-            )
-          ],
+              Container(
+                margin: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(16),
+                // color: Colors.greenAccent,
+                height: 400,
+                child: FutureBuilder(
+                  future: getAllTask(),
+                  initialData: assignedTasks,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        itemBuilder: (context, index) =>
+                            TaskItem(snapshot.data![index], context),
+                        itemCount: snapshot.data!.length,
+                      );
+                    } else if (snapshot.data == null) {
+                      return const Center(
+                        child: Text("No data found"),
+                      );
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  },
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
