@@ -1,5 +1,4 @@
 import 'package:eventquest/models/event.dart';
-import 'package:eventquest/models/user.dart';
 import 'package:eventquest/provider/user_provider.dart';
 import 'package:eventquest/screens/student_screens/registration_screens/registration_screen.dart';
 import 'package:flutter/gestures.dart';
@@ -42,7 +41,7 @@ class EventDetailsScreen extends StatelessWidget {
                 child: Hero(
                   tag: event.eventImage, // Unique tag for the hero animation
                   child: ClipRRect(
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(12),
                       bottomRight: Radius.circular(12),
                     ),
