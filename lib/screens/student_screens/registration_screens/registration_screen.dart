@@ -97,12 +97,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               const SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () {
-                  _printDetails(event.eventCategory);
-                  print(event.eventName);
-                  print(user.username);
-                  print(event.eventAmount);
-                  print(event.eventNoOfParticipants);
-                  addRegistration();
+                  _printDetails(event.eventCategory.toUpperCase());
                 },
                 child: const Center(child: Text('Submit')),
               ),
@@ -171,44 +166,47 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     });
   }
 
-  void _printDetails(String event) {
+  void _printDetails(String eventCategory) {
     participantsName.clear();
     participantsRegisterNo.clear();
     participantsCategory.clear(); // Clear the list to ensure no duplicates
+    bool canSubmit = true;
 
     for (int i = 0; i < participantsNameControllers.length; i++) {
       participantsName.add(participantsNameControllers[i].text);
       participantsRegisterNo.add(participantsRegisterNoControllers[i].text);
 
-      if (event == participantsCategoryController[i].text.toUpperCase()) {
-        participantsCategory
-            .add(participantsCategoryController[i].text.toUpperCase());
-      } else {
-// Show a dialog box to inform the user about successful submission
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Submission Failed'),
-              content: Text(
-                  'It is $event level participation. You can not participate it.'),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('OK'),
-                ),
-              ],
-            );
-          },
-        );
+      String participantCategory =
+          participantsCategoryController[i].text.toUpperCase();
+      participantsCategory.add(participantCategory);
+
+      if (eventCategory != participantCategory) {
+        canSubmit = false;
       }
     }
 
-    print('Names: $participantsName');
-    print('Roll Numbers: $participantsRegisterNo');
-    print('Category: $participantsCategory');
+    if (canSubmit) {
+      addRegistration();
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Submission Failed'),
+            content: Text('This is $eventCategory level participation. '
+                'Participants must be in the same category.'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   void _showGoBackDialog(BuildContext context) {

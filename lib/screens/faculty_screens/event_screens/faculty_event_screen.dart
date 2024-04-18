@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:eventquest/models/event.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/add_event_screen.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/edit_event_screen.dart';
@@ -32,6 +34,9 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
     } else {
       events = await eventServices.getAllEvents(context);
     }
+    setState(() {
+      events;
+    });
     return events;
   }
 
@@ -102,7 +107,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
     var date = event.eventRegistrationDeadline.split("T")[0];
 
     return Card(
-      color: Color(0xfffbfcf8),
+      color: const Color(0xfffbfcf8),
       margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
@@ -114,7 +119,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
-                color: Color(0xff012a4a),
+                color: const Color(0xff012a4a),
                 icon: const Icon(Icons.remove_red_eye),
                 onPressed: () {
                   Navigator.pushNamed(context, EventDetailsScreen.routeName,
@@ -122,7 +127,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                 },
               ),
               IconButton(
-                color: Color(0xff012a4a),
+                color: const Color(0xff012a4a),
                 icon: const Icon(Icons.edit),
                 onPressed: () {
                   Navigator.pushNamed(context, EditEventScreen.routeName,
@@ -130,17 +135,37 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                 },
               ),
               IconButton(
-                color: Color(0xff012a4a),
+                color: const Color(0xff012a4a),
                 icon: const Icon(Icons.delete),
                 onPressed: () {
-                  eventServices.deleteEvent(
-                      context: context,
-                      event: event,
-                      onSuccess: () {
-                        setState(() {
-                          events;
-                        });
-                      });
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        actions: [
+                          ElevatedButton(
+                              onPressed: () {
+                                eventServices.deleteEvent(
+                                    context: context,
+                                    event: event,
+                                    onSuccess: () {
+                                      setState(() {
+                                        events;
+                                      });
+                                    });
+                              },
+                              child: const Text('Yes')),
+                          ElevatedButton(
+                              onPressed: () {}, child: const Text('No'))
+                        ],
+                        title: const Text('Status'),
+                        content: const Text('Are you sure to delete Event ?'),
+                      );
+                    },
+                  );
+                  Timer(const Duration(seconds: 2), () {
+                    Navigator.pop(context); // Go back to previous screen
+                  });
                 },
               ),
             ],
@@ -159,7 +184,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
             child: Row(
               children: [
                 Card(
-                  color: Color(0xffd4d7df),
+                  color: const Color(0xffd4d7df),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -250,7 +275,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                 }
 
                 return ChoiceChip(
-                  selectedColor: Color(0xffd4d7df),
+                  selectedColor: const Color(0xffd4d7df),
                   label: Text(
                     optionText,
                     style: const TextStyle(

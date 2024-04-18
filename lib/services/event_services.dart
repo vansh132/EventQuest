@@ -163,7 +163,7 @@ class EventServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            showSnackBar(context, "Event Added Successfully");
+            // showSnackBar(context, "Event Added Successfully");
             Navigator.pop(context);
           });
     } catch (e) {
@@ -235,7 +235,8 @@ class EventServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            showSnackBar(context, "Event Updated!! ");
+            // showSnackBar(context, "Event Updated!! ");
+            // Navigator.of(context).pop();
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";
@@ -270,7 +271,7 @@ class EventServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            showSnackBar(context, "Event Deleted!!");
+            // showSnackBar(context, "Event Deleted!!");
           });
     } catch (e) {
       showSnackBar(context, e.toString());

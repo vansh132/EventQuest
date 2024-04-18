@@ -93,7 +93,7 @@ class AnnouncementServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            showSnackBar(context, "Announcement Added Successfully");
+            // showSnackBar(context, "Announcement Added Successfully");
             Navigator.pop(context);
           });
     } catch (e) {
@@ -154,7 +154,8 @@ class AnnouncementServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            showSnackBar(context, "Announcement Updated!! ");
+            // showSnackBar(context, "Announcement Updated!! ");
+            // Navigator.of(context).pop();
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";
@@ -188,7 +189,7 @@ class AnnouncementServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            showSnackBar(context, "Announcement Deleted!!");
+            // showSnackBar(context, "Announcement Deleted!!");
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";

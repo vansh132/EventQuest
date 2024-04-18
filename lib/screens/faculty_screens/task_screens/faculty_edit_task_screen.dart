@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:eventquest/models/task.dart';
 import 'package:eventquest/services/task_services.dart';
 import 'package:eventquest/widgets/top_bar.dart';
@@ -27,6 +29,25 @@ class _FacultyEditTaskScreenState extends State<FacultyEditTaskScreen> {
       taskName: title.text,
       taskDescription: description.text,
     );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'))
+          ],
+          title: const Text('Status'),
+          content: const Text('Task has edited successfully.'),
+        );
+      },
+    );
+    Timer(const Duration(seconds: 3), () {
+      Navigator.pop(context); // Go back to previous screen
+    });
   }
 
   @override
@@ -42,7 +63,7 @@ class _FacultyEditTaskScreenState extends State<FacultyEditTaskScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: editTask,
-        child: Icon(
+        child: const Icon(
           Icons.save,
         ),
       ),

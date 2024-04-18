@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:eventquest/models/announcement.dart';
 import 'package:eventquest/screens/faculty_screens/announcement_screens/add_announcement_screen.dart';
 import 'package:eventquest/screens/faculty_screens/announcement_screens/edit_announcement_screen.dart';
@@ -25,6 +27,9 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
   Future<List<Announcement>> getAllAnnouncement() async {
     announcements = await announcementServices.getAllAnnouncements(context);
 
+    setState(() {
+      announcements;
+    });
     return announcements;
   }
 
@@ -94,7 +99,7 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         child: Card(
-          color: Color(0xfffbfcf8),
+          color: const Color(0xfffbfcf8),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
@@ -194,7 +199,7 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                     children: [
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xffd4d7df),
+                            backgroundColor: const Color(0xffd4d7df),
                             foregroundColor:
                                 AppColors.mainColor // Background color
                             ),
@@ -205,11 +210,11 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                             arguments: announcement,
                           );
                         },
-                        child: Text('View'),
+                        child: const Text('View'),
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xffd4d7df),
+                            backgroundColor: const Color(0xffd4d7df),
                             foregroundColor:
                                 AppColors.mainColor // Background color
                             ),
@@ -224,19 +229,41 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xffd4d7df),
+                            backgroundColor: const Color(0xffd4d7df),
                             foregroundColor:
                                 AppColors.mainColor // Background color
                             ),
                         onPressed: () {
-                          announcementServices.deleteAnnouncement(
-                              context: context,
-                              announcement: announcement,
-                              onSuccess: () {
-                                setState(() {
-                                  announcements;
-                                });
-                              });
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                actions: [
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        announcementServices.deleteAnnouncement(
+                                            context: context,
+                                            announcement: announcement,
+                                            onSuccess: () {
+                                              setState(() {
+                                                announcements;
+                                              });
+                                            });
+                                      },
+                                      child: const Text('Yes')),
+                                  ElevatedButton(
+                                      onPressed: () {}, child: const Text('No'))
+                                ],
+                                title: const Text('Status'),
+                                content: const Text(
+                                    'Are you sure to delete Announcemnet ?'),
+                              );
+                            },
+                          );
+                          Timer(const Duration(seconds: 2), () {
+                            Navigator.pop(
+                                context); // Go back to previous screen
+                          });
                         },
                         child: const Text('Delete'),
                       ),

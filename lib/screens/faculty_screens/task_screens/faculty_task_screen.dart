@@ -55,6 +55,7 @@ class _FacultyTaskScreenState extends State<FacultyTaskScreen> {
   @override
   void initState() {
     super.initState();
+
     getAllTask();
   }
 
@@ -131,7 +132,7 @@ Widget taskItem(BuildContext context, Task task) {
       padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Color(0xfffbfcf8),
+        color: const Color(0xfffbfcf8),
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -145,7 +146,7 @@ Widget taskItem(BuildContext context, Task task) {
       child: ListTile(
         title: Text(
           task.taskTitle,
-          style: TextStyle(
+          style: const TextStyle(
             color: Color(0xff012a4a),
             fontWeight: FontWeight.w600,
           ),

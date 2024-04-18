@@ -84,7 +84,8 @@ class RegistrationServices {
           },
           onSuccess: () {
             showSnackBar(context, "Registered Successfully");
-            // Navigator.pop(context);
+
+            Navigator.pop(context);
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";

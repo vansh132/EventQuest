@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
@@ -42,6 +43,22 @@ class _AddEventScreenState extends State<AddEventScreen> {
         eventContactPerson: contactName.text,
         eventContactNo: int.parse(contactPerson.text),
         eventRegistartionDeadline: _registrationDeadline!);
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'))
+          ],
+          title: const Text('Status'),
+          content: const Text('Your Event has been added successfully.'),
+        );
+      },
+    );
   }
 
   File image = File("");
@@ -141,7 +158,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   "Upload Image",
                   style: TextStyle(fontSize: 18),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 image.existsSync() == true
@@ -273,7 +290,10 @@ class _AddEventScreenState extends State<AddEventScreen> {
                 ),
                 Center(
                     child: ElevatedButton(
-                        onPressed: addEvent, child: Text('Submit')))
+                        onPressed: () {
+                          addEvent();
+                        },
+                        child: const Text('Submit')))
               ],
             ),
           ),

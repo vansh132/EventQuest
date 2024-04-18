@@ -49,7 +49,7 @@ class TaskServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            showSnackBar(context, "Task Added Successfully");
+            // showSnackBar(context, "Task Added Successfully");
             // Navigator.pop(context);
           });
     } catch (e) {
@@ -325,7 +325,7 @@ class TaskServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            showSnackBar(context, "Task updated!! ");
+            // showSnackBar(context, "Task updated!! ");
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";

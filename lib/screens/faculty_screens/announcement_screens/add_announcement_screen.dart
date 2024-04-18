@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -16,7 +17,6 @@ class AddAnnouncementScreen extends StatefulWidget {
 }
 
 class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
-  // TODO: Do it for multiple images
   List<File> images = [];
   bool submitted = false;
   void selectImages() async {
@@ -63,6 +63,28 @@ class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
         announcementDescription: announcementDescription.text,
         announcementImages: images,
         announcementPublishedOn: DateTime.now().toString());
+    setState(() {
+      submitted = true;
+    });
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'))
+          ],
+          title: const Text('Status'),
+          content: const Text('Your announcement has been added successfully.'),
+        );
+      },
+    );
+    Timer(const Duration(seconds: 3), () {
+      Navigator.pop(context); // Go back to previous screen
+    });
   }
 
   @override
@@ -103,7 +125,7 @@ class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
                   "Upload Image",
                   style: TextStyle(fontSize: 18),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 images.isNotEmpty
@@ -175,7 +197,8 @@ class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
                 ),
                 Center(
                     child: ElevatedButton(
-                        onPressed: addAnnouncement, child: Text('Submit')))
+                        onPressed: addAnnouncement,
+                        child: const Text('Submit')))
               ],
             ),
           ),

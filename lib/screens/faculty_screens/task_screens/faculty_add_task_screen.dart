@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:eventquest/services/task_services.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +23,25 @@ class _FacultyAddTaskScreenState extends State<FacultyAddTaskScreen> {
       taskType: dropdownValue,
       assignedTo: taskAssignedTo.text,
     );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'))
+          ],
+          title: const Text('Status'),
+          content: const Text('Task has been Assigned successfully.'),
+        );
+      },
+    );
+    Timer(const Duration(seconds: 3), () {
+      Navigator.pop(context); // Go back to previous screen
+    });
   }
 
   TextEditingController taskTitle = TextEditingController();

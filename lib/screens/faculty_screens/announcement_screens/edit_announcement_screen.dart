@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -95,6 +96,25 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
         announcementTitle: announcementTitle.text,
         announcementDescription: announcementDescription.text,
         announcementImages: announcementImages);
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'))
+          ],
+          title: const Text('Status'),
+          content: const Text('Announcement has been Updated successfully.'),
+        );
+      },
+    );
+    Timer(const Duration(seconds: 3), () {
+      Navigator.pop(context); // Go back to previous screen
+    });
   }
 
   @override
@@ -124,7 +144,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                   onChanged: (value) {
                     setState(() {});
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "Enter announcement title",
                   ),
                 ),
@@ -158,7 +178,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                   "Upload Image",
                   style: TextStyle(fontSize: 18),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 updateImageFlag == false
@@ -252,7 +272,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                             // Navigator.pop(context);
                           }
                         : null,
-                    child: Text('Submit'),
+                    child: const Text('Submit'),
                   ),
                 )
               ],
