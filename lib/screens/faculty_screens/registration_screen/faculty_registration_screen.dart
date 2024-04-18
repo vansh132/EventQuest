@@ -17,6 +17,7 @@ class FacultyRegistrationScreen extends StatefulWidget {
 class _FacultyRegistrationScreenState extends State<FacultyRegistrationScreen> {
   RegistrationServices registrationServices = RegistrationServices();
   late Future<List<Registration>> _registrationsFuture;
+  TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -34,31 +35,60 @@ class _FacultyRegistrationScreenState extends State<FacultyRegistrationScreen> {
             TopBar(),
             UserBar(context),
             const SizedBox(height: 20),
-            FutureBuilder<List<Registration>>(
-              future: _registrationsFuture,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (snapshot.hasError) {
-                  return Center(
-                    child: Text('Error: ${snapshot.error}'),
-                  );
-                } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                  // Group registrations by event name
-                  Map<String, List<Registration>> groupedRegistrations = {};
-                  snapshot.data!.forEach((registration) {
-                    if (!groupedRegistrations
-                        .containsKey(registration.eventName)) {
-                      groupedRegistrations[registration.eventName] = [];
-                    }
-                    groupedRegistrations[registration.eventName]!
-                        .add(registration);
-                  });
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  labelText: 'Search by Event Name',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(),
+                ),
+                onChanged: (value) {
+                  setState(() {});
+                },
+              ),
+            ),
+            const SizedBox(height: 10),
+            Expanded(
+              child: FutureBuilder<List<Registration>>(
+                future: _registrationsFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text('Error: ${snapshot.error}'),
+                    );
+                  } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                    // Filter registrations based on search query
+                    List<Registration> filteredRegistrations =
+                        snapshot.data!.where((registration) {
+                      return registration.eventName
+                          .toLowerCase()
+                          .contains(_searchController.text.toLowerCase());
+                    }).toList();
 
-                  return Expanded(
-                    child: Padding(
+                    if (filteredRegistrations.isEmpty) {
+                      return const Center(
+                        child: Text('No matching results found.'),
+                      );
+                    }
+
+                    // Group registrations by event name
+                    Map<String, List<Registration>> groupedRegistrations = {};
+                    filteredRegistrations.forEach((registration) {
+                      if (!groupedRegistrations
+                          .containsKey(registration.eventName)) {
+                        groupedRegistrations[registration.eventName] = [];
+                      }
+                      groupedRegistrations[registration.eventName]!
+                          .add(registration);
+                    });
+
+                    return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
@@ -128,14 +158,14 @@ class _FacultyRegistrationScreenState extends State<FacultyRegistrationScreen> {
                           }).toList(),
                         ),
                       ),
-                    ),
-                  );
-                } else {
-                  return const Center(
-                    child: Text("No data found"),
-                  );
-                }
-              },
+                    );
+                  } else {
+                    return const Center(
+                      child: Text("No data found"),
+                    );
+                  }
+                },
+              ),
             ),
           ],
         ),

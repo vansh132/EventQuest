@@ -71,6 +71,12 @@ class _FacultyAddTaskScreenState extends State<FacultyAddTaskScreen> {
                       decoration: const InputDecoration(
                         labelText: "Task Title",
                       ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please Enter Task Title';
+                        }
+                        return null;
+                      },
                     ),
                     const SizedBox(
                       height: 14,
@@ -80,6 +86,12 @@ class _FacultyAddTaskScreenState extends State<FacultyAddTaskScreen> {
                       decoration: const InputDecoration(
                         labelText: "Description",
                       ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please Enter Task Description';
+                        }
+                        return null;
+                      },
                     ),
                     const SizedBox(
                       height: 16,
@@ -118,13 +130,24 @@ class _FacultyAddTaskScreenState extends State<FacultyAddTaskScreen> {
                         hintText: "Register no (2347152)",
                         labelText: "Assign to",
                       ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please Enter Register Number';
+                        }
+                        return null;
+                      },
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     Center(
                       child: ElevatedButton(
-                          onPressed: addTask, child: const Text("Create Task")),
+                          onPressed: () {
+                            if (_facultyTaskFormKey.currentState!.validate()) {
+                              addTask();
+                            }
+                          },
+                          child: const Text("Create Task")),
                     )
                   ],
                 )),

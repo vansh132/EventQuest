@@ -62,51 +62,55 @@ class _FacultyTaskScreenState extends State<FacultyTaskScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          TopBar(),
-          const SizedBox(
-            height: 16,
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: [
+              TopBar(),
+              const SizedBox(
+                height: 16,
+              ),
+              const Text(
+                "Tasks Created",
+                style: TextStyle(
+                  color: Color(0xff012a4a),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.2,
+                ),
+              ),
+              const Divider(
+                color: Colors.grey,
+                indent: 36,
+                endIndent: 36,
+              ),
+              Container(
+                height: 500,
+                margin: const EdgeInsets.symmetric(horizontal: 8),
+                child: FutureBuilder(
+                  future: getAllTask(),
+                  initialData: tasks,
+                  builder: (context, snapshot) {
+                    if (snapshot.data!.isEmpty) {
+                      return const Center(
+                        child: Text("No data found"),
+                      );
+                    }
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        itemBuilder: (context, index) =>
+                            taskItem(context, snapshot.data![index]),
+                        itemCount: tasks.length,
+                      );
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  },
+                ),
+              )
+            ],
           ),
-          const Text(
-            "Tasks Created",
-            style: TextStyle(
-              color: Color(0xff012a4a),
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 0.2,
-            ),
-          ),
-          const Divider(
-            color: Colors.grey,
-            indent: 36,
-            endIndent: 36,
-          ),
-          Container(
-            height: 500,
-            margin: const EdgeInsets.symmetric(horizontal: 8),
-            child: FutureBuilder(
-              future: getAllTask(),
-              initialData: tasks,
-              builder: (context, snapshot) {
-                if (snapshot.data!.isEmpty) {
-                  return const Center(
-                    child: Text("No data found"),
-                  );
-                }
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    itemBuilder: (context, index) =>
-                        taskItem(context, snapshot.data![index]),
-                    itemCount: tasks.length,
-                  );
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              },
-            ),
-          )
-        ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.mainColor,

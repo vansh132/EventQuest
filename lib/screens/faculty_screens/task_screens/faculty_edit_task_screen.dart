@@ -62,7 +62,11 @@ class _FacultyEditTaskScreenState extends State<FacultyEditTaskScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: editTask,
+        onPressed: () {
+          if (_taskFormKey.currentState!.validate()) {
+            editTask();
+          }
+        },
         child: const Icon(
           Icons.save,
         ),
@@ -89,6 +93,12 @@ class _FacultyEditTaskScreenState extends State<FacultyEditTaskScreen> {
                     ),
                     TextFormField(
                       controller: title,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please Enter Task Title';
+                        }
+                        return null;
+                      },
                     ),
                     const SizedBox(
                       height: 14,
@@ -104,6 +114,12 @@ class _FacultyEditTaskScreenState extends State<FacultyEditTaskScreen> {
                       controller: description,
                       maxLines: 10,
                       textAlign: TextAlign.justify,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please Enter Task Description';
+                        }
+                        return null;
+                      },
                     ),
                     const SizedBox(
                       height: 16,
