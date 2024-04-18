@@ -139,10 +139,16 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                TextField(
+                TextFormField(
                   controller: announcementTitle,
                   onChanged: (value) {
                     setState(() {});
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Announcement Title';
+                    }
+                    return null;
                   },
                   decoration: const InputDecoration(
                     hintText: "Enter announcement title",
@@ -158,10 +164,16 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                TextField(
+                TextFormField(
                   controller: announcementDescription,
                   onChanged: (value) {
                     setState(() {});
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Announcement Description';
+                    }
+                    return null;
                   },
                   maxLines: 4,
                   decoration: const InputDecoration(
@@ -268,8 +280,9 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                   child: ElevatedButton(
                     onPressed: isDataChanged()
                         ? () {
-                            updateAnnouncement();
-                            // Navigator.pop(context);
+                            if (_formKey.currentState!.validate()) {
+                              updateAnnouncement();
+                            }
                           }
                         : null,
                     child: const Text('Submit'),

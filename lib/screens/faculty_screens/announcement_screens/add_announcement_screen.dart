@@ -108,6 +108,12 @@ class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
                   decoration: const InputDecoration(
                     labelText: "Announcement Title",
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Announcement Title';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 14,
@@ -117,6 +123,12 @@ class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
                   decoration: const InputDecoration(
                     labelText: "Description",
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Announcement Description';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 16,
@@ -197,7 +209,11 @@ class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
                 ),
                 Center(
                     child: ElevatedButton(
-                        onPressed: addAnnouncement,
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            addAnnouncement();
+                          }
+                        },
                         child: const Text('Submit')))
               ],
             ),

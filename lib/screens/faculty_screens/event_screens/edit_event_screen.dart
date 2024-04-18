@@ -114,7 +114,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 child: const Text('OK'))
           ],
           title: const Text('Status'),
-          content: const Text('Your Event has been updated successfully.'),
+          content: const Text('Event has been updated successfully.'),
         );
       },
     );
@@ -161,6 +161,12 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 ),
                 TextFormField(
                   controller: eventName,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Event Title';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 14,
@@ -175,6 +181,12 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 TextFormField(
                   controller: eventDescription,
                   maxLines: 10,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Event Description';
+                    }
+                    return null;
+                  },
                   textAlign: TextAlign.justify,
                 ),
                 const SizedBox(
@@ -291,6 +303,12 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 TextFormField(
                   controller: eventAmount,
                   keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Event Amount';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 14,
@@ -305,6 +323,12 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 TextFormField(
                   controller: eventNoOfParticipants,
                   keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter No Of Participants';
+                    }
+                    return null;
+                  },
                   decoration: InputDecoration(
                     hintText: eventData.eventNoOfParticipants.toString(),
                   ),
@@ -324,6 +348,12 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   decoration: InputDecoration(
                     hintText: eventData.eventLink,
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Event Link';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 14,
@@ -340,6 +370,12 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   decoration: InputDecoration(
                     hintText: eventData.eventContactPerson,
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Contact Name';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 14,
@@ -357,6 +393,14 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   decoration: InputDecoration(
                     hintText: eventData.eventContactPersonNo.toString(),
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter contact number';
+                    } else if (!RegExp(r'^[0-9]{10}$').hasMatch(value)) {
+                      return 'Contact number must be exactly 10 digits';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 14,
@@ -383,7 +427,12 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 ),
                 Center(
                     child: ElevatedButton(
-                        onPressed: updateEvent, child: const Text('Submit')))
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            updateEvent();
+                          }
+                        },
+                        child: const Text('Submit')))
               ],
             ),
           ),

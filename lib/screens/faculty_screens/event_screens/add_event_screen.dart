@@ -114,6 +114,12 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   decoration: const InputDecoration(
                     labelText: "Event Name",
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Event Title';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 14,
@@ -123,6 +129,12 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   decoration: const InputDecoration(
                     labelText: "Description",
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Event Description';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 16,
@@ -230,6 +242,12 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   decoration: const InputDecoration(
                     labelText: "Event Amount",
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Event Amount';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 14,
@@ -240,6 +258,12 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   decoration: const InputDecoration(
                     labelText: "No Of Participant",
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter No Of Participants';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 14,
@@ -249,6 +273,12 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   decoration: const InputDecoration(
                     labelText: "Event Link",
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Event Link';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 14,
@@ -258,6 +288,12 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   decoration: const InputDecoration(
                     labelText: "Contact Name",
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Contact Name';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 14,
@@ -266,8 +302,16 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   controller: contactPerson,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                    labelText: "Contact Person",
+                    labelText: "Contact No",
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter contact number';
+                    } else if (!RegExp(r'^[0-9]{10}$').hasMatch(value)) {
+                      return 'Contact number must be exactly 10 digits';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 14,
@@ -291,7 +335,9 @@ class _AddEventScreenState extends State<AddEventScreen> {
                 Center(
                     child: ElevatedButton(
                         onPressed: () {
-                          addEvent();
+                          if (_formKey.currentState!.validate()) {
+                            addEvent();
+                          }
                         },
                         child: const Text('Submit')))
               ],
