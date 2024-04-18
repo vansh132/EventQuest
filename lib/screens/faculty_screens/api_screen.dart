@@ -1,7 +1,5 @@
 import 'package:eventquest/constants/custom_colors.dart';
-import 'package:eventquest/models/event.dart';
 import 'package:flutter/material.dart';
-import 'package:google_generative_ai/google_generative_ai.dart';
 
 class ApiScreen extends StatefulWidget {
   static const String routeName = '/api-screen';
