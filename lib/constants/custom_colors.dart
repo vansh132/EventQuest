@@ -12,6 +12,10 @@ class CustomColors {
   static Color buttonColor = const Color(0xff3D3FD9);
   static Color buttonLightColor = const Color(0xff7F80EB);
   static Color buttonDarkColor = const Color(0xff13159E);
+  //primary button color
+  static Color primaryButtonColor = const Color(0xffACC8E4);
+  static Color primaryButtonLightColor = const Color(0xffE1F0FA);
+  static Color primaryButtonDarkColor = const Color(0xff0D3D6C);
   //background colors
   static Color bgLight = const Color(0xffFAFAFA);
   static Color bgDark = const Color(0xff172733);

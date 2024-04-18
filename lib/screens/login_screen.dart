@@ -1,3 +1,4 @@
+import 'package:eventquest/constants/custom_colors.dart';
 import 'package:eventquest/screens/constants/utils.dart';
 import 'package:eventquest/services/user_services.dart';
 import 'package:flutter/material.dart';
@@ -37,17 +38,19 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xff0D1B2A),
+        backgroundColor:
+            CustomColors.primaryDarkColor, //previous color - 0xff0D1B2A
         title: const Text(
           "EventQuest",
           style: TextStyle(
             color: Colors.white,
+            fontSize: 24,
             fontWeight: FontWeight.w700,
           ),
         ),
         centerTitle: true,
       ),
-      backgroundColor: const Color(0xff0D1B2A),
+      backgroundColor: CustomColors.primaryDarkColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -65,16 +68,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 // color: Colors.red,
                 margin: const EdgeInsets.only(left: 24, top: 24),
                 padding: const EdgeInsets.all(8),
-                child: const Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "Welcome, ",
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                          letterSpacing: 1,
-                          color: Color(0xfff1faee)),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        letterSpacing: 1,
+                        color: CustomColors.bgLight,
+                      ), //previous color - 0xfff1faee
                     ),
                     SizedBox(
                       height: 12,
@@ -82,10 +86,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     Text(
                       "Please sign in to continue.",
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                          letterSpacing: 2,
-                          color: Color(0xff8d99ae)),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                        letterSpacing: 2,
+                        color: CustomColors.lightGrey,
+                      ),
                     ),
                   ],
                 ),
@@ -106,7 +111,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: const Color(0xffddd5d8),
+                        color: CustomColors.bgLight
+                            .withOpacity(0.9), //previous color - 0xffddd5d8
                       ),
                       child: TextFormField(
                         controller: _username,
@@ -121,12 +127,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           }
                           return null;
                         },
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Register No',
+                            hintText: 'username',
                             prefixIcon: Icon(
                               Icons.mail_outline,
-                              color: Color(0xff03071e),
+                              color: CustomColors.darkGrey,
                             )),
                       ),
                     ),
@@ -142,22 +148,22 @@ class _LoginScreenState extends State<LoginScreen> {
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: const Color(0xffddd5d8),
+                        color: CustomColors.bgLight.withOpacity(0.9),
                       ),
                       child: TextFormField(
                         controller: _password,
                         autofocus: false,
                         obscureText: true,
-                        style: const TextStyle(
-                          color: Color(0xff03071e),
+                        style: TextStyle(
+                          color: CustomColors.darkGrey,
                           fontWeight: FontWeight.bold,
                         ),
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Password',
+                          hintText: 'password',
                           prefixIcon: Icon(
                             Icons.lock_outline,
-                            color: Color(0xff03071e),
+                            color: CustomColors.darkGrey,
                           ),
                         ),
                         validator: (val) {
@@ -185,15 +191,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           signIn();
                         }
                       },
-                      child: const Icon(
+                      child: Icon(
                         size: 48,
                         Icons.arrow_circle_right_rounded,
-                        color: Color(0xffACC8E4),
+                        color: CustomColors
+                            .primaryButtonColor, //previous color - 0xffACC8E4
                       ),
                     ),
                     TextButton(
                       child: const Text(
-                        "Forgot Password?",
+                        "New User? Register now",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 12,
