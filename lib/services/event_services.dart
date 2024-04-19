@@ -272,6 +272,7 @@ class EventServices {
           },
           onSuccess: () {
             // showSnackBar(context, "Event Deleted!!");
+            Navigator.of(context).pop();
           });
     } catch (e) {
       showSnackBar(context, e.toString());

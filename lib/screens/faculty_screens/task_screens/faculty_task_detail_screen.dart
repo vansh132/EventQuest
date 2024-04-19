@@ -3,6 +3,7 @@ import 'package:eventquest/screens/faculty_screens/task_screens/faculty_edit_tas
 import 'package:eventquest/services/task_services.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
 
 class FacultyTaskDetailScreen extends StatefulWidget {
   static const String routeName = "/faculty-task-detail-screen";
@@ -158,17 +159,37 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                     const SizedBox(
                       height: 12,
                     ),
-                    SizedBox(
-                      height: 200,
-                      width: 200,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
-                        child: Image(
-                          image: NetworkImage(task.taskFile ??
-                              "https://res.cloudinary.com/dq1q5mtdo/image/upload/f_auto,q_auto/v1/Dummy-images/uo2rk3gkixuyqdznlhqs"),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Scaffold(
+                              body: Center(
+                                child: PhotoView(
+                                  imageProvider: NetworkImage(
+                                    task.taskFile ??
+                                        "https://res.cloudinary.com/dq1q5mtdo/image/upload/f_auto,q_auto/v1/Dummy-images/uo2rk3gkixuyqdznlhqs",
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      child: SizedBox(
+                        height: 200,
+                        width: 200,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Image(
+                            image: NetworkImage(task.taskFile ??
+                                "https://res.cloudinary.com/dq1q5mtdo/image/upload/f_auto,q_auto/v1/Dummy-images/uo2rk3gkixuyqdznlhqs"),
+                          ),
                         ),
                       ),
                     ),
+
                     //NetworkImage(task.taskFile ??
                     //"https://res.cloudinary.com/dq1q5mtdo/image/upload/f_auto,q_auto/v1/Dummy-images/uo2rk3gkixuyqdznlhqs"))
                     const SizedBox(
