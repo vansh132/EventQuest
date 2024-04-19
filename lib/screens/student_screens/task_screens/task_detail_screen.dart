@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:eventquest/models/task.dart';
@@ -56,6 +57,22 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
     setState(() {
       submitted = true;
     });
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'))
+          ],
+          title: const Text('Status'),
+          content: const Text('Poster Submitted successfully.'),
+        );
+      },
+    );
   }
 
   Future<File> pickImages() async {

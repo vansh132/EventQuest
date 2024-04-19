@@ -228,7 +228,7 @@ class TaskServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            showSnackBar(context, "Poster Uploaded!! ");
+            // showSnackBar(context, "Poster Uploaded!! ");
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";
