@@ -213,6 +213,10 @@ class _EditEventScreenState extends State<EditEventScreen> {
                         value: 'PG',
                         child: Text('PG'),
                       ),
+                      DropdownMenuItem<String>(
+                        value: 'Both',
+                        child: Text('Both UG and PG'),
+                      ),
                     ],
                     value: dropdownValue,
                     onChanged: (String? newValue) {
@@ -366,7 +370,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   ),
                 ),
                 TextFormField(
-                  controller: eventContactNo,
+                  controller: eventContactPerson,
                   decoration: InputDecoration(
                     hintText: eventData.eventContactPerson,
                   ),
@@ -388,7 +392,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   ),
                 ),
                 TextFormField(
-                  controller: eventContactPerson,
+                  controller: eventContactNo,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     hintText: eventData.eventContactPersonNo.toString(),

@@ -165,10 +165,12 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                         borderRadius: BorderRadius.circular(16),
                         child: Image(
                           image: NetworkImage(task.taskFile ??
-                              "https://dummyimage.com/600x400/87878a/000000.jpg&text=Image"),
+                              "https://res.cloudinary.com/dq1q5mtdo/image/upload/f_auto,q_auto/v1/Dummy-images/uo2rk3gkixuyqdznlhqs"),
                         ),
                       ),
                     ),
+                    //NetworkImage(task.taskFile ??
+                    //"https://res.cloudinary.com/dq1q5mtdo/image/upload/f_auto,q_auto/v1/Dummy-images/uo2rk3gkixuyqdznlhqs"))
                     const SizedBox(
                       height: 16,
                     ),

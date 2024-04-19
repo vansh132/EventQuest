@@ -111,7 +111,7 @@ class _EventScreenState extends State<EventScreen> {
               child: Row(
                 children: [
                   Card(
-                    color: Colors.white.withOpacity(0.7),
+                    color: Colors.white.withOpacity(0.9),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
@@ -178,7 +178,7 @@ class _EventScreenState extends State<EventScreen> {
             'Select your preference:',
             style: TextStyle(
               fontSize: 22,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w700,
             ),
           ),
           const SizedBox(height: 10.0),

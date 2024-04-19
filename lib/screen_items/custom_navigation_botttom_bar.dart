@@ -1,3 +1,4 @@
+import 'package:eventquest/constants/custom_colors.dart';
 import 'package:eventquest/screens/student_screens/announcement_screens/announcement_screen.dart';
 import 'package:eventquest/screens/student_screens/event_screens/event_screen.dart';
 import 'package:eventquest/screens/student_screens/home_screen.dart';
@@ -35,7 +36,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     return Scaffold(
       body: SafeArea(child: widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color(0xff002848),
+        backgroundColor: CustomColors.bgDark,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

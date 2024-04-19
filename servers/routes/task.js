@@ -113,6 +113,7 @@ taskRouter.get("/api/highlights", async (req, res) => {
         images.push(element);
       });
     });
+    images = images.reverse()
     // console.log(images)
     res.json(images);
   } catch (error) {

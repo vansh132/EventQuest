@@ -157,6 +157,10 @@ class _AddEventScreenState extends State<AddEventScreen> {
                         value: 'PG',
                         child: Text('PG'),
                       ),
+                      DropdownMenuItem<String>(
+                        value: 'Both',
+                        child: Text('Both'),
+                      ),
                     ],
                     value: dropdownValue,
                     onChanged: (String? newValue) {

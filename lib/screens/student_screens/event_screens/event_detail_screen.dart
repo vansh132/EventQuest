@@ -174,10 +174,8 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                         recognizer: TapGestureRecognizer()
                           ..onTap = () async {
                             var url = event.eventLink;
-                            if (await canLaunch(url)) {
-                              await launch(url);
-                            } else {
-                              throw 'Could not launch $url';
+                            if (!await launchUrl(Uri.parse(url))) {
+                              throw Exception('Could not launch $url');
                             }
                           },
                         style: const TextStyle(

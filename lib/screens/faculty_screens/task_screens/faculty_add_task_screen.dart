@@ -110,10 +110,10 @@ class _FacultyAddTaskScreenState extends State<FacultyAddTaskScreen> {
                             value: 'Poster',
                             child: Text('Poster'),
                           ),
-                          DropdownMenuItem<String>(
-                            value: 'Report',
-                            child: Text('Report'),
-                          ),
+                          // DropdownMenuItem<String>(
+                          //   value: 'Report',
+                          //   child: Text('Report'),
+                          // ),
                         ],
                         value: dropdownValue,
                         onChanged: (String? newValue) {
