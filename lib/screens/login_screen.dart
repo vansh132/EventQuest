@@ -198,20 +198,20 @@ class _LoginScreenState extends State<LoginScreen> {
                             .primaryButtonColor, //previous color - 0xffACC8E4
                       ),
                     ),
-                    TextButton(
-                      child: const Text(
-                        "New User? Register now",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
-                            letterSpacing: 2,
-                            color: Color(0xffACC8E4)),
-                      ),
-                      onPressed: () {
-                        showSnackBar(context,
-                            "Under maintainance, contact admin@christuniversity.edu.in for further procedure");
-                      },
-                    ),
+                    // TextButton(
+                    //   child: const Text(
+                    //     "New User? Register now",
+                    //     style: TextStyle(
+                    //         fontWeight: FontWeight.bold,
+                    //         fontSize: 12,
+                    //         letterSpacing: 2,
+                    //         color: Color(0xffACC8E4)),
+                    //   ),
+                    //   onPressed: () {
+                    //     showSnackBar(context,
+                    //         "Under maintainance, contact admin@christuniversity.edu.in for further procedure");
+                    //   },
+                    // ),
                   ],
                 ),
               ),
