@@ -5,6 +5,7 @@ import 'package:eventquest/services/event_services.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class EventScreen extends StatefulWidget {
   static const String routeName = '/event-screen';
@@ -46,16 +47,31 @@ class _EventScreenState extends State<EventScreen> {
           children: [
             TopBar(),
             UserBar(context),
-            const SizedBox(
-              height: 8,
-            ),
+            const SizedBox(height: 8),
             filterOption(context),
             const SizedBox(height: 20),
             FutureBuilder(
-              future: getAllPost(),
+              future: Future.delayed(
+                  const Duration(seconds: 1), () => getAllPost()),
               initialData: events,
               builder: (context, snapshot) {
-                if (snapshot.hasData) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListView.builder(
+                        itemCount: 5,
+                        itemBuilder: (context, index) {
+                          return Shimmer.fromColors(
+                            baseColor: Colors.grey[300]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: buildShimmerEventCard(),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                } else if (snapshot.hasData) {
                   return Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -164,6 +180,24 @@ class _EventScreenState extends State<EventScreen> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildShimmerEventCard() {
+    return Card(
+      margin: const EdgeInsets.all(8),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      elevation: 4.0,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Container(
+          height: 224,
+          width: double.infinity,
+          color: Colors.grey[300],
         ),
       ),
     );
