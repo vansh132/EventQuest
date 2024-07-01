@@ -2,7 +2,38 @@ const express = require("express");
 const Event = require("../models/event");
 const eventRouter = express.Router();
 
-eventRouter.post("/api/add-event", async (req, res) => {
+//GET - All events list
+eventRouter.get("/api/v1/events", async (req, res) => {
+  try {
+    const events = await Event.find({});
+    res.json({ status: "success", data: events });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//GET - All UG events list
+eventRouter.get("/api/v1/ug/events", async (req, res) => {
+  try {
+    const ugEvents = await Event.find({ eventCategory: "UG" });
+    res.json({ status: "success", data: ugEvents });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//GET - All PG events list
+eventRouter.get("/api/v1/pg/events", async (req, res) => {
+  try {
+    const pgEvents = await Event.find({ eventCategory: "PG" });
+    res.json({ status: "success", data: pgEvents });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//POST - Add an event
+eventRouter.post("/api/v1/add/event", async (req, res) => {
   try {
     const {
       eventName,
@@ -31,61 +62,44 @@ eventRouter.post("/api/add-event", async (req, res) => {
       eventRegistrationDeadline,
     });
     event = await event.save();
-    res.json(event);
+    res.status(201).json({
+      status: "Success",
+      message: "Event created Successfully",
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-eventRouter.get("/api/events", async (req, res) => {
+//POST - Update an event
+eventRouter.post("/api/v1/update/event", async (req, res) => {
   try {
-    const events = await Event.find({});
-    res.json(events);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-eventRouter.get("/api/events/ug", async (req, res) => {
-  try {
-    const ugEvents = await Event.find({ eventCategory: "UG" });
-    res.json(ugEvents);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-eventRouter.get("/api/events/pg", async (req, res) => {
-  try {
-    const pgEvents = await Event.find({ eventCategory: "PG" });
-    res.json(pgEvents);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-eventRouter.post("/api/update-event/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
+    const id = req.query.id; //query params changed
     const event = await Event.findByIdAndUpdate(id, req.body);
     if (!event) {
       return res
-        .status(400)
+        .status(204) //status code updated (when no content)
         .json({ message: `cannot find an event with ID ${id}` });
     }
-    const updatedEvent = await Event.findById(id);
-    res.status(200).json(updatedEvent);
+    await Event.findById(id);
+    res
+      .status(200)
+      .json({ status: "Success", message: "Event Updated Successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-eventRouter.post("/api/delete-event", async (req, res) => {
+//POST - Delete an event
+eventRouter.post("/api/v1/delete/event", async (req, res) => {
   try {
-    const { id } = req.body;
-    const event = await Event.findByIdAndDelete(id);
+    const id = req.query.id;
+    Event.findByIdAndDelete(id);
 
-    res.status(200).json(event);
+    res.status(200).json({
+      status: "Success",
+      message: "Event Deleted Successfully",
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class EventServices {
+  //GET ALL EVENTS
   Future<List<Event>> getAllEvents(BuildContext context) async {
     void handleHttpError(String errorMessage) {
       showSnackBar(context, errorMessage);
@@ -21,7 +22,7 @@ class EventServices {
     List<Event> eventList = [];
 
     try {
-      http.Response res = await http.get(Uri.parse("$url/api/events"),
+      http.Response res = await http.get(Uri.parse("$url/api/v1/events"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8'
           });
@@ -32,9 +33,10 @@ class EventServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            for (int i = 0; i < jsonDecode(res.body).length; i++) {
-              eventList
-                  .add(Event.fromJson(jsonEncode(jsonDecode(res.body)[i])));
+            // print(jsonEncode(jsonDecode(res.body)['data']));
+            for (int i = 0; i < jsonDecode(res.body)['data'].length; i++) {
+              eventList.add(
+                  Event.fromJson(jsonEncode(jsonDecode(res.body)['data'][i])));
             }
           });
     } catch (e) {
@@ -44,6 +46,7 @@ class EventServices {
     return eventList;
   }
 
+  //GET ALL UG EVENTS
   Future<List<Event>> getAllUgEvents(BuildContext context) async {
     void handleHttpError(String errorMessage) {
       showSnackBar(context, errorMessage);
@@ -53,7 +56,7 @@ class EventServices {
     List<Event> eventList = [];
 
     try {
-      http.Response res = await http.get(Uri.parse("$url/api/events/ug"),
+      http.Response res = await http.get(Uri.parse("$url/api/v1/ug/events"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8'
           });
@@ -76,6 +79,7 @@ class EventServices {
     return eventList;
   }
 
+  //GET ALL PG EVENTS
   Future<List<Event>> getAllPgEvents(BuildContext context) async {
     void handleHttpError(String errorMessage) {
       showSnackBar(context, errorMessage);
@@ -85,7 +89,7 @@ class EventServices {
     List<Event> eventList = [];
 
     try {
-      http.Response res = await http.get(Uri.parse("$url/api/events/pg"),
+      http.Response res = await http.get(Uri.parse("$url/api/v1/pg/events"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8'
           });
@@ -108,6 +112,7 @@ class EventServices {
     return eventList;
   }
 
+  //ADD AN EVENTS
   Future<void> addEvent(
       {required BuildContext context,
       required String eventName,
@@ -150,7 +155,7 @@ class EventServices {
           eventRegistrationDeadline: eventRegistartionDeadline.toString());
       // print(event.toJson());
       http.Response res = await http.post(
-        Uri.parse('$url/api/add-event'),
+        Uri.parse('$url/api/v1/add/event'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -172,6 +177,7 @@ class EventServices {
     }
   }
 
+  //UPDATE AN EVENTS
   void updateEvent(
       {required BuildContext context,
       required String existImage,
@@ -223,7 +229,7 @@ class EventServices {
 
     try {
       http.Response res =
-          await http.post(Uri.parse("$url/api/update-event/$eventId"),
+          await http.post(Uri.parse("$url/api/v1/update/event?id=$eventId"),
               headers: <String, String>{
                 "Content-Type": 'application/json; charset=UTF-8',
                 // 'x-auth-token': userProvider.user.token,
@@ -244,6 +250,7 @@ class EventServices {
     }
   }
 
+  //DELETE AN EVENT
   void deleteEvent({
     required BuildContext context,
     required Event event,
@@ -255,14 +262,11 @@ class EventServices {
 
     try {
       http.Response res = await http.post(
-        Uri.parse('$url/api/delete-event'),
+        Uri.parse('$url/api/v1/delete/event?id=${event.eventId}'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           // 'x-auth-token': userProvider.user.token,
         },
-        body: jsonEncode({
-          'id': event.eventId,
-        }),
       );
 
       httpErrorHandle(

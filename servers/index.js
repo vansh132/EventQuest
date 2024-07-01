@@ -20,6 +20,7 @@ app.use(announcementRouter)
 app.use(taskRouter)
 app.use(registerRouter)
 
+//Database connection
 mongoose
   .connect(DB)
   .then(() => {
@@ -29,8 +30,7 @@ mongoose
     console.log(e);
   });
 
-
-
+// Server 
 app.listen(PORT, "0.0.0.0", () => {
   console.log("Connected at port " + PORT);
 });
