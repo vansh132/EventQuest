@@ -6,7 +6,7 @@ const registerRouter = express.Router()
 registerRouter.get('/api/v1/registrations', async (req, res) => {
     try {
         const registrations = await Register.find({})
-        res.json(registrations)
+        res.json({ status: "success", data: registrations });
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
@@ -20,7 +20,7 @@ registerRouter.post('/api/v1/registrations', async (req, res) => {
             eventName, eventAmount, eventCategory, eventNoOfParticipants, userName, participantsName, participantsRegisterNo, participantsCategory
         })
         register = await register.save();
-        res.json(register);
+        res.json({ status: "success", "message": "Registered Successfully" });
 
     } catch (error) {
         res.status(500).json({ error: error.message })

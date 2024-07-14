@@ -67,9 +67,9 @@ class EventServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            for (int i = 0; i < jsonDecode(res.body).length; i++) {
-              eventList
-                  .add(Event.fromJson(jsonEncode(jsonDecode(res.body)[i])));
+            for (int i = 0; i < jsonDecode(res.body)['data'].length; i++) {
+              eventList.add(
+                  Event.fromJson(jsonEncode(jsonDecode(res.body)['data'][i])));
             }
           });
     } catch (e) {
@@ -101,9 +101,9 @@ class EventServices {
           },
           onSuccess: () {
             print(jsonDecode(res.body)['data']);
-            for (int i = 0; i < jsonDecode(res.body).length; i++) {
-              eventList
-                  .add(Event.fromJson(jsonEncode(jsonDecode(res.body)[i])));
+            for (int i = 0; i < jsonDecode(res.body)['data'].length; i++) {
+              eventList.add(
+                  Event.fromJson(jsonEncode(jsonDecode(res.body)['data'][i])));
             }
           });
     } catch (e) {
@@ -230,7 +230,7 @@ class EventServices {
 
     try {
       http.Response res =
-          await http.post(Uri.parse("$url/api/v1/update/event?id=$eventId"),
+          await http.put(Uri.parse("$url/api/v1/events/$eventId"),
               headers: <String, String>{
                 "Content-Type": 'application/json; charset=UTF-8',
                 // 'x-auth-token': userProvider.user.token,
@@ -262,8 +262,8 @@ class EventServices {
     }
 
     try {
-      http.Response res = await http.post(
-        Uri.parse('$url/api/v1/delete/event?id=${event.eventId}'),
+      http.Response res = await http.delete(
+        Uri.parse('$url/api/v1/events/${event.eventId}'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           // 'x-auth-token': userProvider.user.token,

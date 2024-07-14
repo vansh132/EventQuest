@@ -21,7 +21,7 @@ class RegistrationServices {
     List<Registration> registrationList = [];
 
     try {
-      http.Response res = await http.get(Uri.parse("$url/api/registrations"),
+      http.Response res = await http.get(Uri.parse("$url/api/v1/registrations"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8'
           });
@@ -32,9 +32,9 @@ class RegistrationServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            for (int i = 0; i < jsonDecode(res.body).length; i++) {
-              registrationList.add(
-                  Registration.fromJson(jsonEncode(jsonDecode(res.body)[i])));
+            for (int i = 0; i < jsonDecode(res.body)['data'].length; i++) {
+              registrationList.add(Registration.fromJson(
+                  jsonEncode(jsonDecode(res.body)['data'][i])));
             }
           });
     } catch (e) {
@@ -70,7 +70,7 @@ class RegistrationServices {
       );
 
       http.Response res = await http.post(
-        Uri.parse('$url/api/add-registration'),
+        Uri.parse('$url/api/v1/registrations'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },

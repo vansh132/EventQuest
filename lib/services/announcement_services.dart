@@ -23,7 +23,7 @@ class AnnouncementServices {
     List<Announcement> announcementList = [];
 
     try {
-      http.Response res = await http.get(Uri.parse("$url/api/announcements"),
+      http.Response res = await http.get(Uri.parse("$url/api/v1/announcements"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8'
           });
@@ -34,9 +34,9 @@ class AnnouncementServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            for (int i = 0; i < jsonDecode(res.body).length; i++) {
-              announcementList.add(
-                  Announcement.fromJson(jsonEncode(jsonDecode(res.body)[i])));
+            for (int i = 0; i < jsonDecode(res.body)['data'].length; i++) {
+              announcementList.add(Announcement.fromJson(
+                  jsonEncode(jsonDecode(res.body)['data'][i])));
             }
           });
     } catch (e) {
@@ -80,7 +80,7 @@ class AnnouncementServices {
           announcementPublishedOn: announcementPublishedOn);
 
       http.Response res = await http.post(
-        Uri.parse('$url/api/add-announcement'),
+        Uri.parse('$url/api/v1/announcements'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -140,13 +140,13 @@ class AnnouncementServices {
     }
 
     try {
-      http.Response res = await http.put(
-          Uri.parse("$url/api/update-announcement/$announcementId"),
-          headers: <String, String>{
-            "Content-Type": 'application/json; charset=UTF-8',
-            // 'x-auth-token': userProvider.user.token,
-          },
-          body: jsonEncode(announcementData));
+      http.Response res =
+          await http.put(Uri.parse("$url/api/v1/announcements/$announcementId"),
+              headers: <String, String>{
+                "Content-Type": 'application/json; charset=UTF-8',
+                // 'x-auth-token': userProvider.user.token,
+              },
+              body: jsonEncode(announcementData));
 
       httpErrorHandle(
           response: res,
@@ -172,8 +172,8 @@ class AnnouncementServices {
     }
 
     try {
-      http.Response res = await http.post(
-        Uri.parse('$url/api/delete-announcement'),
+      http.Response res = await http.delete(
+        Uri.parse('$url/api/v1/announcements'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           // 'x-auth-token': userProvider.user.token,

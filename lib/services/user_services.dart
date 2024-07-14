@@ -18,11 +18,13 @@ class UserService {
     }
 
     try {
-      http.Response res = await http.post(Uri.parse("$url/api/signin"),
-          body: jsonEncode({'username': username, 'password': password}),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8'
-          });
+      final uri = Uri.parse("$url/api/v1/signin").replace(queryParameters: {
+        'username': username,
+        'password': password,
+      });
+      http.Response res = await http.post(uri, headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8'
+      });
 
       httpErrorHandle(
         response: res,

@@ -40,7 +40,7 @@ taskRouter.post("/api/v1/tasks", async (req, res) => {
 taskRouter.get("/api/v1/tasks", async (req, res) => {
   try {
     const tasks = await Task.find({});
-    res.json(tasks);
+    res.json({ status: "success", data: tasks });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -57,7 +57,7 @@ taskRouter.get("/api/v1/tasks/:assignedBy", async (req, res) => {
         .status(400)
         .json({ message: `cannot find an tasks with username: ${assignedBy}` });
     }
-    res.json(tasks);
+    res.json({ status: "success", data: tasks });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -76,7 +76,7 @@ taskRouter.get("/api/v1/tasks/assignedTo/:assignedTo", async (req, res) => {
         .status(400)
         .json({ message: `cannot find an tasks with username: ${assignedTo}` });
     }
-    res.json(tasks);
+    res.json({ status: "success", data: tasks });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -98,7 +98,7 @@ taskRouter.get(
           message: `cannot find an tasks with username: ${assignedTo}`,
         });
       }
-      res.json(tasks);
+      res.json({ status: "success", data: tasks });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -122,7 +122,7 @@ taskRouter.get("/api/v1/highlights", async (req, res) => {
     });
     images = images.reverse()
     // console.log(images)
-    res.json(images);
+    res.json({ status: "success", data: images });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

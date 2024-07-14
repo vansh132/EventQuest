@@ -36,7 +36,7 @@ class TaskServices {
       );
 
       http.Response res = await http.post(
-        Uri.parse('$url/api/add-task'),
+        Uri.parse('$url/api/v1/tasks'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -69,7 +69,7 @@ class TaskServices {
 
     try {
       http.Response res = await http.get(
-          Uri.parse("$url/api/tasks/assignedTo/${userProvider.username}"),
+          Uri.parse("$url/api/v1/tasks/assignedTo/${userProvider.username}"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8'
           });
@@ -80,8 +80,9 @@ class TaskServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            for (int i = 0; i < jsonDecode(res.body).length; i++) {
-              taskList.add(Task.fromJson(jsonEncode(jsonDecode(res.body)[i])));
+            for (int i = 0; i < jsonDecode(res.body)['data'].length; i++) {
+              taskList.add(
+                  Task.fromJson(jsonEncode(jsonDecode(res.body)['data'][i])));
             }
           });
     } catch (e) {
@@ -102,7 +103,7 @@ class TaskServices {
 
     try {
       http.Response res = await http.get(
-          Uri.parse("$url/api/tasks/${userProvider.username}"),
+          Uri.parse("$url/api/v1/tasks/${userProvider.username}"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8'
           });
@@ -113,8 +114,9 @@ class TaskServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            for (int i = 0; i < jsonDecode(res.body).length; i++) {
-              taskList.add(Task.fromJson(jsonEncode(jsonDecode(res.body)[i])));
+            for (int i = 0; i < jsonDecode(res.body)['data'].length; i++) {
+              taskList.add(
+                  Task.fromJson(jsonEncode(jsonDecode(res.body)['data'][i])));
             }
           });
     } catch (e) {
@@ -136,8 +138,7 @@ class TaskServices {
 
     try {
       http.Response res = await http.get(
-          Uri.parse(
-              "$url/api/tasks/assignedTo/history/${userProvider.username}"),
+          Uri.parse("$url/api/v1/tasks/history/${userProvider.username}"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8'
           });
@@ -148,8 +149,9 @@ class TaskServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            for (int i = 0; i < jsonDecode(res.body).length; i++) {
-              taskList.add(Task.fromJson(jsonEncode(jsonDecode(res.body)[i])));
+            for (int i = 0; i < jsonDecode(res.body)['data'].length; i++) {
+              taskList.add(
+                  Task.fromJson(jsonEncode(jsonDecode(res.body)['data'][i])));
             }
           });
     } catch (e) {
@@ -170,11 +172,11 @@ class TaskServices {
     List<String> images = [];
 
     try {
-      http.Response res = await http.get(Uri.parse("$url/api/highlights"),
+      http.Response res = await http.get(Uri.parse("$url/api/v1/highlights"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8'
           });
-
+      print(res.body);
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
@@ -183,8 +185,9 @@ class TaskServices {
           onSuccess: () {
             // print("efef");
             // print("vansh - " + jsonEncode((jsonDecode(res.body)[0])));
-            for (int i = 0; i < jsonDecode(res.body).length; i++) {
-              images.add(jsonDecode(jsonEncode(jsonDecode(res.body)[i])));
+            for (int i = 0; i < jsonDecode(res.body)['data'].length; i++) {
+              images
+                  .add(jsonDecode(jsonEncode(jsonDecode(res.body)['data'][i])));
               // print(res.body);
               // print(images);
             }

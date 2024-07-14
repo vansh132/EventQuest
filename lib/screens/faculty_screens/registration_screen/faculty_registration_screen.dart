@@ -125,30 +125,24 @@ class _FacultyRegistrationScreenState extends State<FacultyRegistrationScreen> {
                                     ],
                                     rows: registrations.map((registration) {
                                       return DataRow(cells: [
-                                        DataCell(Flexible(
-                                            child:
-                                                Text(registration.userName))),
-                                        DataCell(Flexible(
-                                            child: Text(
-                                                registration.eventAmount))),
-                                        DataCell(Flexible(
-                                            child: Text(registration
-                                                .participantsName
-                                                .toString()
-                                                .replaceAll(
-                                                    RegExp(r'[\[\]]'), '')))),
-                                        DataCell(Flexible(
-                                            child: Text(registration
-                                                .participantsCategory
-                                                .toString()
-                                                .replaceAll(
-                                                    RegExp(r'[\[\]]'), '')))),
-                                        DataCell(Flexible(
-                                            child: Text(registration
-                                                .participantsRegisterNo
-                                                .toString()
-                                                .replaceAll(
-                                                    RegExp(r'[\[\]]'), '')))),
+                                        DataCell(Text(registration.userName)),
+                                        DataCell(
+                                            Text(registration.eventAmount)),
+                                        DataCell(Text(registration
+                                            .participantsName
+                                            .toString()
+                                            .replaceAll(
+                                                RegExp(r'[\[\]]'), ''))),
+                                        DataCell(Text(registration
+                                            .participantsCategory
+                                            .toString()
+                                            .replaceAll(
+                                                RegExp(r'[\[\]]'), ''))),
+                                        DataCell(Text(registration
+                                            .participantsRegisterNo
+                                            .toString()
+                                            .replaceAll(
+                                                RegExp(r'[\[\]]'), ''))),
                                       ]);
                                     }).toList(),
                                   ),
