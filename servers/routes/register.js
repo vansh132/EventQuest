@@ -2,8 +2,8 @@ const express = require('express')
 const Register = require('../models/register')
 const registerRouter = express.Router()
 
-
-registerRouter.get('/api/registrations', async (req, res) => {
+// GET - All Registrations
+registerRouter.get('/api/v1/registrations', async (req, res) => {
     try {
         const registrations = await Register.find({})
         res.json(registrations)
@@ -12,7 +12,8 @@ registerRouter.get('/api/registrations', async (req, res) => {
     }
 })
 
-registerRouter.post('/api/add-registration', async (req, res) => {
+// POST - Registration Form
+registerRouter.post('/api/v1/registrations', async (req, res) => {
     try {
         const { eventName, eventAmount, eventCategory, eventNoOfParticipants, userName, participantsName, participantsRegisterNo, participantsCategory } = req.body
         let register = new Register({

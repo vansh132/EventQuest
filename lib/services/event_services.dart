@@ -100,6 +100,7 @@ class EventServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
+            print(jsonDecode(res.body)['data']);
             for (int i = 0; i < jsonDecode(res.body).length; i++) {
               eventList
                   .add(Event.fromJson(jsonEncode(jsonDecode(res.body)[i])));

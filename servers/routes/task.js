@@ -4,7 +4,8 @@ const Event = require("../models/event");
 const Announcement = require("../models/announcement");
 const taskRouter = express.Router();
 
-taskRouter.post("/api/add-task", async (req, res) => {
+// POST - Assign Task
+taskRouter.post("/api/v1/tasks", async (req, res) => {
   try {
     const {
       taskTitle,
@@ -27,13 +28,16 @@ taskRouter.post("/api/add-task", async (req, res) => {
       taskStatus,
     });
     task = await task.save();
-    res.json(task);
+    res
+      .status(201)
+      .json({ status: "Success", message: "Task Added Successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-taskRouter.get("/api/tasks", async (req, res) => {
+// GET - All Tasks
+taskRouter.get("/api/v1/tasks", async (req, res) => {
   try {
     const tasks = await Task.find({});
     res.json(tasks);
@@ -42,7 +46,8 @@ taskRouter.get("/api/tasks", async (req, res) => {
   }
 });
 
-taskRouter.get("/api/tasks/:assignedBy", async (req, res) => {
+// GET - Task AssignedBy
+taskRouter.get("/api/v1/tasks/:assignedBy", async (req, res) => {
   try {
     const { assignedBy } = req.params;
     const tasks = await Task.find({ assignedBy: assignedBy });
@@ -58,7 +63,7 @@ taskRouter.get("/api/tasks/:assignedBy", async (req, res) => {
   }
 });
 
-taskRouter.get("/api/tasks/assignedTo/:assignedTo", async (req, res) => {
+taskRouter.get("/api/v1/tasks/assignedTo/:assignedTo", async (req, res) => {
   try {
     const { assignedTo } = req.params;
     const tasks = await Task.find({
@@ -77,8 +82,9 @@ taskRouter.get("/api/tasks/assignedTo/:assignedTo", async (req, res) => {
   }
 });
 
+// GET - Task History by assignedTo
 taskRouter.get(
-  "/api/tasks/assignedTo/history/:assignedTo",
+  "/api/v1/tasks/history/:assignedTo",
   async (req, res) => {
     try {
       const { assignedTo } = req.params;
@@ -99,7 +105,8 @@ taskRouter.get(
   }
 );
 
-taskRouter.get("/api/highlights", async (req, res) => {
+// GET - Announcement and Events Highlights
+taskRouter.get("/api/v1/highlights", async (req, res) => {
   try {
     const events = await Event.find({});
     const announcements = await Announcement.find({});
@@ -121,15 +128,17 @@ taskRouter.get("/api/highlights", async (req, res) => {
   }
 });
 
-taskRouter.post("/api/add-poster/:taskId", async (req, res) => {
+// PUT - Update Task
+taskRouter.put("/api/v1/tasks/:taskId", async (req, res) => {
   try {
     const { taskId } = req.params;
     const task = await Task.findByIdAndUpdate(taskId, req.body);
     if (!task) {
       return res.status(400).json({ message: `cannot find an task` });
     }
-    const updatedTask = await Task.findById(taskId);
-    res.status(200).json(updatedTask);
+    res
+      .status(200)
+      .json({ status: "Success", message: "Task Updated Successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

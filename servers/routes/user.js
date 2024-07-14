@@ -25,12 +25,14 @@ userRouter.post('/api/signup', async (req, res) => {
     }
 })
 
-userRouter.post('/api/signin', async (req, res) => {
+// POST - Sign In
+userRouter.post('/api/v1/signin', async (req, res) => {
 
     try {
 
-        const { username, password } = req.body;
-        // console.log("cec")
+        const username = req.query.username;
+        const password = req.query.password;
+        console.log(username)
         const user = await User.findOne({ username })
 
 

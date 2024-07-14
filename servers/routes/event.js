@@ -33,7 +33,7 @@ eventRouter.get("/api/v1/pg/events", async (req, res) => {
 });
 
 //POST - Add an event
-eventRouter.post("/api/v1/add/event", async (req, res) => {
+eventRouter.post("/api/v1/events", async (req, res) => {
   try {
     const {
       eventName,
@@ -71,10 +71,10 @@ eventRouter.post("/api/v1/add/event", async (req, res) => {
   }
 });
 
-//POST - Update an event
-eventRouter.post("/api/v1/update/event", async (req, res) => {
+//PUT - Update an event
+eventRouter.put("/api/v1/events/:id", async (req, res) => {
   try {
-    const id = req.query.id; //query params changed
+    const { id } = req.params; //query params changed
     const event = await Event.findByIdAndUpdate(id, req.body);
     if (!event) {
       return res
@@ -91,15 +91,16 @@ eventRouter.post("/api/v1/update/event", async (req, res) => {
 });
 
 //POST - Delete an event
-eventRouter.post("/api/v1/delete/event", async (req, res) => {
+eventRouter.delete("/api/v1/events/:id", async (req, res) => {
   try {
-    const id = req.query.id;
-    Event.findByIdAndDelete(id);
+    const { id } = req.params;
+    const event = await Event.findByIdAndDelete(id);
 
-    res.status(200).json({
-      status: "Success",
-      message: "Event Deleted Successfully",
-    });
+    if (!event) {
+      return res.status(404).json({ status: "Failure", message: "Event not found" });
+    }
+
+    res.status(200).json({ status: "Success", message: "Event Deleted Successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

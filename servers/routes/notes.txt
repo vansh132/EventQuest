@@ -46,3 +46,8 @@ GET /things returns:
 
 ///
 500 - server error
+
+
+req.query = when the data is short or you want to search something.
+req.params = when we want to pass the id to apply changes.
+req.body = when you have large amount of data.You can pass to body.
