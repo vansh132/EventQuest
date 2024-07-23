@@ -18,17 +18,23 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
   TextEditingController remarkController = TextEditingController();
 
   Task task = Task(
-      taskTitle: "",
-      taskDescription: "",
-      taskType: "",
-      assignedTo: "",
-      assignedBy: "",
-      taskStatus: false);
+    taskTitle: "",
+    taskDescription: "",
+    taskType: "",
+    assignedTo: "",
+    assignedBy: "",
+    taskStatus: false,
+    taskSubmission: false,
+  );
   TaskServices taskServices = TaskServices();
 
   void addRemark() async {
     await taskServices.addRemarks(
-        context: context, taskId: task.taskId, remarks: remarkController.text);
+      context: context,
+      taskId: task.taskId,
+      remarks: remarkController.text,
+      taskSubmission: false,
+    );
   }
 
   void markAsCompleted() async {

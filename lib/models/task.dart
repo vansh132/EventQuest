@@ -9,6 +9,7 @@ class Task {
   final String assignedBy;
   String? taskFile;
   String? remarks;
+  final bool taskSubmission;
   final bool taskStatus;
   Task({
     this.taskId = '',
@@ -19,6 +20,7 @@ class Task {
     required this.assignedBy,
     this.taskFile,
     this.remarks,
+    required this.taskSubmission,
     required this.taskStatus,
   });
 
@@ -37,6 +39,7 @@ class Task {
     if (remarks != null) {
       result.addAll({'remarks': remarks});
     }
+    result.addAll({'taskSubmission': taskSubmission});
     result.addAll({'taskStatus': taskStatus});
 
     return result;
@@ -52,6 +55,7 @@ class Task {
       assignedBy: map['assignedBy'] ?? '',
       taskFile: map['taskFile'],
       remarks: map['remarks'],
+      taskSubmission: map['taskSubmission'] ?? false,
       taskStatus: map['taskStatus'] ?? false,
     );
   }

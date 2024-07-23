@@ -33,6 +33,7 @@ class TaskServices {
         assignedTo: assignedTo,
         assignedBy: userProvider.username,
         taskStatus: false,
+        taskSubmission: false,
       );
 
       http.Response res = await http.post(
@@ -203,6 +204,7 @@ class TaskServices {
     required BuildContext context,
     required String taskId,
     required File posterImage,
+    required bool taskSubmission,
   }) async {
     String imageUrl = "";
     final cloudinary = CloudinaryPublic('dq1q5mtdo', 'fwsfdscu');
@@ -217,21 +219,23 @@ class TaskServices {
       showSnackBar(context, errorMessage);
     }
 
-    final posterImages = {"taskFile": imageUrl};
+    final posterImages = {
+      "taskFile": imageUrl,
+      "taskSubmission": taskSubmission,
+    };
     try {
-      http.Response res =
-          await http.post(Uri.parse("$url/api/add-poster/$taskId"),
-              headers: <String, String>{
-                "Content-Type": 'application/json; charset=UTF-8',
-              },
-              body: jsonEncode(posterImages));
+      http.Response res = await http.put(Uri.parse("$url/api/v1/tasks/$taskId"),
+          headers: <String, String>{
+            "Content-Type": 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(posterImages));
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            // showSnackBar(context, "Poster Uploaded!! ");
+            showSnackBar(context, "Poster Uploaded!! ");
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";
@@ -243,19 +247,22 @@ class TaskServices {
     required BuildContext context,
     required String taskId,
     required String remarks,
+    required bool taskSubmission,
   }) async {
     void handleHttpError(String errorMessage) {
       showSnackBar(context, errorMessage);
     }
 
-    final remark = {"remarks": remarks};
+    final remark = {
+      "remarks": remarks,
+      "taskSubmission": taskSubmission,
+    };
     try {
-      http.Response res =
-          await http.post(Uri.parse("$url/api/add-poster/$taskId"),
-              headers: <String, String>{
-                "Content-Type": 'application/json; charset=UTF-8',
-              },
-              body: jsonEncode(remark));
+      http.Response res = await http.put(Uri.parse("$url/api/v1/tasks/$taskId"),
+          headers: <String, String>{
+            "Content-Type": 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(remark));
       httpErrorHandle(
           response: res,
           onError: (errMessage) {

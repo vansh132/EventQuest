@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:eventquest/models/task.dart';
 import 'package:eventquest/screens/constants/utils.dart';
+import 'package:eventquest/services/poster_validation.dart';
 import 'package:eventquest/services/task_services.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -19,16 +20,21 @@ class TaskDetailScreen extends StatefulWidget {
 
 class _TaskDetailScreenState extends State<TaskDetailScreen> {
   File image = File("");
-  bool submitted = false;
-  int validation = 0;
+  String posterValidationMessage = '';
+  bool posterValidationStatus = false;
+  late bool taskSubmission;
+
   Task task = Task(
-      taskTitle: "",
-      taskDescription: "",
-      taskType: "",
-      assignedTo: "",
-      assignedBy: "",
-      taskStatus: false);
+    taskTitle: "",
+    taskDescription: "",
+    taskType: "",
+    assignedTo: "",
+    assignedBy: "",
+    taskStatus: false,
+    taskSubmission: false,
+  );
   TaskServices taskServices = TaskServices();
+  PosterValidation posterValidation = PosterValidation();
 
   void selectImages() async {
     var res = await pickImages();
@@ -39,7 +45,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
 
   void clearImage() {
     setState(() {
-      validation = 0;
+      posterValidationMessage = "";
       task.taskFile = "";
       image = File("");
     });
@@ -52,11 +58,12 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
       return;
     } else {
       await taskServices.addPoster(
-          context: context, taskId: task.taskId, posterImage: image);
+        context: context,
+        taskId: task.taskId,
+        posterImage: image,
+        taskSubmission: true,
+      );
     }
-    setState(() {
-      submitted = true;
-    });
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -83,84 +90,61 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
         allowMultiple: false,
       );
       if (files != null && files.files.isNotEmpty) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CircularProgressIndicator(),
+                    SizedBox(height: 16),
+                    Text(
+                      "Processing...",
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+
         image = File(files.files[0].path!);
-        // image file name
-        print("vansh132" + files.files[0].name);
-        if (files.files[0].name.split("-")[0] == "christ") {
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (BuildContext context) {
-              return Dialog(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CircularProgressIndicator(),
-                      SizedBox(height: 16),
-                      Text(
-                        "Processing...",
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          );
+        var result = await posterValidation.verifyPoster(
+            context: context, posterImage: image);
 
-          // Adding delay of 2 seconds
-          await Future.delayed(const Duration(seconds: 2));
+        // Adding delay of 2 seconds
+        await Future.delayed(const Duration(seconds: 2));
 
-          Navigator.pop(context); // Dismiss the dialog
-          setState(() {
-            validation = 1;
-          });
+        Navigator.pop(context); // Dismiss the dialog
+
+        if (result == "Valid poster") {
+          posterValidationStatus = true;
+          posterValidationMessage = "Hurray, Poster validated successfully...";
+          print("Hurray, Poster validated successfully...");
+        } else if (result == "Invalid poster") {
+          posterValidationStatus = false;
+          posterValidationMessage =
+              "OOPS, Poster is invalid. Please read guidelines...";
+          print("OOPS, Poster is invalid. Please read guidelines.");
+        } else if (result == "Logo not detected") {
+          posterValidationStatus = false;
+          posterValidationMessage =
+              "Please add CHRIST logo at top-right. Read guidelines..";
+          print("Please add CHRIST logo at top-right. Read guidelines.");
         } else {
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (BuildContext context) {
-              return Dialog(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CircularProgressIndicator(),
-                      SizedBox(height: 16),
-                      Text(
-                        "Processing...",
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          );
-
-          // Adding delay of 2 seconds
-          await Future.delayed(const Duration(seconds: 2));
-          Navigator.pop(context); // Dismiss the dialog
-          setState(() {
-            validation = 2;
-            // task.taskFile = "";
-            // image = File("");
-          });
+          posterValidationMessage = "Something went wrong...";
+          print("Something went wrong...");
         }
       }
     } catch (e) {
@@ -173,13 +157,11 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     task = ModalRoute.of(context)!.settings.arguments as Task;
+    taskSubmission = task.taskSubmission;
   }
 
   @override
   Widget build(BuildContext context) {
-    Task temptask = ModalRoute.of(context)!.settings.arguments as Task;
-
-    print(temptask);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -343,60 +325,27 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                                       ),
                                     ),
                                   ),
-
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    validation == 0
-                        ? SizedBox()
-                        : validation == 1
-                            ? Container(
-                                padding: EdgeInsets.all(12.0),
-                                decoration: BoxDecoration(
-                                  color: Colors.green,
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                child: Text(
-                                  "Poster Validated",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              )
-                            : Container(
-                                padding: EdgeInsets.all(12.0),
-                                decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                child: Text(
-                                  "One of the guidelines have been violated",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
+                    Text(posterValidationMessage),
                     task.taskStatus
                         ? const SizedBox()
                         : Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               ElevatedButton.icon(
-                                onPressed:
-                                    submitted == true ? null : clearImage,
+                                onPressed: task.taskSubmission == true
+                                    ? null
+                                    : clearImage,
                                 label: Text(
-                                  task.taskFile == ""
+                                  task.taskFile != ""
                                       ? "Clear"
                                       : "Clear Submission",
                                 ),
                                 icon: const Icon(Icons.cancel_outlined),
                               ),
                               ElevatedButton.icon(
-                                onPressed: submitted == true
+                                onPressed: posterValidationStatus == false
                                     ? null
-                                    : validation == 2
+                                    : task.taskSubmission == true
                                         ? null
                                         : submitImage,
                                 icon: const Icon(
@@ -471,7 +420,7 @@ Widget topbarTitle(BuildContext context, Task task) {
         BoxShadow(
           color: Colors.black.withOpacity(0.5),
           spreadRadius: 5,
-          blurRadius: 7,
+          blurRadius: 2,
           offset: const Offset(3, 7),
         ),
       ],
