@@ -12,8 +12,8 @@ import 'package:eventquest/screens/faculty_screens/task_screens/faculty_edit_tas
 import 'package:eventquest/screens/faculty_screens/task_screens/faculty_task_detail_screen.dart';
 import 'package:eventquest/screens/login_screen.dart';
 import 'package:eventquest/screens/student_screens/announcement_screens/announcement_detail_screen.dart';
+import 'package:eventquest/screens/student_screens/event_screens/editReportScrreen.dart';
 import 'package:eventquest/screens/student_screens/event_screens/event_detail_screen.dart';
-import 'package:eventquest/screens/student_screens/event_screens/report.dart';
 import 'package:eventquest/screens/student_screens/registration_screens/registration_screen.dart';
 import 'package:eventquest/screens/student_screens/task_screens/task_detail_screen.dart';
 import 'package:flutter/material.dart';
@@ -54,11 +54,6 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const EditEventScreen(),
-      );
-    case EditEventReportForm.routeName:
-      return MaterialPageRoute(
-        settings: routeSettings,
-        builder: (_) => EditEventReportForm(),
       );
     case AddAnnouncementScreen.routeName:
       return MaterialPageRoute(

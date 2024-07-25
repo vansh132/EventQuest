@@ -2,7 +2,6 @@ import 'package:eventquest/models/event.dart';
 import 'package:eventquest/models/eventReport.dart';
 import 'package:eventquest/provider/user_provider.dart';
 import 'package:eventquest/screens/faculty_screens/api_screen.dart';
-import 'package:eventquest/screens/student_screens/event_screens/report.dart';
 import 'package:eventquest/screens/student_screens/registration_screens/registration_screen.dart';
 import 'package:eventquest/services/report_services.dart';
 import 'package:flutter/gestures.dart';
@@ -108,7 +107,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
   Future<void> _generateFollowUp(Event event) async {
     final content = [
       Content.text(
-          "${event.eventName} Event name and $generatedActivitySummary.Please write the FollowUp of the Activity for this event in simple one point which should be real.Don't put Title.please dont use **"),
+          "${event.eventName} Event name and $generatedActivitySummary.Please write the FollowUp of the Activity for this event in simple one point which should be real.please dont use **"),
     ];
     final response = await model.generateContent(content);
     setState(() {
@@ -559,22 +558,23 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                         backgroundColor: const Color(0xff003049),
                         foregroundColor: Colors.white),
                     onPressed: () async {
-                      // if (generatedContent.isEmpty) {
-                      //   // Show a message if content is not generated yet
-                      //   ScaffoldMessenger.of(context).showSnackBar(
-                      //     SnackBar(
-                      //         content: Text(
-                      //             'Content is still generating, please wait.')),
-                      //   );
-                      //   return;
-                      // }
+                      if (generatedContent.isEmpty ||
+                          generatedActivitySummary.isEmpty ||
+                          generatedFollowUp.isEmpty ||
+                          generatedHighlightsOfActivity.isEmpty ||
+                          generatedKeyTakeAways.isEmpty) {
+                        // Show a message if content is not generated yet
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content: Text(
+                                  'Content is still generating, please wait.')),
+                        );
+                        return;
+                      }
 
-                      // final pdf = await _createPdf(event);
-                      // await Printing.layoutPdf(
-                      //   onLayout: (PdfPageFormat format) async => pdf.save(),
-                      // );
-                      Navigator.of(context).pushNamed(
-                        EditEventReportForm.routeName,
+                      final pdf = await _createPdf(event);
+                      await Printing.layoutPdf(
+                        onLayout: (PdfPageFormat format) async => pdf.save(),
                       );
                     },
                     child: const Text(
