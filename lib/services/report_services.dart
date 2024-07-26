@@ -23,15 +23,30 @@ class ReportServices {
           },
           onSuccess: () {
             final jsonData = jsonDecode(res.body) as List;
-            print(jsonData);
             eventReportList =
                 jsonData.map((item) => EventReport.fromJson(item)).toList();
           });
-      print(eventReportList);
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";
       showSnackBar(context, errorMessage);
     }
     return eventReportList;
+  }
+
+  Future<void> addEventReport(EventReport eventReport) async {
+    final url = Uri.parse('/api/v1/reports');
+    final response = await http.post(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(eventReport.toJson()),
+    );
+
+    if (response.statusCode == 200) {
+      print('Event report added successfully');
+    } else {
+      throw Exception('Failed to add event report');
+    }
   }
 }

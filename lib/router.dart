@@ -1,3 +1,4 @@
+import 'package:eventquest/models/eventReport.dart';
 import 'package:eventquest/screen_items/custom_navigation_botttom_bar.dart';
 import 'package:eventquest/screen_items/faculty_custom_navigation_bottom_bar.dart';
 import 'package:eventquest/screens/faculty_screens/announcement_screens/add_announcement_screen.dart';
@@ -12,7 +13,7 @@ import 'package:eventquest/screens/faculty_screens/task_screens/faculty_edit_tas
 import 'package:eventquest/screens/faculty_screens/task_screens/faculty_task_detail_screen.dart';
 import 'package:eventquest/screens/login_screen.dart';
 import 'package:eventquest/screens/student_screens/announcement_screens/announcement_detail_screen.dart';
-import 'package:eventquest/screens/student_screens/event_screens/editReportScrreen.dart';
+import 'package:eventquest/screens/student_screens/event_screens/eventReport.dart';
 import 'package:eventquest/screens/student_screens/event_screens/event_detail_screen.dart';
 import 'package:eventquest/screens/student_screens/registration_screens/registration_screen.dart';
 import 'package:eventquest/screens/student_screens/task_screens/task_detail_screen.dart';
@@ -40,6 +41,12 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => const RegistrationScreen(),
       );
+    case ReportForm.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => ReportForm(),
+      );
+
     case CustomBottomNavigationBar.routeName:
       return MaterialPageRoute(
         settings: routeSettings,

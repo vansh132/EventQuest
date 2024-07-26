@@ -13,9 +13,9 @@ class EventReport {
   final String rapporteurEmail;
   final String eventDescriptiveReport;
   final List<SpeakersBio> speakersProfile;
-  final List<String> geoTagPhotos;
-  final List<String> feedbackForm;
-  final List<String> activityImages;
+  final String geoTagPhotos;
+  final String feedbackForm;
+  final String activityImages;
   final String poster;
 
   EventReport({
@@ -48,9 +48,9 @@ class EventReport {
       speakersProfile: (json['speakersProfile'] as List)
           .map((i) => SpeakersBio.fromJson(i))
           .toList(),
-      geoTagPhotos: List<String>.from(json['geoTagPhotos']),
-      feedbackForm: List<String>.from(json['feedbackForm']),
-      activityImages: List<String>.from(json['activityImages']),
+      geoTagPhotos: json['geoTagPhotos'],
+      feedbackForm: json['feedbackForm'],
+      activityImages: json['activityImages'],
       poster: json['poster'],
     );
   }

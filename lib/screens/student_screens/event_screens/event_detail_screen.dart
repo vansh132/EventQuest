@@ -1,16 +1,16 @@
 import 'package:eventquest/models/event.dart';
 import 'package:eventquest/models/eventReport.dart';
+import 'package:eventquest/models/eventSynopsis.dart';
+import 'package:eventquest/models/generalInfo.dart';
+import 'package:eventquest/models/participantsDetail.dart';
+import 'package:eventquest/models/speakerBio.dart';
+import 'package:eventquest/models/speakerDetails.dart';
 import 'package:eventquest/provider/user_provider.dart';
-import 'package:eventquest/screens/faculty_screens/api_screen.dart';
+import 'package:eventquest/screens/student_screens/event_screens/eventReport.dart';
 import 'package:eventquest/screens/student_screens/registration_screens/registration_screen.dart';
-import 'package:eventquest/services/report_services.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:printing/printing.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -33,8 +33,6 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
   String generatedActivitySummary = '';
   String generatedFollowUp = '';
 
-  List<EventReport> eventReports = [];
-
   @override
   void initState() {
     super.initState();
@@ -47,23 +45,13 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
       await _generateKeyTakeAways(event); // Wait for _generateC to complete
       await _generateActivitySummary(event); // Wait for _generateC to complete
       await _generateFollowUp(event); // Wait for _generateC to complete
-
-      _fetchReports(context); // Start _fetchReports
-    });
-  }
-
-  Future<void> _fetchReports(BuildContext context) async {
-    ReportServices service = ReportServices();
-    List<EventReport> reports = await service.getAllReports(context);
-    setState(() {
-      eventReports = reports;
     });
   }
 
   Future<void> _generateContent(Event event) async {
     final content = [
       Content.text(
-          "${event.eventName} Event name and ${event.eventDescription} event description.Please write the report for this event for minimum 700 and maximum 1000 words in single paragraph only.please dont use **"),
+          "${event.eventName} Event name and ${event.eventDescription} event description.Please write the report for this event for minimum 700 and maximum 1000 words in single paragraph only.please dont use **. Don't write title"),
     ];
     final response = await model.generateContent(content);
     setState(() {
@@ -115,216 +103,6 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
     });
   }
 
-  Future<pw.Document> _createPdf(Event event) async {
-    final pdf = pw.Document();
-
-    List<Map<String, String>> speakerDetails = [
-      {
-        'Name': 'John Doe',
-        'Title/Position': 'Professor',
-        'Organization': 'Institute',
-        'Title of Presentation': 'AI and ML'
-      },
-      {
-        'Name': 'John Doe1',
-        'Title/Position': 'Professor1',
-        'Organization': 'Institute1',
-        'Title of Presentation': 'AI and ML1'
-      }
-    ];
-
-    List<Map<String, String>> generalInfo = [
-      {
-        'Type of Activity': 'Workshop/Seminar/Conference/Training/Events *',
-        'Title of the Activity': event.eventName,
-        'Date/s': event.eventPublishedOn,
-        'Time': 'Njkh',
-        'Venue': 'Jk',
-        'Collaboration/Sponsor (if any)': 'Njk'
-      },
-    ];
-
-    List<Map<String, String>> participantsProfile = [
-      {
-        'Type of Participants': 'Student/Faculty/Research Scholar',
-        'No. of Participants': 'Nk'
-      },
-    ];
-
-    List<Map<String, String>> synopsis = [
-      {
-        'Highlights of the Activity': generatedHighlightsOfActivity,
-        'Key Takeaways': generatedKeyTakeAways,
-        'Summary of the Activity': generatedActivitySummary,
-        'Follow-up Plan, if any': generatedFollowUp
-      },
-    ];
-
-    List<Map<String, String>> rapporteurDetails = [
-      {
-        'Name of the Rapporteur': 'Nknkj Nknknl Nlk,m',
-        'Email and Contact No': 'Nnknjk'
-      },
-    ];
-
-    String paragraphText = generatedContent;
-
-    List<Map<String, String>> speakers = [
-      {
-        'bio': '''
-        Dr. John Doe is a renowned expert in computer science with over 20 years of experience in the field. He has contributed significantly to research in artificial intelligence and machine learning. He has published numerous papers in top-tier conferences and journals. He is currently a professor at XYZ University, where he leads a research group focusing on AI advancements.
-        ''',
-        'image': 'assets/images/placement.jpeg'
-      },
-      {
-        'bio': '''
-        Jane Smith is a leading researcher in data science, specializing in big data analytics and machine learning. She works at the ABC Institute, where she heads the Data Science department. Jane has a rich portfolio of research papers and has been a speaker at various international conferences.
-        ''',
-        'image': 'assets/images/placement.jpeg'
-      },
-    ];
-
-    List<Uint8List> speakerImages = [];
-    for (var speaker in speakers) {
-      final imageBytes =
-          (await rootBundle.load(speaker['image']!)).buffer.asUint8List();
-      speakerImages.add(imageBytes);
-    }
-
-    pw.Widget header = pw.Column(
-      children: [
-        pw.Text('School of Sciences',
-            style: pw.TextStyle(fontSize: 16, fontWeight: pw.FontWeight.bold)),
-        pw.Text('Department of Computer Science',
-            style: pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
-        pw.Text('CHRIST (Deemed to be University), Bangalore',
-            style: const pw.TextStyle(fontSize: 12)),
-        pw.SizedBox(height: 30),
-        pw.Text('Activity Report',
-            style: pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold)),
-        pw.SizedBox(height: 20),
-      ],
-    );
-
-    pdf.addPage(
-      pw.MultiPage(
-        build: (context) => [
-          pw.Center(
-            child: pw.Container(
-              width: double.infinity,
-              child: header,
-            ),
-          ),
-          _buildTableSection('General Information', generalInfo),
-          _buildTableSection('Speaker/Guest/Presenter Details', speakerDetails),
-          _buildTableSection('Participants profile', participantsProfile),
-          _buildTableSection(
-              'Synopsis of the Activity (Description)', synopsis),
-          _buildTableSection('Rapporteur', rapporteurDetails),
-          pw.SizedBox(height: 20),
-          pw.Text('Descriptive Report',
-              textAlign: pw.TextAlign.justify,
-              style:
-                  pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
-          _buildParagraphSection(paragraphText),
-          pw.SizedBox(height: 20),
-          pw.Text('Speakers Profile',
-              style:
-                  pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
-          for (int i = 0; i < speakers.length; i++)
-            pw.Column(
-              crossAxisAlignment: pw.CrossAxisAlignment.start,
-              children: [
-                pw.Row(
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
-                  children: [
-                    pw.Container(
-                      width: 100,
-                      height: 100,
-                      child: pw.Image(
-                        pw.MemoryImage(speakerImages[i]),
-                        fit: pw.BoxFit.cover,
-                      ),
-                    ),
-                    pw.SizedBox(width: 20),
-                    pw.Expanded(
-                      child: pw.Text(
-                        speakers[i]['bio']!,
-                        textAlign: pw.TextAlign.justify,
-                      ),
-                    ),
-                  ],
-                ),
-                pw.SizedBox(height: 20),
-              ],
-            ),
-        ],
-      ),
-    );
-
-    return pdf;
-  }
-
-  pw.Widget _buildTableSection(String title, List<Map<String, String>> data) {
-    if (data.isEmpty) {
-      return pw.Container(); // Return an empty container if no data is provided
-    }
-
-    // Flatten the data from List<Map<String, String>> to List<Map<String, String>>
-    // where each Map contains only one key-value pair
-    final flattenedData = data.expand((map) {
-      return map.entries.map((entry) => {entry.key: entry.value});
-    }).toList();
-
-    return pw.Column(
-      crossAxisAlignment: pw.CrossAxisAlignment.start,
-      children: [
-        pw.Text(title,
-            style: pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
-        pw.Table(
-          border: pw.TableBorder.all(width: 1, color: PdfColors.black),
-          columnWidths: {
-            0: const pw.FixedColumnWidth(150), // Adjust the width as needed
-            1: const pw.FlexColumnWidth(), // Fill remaining space
-          },
-          children: [
-            // Table Data Rows
-            ...flattenedData.map((row) {
-              final key = row.keys.first;
-              final value = row[key] ?? '';
-              return pw.TableRow(
-                children: [
-                  pw.Padding(
-                    padding: const pw.EdgeInsets.all(8.0),
-                    child: pw.Text(
-                      key,
-                      style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
-                    ),
-                  ),
-                  pw.Padding(
-                    padding: const pw.EdgeInsets.all(8.0),
-                    child: pw.Text(
-                      value,
-                      textAlign: pw.TextAlign.justify,
-                    ),
-                  ),
-                ],
-              );
-            }).toList(),
-          ],
-        ),
-        pw.SizedBox(height: 20),
-      ],
-    );
-  }
-
-  pw.Widget _buildParagraphSection(String text) {
-    return pw.Paragraph(
-      text: text,
-      textAlign: pw.TextAlign.justify,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final Event event = ModalRoute.of(context)!.settings.arguments as Event;
@@ -332,6 +110,73 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
     final user = Provider.of<UserProvider>(context, listen: false).user;
     var date = event.eventRegistrationDeadline.split("T")[0];
     final DateFormat formatter = DateFormat('dd-MM-yyyy');
+
+    List<SpeakerDetails> speakerDetails = [
+      SpeakerDetails(
+        name: 'Dr. Alice Johnson',
+        position: 'Professor of Computer Science',
+        presentationTitle: 'The Future of Artificial Intelligence',
+        organization: 'Tech University',
+      ),
+      SpeakerDetails(
+        name: 'Mr. Bob Smith',
+        position: 'Chief Technology Officer',
+        presentationTitle: 'Innovations in Blockchain Technology',
+        organization: 'Innovate Corp',
+      ),
+    ];
+
+    GeneralInfo generalInfo = GeneralInfo(
+        type: 'type',
+        title: event.eventName,
+        date: event.eventPublishedOn,
+        time: 'time',
+        venue: 'venue');
+
+    ParticipantsDetail participantsProfile = ParticipantsDetail(
+        typeOfParticipants: 'typeOfParticipants', noOfParticipants: 5);
+
+    EventSynopsis synopsis = EventSynopsis(
+        highlights: generatedContent,
+        keyTakeaways: generatedKeyTakeAways,
+        summary: generatedActivitySummary,
+        followUp: generatedFollowUp);
+
+    String rapporteurName = 'high';
+    String raporteurEmail = 'abc@gmail.com';
+
+    String eventDescription = generatedContent;
+    String geoTag = 'geoTag';
+    String feedbackForm = 'feedBackForm';
+    String activityImages = 'Activity Images';
+    String poster = 'Poster';
+
+    List<SpeakersBio> speakersProfile = [
+      SpeakersBio(
+        image: '',
+        bio:
+            'Dr. Alice Johnson is a Professor of Computer Science at Tech University with a focus on Artificial Intelligence. She has published numerous papers and is a regular speaker at international conferences.',
+      ),
+      SpeakersBio(
+        image: '',
+        bio:
+            'Mr. Bob Smith, the Chief Technology Officer at Innovate Corp, is an expert in Blockchain Technology. He has over 20 years of experience in the tech industry and has been a key figure in several groundbreaking projects.',
+      ),
+    ];
+
+    final EventReport eventReport = EventReport(
+        generalInfo: generalInfo,
+        speakerDetails: speakerDetails,
+        participantsDetail: participantsProfile,
+        eventSynopsis: synopsis,
+        rapporteurName: rapporteurName,
+        rapporteurEmail: raporteurEmail,
+        eventDescriptiveReport: generatedContent,
+        speakersProfile: speakersProfile,
+        geoTagPhotos: geoTag,
+        feedbackForm: feedbackForm,
+        activityImages: activityImages,
+        poster: poster);
     return Scaffold(
       appBar: AppBar(
         title: Text(event.eventName),
@@ -558,27 +403,24 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                         backgroundColor: const Color(0xff003049),
                         foregroundColor: Colors.white),
                     onPressed: () async {
-                      if (generatedContent.isEmpty ||
-                          generatedActivitySummary.isEmpty ||
+                      if (generatedActivitySummary.isEmpty ||
+                          generatedContent.isEmpty ||
                           generatedFollowUp.isEmpty ||
-                          generatedHighlightsOfActivity.isEmpty ||
-                          generatedKeyTakeAways.isEmpty) {
-                        // Show a message if content is not generated yet
+                          generatedFollowUp.isEmpty ||
+                          generatedHighlightsOfActivity.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                              content: Text(
-                                  'Content is still generating, please wait.')),
+                            content: Text(
+                                'Please complete all generated content before proceeding.'),
+                          ),
                         );
-                        return;
+                      } else {
+                        Navigator.of(context).pushNamed(ReportForm.routeName,
+                            arguments: eventReport);
                       }
-
-                      final pdf = await _createPdf(event);
-                      await Printing.layoutPdf(
-                        onLayout: (PdfPageFormat format) async => pdf.save(),
-                      );
                     },
                     child: const Text(
-                      'Generate Report',
+                      'Edit Report',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
