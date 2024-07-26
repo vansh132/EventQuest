@@ -273,7 +273,7 @@ class _ReportFormState extends State<ReportForm> {
         pw.Container(
           width: MediaQuery.of(context).size.width * 0.7,
           padding: const pw.EdgeInsets.all(4),
-          child: pw.Text(value),
+          child: pw.Text(value, textAlign: pw.TextAlign.justify),
         ),
       ],
     );
@@ -286,7 +286,7 @@ class _ReportFormState extends State<ReportForm> {
         pw.Text(title,
             style: pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
         pw.SizedBox(height: 8),
-        pw.Text(content),
+        pw.Text(content, textAlign: pw.TextAlign.justify),
         pw.SizedBox(height: 16),
       ],
     );

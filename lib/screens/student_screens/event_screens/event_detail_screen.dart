@@ -111,20 +111,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
     var date = event.eventRegistrationDeadline.split("T")[0];
     final DateFormat formatter = DateFormat('dd-MM-yyyy');
 
-    List<SpeakerDetails> speakerDetails = [
-      SpeakerDetails(
-        name: 'Dr. Alice Johnson',
-        position: 'Professor of Computer Science',
-        presentationTitle: 'The Future of Artificial Intelligence',
-        organization: 'Tech University',
-      ),
-      SpeakerDetails(
-        name: 'Mr. Bob Smith',
-        position: 'Chief Technology Officer',
-        presentationTitle: 'Innovations in Blockchain Technology',
-        organization: 'Innovate Corp',
-      ),
-    ];
+    List<SpeakerDetails> speakerDetails = [];
 
     GeneralInfo generalInfo = GeneralInfo(
         type: 'type',
@@ -137,7 +124,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
         typeOfParticipants: 'typeOfParticipants', noOfParticipants: 5);
 
     EventSynopsis synopsis = EventSynopsis(
-        highlights: generatedContent,
+        highlights: generatedHighlightsOfActivity,
         keyTakeaways: generatedKeyTakeAways,
         summary: generatedActivitySummary,
         followUp: generatedFollowUp);
@@ -149,18 +136,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
     String activityImages = 'Activity Images';
     String poster = 'Poster';
 
-    List<SpeakersBio> speakersProfile = [
-      SpeakersBio(
-        image: '',
-        bio:
-            'Dr. Alice Johnson is a Professor of Computer Science at Tech University with a focus on Artificial Intelligence. She has published numerous papers and is a regular speaker at international conferences.',
-      ),
-      SpeakersBio(
-        image: '',
-        bio:
-            'Mr. Bob Smith, the Chief Technology Officer at Innovate Corp, is an expert in Blockchain Technology. He has over 20 years of experience in the tech industry and has been a key figure in several groundbreaking projects.',
-      ),
-    ];
+    List<SpeakersBio> speakersProfile = [];
 
     final EventReport eventReport = EventReport(
         generalInfo: generalInfo,
