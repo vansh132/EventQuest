@@ -44,7 +44,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
     case ReportForm.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => ReportForm(),
+        builder: (_) => const ReportForm(),
       );
 
     case CustomBottomNavigationBar.routeName:
