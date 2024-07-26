@@ -73,7 +73,6 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                   });
                   return ListView(
                     children: groupedEvents.entries.map((entry) {
-                      String date = entry.key;
                       List<Event> eventsForDate = entry.value;
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

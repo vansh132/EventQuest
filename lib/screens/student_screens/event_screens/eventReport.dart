@@ -31,12 +31,12 @@ class _ReportFormState extends State<ReportForm> {
   late TextEditingController _feedbackFormController;
   late TextEditingController _activityImagesController;
   late TextEditingController _posterController;
-  List<TextEditingController> _speakerNameControllers = [];
-  List<TextEditingController> _speakerPositionControllers = [];
-  List<TextEditingController> _speakerTitleControllers = [];
-  List<TextEditingController> _speakerOrganizationControllers = [];
-  List<TextEditingController> _speakerBioControllers = [];
-  List<TextEditingController> _speakerImageControllers = [];
+  final List<TextEditingController> _speakerNameControllers = [];
+  final List<TextEditingController> _speakerPositionControllers = [];
+  final List<TextEditingController> _speakerTitleControllers = [];
+  final List<TextEditingController> _speakerOrganizationControllers = [];
+  final List<TextEditingController> _speakerBioControllers = [];
+  final List<TextEditingController> _speakerImageControllers = [];
 
   @override
   void didChangeDependencies() {
@@ -266,13 +266,13 @@ class _ReportFormState extends State<ReportForm> {
       children: [
         pw.Container(
           width: MediaQuery.of(context).size.width * 0.3,
-          padding: pw.EdgeInsets.all(4),
+          padding: const pw.EdgeInsets.all(4),
           child: pw.Text(label,
               style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
         ),
         pw.Container(
           width: MediaQuery.of(context).size.width * 0.7,
-          padding: pw.EdgeInsets.all(4),
+          padding: const pw.EdgeInsets.all(4),
           child: pw.Text(value),
         ),
       ],
@@ -312,13 +312,24 @@ class _ReportFormState extends State<ReportForm> {
     _feedbackFormController.dispose();
     _activityImagesController.dispose();
     _posterController.dispose();
-    _speakerNameControllers.forEach((controller) => controller.dispose());
-    _speakerPositionControllers.forEach((controller) => controller.dispose());
-    _speakerTitleControllers.forEach((controller) => controller.dispose());
-    _speakerOrganizationControllers
-        .forEach((controller) => controller.dispose());
-    _speakerBioControllers.forEach((controller) => controller.dispose());
-    _speakerImageControllers.forEach((controller) => controller.dispose());
+    for (var controller in _speakerNameControllers) {
+      controller.dispose();
+    }
+    for (var controller in _speakerPositionControllers) {
+      controller.dispose();
+    }
+    for (var controller in _speakerTitleControllers) {
+      controller.dispose();
+    }
+    for (var controller in _speakerOrganizationControllers) {
+      controller.dispose();
+    }
+    for (var controller in _speakerBioControllers) {
+      controller.dispose();
+    }
+    for (var controller in _speakerImageControllers) {
+      controller.dispose();
+    }
     super.dispose();
   }
 
@@ -352,14 +363,12 @@ class _ReportFormState extends State<ReportForm> {
 
   @override
   Widget build(BuildContext context) {
-    final EventReport eventReport =
-        ModalRoute.of(context)!.settings.arguments as EventReport;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Event Report'),
+        title: const Text('Edit Event Report'),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -384,22 +393,22 @@ class _ReportFormState extends State<ReportForm> {
                 _eventDescriptionController, 'Event Description', true),
             ..._buildSpeakerDetails(),
             ..._buildSpeakerBios(),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _addSpeaker,
-              child: Text('Add Speaker'),
+              child: const Text('Add Speaker'),
             ),
             _buildTextField(_geoTagController, 'Geo Tag Photos', false),
             _buildTextField(_feedbackFormController, 'Feedback Form', false),
             _buildTextField(
                 _activityImagesController, 'Activity Images', false),
             _buildTextField(_posterController, 'Poster', false),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 _generatePdf();
               },
-              child: Text('Save'),
+              child: const Text('Save'),
             ),
           ],
         ),
@@ -414,7 +423,7 @@ class _ReportFormState extends State<ReportForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Speaker ${i + 1} Details',
-              style: TextStyle(fontWeight: FontWeight.bold)),
+              style: const TextStyle(fontWeight: FontWeight.bold)),
           _buildTextField(_speakerNameControllers[i], 'Speaker Name', false),
           _buildTextField(
               _speakerPositionControllers[i], 'Speaker Position', false),
@@ -439,7 +448,7 @@ class _ReportFormState extends State<ReportForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Speaker ${i + 1} Bio',
-              style: TextStyle(fontWeight: FontWeight.bold)),
+              style: const TextStyle(fontWeight: FontWeight.bold)),
           _buildTextField(_speakerImageControllers[i], 'Speaker Image', false),
           _buildTextField(_speakerBioControllers[i], 'Speaker Bio', true),
         ],
@@ -456,7 +465,7 @@ class _ReportFormState extends State<ReportForm> {
         controller: controller,
         maxLines: maxlines ? 4 : 1,
         decoration: InputDecoration(
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
           labelText: labelText,
         ),
       ),

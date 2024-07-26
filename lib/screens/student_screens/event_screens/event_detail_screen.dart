@@ -144,8 +144,6 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
 
     String rapporteurName = 'high';
     String raporteurEmail = 'abc@gmail.com';
-
-    String eventDescription = generatedContent;
     String geoTag = 'geoTag';
     String feedbackForm = 'feedBackForm';
     String activityImages = 'Activity Images';
@@ -409,7 +407,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                           generatedFollowUp.isEmpty ||
                           generatedHighlightsOfActivity.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content: Text(
                                 'Please complete all generated content before proceeding.'),
                           ),
@@ -436,7 +434,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
 class HeroImageScreen extends StatelessWidget {
   final String image;
 
-  const HeroImageScreen({required this.image});
+  const HeroImageScreen({super.key, required this.image});
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:eventquest/constants/error_handling.dart';
 import 'package:eventquest/constants/global_variable.dart';
 import 'package:eventquest/provider/user_provider.dart';

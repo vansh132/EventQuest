@@ -1,5 +1,4 @@
 import 'package:eventquest/constants/custom_colors.dart';
-import 'package:eventquest/screens/constants/utils.dart';
 import 'package:eventquest/services/user_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
