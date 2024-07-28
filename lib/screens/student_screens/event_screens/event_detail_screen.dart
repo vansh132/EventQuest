@@ -51,7 +51,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
   Future<void> _generateContent(Event event) async {
     final content = [
       Content.text(
-          "${event.eventName} Event name and ${event.eventDescription} event description.Please write the report for this event for minimum 700 and maximum 1000 words in single paragraph only.please dont use **. Don't write title"),
+          "${event.eventName} Event name and ${event.eventDescription} event description.Please write the report for this event for perfect 800 words only in single paragraph only.please dont use **. Don't write title"),
     ];
     final response = await model.generateContent(content);
     setState(() {
@@ -62,7 +62,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
   Future<void> _generateHighlightsOfActivity(Event event) async {
     final content = [
       Content.text(
-          "${event.eventName} Event name and ${event.eventDescription} event description.Please write the Highlight of the Activity report for this event in simple paragraph with 50 words which should be real.please dont use **"),
+          "${event.eventName} Event name and ${event.eventDescription} event description.Please write the Highlight of the Activity report for this event in simple paragraph with perfect 50 words only which should be real.please dont use **"),
     ];
     final response = await model.generateContent(content);
     setState(() {
@@ -73,7 +73,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
   Future<void> _generateKeyTakeAways(Event event) async {
     final content = [
       Content.text(
-          "${event.eventName} Event name and ${event.eventDescription} event description.Please write the Key Take Aways of event in report in simple 2 bullet points or sometime 40 words one paragraph which should be real.please dont use **"),
+          "${event.eventName} Event name and ${event.eventDescription} event description.Please write the Key Take Aways of event in report in simple 2 bullet points which should be real.please dont use **"),
     ];
     final response = await model.generateContent(content);
     setState(() {
@@ -84,7 +84,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
   Future<void> _generateActivitySummary(Event event) async {
     final content = [
       Content.text(
-          "${event.eventName} Event name and ${event.eventDescription} event description.Please write the Summary of the Activity report for this event in simple paragraph of 70 words which should be real.please dont use **"),
+          "${event.eventName} Event name and ${event.eventDescription} event description.Please write the Summary of the Activity report for this event in simple paragraph of perfect 70 words which should be real.please dont use **"),
     ];
     final response = await model.generateContent(content);
     setState(() {
@@ -95,7 +95,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
   Future<void> _generateFollowUp(Event event) async {
     final content = [
       Content.text(
-          "${event.eventName} Event name and $generatedActivitySummary.Please write the FollowUp of the Activity for this event in simple one point which should be real.please dont use **"),
+          "${event.eventName} Event name and $generatedActivitySummary.Please write the FollowUp of the Activity for this event in simple one point 20 words only which should be real.please dont use **"),
     ];
     final response = await model.generateContent(content);
     setState(() {
@@ -114,14 +114,15 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
     List<SpeakerDetails> speakerDetails = [];
 
     GeneralInfo generalInfo = GeneralInfo(
-        type: 'type',
+        type: '',
         title: event.eventName,
-        date: event.eventPublishedOn,
-        time: 'time',
-        venue: 'venue');
+        date: formatter
+            .format(DateTime.parse(event.eventPublishedOn.split(" ")[0])),
+        time: '',
+        venue: '');
 
-    ParticipantsDetail participantsProfile = ParticipantsDetail(
-        typeOfParticipants: 'typeOfParticipants', noOfParticipants: 5);
+    ParticipantsDetail participantsProfile =
+        ParticipantsDetail(typeOfParticipants: '', noOfParticipants: 5);
 
     EventSynopsis synopsis = EventSynopsis(
         highlights: generatedHighlightsOfActivity,
@@ -129,11 +130,11 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
         summary: generatedActivitySummary,
         followUp: generatedFollowUp);
 
-    String rapporteurName = 'high';
-    String raporteurEmail = 'abc@gmail.com';
+    String rapporteurName = '';
+    String raporteurEmail = '';
     String geoTag = '';
     String feedbackForm = '';
-    String poster = '';
+    String activityImage = '';
 
     List<SpeakersBio> speakersProfile = [];
 
@@ -148,8 +149,8 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
         speakersProfile: speakersProfile,
         geoTagPhotos: geoTag,
         feedbackForm: feedbackForm,
-        activityImages: event.eventImage,
-        poster: poster);
+        activityImages: activityImage,
+        poster: event.eventImage);
     return Scaffold(
       appBar: AppBar(
         title: Text(event.eventName),
