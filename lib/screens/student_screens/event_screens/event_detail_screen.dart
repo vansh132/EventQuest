@@ -131,10 +131,9 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
 
     String rapporteurName = 'high';
     String raporteurEmail = 'abc@gmail.com';
-    String geoTag = 'geoTag';
-    String feedbackForm = 'feedBackForm';
-    String activityImages = 'Activity Images';
-    String poster = 'Poster';
+    String geoTag = '';
+    String feedbackForm = '';
+    String poster = '';
 
     List<SpeakersBio> speakersProfile = [];
 
@@ -149,7 +148,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
         speakersProfile: speakersProfile,
         geoTagPhotos: geoTag,
         feedbackForm: feedbackForm,
-        activityImages: activityImages,
+        activityImages: event.eventImage,
         poster: poster);
     return Scaffold(
       appBar: AppBar(

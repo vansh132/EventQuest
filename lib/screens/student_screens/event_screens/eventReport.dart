@@ -1,4 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:eventquest/models/eventReport.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -27,16 +32,139 @@ class _ReportFormState extends State<ReportForm> {
   late TextEditingController _rapporteurNameController;
   late TextEditingController _rapporteurEmailController;
   late TextEditingController _eventDescriptionController;
-  late TextEditingController _geoTagController;
-  late TextEditingController _feedbackFormController;
-  late TextEditingController _activityImagesController;
   late TextEditingController _posterController;
   final List<TextEditingController> _speakerNameControllers = [];
   final List<TextEditingController> _speakerPositionControllers = [];
   final List<TextEditingController> _speakerTitleControllers = [];
   final List<TextEditingController> _speakerOrganizationControllers = [];
   final List<TextEditingController> _speakerBioControllers = [];
-  final List<TextEditingController> _speakerImageControllers = [];
+  File geoTaggedImage = File("");
+  File feedBackFormImage = File("");
+  File activityImage = File("");
+  File speakerImage = File("");
+  File posterImage = File("");
+
+  bool submitted = false;
+
+  void selectGeoTaggedImage() async {
+    var res = await pickGeoTaggedImages();
+    setState(() {
+      geoTaggedImage = res;
+    });
+  }
+
+  void clearGeoTaggedImage() {
+    setState(() {
+      geoTaggedImage = File("");
+    });
+  }
+
+  Future<File> pickGeoTaggedImages() async {
+    File image = File("");
+    try {
+      var files = await FilePicker.platform.pickFiles(
+        type: FileType.image,
+        allowMultiple: false,
+      );
+
+      if (files != null && files.files.isNotEmpty) {
+        image = File(files.files[0].path!);
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    return image;
+  }
+
+  void selectFeedbackFormImage() async {
+    var res = await pickFeebackFormImages();
+    setState(() {
+      feedBackFormImage = res;
+    });
+  }
+
+  void clearFeedbackFormImage() {
+    setState(() {
+      feedBackFormImage = File("");
+    });
+  }
+
+  Future<File> pickFeebackFormImages() async {
+    File image = File("");
+    try {
+      var files = await FilePicker.platform.pickFiles(
+        type: FileType.image,
+        allowMultiple: false,
+      );
+
+      if (files != null && files.files.isNotEmpty) {
+        image = File(files.files[0].path!);
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    return image;
+  }
+
+  void selectActivityImage() async {
+    var res = await pickActivityImages();
+    setState(() {
+      activityImage = res;
+    });
+  }
+
+  void clearActivityImage() {
+    setState(() {
+      activityImage = File("");
+    });
+  }
+
+  Future<File> pickActivityImages() async {
+    File image = File("");
+    try {
+      var files = await FilePicker.platform.pickFiles(
+        type: FileType.image,
+        allowMultiple: false,
+      );
+
+      if (files != null && files.files.isNotEmpty) {
+        image = File(files.files[0].path!);
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    return image;
+  }
+
+  void selectSpeakerImage() async {
+    var res = await pickSpeakerImages();
+    setState(() {
+      speakerImage = res;
+    });
+  }
+
+  void clearSpeakerImage() {
+    setState(() {
+      speakerImage = File("");
+    });
+  }
+
+  Future<File> pickSpeakerImages() async {
+    File image = File("");
+    try {
+      var files = await FilePicker.platform.pickFiles(
+        type: FileType.image,
+        allowMultiple: false,
+      );
+
+      if (files != null && files.files.isNotEmpty) {
+        image = File(files.files[0].path!);
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    return image;
+  }
 
   @override
   void didChangeDependencies() {
@@ -68,11 +196,6 @@ class _ReportFormState extends State<ReportForm> {
         TextEditingController(text: eventReport.rapporteurEmail);
     _eventDescriptionController =
         TextEditingController(text: eventReport.eventDescriptiveReport);
-    _geoTagController = TextEditingController(text: eventReport.geoTagPhotos);
-    _feedbackFormController =
-        TextEditingController(text: eventReport.feedbackForm);
-    _activityImagesController =
-        TextEditingController(text: eventReport.activityImages);
     _posterController = TextEditingController(text: eventReport.poster);
 
     for (var speakerDetail in eventReport.speakerDetails) {
@@ -88,8 +211,13 @@ class _ReportFormState extends State<ReportForm> {
 
     for (var speakerBio in eventReport.speakersProfile) {
       _speakerBioControllers.add(TextEditingController(text: speakerBio.bio));
-      _speakerImageControllers
-          .add(TextEditingController(text: speakerBio.image));
+
+      // Read the file as bytes and convert to Base64 string
+      List<int> imageBytes = speakerImage.readAsBytesSync();
+      String base64Image = base64Encode(imageBytes);
+
+      speakerBio.image =
+          base64Image; // Assuming `image` is a String type property
     }
   }
 
@@ -124,6 +252,18 @@ class _ReportFormState extends State<ReportForm> {
   void _generatePdf() async {
     final pdf = pw.Document();
 
+    // Load the image file
+    final Uint8List geoImageBytes = await geoTaggedImage.readAsBytes();
+    final pw.MemoryImage geoPdfImage = pw.MemoryImage(geoImageBytes);
+
+    final Uint8List feedbackImageBytes = await feedBackFormImage.readAsBytes();
+    final pw.MemoryImage feedbackPdfImage = pw.MemoryImage(feedbackImageBytes);
+
+    final Uint8List activityImageBytes = await activityImage.readAsBytes();
+    final pw.MemoryImage activityPdfImage = pw.MemoryImage(activityImageBytes);
+
+    final Uint8List speakerImageBytes = await speakerImage.readAsBytes();
+    final pw.MemoryImage speakerPdfImage = pw.MemoryImage(speakerImageBytes);
     pdf.addPage(
       pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
@@ -167,7 +307,6 @@ class _ReportFormState extends State<ReportForm> {
             pw.Text('Speaker/Guest/Presenter Details',
                 style:
                     pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
-            pw.SizedBox(height: 8),
             ..._buildSpeakerDetailsPdf(),
             pw.SizedBox(height: 16),
             pw.Text('Participants Profile',
@@ -213,10 +352,12 @@ class _ReportFormState extends State<ReportForm> {
                     'Rapporteur Email', _rapporteurEmailController.text),
               ],
             ),
+            pw.SizedBox(height: 16),
             _buildTextBlock('Event Report', _eventDescriptionController.text),
             pw.Text('Speakers Profile',
                 style:
                     pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
+            pw.SizedBox(height: 8),
             for (int i = 0; i < _speakerBioControllers.length; i++)
               pw.Column(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -227,29 +368,33 @@ class _ReportFormState extends State<ReportForm> {
                       pw.Container(
                         width: 100,
                         height: 100,
-                        child: pw.Text(
-                          "Image",
-                        ),
+                        child: pw.Text('hi'),
                       ),
                       pw.SizedBox(width: 20),
                       pw.Expanded(
-                        child: pw.Text(
-                          _speakerBioControllers[i].text,
-                          textAlign: pw.TextAlign.justify,
-                        ),
+                        child: pw.Image(speakerPdfImage),
                       ),
                     ],
                   ),
                   pw.SizedBox(height: 20),
                 ],
               ),
-            pw.Text('Additional Information',
+            pw.Text('Geo Tagged Image',
                 style:
                     pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
             pw.SizedBox(height: 8),
-            _buildTextBlock('Geo Tag Photos', _geoTagController.text),
-            _buildTextBlock('Feedback Form', _feedbackFormController.text),
-            _buildTextBlock('Activity Images', _activityImagesController.text),
+            pw.Image(geoPdfImage),
+            pw.Text('FeedBack Form Image',
+                style:
+                    pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
+            pw.SizedBox(height: 8),
+            pw.Image(feedbackPdfImage),
+            pw.Text('Activity Image',
+                style:
+                    pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
+            pw.SizedBox(height: 8),
+            pw.Image(activityPdfImage),
+            pw.Image(speakerPdfImage),
             _buildTextBlock('Poster', _posterController.text),
           ];
         },
@@ -308,9 +453,6 @@ class _ReportFormState extends State<ReportForm> {
     _rapporteurNameController.dispose();
     _rapporteurEmailController.dispose();
     _eventDescriptionController.dispose();
-    _geoTagController.dispose();
-    _feedbackFormController.dispose();
-    _activityImagesController.dispose();
     _posterController.dispose();
     for (var controller in _speakerNameControllers) {
       controller.dispose();
@@ -327,9 +469,7 @@ class _ReportFormState extends State<ReportForm> {
     for (var controller in _speakerBioControllers) {
       controller.dispose();
     }
-    for (var controller in _speakerImageControllers) {
-      controller.dispose();
-    }
+
     super.dispose();
   }
 
@@ -340,7 +480,6 @@ class _ReportFormState extends State<ReportForm> {
       _speakerTitleControllers.add(TextEditingController());
       _speakerOrganizationControllers.add(TextEditingController());
       _speakerBioControllers.add(TextEditingController());
-      _speakerImageControllers.add(TextEditingController());
     });
   }
 
@@ -351,13 +490,11 @@ class _ReportFormState extends State<ReportForm> {
       _speakerTitleControllers[index].dispose();
       _speakerOrganizationControllers[index].dispose();
       _speakerBioControllers[index].dispose();
-      _speakerImageControllers[index].dispose();
       _speakerNameControllers.removeAt(index);
       _speakerPositionControllers.removeAt(index);
       _speakerTitleControllers.removeAt(index);
       _speakerOrganizationControllers.removeAt(index);
       _speakerBioControllers.removeAt(index);
-      _speakerImageControllers.removeAt(index);
     });
   }
 
@@ -394,14 +531,192 @@ class _ReportFormState extends State<ReportForm> {
             ..._buildSpeakerDetails(),
             ..._buildSpeakerBios(),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _addSpeaker,
-              child: const Text('Add Speaker'),
+            Center(
+              child: ElevatedButton(
+                onPressed: _addSpeaker,
+                child: const Text('Add Speaker'),
+              ),
             ),
-            _buildTextField(_geoTagController, 'Geo Tag Photos', false),
-            _buildTextField(_feedbackFormController, 'Feedback Form', false),
-            _buildTextField(
-                _activityImagesController, 'Activity Images', false),
+            SizedBox(
+              height: 20,
+            ),
+            geoTaggedImage.existsSync() == true
+                ? Center(
+                    child: SizedBox(
+                      height: 200,
+                      width: 200,
+                      child: Image(
+                        image: FileImage(geoTaggedImage),
+                      ),
+                    ),
+                  )
+                : GestureDetector(
+                    onTap: selectGeoTaggedImage,
+                    child: DottedBorder(
+                      radius: const Radius.circular(10),
+                      dashPattern: const [10, 4],
+                      borderType: BorderType.RRect,
+                      strokeCap: StrokeCap.round,
+                      child: Container(
+                        width: double.infinity,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          // color: Colors.red,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.folder_open_outlined,
+                              size: 40,
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              "Upload GeoTag Image",
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.grey.shade400,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: submitted == true ? null : clearGeoTaggedImage,
+                  label: const Text(
+                    "Clear",
+                  ),
+                  icon: const Icon(Icons.cancel_outlined),
+                ),
+              ],
+            ),
+            feedBackFormImage.existsSync() == true
+                ? Center(
+                    child: SizedBox(
+                      height: 200,
+                      width: 200,
+                      child: Image(
+                        image: FileImage(feedBackFormImage),
+                      ),
+                    ),
+                  )
+                : GestureDetector(
+                    onTap: selectFeedbackFormImage,
+                    child: DottedBorder(
+                      radius: const Radius.circular(10),
+                      dashPattern: const [10, 4],
+                      borderType: BorderType.RRect,
+                      strokeCap: StrokeCap.round,
+                      child: Container(
+                        width: double.infinity,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          // color: Colors.red,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.folder_open_outlined,
+                              size: 40,
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              "Upload Feedback Image",
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.grey.shade400,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: submitted == true ? null : clearFeedbackFormImage,
+                  label: const Text(
+                    "Clear",
+                  ),
+                  icon: const Icon(Icons.cancel_outlined),
+                ),
+              ],
+            ),
+            activityImage.existsSync() == true
+                ? Center(
+                    child: SizedBox(
+                      height: 200,
+                      width: 200,
+                      child: Image(
+                        image: FileImage(activityImage),
+                      ),
+                    ),
+                  )
+                : GestureDetector(
+                    onTap: selectActivityImage,
+                    child: DottedBorder(
+                      radius: const Radius.circular(10),
+                      dashPattern: const [10, 4],
+                      borderType: BorderType.RRect,
+                      strokeCap: StrokeCap.round,
+                      child: Container(
+                        width: double.infinity,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          // color: Colors.red,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.folder_open_outlined,
+                              size: 40,
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              "Upload Activity Image",
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.grey.shade400,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: submitted == true ? null : clearActivityImage,
+                  label: const Text(
+                    "Clear",
+                  ),
+                  icon: const Icon(Icons.cancel_outlined),
+                ),
+              ],
+            ),
             _buildTextField(_posterController, 'Poster', false),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -449,7 +764,65 @@ class _ReportFormState extends State<ReportForm> {
         children: [
           Text('Speaker ${i + 1} Bio',
               style: const TextStyle(fontWeight: FontWeight.bold)),
-          _buildTextField(_speakerImageControllers[i], 'Speaker Image', false),
+          speakerImage.existsSync() == true
+              ? Center(
+                  child: SizedBox(
+                    height: 200,
+                    width: 200,
+                    child: Image(
+                      image: FileImage(speakerImage),
+                    ),
+                  ),
+                )
+              : GestureDetector(
+                  onTap: selectSpeakerImage,
+                  child: DottedBorder(
+                    radius: const Radius.circular(10),
+                    dashPattern: const [10, 4],
+                    borderType: BorderType.RRect,
+                    strokeCap: StrokeCap.round,
+                    child: Container(
+                      width: double.infinity,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        // color: Colors.red,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.folder_open_outlined,
+                            size: 40,
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            "Upload Speaker Image",
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.grey.shade400,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ElevatedButton.icon(
+                onPressed: submitted == true ? null : clearSpeakerImage,
+                label: const Text(
+                  "Clear",
+                ),
+                icon: const Icon(Icons.cancel_outlined),
+              ),
+            ],
+          ),
           _buildTextField(_speakerBioControllers[i], 'Speaker Bio', true),
         ],
       ));

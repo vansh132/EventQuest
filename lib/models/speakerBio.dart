@@ -1,5 +1,5 @@
 class SpeakersBio {
-  final String image;
+  String image;
   final String bio;
 
   SpeakersBio({
