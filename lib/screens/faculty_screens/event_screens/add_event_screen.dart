@@ -43,22 +43,6 @@ class _AddEventScreenState extends State<AddEventScreen> {
         eventContactPerson: contactName.text,
         eventContactNo: int.parse(contactPerson.text),
         eventRegistartionDeadline: _registrationDeadline!);
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          actions: [
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('OK'))
-          ],
-          title: const Text('Status'),
-          content: const Text('Your Event has been added successfully.'),
-        );
-      },
-    );
   }
 
   File image = File("");

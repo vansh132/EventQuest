@@ -27,7 +27,7 @@ class _EventScreenState extends State<EventScreen> {
     } else if (_value == 1) {
       events = await eventServices.getAllPgEvents(context);
     } else {
-      events = await eventServices.getAllEvents(context);
+      events = await eventServices.getAllBothEvents(context);
     }
     return events;
   }

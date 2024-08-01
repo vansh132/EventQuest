@@ -7,8 +7,8 @@ void httpErrorHandle({
   required void Function(String) onError,
   required VoidCallback onSuccess,
 }) {
-  print("object");
   switch (response.statusCode) {
+    case 201:
     case 200:
       onSuccess();
       break;

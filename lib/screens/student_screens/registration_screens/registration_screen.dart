@@ -196,15 +196,28 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     bool canSubmit = true;
 
     for (int i = 0; i < participantsNameControllers.length; i++) {
-      participantsName.add(participantsNameControllers[i].text);
-      participantsRegisterNo.add(participantsRegisterNoControllers[i].text);
+      // participantsName.add(participantsNameControllers[i].text);
+      // participantsRegisterNo.add(participantsRegisterNoControllers[i].text);
 
-      String participantCategory =
-          participantsCategoryController[i].text.toUpperCase();
-      participantsCategory.add(participantCategory);
-
-      if (eventCategory != participantCategory) {
+      // String participantCategory =
+      // participantsCategoryController[i].text.toUpperCase();
+      // participantsCategory.add(participantCategory);
+      print(eventCategory);
+      if (eventCategory == 'BOTH' &&
+              participantsCategoryController[i].text == 'ug' ||
+          participantsCategoryController[i].text == 'pg') {
+        print("eventCategory" + eventCategory);
+        canSubmit = true;
+      } else if (eventCategory == 'UG' &&
+          participantsCategoryController[i].text.toUpperCase() == 'UG') {
+        canSubmit = true;
+      } else if (eventCategory == 'PG' &&
+          participantsCategoryController[i].text.toUpperCase() == 'PG') {
+        print("eventCategory" + eventCategory);
+        canSubmit = true;
+      } else {
         canSubmit = false;
+        break;
       }
     }
 

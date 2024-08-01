@@ -28,6 +28,7 @@ class _FacultyRegistrationScreenState extends State<FacultyRegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffFfFfFf),
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Column(

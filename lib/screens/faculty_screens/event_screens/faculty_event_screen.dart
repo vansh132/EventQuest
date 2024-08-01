@@ -28,7 +28,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
     } else if (_value == 1) {
       events = await eventServices.getAllPgEvents(context);
     } else {
-      events = await eventServices.getAllEvents(context);
+      events = await eventServices.getAllBothEvents(context);
     }
     return events;
   }
@@ -125,69 +125,11 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
         elevation: 4.0,
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(
-                  color: const Color(0xff012a4a),
-                  icon: const Icon(Icons.remove_red_eye),
-                  onPressed: () {
-                    Navigator.pushNamed(context, EventDetailsScreen.routeName,
-                        arguments: event);
-                  },
-                ),
-                IconButton(
-                  color: const Color(0xff012a4a),
-                  icon: const Icon(Icons.edit),
-                  onPressed: () {
-                    Navigator.pushNamed(context, EditEventScreen.routeName,
-                        arguments: event);
-                  },
-                ),
-                IconButton(
-                  color: const Color(0xff012a4a),
-                  icon: const Icon(Icons.delete),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          actions: [
-                            ElevatedButton(
-                              onPressed: () {
-                                eventServices.deleteEvent(
-                                  context: context,
-                                  event: event,
-                                  onSuccess: () {
-                                    setState(() {
-                                      events.remove(event);
-                                    });
-                                  },
-                                );
-                              },
-                              child: const Text('Yes'),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text('No'),
-                            )
-                          ],
-                          title: const Text('Status'),
-                          content: const Text('Are you sure to delete Event ?'),
-                        );
-                      },
-                    );
-                  },
-                ),
-              ],
-            ),
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
                 event.eventImage,
-                height: 224,
+                height: 200,
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),
@@ -248,6 +190,88 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                   ),
                 ],
               ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                  color: const Color(0xff012a4a),
+                  icon: const Icon(Icons.remove_red_eye),
+                  onPressed: () {
+                    Navigator.pushNamed(context, EventDetailsScreen.routeName,
+                        arguments: event);
+                  },
+                ),
+                IconButton(
+                  color: const Color(0xff012a4a),
+                  icon: const Icon(Icons.edit),
+                  onPressed: () {
+                    Navigator.pushNamed(context, EditEventScreen.routeName,
+                        arguments: event);
+                  },
+                ),
+                GestureDetector(
+                  child: IconButton(
+                    color: const Color(0xff012a4a),
+                    icon: const Icon(Icons.delete),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            backgroundColor: Color(0xffE9F2F5),
+                            iconColor: Color(0xff0B3F63),
+                            actions: [
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Color(0xffE9F2F5)),
+                                onPressed: () {
+                                  eventServices.deleteEvent(
+                                    context: context,
+                                    event: event,
+                                    onSuccess: () {
+                                      setState(() {
+                                        events.remove(event);
+                                      });
+                                    },
+                                  );
+                                },
+                                child: const Text(
+                                  'Yes',
+                                  style: TextStyle(
+                                      color: Color(0xff0B3F63),
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Color(0xffE9F2F5)),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text(
+                                  'No',
+                                  style: TextStyle(
+                                      color: Color(0xff0B3F63),
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              )
+                            ],
+                            title: const Text(
+                              'Status',
+                              style: TextStyle(color: Color(0xff0B3F63)),
+                            ),
+                            content: const Text(
+                              'Are you sure to delete Event ?',
+                              style: TextStyle(color: Color(0xff0B3F63)),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ],
         ),

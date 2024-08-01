@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -12,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class EventServices {
-  //GET ALL EVENTS
   Future<List<Event>> getAllEvents(BuildContext context) async {
     void handleHttpError(String errorMessage) {
       showSnackBar(context, errorMessage);
@@ -23,6 +23,40 @@ class EventServices {
 
     try {
       http.Response res = await http.get(Uri.parse("$url/api/v1/events"),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8'
+          });
+
+      httpErrorHandle(
+          response: res,
+          onError: (errMessage) {
+            showSnackBar(context, errMessage);
+          },
+          onSuccess: () {
+            // print(jsonEncode(jsonDecode(res.body)['data']));
+            for (int i = 0; i < jsonDecode(res.body)['data'].length; i++) {
+              eventList.add(
+                  Event.fromJson(jsonEncode(jsonDecode(res.body)['data'][i])));
+            }
+          });
+    } catch (e) {
+      final errorMessage = "Error occurred: ${e.toString()}";
+      handleHttpError(errorMessage);
+    }
+    return eventList;
+  }
+
+  //GET ALL Both EVENTS
+  Future<List<Event>> getAllBothEvents(BuildContext context) async {
+    void handleHttpError(String errorMessage) {
+      showSnackBar(context, errorMessage);
+    }
+
+    // Event List
+    List<Event> eventList = [];
+
+    try {
+      http.Response res = await http.get(Uri.parse("$url/api/v1/both/events"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8'
           });
@@ -154,23 +188,23 @@ class EventServices {
           eventContactPerson: eventContactPerson,
           eventContactPersonNo: eventContactNo,
           eventRegistrationDeadline: eventRegistartionDeadline.toString());
-      // print(event.toJson());
       http.Response res = await http.post(
-        Uri.parse('$url/api/v1/add/event'),
+        Uri.parse('$url/api/v1/events'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: event.toJson(),
       );
-
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
-            showSnackBar(context, errMessage);
+            customSnackbar(context, "Error", 'Failed to Add Event');
           },
           onSuccess: () {
-            // showSnackBar(context, "Event Added Successfully");
-            Navigator.pop(context);
+            Timer(const Duration(seconds: 3), () {
+              Navigator.pop(context);
+            });
+            customSnackbar(context, "Success", 'Event Added Successfully');
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";
@@ -239,11 +273,13 @@ class EventServices {
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
-            showSnackBar(context, errMessage);
+            customSnackbar(context, "Error", 'Failed to Update Event');
           },
           onSuccess: () {
-            // showSnackBar(context, "Event Updated!! ");
-            // Navigator.of(context).pop();
+            Timer(const Duration(seconds: 3), () {
+              Navigator.pop(context);
+            });
+            customSnackbar(context, "Success", 'Event Updated Successfully');
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";
@@ -273,10 +309,10 @@ class EventServices {
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
-            showSnackBar(context, errMessage);
+            customSnackbar(context, "Error", 'Failed to Delete Event');
           },
           onSuccess: () {
-            // showSnackBar(context, "Event Deleted!!");
+            customSnackbar(context, "Success", 'Event Deleted Successfully!!');
             Navigator.of(context).pop();
           });
     } catch (e) {

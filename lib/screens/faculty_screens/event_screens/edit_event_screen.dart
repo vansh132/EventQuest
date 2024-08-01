@@ -102,25 +102,6 @@ class _EditEventScreenState extends State<EditEventScreen> {
         eventContactNo: int.parse(eventContactNo.text),
         eventRegistartionDeadline:
             DateTime.parse(eventData.eventRegistrationDeadline));
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          actions: [
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('OK'))
-          ],
-          title: const Text('Status'),
-          content: const Text('Event has been updated successfully.'),
-        );
-      },
-    );
-    Timer(const Duration(seconds: 3), () {
-      Navigator.pop(context); // Go back to previous screen
-    });
   }
 
   @override
@@ -215,7 +196,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                       ),
                       DropdownMenuItem<String>(
                         value: 'Both',
-                        child: Text('Both UG and PG'),
+                        child: Text('Both'),
                       ),
                     ],
                     value: dropdownValue,
