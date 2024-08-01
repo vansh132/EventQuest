@@ -419,9 +419,9 @@ Widget topbarTitle(BuildContext context, Task task) {
       boxShadow: [
         BoxShadow(
           color: Colors.black.withOpacity(0.5),
-          spreadRadius: 5,
-          blurRadius: 2,
-          offset: const Offset(3, 7),
+          spreadRadius: 1,
+          blurRadius: 1,
+          offset: const Offset(0, 1),
         ),
       ],
       color: const Color(0xff0D1B2A),
