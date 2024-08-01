@@ -120,7 +120,7 @@ class _EventScreenState extends State<EventScreen> {
             arguments: event);
       },
       child: Card(
-        color: Color(0xffF7FCFF),
+        color: const Color(0xffF7FCFF),
         margin: const EdgeInsets.all(8),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
@@ -129,10 +129,11 @@ class _EventScreenState extends State<EventScreen> {
         child: Column(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
               child: Image.network(
                 event.eventImage,
-                height: 224,
+                height: 220,
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),

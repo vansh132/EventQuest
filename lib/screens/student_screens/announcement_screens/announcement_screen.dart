@@ -37,8 +37,25 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
-            TopBar(),
-            UserBar(context),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Announcements",
+                    style: Theme.of(context).textTheme.displayLarge,
+                  ),
+                  Image.asset(
+                    scale: 1,
+                    height: 70,
+                    width: 70,
+                    "assets/images/announcement.gif",
+                    fit: BoxFit.cover,
+                  ),
+                ],
+              ),
+            ),
             FutureBuilder(
               future: Future.delayed(
                   const Duration(seconds: 1), () => getAllAnnouncement()),

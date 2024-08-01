@@ -72,7 +72,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
               future: getAllPost(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else {
@@ -95,7 +95,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                         children: [
                           ListView.builder(
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             itemCount: eventsForDate.length,
                             itemBuilder: (context, index) {
                               return buildEventCard(eventsForDate[index]);
@@ -142,11 +142,12 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
         child: Column(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
               child: GestureDetector(
                 child: Image.network(
                   event.eventImage,
-                  height: 224,
+                  height: 220,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
@@ -157,7 +158,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
               child: Row(
                 children: [
                   Card(
@@ -203,14 +204,14 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
-            Divider(
+            const Divider(
               height: 2,
               thickness: 2,
             ),
-            SizedBox(
+            const SizedBox(
               height: 6,
             ),
             Row(
@@ -285,7 +286,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 12,
             )
           ],
