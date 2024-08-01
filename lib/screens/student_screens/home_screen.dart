@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:eventquest/constants/custom_colors.dart';
 import 'package:eventquest/models/announcement.dart';
 import 'package:eventquest/models/event.dart';
@@ -8,6 +6,7 @@ import 'package:eventquest/screens/student_screens/announcement_screens/announce
 import 'package:eventquest/screens/student_screens/event_screens/event_detail_screen.dart';
 import 'package:eventquest/services/announcement_services.dart';
 import 'package:eventquest/services/event_services.dart';
+import 'package:eventquest/theme/theme_ext.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
@@ -47,60 +46,44 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        // color: Color(0xff0D1B2A),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              branding(context),
-              userDetails(context),
-              const Highlights(),
-              const SizedBox(
-                height: 8,
-              ),
-              recentEvents(context, events),
-              RecentAnnouncements(context, announcements),
-            ],
-          ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            branding(context),
+            userDetails(context),
+            const Highlights(),
+            const SizedBox(
+              height: 12,
+            ),
+            recentEvents(context, events),
+            recentAnnouncements(context, announcements),
+          ],
         ),
       ),
     );
   }
 
-  Widget RecentAnnouncements(
+  Widget recentAnnouncements(
       BuildContext context, List<Announcement> announcements) {
+    final appColors = context.appColors;
     return Container(
       width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(12),
       // color: Colors.greenAccent,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Recent Announcements",
-            style: TextStyle(
-              fontSize: 24,
-              color: CustomColors.textBlackColor,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 0.2,
-            ),
+            "Achievements",
+            style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                  color: appColors.primary,
+                ),
           ),
           const SizedBox(
-            height: 12,
+            height: 8,
           ),
-          Container(
-            // color: Colors.greenAccent,
+          SizedBox(
             height: 200,
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.3), // Shadow color
-                  spreadRadius: 5, // Spread radius
-                  blurRadius: 7, // Blur radius
-                  offset: const Offset(0, 3), // Offset in the x, y direction
-                ),
-              ],
-            ),
             child: FutureBuilder(
                 future: getAllAnnouncement(),
                 initialData: announcements,
@@ -110,12 +93,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   } else {
                     snapshot.data!.length = snapshot.data!.length;
                   }
-
                   return ListView.builder(
                     scrollDirection: Axis.vertical,
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) =>
-                        AnnouncementItem(context, snapshot.data![index]),
+                        announcementItem(context, snapshot.data![index]),
                   );
                 }),
           ),
@@ -125,21 +107,19 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget recentEvents(BuildContext context, List<Event> events) {
+    final appColors = context.appColors;
     return Container(
       width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(12),
       // color: Colors.deepOrange,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             "Recent Events",
-            style: TextStyle(
-              fontSize: 24,
-              color: CustomColors.textBlackColor,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 0.2,
-            ),
+            style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                  color: appColors.primary,
+                ),
           ),
           const SizedBox(
             height: 6,
@@ -166,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) =>
-                        EventItem(snapshot.data![index], context),
+                        eventItem(snapshot.data![index], context),
                   );
                 }),
           ),
@@ -176,7 +156,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-Widget AnnouncementItem(BuildContext context, Announcement announcement) {
+Widget announcementItem(BuildContext context, Announcement announcement) {
+  final appColors = context.appColors;
   var date = announcement.announcementPublishedOn.split("T")[0];
   final DateFormat formatter = DateFormat('dd-MM-yyyy');
   return GestureDetector(
@@ -184,11 +165,14 @@ Widget AnnouncementItem(BuildContext context, Announcement announcement) {
         context, AnnouncementDetailScreen.routeName,
         arguments: announcement),
     child: Container(
-      // width: 180,
-      margin: const EdgeInsets.all(8),
+      margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        border: Border.all(
+          width: 0.5,
+          color: Colors.grey,
+        ),
+        color: appColors.white,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -196,8 +180,8 @@ Widget AnnouncementItem(BuildContext context, Announcement announcement) {
           Expanded(
             flex: 2,
             child: SizedBox(
-              height: 100, // Set the desired height
-              width: 100, // Set the desired width
+              height: 100,
+              width: 100,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12.0),
                 child: Image.network(
@@ -211,7 +195,6 @@ Widget AnnouncementItem(BuildContext context, Announcement announcement) {
               flex: 4,
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.1,
-                // color: Colors.amber,
                 margin: const EdgeInsets.symmetric(horizontal: 6),
                 child: Column(
                   children: [
@@ -221,11 +204,10 @@ Widget AnnouncementItem(BuildContext context, Announcement announcement) {
                         alignment: Alignment.center,
                         child: Text(
                           announcement.announcementTitle,
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.titleLarge!.copyWith(
+                                    color: appColors.richBlack,
+                                  ),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -241,19 +223,24 @@ Widget AnnouncementItem(BuildContext context, Announcement announcement) {
                         children: [
                           Text(
                             announcement.announcementPublishedBy,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              letterSpacing: 0.5,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall!
+                                .copyWith(
+                                  color: appColors.richBlack,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 14,
+                                ),
                           ),
                           Text(
                             formatter.format(DateTime.parse(date)),
-                            style: const TextStyle(
-                              fontSize: 8,
-                              fontWeight: FontWeight.w500,
-                              letterSpacing: 0.5,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall!
+                                .copyWith(
+                                  fontSize: 10,
+                                  color: appColors.richBlack,
+                                ),
                           ),
                         ],
                       ),
@@ -267,15 +254,15 @@ Widget AnnouncementItem(BuildContext context, Announcement announcement) {
   );
 }
 
-Widget EventItem(Event event, BuildContext context) {
+Widget eventItem(Event event, BuildContext context) {
   var date = event.eventRegistrationDeadline.split("T")[0];
 
   return GestureDetector(
     onTap: () => Navigator.pushNamed(context, EventDetailsScreen.routeName,
         arguments: event),
     child: Container(
-      // margin: const EdgeInsets.all(8),
-      padding: const EdgeInsets.all(8),
+      margin: const EdgeInsets.only(right: 12),
+      // padding: const EdgeInsets.all(8),
       child: Stack(children: [
         SizedBox(
           height: double.infinity, // Set the desired height
@@ -332,7 +319,7 @@ Widget EventItem(Event event, BuildContext context) {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          padding: EdgeInsets.all(4),
+                          padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               color: Colors.black54),

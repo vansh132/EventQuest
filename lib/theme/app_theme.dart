@@ -41,6 +41,11 @@ class AppTheme {
           ],
           fontWeight: FontWeight.bold,
         ),
+        displaySmall: GoogleFonts.alegreyaSans(
+          fontSize: 28,
+          color: color.primary,
+          fontWeight: FontWeight.bold,
+        ),
         // title
         titleLarge: GoogleFonts.robotoSlab(
           fontSize: 24,

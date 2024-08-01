@@ -2,6 +2,8 @@ import 'package:eventquest/constants/custom_colors.dart';
 import 'package:eventquest/provider/user_provider.dart';
 import 'package:eventquest/screens/login_screen.dart';
 import 'package:eventquest/theme/theme_ext.dart';
+import 'package:eventquest/widgets/fade.dart';
+import 'package:eventquest/widgets/slide.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -129,7 +131,19 @@ Widget userDetails(BuildContext context) {
             //   LoginScreen.routeName,
             //   (route) => false,
             // );
-            showAboutDialog(context: context);
+            Navigator.of(context).pushAndRemoveUntil(
+              SlidePageRoute(
+                  page:
+                      LoginScreen()), // Use your actual LoginScreen widget here
+              (route) => false,
+            );
+            // Navigator.of(context).pushAndRemoveUntil(
+            //   FadePageRoute(
+            //       page:
+            //           LoginScreen()), // Use your actual LoginScreen widget here
+            //   (route) => false,
+            // );
+            // showAboutDialog(context: context);
           },
           icon: Icon(
             Icons.logout,
