@@ -96,25 +96,6 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
         announcementTitle: announcementTitle.text,
         announcementDescription: announcementDescription.text,
         announcementImages: announcementImages);
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          actions: [
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('OK'))
-          ],
-          title: const Text('Status'),
-          content: const Text('Announcement has been Updated successfully.'),
-        );
-      },
-    );
-    Timer(const Duration(seconds: 3), () {
-      Navigator.pop(context); // Go back to previous screen
-    });
   }
 
   @override

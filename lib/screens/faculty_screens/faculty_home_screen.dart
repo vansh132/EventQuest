@@ -23,7 +23,7 @@ class _FacultyHomeScreenState extends State<FacultyHomeScreen> {
   List<Announcement> announcements = [];
   Future<List<Event>> getAllPost() async {
     EventServices eventServices = EventServices();
-    events = await eventServices.getAllBothEvents(context);
+    events = await eventServices.getAllEvents(context);
     return events;
   }
 

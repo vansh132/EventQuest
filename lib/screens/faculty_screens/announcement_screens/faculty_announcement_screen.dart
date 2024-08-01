@@ -26,10 +26,6 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
 
   Future<List<Announcement>> getAllAnnouncement() async {
     announcements = await announcementServices.getAllAnnouncements(context);
-
-    // setState(() {
-    //   announcements;
-    // });
     return announcements;
   }
 
@@ -114,7 +110,7 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                     // Wrap the image with a Container to set fixed size
                     Container(
                       height: 100, // Set the desired height
-                      width: 100, // Set the desired width
+                      width: 90, // Set the desired width
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12.0),
                         child: announcement.announcementImages!.isEmpty
@@ -166,7 +162,7 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(
-                            height: 65,
+                            height: 60,
                           ),
                           const Text(
                             "Date: ",
@@ -193,79 +189,95 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                   height: 8,
                 ),
                 Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 40),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xffd4d7df),
-                            foregroundColor:
-                                AppColors.mainColor // Background color
-                            ),
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            AnnouncementDetailScreen.routeName,
-                            arguments: announcement,
-                          );
-                        },
-                        child: const Text('View'),
+                            foregroundColor: AppColors.mainColor,
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              AnnouncementDetailScreen.routeName,
+                              arguments: announcement,
+                            );
+                          },
+                          child: const Text(
+                            'View',
+                            style: TextStyle(fontSize: 14),
+                          ),
+                        ),
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
+                      const SizedBox(width: 8), // Add spacing between buttons
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xffd4d7df),
-                            foregroundColor:
-                                AppColors.mainColor // Background color
-                            ),
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            EditAnnouncementScreen.routeName,
-                            arguments: announcement,
-                          );
-                        },
-                        child: const Text('Edit'),
+                            foregroundColor: AppColors.mainColor,
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              EditAnnouncementScreen.routeName,
+                              arguments: announcement,
+                            );
+                          },
+                          child: const Text(
+                            'Edit',
+                            style: TextStyle(fontSize: 14),
+                          ),
+                        ),
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xffd4d7df),
-                            foregroundColor:
-                                AppColors.mainColor // Background color
-                            ),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                actions: [
-                                  ElevatedButton(
+                            foregroundColor: AppColors.mainColor,
+                          ),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  actions: [
+                                    ElevatedButton(
                                       onPressed: () {
                                         announcementServices.deleteAnnouncement(
-                                            context: context,
-                                            announcement: announcement,
-                                            onSuccess: () {
-                                              setState(() {
-                                                announcements;
-                                              });
+                                          context: context,
+                                          announcement: announcement,
+                                          onSuccess: () {
+                                            setState(() {
+                                              announcements;
                                             });
+                                          },
+                                        );
                                       },
-                                      child: const Text('Yes')),
-                                  ElevatedButton(
-                                      onPressed: () {}, child: const Text('No'))
-                                ],
-                                title: const Text('Status'),
-                                content: const Text(
-                                    'Are you sure to delete Announcemnet ?'),
-                              );
-                            },
-                          );
-                          Timer(const Duration(seconds: 2), () {
-                            Navigator.pop(
-                                context); // Go back to previous screen
-                          });
-                        },
-                        child: const Text('Delete'),
+                                      child: const Text('Yes'),
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('No'),
+                                    ),
+                                  ],
+                                  title: const Text('Status'),
+                                  content: const Text(
+                                      'Are you sure to delete Announcement?'),
+                                );
+                              },
+                            );
+                          },
+                          child: const Text(
+                            'Delete',
+                            style: TextStyle(fontSize: 14),
+                          ),
+                        ),
                       ),
                     ],
                   ),

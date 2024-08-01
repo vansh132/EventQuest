@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -90,11 +91,14 @@ class AnnouncementServices {
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
-            showSnackBar(context, errMessage);
+            customSnackbar(context, "Error", 'Failed to Add Announcement!!');
           },
           onSuccess: () {
-            // showSnackBar(context, "Announcement Added Successfully");
-            Navigator.pop(context);
+            Timer(const Duration(seconds: 4), () {
+              Navigator.pop(context); // Go back to previous screen
+            });
+            customSnackbar(
+                context, "Success", "Announcement Added Successfully!!");
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";
@@ -151,11 +155,14 @@ class AnnouncementServices {
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
-            showSnackBar(context, errMessage);
+            customSnackbar(context, "Error", 'Failed to Update Announcement!!');
           },
           onSuccess: () {
-            // showSnackBar(context, "Announcement Updated!! ");
-            // Navigator.of(context).pop();
+            customSnackbar(
+                context, "Success", 'Announcement Updated Successfully!!');
+            Timer(const Duration(seconds: 4), () {
+              Navigator.pop(context); // Go back to previous screen
+            });
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";
@@ -186,10 +193,11 @@ class AnnouncementServices {
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
-            showSnackBar(context, errMessage);
+            customSnackbar(context, "Error", "Failed to Delete Announcement!!");
           },
           onSuccess: () {
-            // showSnackBar(context, "Announcement Deleted!!");
+            customSnackbar(
+                context, "Success", "Announcement Deleted Successfully!!");
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";

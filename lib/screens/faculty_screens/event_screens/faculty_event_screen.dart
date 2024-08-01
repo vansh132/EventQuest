@@ -219,52 +219,31 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            backgroundColor: Color(0xffE9F2F5),
-                            iconColor: Color(0xff0B3F63),
                             actions: [
                               ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xffE9F2F5)),
                                 onPressed: () {
                                   eventServices.deleteEvent(
                                     context: context,
                                     event: event,
                                     onSuccess: () {
                                       setState(() {
-                                        events.remove(event);
+                                        events;
                                       });
                                     },
                                   );
                                 },
-                                child: const Text(
-                                  'Yes',
-                                  style: TextStyle(
-                                      color: Color(0xff0B3F63),
-                                      fontWeight: FontWeight.w600),
-                                ),
+                                child: const Text('Yes'),
                               ),
                               ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xffE9F2F5)),
                                 onPressed: () {
-                                  Navigator.pop(context);
+                                  Navigator.of(context).pop();
                                 },
-                                child: const Text(
-                                  'No',
-                                  style: TextStyle(
-                                      color: Color(0xff0B3F63),
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              )
+                                child: const Text('No'),
+                              ),
                             ],
-                            title: const Text(
-                              'Status',
-                              style: TextStyle(color: Color(0xff0B3F63)),
-                            ),
-                            content: const Text(
-                              'Are you sure to delete Event ?',
-                              style: TextStyle(color: Color(0xff0B3F63)),
-                            ),
+                            title: const Text('Status'),
+                            content:
+                                const Text('Are you sure to delete Event?'),
                           );
                         },
                       );

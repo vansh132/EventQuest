@@ -66,25 +66,6 @@ class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
     setState(() {
       submitted = true;
     });
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          actions: [
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('OK'))
-          ],
-          title: const Text('Status'),
-          content: const Text('Your announcement has been added successfully.'),
-        );
-      },
-    );
-    Timer(const Duration(seconds: 3), () {
-      Navigator.pop(context); // Go back to previous screen
-    });
   }
 
   @override

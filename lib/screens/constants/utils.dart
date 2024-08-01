@@ -11,6 +11,7 @@ void showSnackBar(BuildContext context, String text) {
 void customSnackbar(BuildContext context, String text, String message) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
+      duration: Duration(seconds: 3),
       content: Stack(
         children: [
           Container(

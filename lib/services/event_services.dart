@@ -197,13 +197,13 @@ class EventServices {
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
-            customSnackbar(context, "Error", 'Failed to Add Event');
+            customSnackbar(context, "Error", 'Failed to Add Event!!');
           },
           onSuccess: () {
             Timer(const Duration(seconds: 3), () {
               Navigator.pop(context);
             });
-            customSnackbar(context, "Success", 'Event Added Successfully');
+            customSnackbar(context, "Success", 'Event Added Successfully!!');
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";
@@ -272,13 +272,13 @@ class EventServices {
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
-            customSnackbar(context, "Error", 'Failed to Update Event');
+            customSnackbar(context, "Error", 'Failed to Update Event!!');
           },
           onSuccess: () {
             Timer(const Duration(seconds: 3), () {
               Navigator.pop(context);
             });
-            customSnackbar(context, "Success", 'Event Updated Successfully');
+            customSnackbar(context, "Success", 'Event Updated Successfully!!');
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";
@@ -308,7 +308,7 @@ class EventServices {
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
-            customSnackbar(context, "Error", 'Failed to Delete Event');
+            customSnackbar(context, "Error", 'Failed to Delete Event!!');
           },
           onSuccess: () {
             customSnackbar(context, "Success", 'Event Deleted Successfully!!');

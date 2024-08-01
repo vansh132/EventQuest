@@ -6,6 +6,7 @@ import 'package:eventquest/models/participantsDetail.dart';
 import 'package:eventquest/models/speakerBio.dart';
 import 'package:eventquest/models/speakerDetails.dart';
 import 'package:eventquest/provider/user_provider.dart';
+import 'package:eventquest/screens/faculty_screens/event_screens/reportgenerator.dart';
 import 'package:eventquest/screens/student_screens/event_screens/eventReport.dart';
 import 'package:eventquest/screens/student_screens/registration_screens/registration_screen.dart';
 import 'package:flutter/gestures.dart';
@@ -25,13 +26,7 @@ class EventDetailsScreen extends StatefulWidget {
 }
 
 class _EventDetailsScreenState extends State<EventDetailsScreen> {
-  final model = GenerativeModel(
-      model: 'gemini-pro', apiKey: 'AIzaSyBXpwcezV-uPCUrHJAeWHkGBlTgSZ0kdQ4');
-  String generatedContent = '';
-  String generatedHighlightsOfActivity = '';
-  String generatedKeyTakeAways = '';
-  String generatedActivitySummary = '';
-  String generatedFollowUp = '';
+  final EventReportGenerator reportGenerator = EventReportGenerator();
 
   @override
   void initState() {
@@ -39,67 +34,13 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final Event event = ModalRoute.of(context)!.settings.arguments as Event;
 
-      await _generateContent(event); // Wait for _generateContent to complete
-      await _generateHighlightsOfActivity(
-          event); // Wait for _generateC to complete
-      await _generateKeyTakeAways(event); // Wait for _generateC to complete
-      await _generateActivitySummary(event); // Wait for _generateC to complete
-      await _generateFollowUp(event); // Wait for _generateC to complete
-    });
-  }
+      await reportGenerator.generateContent(event);
+      await reportGenerator.generateHighlightsOfActivity(event);
+      await reportGenerator.generateKeyTakeAways(event);
+      await reportGenerator.generateActivitySummary(event);
+      await reportGenerator.generateFollowUp(event);
 
-  Future<void> _generateContent(Event event) async {
-    final content = [
-      Content.text(
-          "${event.eventName} Event name and ${event.eventDescription} event description.Please write the report for this event for perfect 800 words only in single paragraph only.please dont use **. Don't write title"),
-    ];
-    final response = await model.generateContent(content);
-    setState(() {
-      generatedContent = response.text!;
-    });
-  }
-
-  Future<void> _generateHighlightsOfActivity(Event event) async {
-    final content = [
-      Content.text(
-          "${event.eventName} Event name and ${event.eventDescription} event description.Please write the Highlight of the Activity report for this event in simple paragraph with perfect 50 words only which should be real.please dont use **"),
-    ];
-    final response = await model.generateContent(content);
-    setState(() {
-      generatedHighlightsOfActivity = response.text!;
-    });
-  }
-
-  Future<void> _generateKeyTakeAways(Event event) async {
-    final content = [
-      Content.text(
-          "${event.eventName} Event name and ${event.eventDescription} event description.Please write the Key Take Aways of event in report in simple 2 bullet points which should be real.please dont use **"),
-    ];
-    final response = await model.generateContent(content);
-    setState(() {
-      generatedKeyTakeAways = response.text!;
-    });
-  }
-
-  Future<void> _generateActivitySummary(Event event) async {
-    final content = [
-      Content.text(
-          "${event.eventName} Event name and ${event.eventDescription} event description.Please write the Summary of the Activity report for this event in simple paragraph of perfect 70 words which should be real.please dont use **"),
-    ];
-    final response = await model.generateContent(content);
-    setState(() {
-      generatedActivitySummary = response.text!;
-    });
-  }
-
-  Future<void> _generateFollowUp(Event event) async {
-    final content = [
-      Content.text(
-          "${event.eventName} Event name and $generatedActivitySummary.Please write the FollowUp of the Activity for this event in simple one point 20 words only which should be real.please dont use **"),
-    ];
-    final response = await model.generateContent(content);
-    setState(() {
-      generatedFollowUp = response.text!;
+      setState(() {});
     });
   }
 
@@ -111,46 +52,6 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
     var date = event.eventRegistrationDeadline.split("T")[0];
     final DateFormat formatter = DateFormat('dd-MM-yyyy');
 
-    List<SpeakerDetails> speakerDetails = [];
-
-    GeneralInfo generalInfo = GeneralInfo(
-        type: '',
-        title: event.eventName,
-        date: formatter
-            .format(DateTime.parse(event.eventPublishedOn.split(" ")[0])),
-        time: '',
-        venue: '');
-
-    ParticipantsDetail participantsProfile =
-        ParticipantsDetail(typeOfParticipants: '', noOfParticipants: 5);
-
-    EventSynopsis synopsis = EventSynopsis(
-        highlights: generatedHighlightsOfActivity,
-        keyTakeaways: generatedKeyTakeAways,
-        summary: generatedActivitySummary,
-        followUp: generatedFollowUp);
-
-    String rapporteurName = '';
-    String raporteurEmail = '';
-    String geoTag = '';
-    String feedbackForm = '';
-    String activityImage = '';
-
-    List<SpeakersBio> speakersProfile = [];
-
-    final EventReport eventReport = EventReport(
-        generalInfo: generalInfo,
-        speakerDetails: speakerDetails,
-        participantsDetail: participantsProfile,
-        eventSynopsis: synopsis,
-        rapporteurName: rapporteurName,
-        rapporteurEmail: raporteurEmail,
-        eventDescriptiveReport: generatedContent,
-        speakersProfile: speakersProfile,
-        geoTagPhotos: geoTag,
-        feedbackForm: feedbackForm,
-        activityImages: activityImage,
-        poster: event.eventImage);
     return Scaffold(
       appBar: AppBar(
         title: Text(event.eventName),
@@ -174,17 +75,24 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                 child: Hero(
                   tag: event.eventImage, // Unique tag for the hero animation
                   child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(12),
-                      bottomRight: Radius.circular(12),
-                    ),
-                    child: Image.network(
-                      event.eventImage,
-                      height: 250,
-                      width: double.infinity,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(12),
+                        bottomRight: Radius.circular(12),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(
+                            8.0), // Padding around the image
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(
+                              16.0), // Adjust the radius for desired roundness
+                          child: Image.network(
+                            event.eventImage,
+                            height: 250,
+                            width: double.infinity, // Fill available width
+                            fit: BoxFit.contain, // Cover the entire area
+                          ),
+                        ),
+                      )),
                 ),
               ),
 
@@ -362,7 +270,6 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                     onPressed: () {
                       Navigator.pushNamed(context, RegistrationScreen.routeName,
                           arguments: event);
-                      print("Event Category ----->" + event.eventCategory);
                     },
                     child: const Text(
                       'Register',
@@ -378,11 +285,11 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                         backgroundColor: const Color(0xff003049),
                         foregroundColor: Colors.white),
                     onPressed: () async {
-                      if (generatedActivitySummary.isEmpty ||
-                          generatedContent.isEmpty ||
-                          generatedFollowUp.isEmpty ||
-                          generatedFollowUp.isEmpty ||
-                          generatedHighlightsOfActivity.isEmpty) {
+                      if (reportGenerator.generatedActivitySummary.isEmpty ||
+                          reportGenerator.generatedContent.isEmpty ||
+                          reportGenerator.generatedFollowUp.isEmpty ||
+                          reportGenerator
+                              .generatedHighlightsOfActivity.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text(
@@ -390,12 +297,41 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                           ),
                         );
                       } else {
+                        final EventReport eventReport = EventReport(
+                          generalInfo: GeneralInfo(
+                            type: '',
+                            title: event.eventName,
+                            date: date,
+                            time: '',
+                            venue: '',
+                          ),
+                          speakerDetails: [],
+                          participantsDetail: ParticipantsDetail(
+                              typeOfParticipants: '', noOfParticipants: 5),
+                          eventSynopsis: EventSynopsis(
+                            highlights:
+                                reportGenerator.generatedHighlightsOfActivity,
+                            keyTakeaways: reportGenerator.generatedKeyTakeAways,
+                            summary: reportGenerator.generatedActivitySummary,
+                            followUp: reportGenerator.generatedFollowUp,
+                          ),
+                          rapporteurName: '',
+                          rapporteurEmail: '',
+                          eventDescriptiveReport:
+                              reportGenerator.generatedContent,
+                          speakersProfile: [],
+                          geoTagPhotos: '',
+                          feedbackForm: '',
+                          activityImages: '',
+                          poster: event.eventImage,
+                        );
+
                         Navigator.of(context).pushNamed(ReportForm.routeName,
                             arguments: eventReport);
                       }
                     },
                     child: const Text(
-                      'Edit Report',
+                      'Generate Report',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
