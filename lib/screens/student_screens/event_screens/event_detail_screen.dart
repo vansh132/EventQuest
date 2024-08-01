@@ -362,6 +362,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                     onPressed: () {
                       Navigator.pushNamed(context, RegistrationScreen.routeName,
                           arguments: event);
+                      print("Event Category ----->" + event.eventCategory);
                     },
                     child: const Text(
                       'Register',

@@ -196,24 +196,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     bool canSubmit = true;
 
     for (int i = 0; i < participantsNameControllers.length; i++) {
-      // participantsName.add(participantsNameControllers[i].text);
-      // participantsRegisterNo.add(participantsRegisterNoControllers[i].text);
+      participantsName.add(participantsNameControllers[i].text);
+      participantsRegisterNo.add(participantsRegisterNoControllers[i].text);
 
-      // String participantCategory =
-      // participantsCategoryController[i].text.toUpperCase();
-      // participantsCategory.add(participantCategory);
-      print(eventCategory);
+      String participantCategory =
+          participantsCategoryController[i].text.toUpperCase();
+      participantsCategory.add(participantCategory);
+
       if (eventCategory == 'BOTH' &&
-              participantsCategoryController[i].text == 'ug' ||
-          participantsCategoryController[i].text == 'pg') {
-        print("eventCategory" + eventCategory);
+          (participantCategory == 'UG' || participantCategory == 'PG')) {
         canSubmit = true;
-      } else if (eventCategory == 'UG' &&
-          participantsCategoryController[i].text.toUpperCase() == 'UG') {
+      } else if (eventCategory == 'UG' && participantCategory == 'UG') {
         canSubmit = true;
-      } else if (eventCategory == 'PG' &&
-          participantsCategoryController[i].text.toUpperCase() == 'PG') {
-        print("eventCategory" + eventCategory);
+      } else if (eventCategory == 'PG' && participantCategory == 'PG') {
         canSubmit = true;
       } else {
         canSubmit = false;
@@ -229,8 +224,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Submission Failed'),
-            content: Text('This is $eventCategory level participation. '
-                'Participants must be in the same category.'),
+            content: Text(eventCategory == "UG" || eventCategory == 'PG'
+                ? "This is $eventCategory level participation. Participants must be in the same category."
+                : "This is UG and PG level participation. Participants must be in the same category."),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
