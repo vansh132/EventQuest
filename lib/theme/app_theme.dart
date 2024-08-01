@@ -7,6 +7,7 @@ class AppTheme {
 
   ThemeData _base(AppColors color) {
     return ThemeData(
+      // default
       primaryTextTheme: TextTheme(
         labelLarge: GoogleFonts.raleway(
           fontSize: 24,
@@ -15,6 +16,7 @@ class AppTheme {
         ),
       ),
       textTheme: TextTheme(
+        // heading
         displayLarge: GoogleFonts.alegreyaSans(
           fontSize: 36,
           color: color.primary,
@@ -27,12 +29,14 @@ class AppTheme {
           ],
           fontWeight: FontWeight.bold,
         ),
+        // title
         titleLarge: GoogleFonts.robotoSlab(
           fontSize: 24,
           color: color.primary,
           fontWeight: FontWeight.bold,
           letterSpacing: 0.1,
         ),
+        // description
         bodyLarge: GoogleFonts.publicSans(
           fontSize: 18,
           color: color.richBlack,
