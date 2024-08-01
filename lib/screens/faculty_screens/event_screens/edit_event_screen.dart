@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:eventquest/models/event.dart';
 import 'package:eventquest/services/event_services.dart';
+import 'package:eventquest/theme/theme_ext.dart';
+import 'package:eventquest/themes.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -118,10 +120,12 @@ class _EditEventScreenState extends State<EditEventScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appColor = context.appColors;
     eventData = ModalRoute.of(context)!.settings.arguments as Event;
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: appColor.accent,
         title: const Text('Update Event'),
       ),
       body: SingleChildScrollView(
@@ -133,13 +137,8 @@ class _EditEventScreenState extends State<EditEventScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Event Name",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                Text("Event Name",
+                    style: Theme.of(context).textTheme.titleMedium),
                 TextFormField(
                   controller: eventName,
                   validator: (value) {
@@ -152,12 +151,9 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                const Text(
+                Text(
                   "Description",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 TextFormField(
                   controller: eventDescription,
@@ -173,13 +169,8 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 16,
                 ),
-                const Text(
-                  "Event Type",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                Text("Event Type",
+                    style: Theme.of(context).textTheme.titleMedium),
                 Container(
                   padding: const EdgeInsets.all(10.0),
                   child: DropdownButton<String>(
@@ -207,10 +198,8 @@ class _EditEventScreenState extends State<EditEventScreen> {
                     },
                   ),
                 ),
-                const Text(
-                  "Upload Image",
-                  style: TextStyle(fontSize: 18),
-                ),
+                Text("Upload Image",
+                    style: Theme.of(context).textTheme.titleMedium),
                 const SizedBox(
                   height: 8,
                 ),
@@ -278,13 +267,8 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 13,
                 ),
-                const Text(
-                  "Event Amount",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                Text("Event Amount",
+                    style: Theme.of(context).textTheme.titleMedium),
                 TextFormField(
                   controller: eventAmount,
                   keyboardType: TextInputType.number,
@@ -298,13 +282,8 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                const Text(
-                  "No Of Participants",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                Text("No Of Participants",
+                    style: Theme.of(context).textTheme.titleMedium),
                 TextFormField(
                   controller: eventNoOfParticipants,
                   keyboardType: TextInputType.number,
@@ -321,13 +300,8 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                const Text(
-                  "Event Link",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                Text("Event Link",
+                    style: Theme.of(context).textTheme.titleMedium),
                 TextFormField(
                   controller: eventLink,
                   decoration: InputDecoration(
@@ -343,13 +317,8 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                const Text(
-                  "Contact Name",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                Text("Contact Name",
+                    style: Theme.of(context).textTheme.titleMedium),
                 TextFormField(
                   controller: eventContactPerson,
                   decoration: InputDecoration(
@@ -365,13 +334,8 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                const Text(
-                  "Contact No",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                Text("Contact No",
+                    style: Theme.of(context).textTheme.titleMedium),
                 TextFormField(
                   controller: eventContactNo,
                   keyboardType: TextInputType.number,
@@ -391,13 +355,8 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   height: 14,
                 ),
                 // Date picker for Registration Deadline
-                const Text(
-                  "Registration Deadline",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                Text("Registration Deadline",
+                    style: Theme.of(context).textTheme.titleMedium),
                 const SizedBox(
                   height: 10,
                 ),
@@ -444,11 +403,22 @@ class _EditEventScreenState extends State<EditEventScreen> {
 
   void _pickRegistrationDeadline() async {
     DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.parse(eventData.eventRegistrationDeadline),
-      firstDate: DateTime(2015, 8),
-      lastDate: DateTime(2101),
-    );
+        context: context,
+        initialDate: DateTime.parse(eventData.eventRegistrationDeadline),
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101),
+        builder: (context, child) {
+          return Theme(
+            data: ThemeData.light().copyWith(
+              primaryColor: AppColors.primaryColor, // Header background color
+              colorScheme: ColorScheme.light(primary: AppColors.primaryColor),
+              buttonTheme: const ButtonThemeData(
+                textTheme: ButtonTextTheme.primary, // Button text color
+              ),
+            ),
+            child: child!,
+          );
+        });
 
     if (pickedDate != null) {
       setState(() {

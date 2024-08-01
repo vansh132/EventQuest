@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:eventquest/services/event_services.dart';
+import 'package:eventquest/theme/theme_ext.dart';
+import 'package:eventquest/themes.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -79,8 +81,10 @@ class _AddEventScreenState extends State<AddEventScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appColor = context.appColors;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: appColor.accent,
         title: const Text('Event Form'),
       ),
       body: SingleChildScrollView(
@@ -95,7 +99,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
               children: [
                 TextFormField(
                   controller: eventName,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: "Event Name",
                   ),
                   validator: (value) {
@@ -106,10 +110,11 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   },
                 ),
                 const SizedBox(
-                  height: 14,
+                  height: 8,
                 ),
                 TextFormField(
                   controller: description,
+                  maxLines: 4,
                   decoration: const InputDecoration(
                     labelText: "Description",
                   ),
@@ -121,29 +126,37 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   },
                 ),
                 const SizedBox(
-                  height: 16,
+                  height: 8,
                 ),
-                const Text(
-                  "Event Type",
-                  style: TextStyle(fontSize: 18),
-                ),
+                Text("Event Type",
+                    style: Theme.of(context).textTheme.titleSmall),
                 Container(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: DropdownButton<String>(
+                    dropdownColor: appColor.accent,
                     isExpanded: true,
-                    borderRadius: BorderRadius.circular(10),
-                    items: const [
+                    borderRadius: BorderRadius.circular(20),
+                    items: [
                       DropdownMenuItem<String>(
                         value: 'UG',
-                        child: Text('UG'),
+                        child: Text(
+                          'UG',
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
                       ),
                       DropdownMenuItem<String>(
                         value: 'PG',
-                        child: Text('PG'),
+                        child: Text(
+                          'PG',
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
                       ),
                       DropdownMenuItem<String>(
                         value: 'Both',
-                        child: Text('Both'),
+                        child: Text(
+                          'Both',
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
                       ),
                     ],
                     value: dropdownValue,
@@ -154,10 +167,11 @@ class _AddEventScreenState extends State<AddEventScreen> {
                     },
                   ),
                 ),
-                const Text(
-                  "Upload Image",
-                  style: TextStyle(fontSize: 18),
+                const SizedBox(
+                  height: 8,
                 ),
+                Text("Upload Image",
+                    style: Theme.of(context).textTheme.titleSmall),
                 const SizedBox(
                   height: 8,
                 ),
@@ -208,6 +222,9 @@ class _AddEventScreenState extends State<AddEventScreen> {
                           ),
                         ),
                       ),
+                SizedBox(
+                  height: 8,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -219,9 +236,6 @@ class _AddEventScreenState extends State<AddEventScreen> {
                       icon: const Icon(Icons.cancel_outlined),
                     ),
                   ],
-                ),
-                const SizedBox(
-                  height: 16,
                 ),
 
                 TextFormField(
@@ -238,7 +252,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   },
                 ),
                 const SizedBox(
-                  height: 14,
+                  height: 8,
                 ),
                 TextFormField(
                   controller: noOfParticipants,
@@ -254,7 +268,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   },
                 ),
                 const SizedBox(
-                  height: 14,
+                  height: 8,
                 ),
                 TextFormField(
                   controller: eventLink,
@@ -269,7 +283,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   },
                 ),
                 const SizedBox(
-                  height: 14,
+                  height: 8,
                 ),
                 TextFormField(
                   controller: contactName,
@@ -284,7 +298,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   },
                 ),
                 const SizedBox(
-                  height: 14,
+                  height: 8,
                 ),
                 TextFormField(
                   controller: contactPerson,
@@ -305,9 +319,9 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   height: 14,
                 ),
                 // Date picker for Registration Deadline
-                const Text(
+                Text(
                   "Registration Deadline",
-                  style: TextStyle(fontSize: 18),
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
                 const SizedBox(
                   height: 10,
@@ -355,11 +369,22 @@ class _AddEventScreenState extends State<AddEventScreen> {
 
   void _pickRegistrationDeadline() async {
     DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2100),
-    );
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now(),
+        lastDate: DateTime(2100),
+        builder: (context, child) {
+          return Theme(
+            data: ThemeData.light().copyWith(
+              primaryColor: AppColors.primaryColor, // Header background color
+              colorScheme: ColorScheme.light(primary: AppColors.primaryColor),
+              buttonTheme: ButtonThemeData(
+                textTheme: ButtonTextTheme.primary, // Button text color
+              ),
+            ),
+            child: child!,
+          );
+        });
 
     if (pickedDate != null) {
       setState(() {

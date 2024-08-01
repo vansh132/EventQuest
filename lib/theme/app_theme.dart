@@ -7,6 +7,13 @@ class AppTheme {
 
   ThemeData _base(AppColors color) {
     return ThemeData(
+      // TextEditingController
+      inputDecorationTheme: InputDecorationTheme(
+        labelStyle: TextStyle(color: color.primary),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: color.primary),
+        ),
+      ),
       // default
       primaryTextTheme: TextTheme(
         labelLarge: GoogleFonts.raleway(

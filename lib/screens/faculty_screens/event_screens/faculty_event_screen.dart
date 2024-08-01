@@ -4,9 +4,7 @@ import 'package:eventquest/screens/faculty_screens/event_screens/add_event_scree
 import 'package:eventquest/screens/faculty_screens/event_screens/edit_event_screen.dart';
 import 'package:eventquest/screens/student_screens/event_screens/event_detail_screen.dart';
 import 'package:eventquest/services/event_services.dart';
-import 'package:eventquest/themes.dart';
-import 'package:eventquest/widgets/top_bar.dart';
-import 'package:eventquest/widgets/user_info.dart';
+import 'package:eventquest/theme/theme_ext.dart';
 import 'package:flutter/material.dart';
 
 class FacultyEventScreen extends StatefulWidget {
@@ -41,11 +39,29 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
     return Scaffold(
       body: Column(
         children: [
-          TopBar(),
-          UserBar(context),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Events",
+                  style: Theme.of(context).textTheme.displayLarge,
+                ),
+                Image.asset(
+                  scale: 1,
+                  height: 60,
+                  width: 70,
+                  "assets/images/event.gif",
+                  fit: BoxFit.cover,
+                ),
+              ],
+            ),
+          ),
           const SizedBox(
             height: 8,
           ),
@@ -96,16 +112,16 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.mainColor,
+        backgroundColor: appColors.primary,
         onPressed: () {
           Navigator.pushNamed(
             context,
             AddEventScreen.routeName,
           );
         },
-        child: const Icon(
+        child: Icon(
           Icons.add,
-          color: Color(0xffffffff),
+          color: appColors.white,
         ),
       ),
     );
@@ -127,11 +143,17 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                event.eventImage,
-                height: 200,
-                width: double.infinity,
-                fit: BoxFit.cover,
+              child: GestureDetector(
+                child: Image.network(
+                  event.eventImage,
+                  height: 224,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, EventDetailsScreen.routeName,
+                      arguments: event);
+                },
               ),
             ),
             Padding(
@@ -139,7 +161,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
               child: Row(
                 children: [
                   Card(
-                    color: const Color(0xffd4d7df),
+                    color: Colors.white.withOpacity(0.9),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
@@ -151,17 +173,11 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                         children: [
                           Text(
                             date.split(" ")[0].split("-")[2],
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
+                            style: Theme.of(context).textTheme.titleSmall,
                           ),
                           Text(
-                            month(int.parse(date.split(" ")[0].split("-")[1])),
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
+                            month(int.parse(date.split("-")[1])),
+                            style: Theme.of(context).textTheme.titleSmall,
                           ),
                         ],
                       ),
@@ -172,86 +188,106 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          event.eventName,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        Text(event.eventName,
+                            style: Theme.of(context).textTheme.titleMedium),
                         Text(
                           event.eventDescription,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           textAlign: TextAlign.justify,
-                        ),
+                          style: Theme.of(context).textTheme.bodySmall,
+                        )
                       ],
                     ),
                   ),
                 ],
               ),
             ),
+            SizedBox(
+              height: 4,
+            ),
+            Divider(
+              height: 2,
+              thickness: 2,
+            ),
+            SizedBox(
+              height: 6,
+            ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(
-                  color: const Color(0xff012a4a),
-                  icon: const Icon(Icons.remove_red_eye),
-                  onPressed: () {
-                    Navigator.pushNamed(context, EventDetailsScreen.routeName,
-                        arguments: event);
-                  },
-                ),
-                IconButton(
-                  color: const Color(0xff012a4a),
-                  icon: const Icon(Icons.edit),
-                  onPressed: () {
+                GestureDetector(
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        'assets/images/edit.png',
+                        height: 14,
+                      ),
+                      const SizedBox(width: 12),
+                      const Text('Edit'),
+                    ],
+                  ),
+                  onTap: () {
                     Navigator.pushNamed(context, EditEventScreen.routeName,
                         arguments: event);
                   },
                 ),
+                const SizedBox(width: 65),
+                const Text(
+                  '|',
+                  style: TextStyle(fontSize: 25),
+                ),
+                const SizedBox(width: 65),
                 GestureDetector(
-                  child: IconButton(
-                    color: const Color(0xff012a4a),
-                    icon: const Icon(Icons.delete),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            actions: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  eventServices.deleteEvent(
-                                    context: context,
-                                    event: event,
-                                    onSuccess: () {
-                                      setState(() {
-                                        events;
-                                      });
-                                    },
-                                  );
-                                },
-                                child: const Text('Yes'),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text('No'),
-                              ),
-                            ],
-                            title: const Text('Status'),
-                            content:
-                                const Text('Are you sure to delete Event?'),
-                          );
-                        },
-                      );
-                    },
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        'assets/images/delete.png',
+                        height: 14,
+                      ),
+                      const SizedBox(width: 8),
+                      const Text('Delete'),
+                    ],
                   ),
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          actions: [
+                            ElevatedButton(
+                              onPressed: () {
+                                eventServices.deleteEvent(
+                                  context: context,
+                                  event: event,
+                                  onSuccess: () {
+                                    setState(() {
+                                      events;
+                                    });
+                                  },
+                                );
+                              },
+                              child: const Text('Yes'),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('No'),
+                            ),
+                          ],
+                          title: const Text('Status'),
+                          content: const Text('Are you sure to delete Event?'),
+                        );
+                      },
+                    );
+                  },
                 ),
               ],
             ),
+            SizedBox(
+              height: 12,
+            )
           ],
         ),
       ),
@@ -263,20 +299,16 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
       width: MediaQuery.of(context).size.width,
       child: Column(
         children: [
-          const Text(
-            'Select your preference:',
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
+          Text('Select your preference',
+              style: Theme.of(context).primaryTextTheme.labelLarge),
           const SizedBox(height: 10.0),
           Wrap(
             spacing: 20.0,
             children: List<Widget>.generate(
               2,
               (int index) {
-                String optionText = '';
+                String optionText = 'UG';
+
                 switch (index) {
                   case 0:
                     optionText = 'UG';
@@ -284,22 +316,22 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                   case 1:
                     optionText = 'PG';
                     break;
-                  case 2:
-                    optionText = 'Both';
-                    break;
 
                   default:
                     optionText = '';
                     break;
                 }
-
                 return ChoiceChip(
-                  selectedColor: const Color(0xffd4d7df),
+                  checkmarkColor: _value == index ? Colors.white : Colors.black,
+                  backgroundColor: const Color(0xffE9F2F5),
+                  selectedColor: const Color(0xff0B3F63),
                   label: Text(
                     optionText,
-                    style: const TextStyle(
-                      color: Color(0xff012a4a),
+                    style: TextStyle(
                       fontWeight: FontWeight.w700,
+                      color: _value == index
+                          ? Colors.white // Text color when selected
+                          : Colors.black, // Text color when not selected
                     ),
                   ),
                   selected: _value == index,

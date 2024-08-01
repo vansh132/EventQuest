@@ -3,15 +3,13 @@ import 'package:eventquest/models/eventReport.dart';
 import 'package:eventquest/models/eventSynopsis.dart';
 import 'package:eventquest/models/generalInfo.dart';
 import 'package:eventquest/models/participantsDetail.dart';
-import 'package:eventquest/models/speakerBio.dart';
-import 'package:eventquest/models/speakerDetails.dart';
 import 'package:eventquest/provider/user_provider.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/reportgenerator.dart';
 import 'package:eventquest/screens/student_screens/event_screens/eventReport.dart';
 import 'package:eventquest/screens/student_screens/registration_screens/registration_screen.dart';
+import 'package:eventquest/theme/theme_ext.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -46,6 +44,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
     final Event event = ModalRoute.of(context)!.settings.arguments as Event;
 
     final user = Provider.of<UserProvider>(context, listen: false).user;
@@ -54,6 +53,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: appColors.accent,
         title: Text(event.eventName),
       ),
       body: SizedBox(
@@ -95,14 +95,13 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                       )),
                 ),
               ),
-
               // Event Amount and Registration Deadline
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Container(
                   padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: appColors.accent,
                     borderRadius: BorderRadius.circular(16.0),
                     boxShadow: [
                       BoxShadow(
@@ -115,30 +114,26 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                   ),
                   child: Column(
                     children: [
-                      const Text("Participation Instructions",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17)),
+                      Text("Participation Instructions",
+                          style: Theme.of(context).textTheme.titleMedium),
                       const SizedBox(height: 12),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          const Column(
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                "Registration Fees:",
-                                style: TextStyle(fontWeight: FontWeight.w600),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                "Registration Deadline:",
-                                style: TextStyle(fontWeight: FontWeight.w600),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                "No Of Participation:",
-                                style: TextStyle(fontWeight: FontWeight.w600),
-                              ),
+                              Text("Registration Fees:",
+                                  style:
+                                      Theme.of(context).textTheme.bodyMedium),
+                              const SizedBox(height: 8),
+                              Text("Registration Deadline:",
+                                  style:
+                                      Theme.of(context).textTheme.bodyMedium),
+                              const SizedBox(height: 8),
+                              Text("No Of Participation:",
+                                  style:
+                                      Theme.of(context).textTheme.bodyMedium),
                             ],
                           ),
                           const SizedBox(
@@ -147,16 +142,24 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(event.eventAmount == 0
-                                  ? 'Free'
-                                  : event.eventAmount.toString()),
-                              const SizedBox(height: 8),
                               Text(
-                                formatter
-                                    .format(DateTime.parse(date.split(" ")[0])),
+                                event.eventAmount == 0
+                                    ? 'Free'
+                                    : event.eventAmount.toString(),
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
                               const SizedBox(height: 8),
-                              Text(event.eventNoOfParticipants.toString()),
+                              Text(
+                                style: Theme.of(context).textTheme.bodyMedium,
+                                formatter.format(
+                                  DateTime.parse(date.split(" ")[0]),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                event.eventNoOfParticipants.toString(),
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
                             ],
                           )
                         ],
@@ -165,15 +168,17 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                   ),
                 ),
               ),
-
+              const SizedBox(
+                height: 16,
+              ),
               // Event Link
               RichText(
                 text: TextSpan(
                   style: const TextStyle(fontSize: 18, color: Colors.black),
                   children: [
-                    const TextSpan(
-                      text: 'Event Link:',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    TextSpan(
+                      text: 'Event Link: ',
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     TextSpan(
                         text: ' ${event.eventLink}',
@@ -186,7 +191,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                           },
                         style: const TextStyle(
                             decoration: TextDecoration.underline,
-                            color: Colors.redAccent)),
+                            color: Color(0xff0B3F63))),
                   ],
                 ),
               ),
@@ -198,10 +203,9 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "Description:",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                      Text(
+                        "Description :",
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                       const SizedBox(
                         height: 16,
@@ -213,7 +217,9 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                             color: Colors.black,
                           ),
                           children: [
-                            TextSpan(text: event.eventDescription),
+                            TextSpan(
+                                text: event.eventDescription,
+                                style: Theme.of(context).textTheme.bodyMedium),
                           ],
                         ),
                         textAlign: TextAlign.justify,
@@ -234,11 +240,13 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                         style:
                             const TextStyle(fontSize: 18, color: Colors.black),
                         children: [
-                          const TextSpan(
+                          TextSpan(
                             text: 'Contact Person:',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
-                          TextSpan(text: ' ${event.eventContactPerson}'),
+                          TextSpan(
+                              text: ' ${event.eventContactPerson}',
+                              style: Theme.of(context).textTheme.bodyLarge),
                         ],
                       ),
                     ),
@@ -248,11 +256,13 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                         style:
                             const TextStyle(fontSize: 18, color: Colors.black),
                         children: [
-                          const TextSpan(
+                          TextSpan(
                             text: 'Contact Number:',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
-                          TextSpan(text: ' ${event.eventContactPersonNo}'),
+                          TextSpan(
+                              text: ' ${event.eventContactPersonNo}',
+                              style: Theme.of(context).textTheme.bodyLarge),
                         ],
                       ),
                     ),
@@ -264,9 +274,8 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff003049),
-                        foregroundColor: Colors.white),
+                    style:
+                        ElevatedButton.styleFrom(foregroundColor: Colors.white),
                     onPressed: () {
                       Navigator.pushNamed(context, RegistrationScreen.routeName,
                           arguments: event);
