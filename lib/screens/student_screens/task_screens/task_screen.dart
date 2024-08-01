@@ -1,6 +1,7 @@
 import 'package:eventquest/models/task.dart';
 import 'package:eventquest/screens/student_screens/task_screens/task_detail_screen.dart';
 import 'package:eventquest/services/task_services.dart';
+import 'package:eventquest/theme/theme_ext.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class _TaskScreenState extends State<TaskScreen> {
   @override
   void initState() {
     super.initState();
-    getAllTask();
+    // getAllTask();
   }
 
   ButtonStyle selectedButtonStyle = const ButtonStyle(
@@ -82,6 +83,7 @@ class _TaskScreenState extends State<TaskScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -165,7 +167,44 @@ class _TaskScreenState extends State<TaskScreen> {
                     }
                   },
                 ),
-              )
+              ),
+              Container(
+                width: double.infinity,
+                color: colors.accent,
+                padding: EdgeInsets.all(8),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text("Create Task"),
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                color: colors.accent,
+                padding: EdgeInsets.all(8),
+                child: Text(
+                  "Manage your tasks",
+                  style: Theme.of(context).textTheme.displayLarge,
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                color: colors.accent,
+                padding: EdgeInsets.all(8),
+                child: Text(
+                  "Gateways 2023",
+                  style: Theme.of(context).primaryTextTheme.labelLarge,
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                color: colors.accent,
+                padding: EdgeInsets.all(8),
+                child: Text(
+                  textAlign: TextAlign.justify,
+                  "Heartiest congratulations to all the brilliant students who have achieved remarkable success and secured placements! Your hard work, dedication, and exceptional skills have paved the way for this significant accomplishment. Wishing you a future filled with continued success, growth, and prosperity. Well done!Heartiest congratulations to all the brilliant students who have achieved remarkable success and secured placements! Your hard work, dedication, and exceptional skills have paved the way for this significant accomplishment. Wishing you a future filled with continued success, growth, and prosperity. Well done!Heartiest congratulations to all the brilliant students who have achieved remarkable success and secured placements! Your hard work, dedication, and exceptional skills have paved the way for this significant accomplishment. Wishing you a future filled with continued success, growth, and prosperity. Well done!",
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ),
             ],
           ),
         ),

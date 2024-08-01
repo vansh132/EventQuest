@@ -3,6 +3,7 @@ import 'package:eventquest/provider/user_provider.dart';
 import 'package:eventquest/router.dart';
 import 'package:eventquest/screen_items/custom_navigation_botttom_bar.dart';
 import 'package:eventquest/screen_items/faculty_custom_navigation_bottom_bar.dart';
+import 'package:eventquest/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -22,14 +23,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AppTheme();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        // primarySwatch: MaterialColor(2, swatch),
-        textTheme: GoogleFonts.openSansTextTheme(),
-      ),
+      theme: theme.light,
       onGenerateRoute: (settings) => generateRoute(settings),
       home: Provider.of<UserProvider>(context).user.type == "Student"
           ? const CustomBottomNavigationBar()
