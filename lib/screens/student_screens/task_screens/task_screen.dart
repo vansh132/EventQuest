@@ -2,9 +2,8 @@ import 'package:eventquest/models/task.dart';
 import 'package:eventquest/screens/student_screens/task_screens/task_detail_screen.dart';
 import 'package:eventquest/services/task_services.dart';
 import 'package:eventquest/theme/theme_ext.dart';
-import 'package:eventquest/widgets/top_bar.dart';
-import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TaskScreen extends StatefulWidget {
   const TaskScreen({super.key});
@@ -53,158 +52,168 @@ class _TaskScreenState extends State<TaskScreen> {
   @override
   void initState() {
     super.initState();
-    // getAllTask();
   }
 
-  ButtonStyle selectedButtonStyle = const ButtonStyle(
-    padding: MaterialStatePropertyAll(EdgeInsets.all(16)),
-    backgroundColor: MaterialStatePropertyAll(
-      Colors.black,
-    ),
-  );
-
-  ButtonStyle unselectedButtonStyle = const ButtonStyle(
-    padding: MaterialStatePropertyAll(EdgeInsets.all(16)),
-  );
-
-  TextStyle selectedTextStyle = const TextStyle(
-    color: Colors.white,
-    fontWeight: FontWeight.bold,
-    letterSpacing: 0.3,
-    fontSize: 14,
-  );
-
-  TextStyle unselectedTextStyle = const TextStyle(
-    color: Colors.black,
-    fontWeight: FontWeight.bold,
-    letterSpacing: 0.3,
-    fontSize: 14,
-  );
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    getAllTask();
+    // TODO: implement didChangeDependencies
+  }
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.appColors;
+    print(assignedTasks);
+    print(assignedTasks.isEmpty.toString() + "dede");
+    print(selected);
+    final appColors = context.appColors;
+
+    ButtonStyle selectedButtonStyle = ButtonStyle(
+      padding: const WidgetStatePropertyAll(EdgeInsets.all(16)),
+      backgroundColor: WidgetStatePropertyAll(
+        appColors.primary,
+      ),
+    );
+
+    ButtonStyle unselectedButtonStyle = ButtonStyle(
+      backgroundColor: WidgetStatePropertyAll(appColors.white),
+      padding: const WidgetStatePropertyAll(EdgeInsets.all(16)),
+    );
+
+    TextStyle selectedTextStyle =
+        Theme.of(context).textTheme.titleSmall!.copyWith(
+              color: appColors.white,
+            );
+
+    TextStyle unselectedTextStyle =
+        Theme.of(context).textTheme.titleSmall as TextStyle;
+
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: appColors.white,
+        title: Text(
+          "Manage Your Tasks",
+          style: Theme.of(context).textTheme.displayMedium,
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
-          // color: Colors.amber,
+          padding: const EdgeInsets.all(8),
+          width: double.infinity,
           child: Column(
             children: [
-              TopBar(),
-              UserBar(context),
-              //TODO: Search bar can be added (last)
-              Container(
-                // color: Colors.tealAccent,
-                child: Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
+              Text(
+                "\"The harder you work for something, the greater you'll feel when you achieve it.\"",
+                style: GoogleFonts.raleway(
+                  fontSize: 14,
+                  color: appColors.primary,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        OutlinedButton(
+                          style: selected
+                              ? selectedButtonStyle
+                              : unselectedButtonStyle,
+                          onPressed: () {
+                            setState(() {
+                              selected = true;
+                              // getAllTask();
+                            });
+                          },
+                          child: Text(
+                            "Assigned Tasks",
                             style: selected
-                                ? selectedButtonStyle
-                                : unselectedButtonStyle,
-                            onPressed: () {
-                              setState(() {
-                                selected = true;
-                              });
-                            },
-                            child: Text(
-                              "Assigned Tasks",
-                              style: selected
-                                  ? selectedTextStyle
-                                  : unselectedTextStyle,
-                            ),
+                                ? selectedTextStyle
+                                : unselectedTextStyle,
                           ),
-                          const SizedBox(
-                            width: 72,
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              setState(() {
-                                selected = false;
-                              });
-                            },
+                        ),
+                        OutlinedButton(
+                          onPressed: () {
+                            setState(() {
+                              selected = false;
+                              // getAllTask();
+                            });
+                          },
+                          style: selected
+                              ? unselectedButtonStyle
+                              : selectedButtonStyle,
+                          child: Text(
+                            "History",
                             style: selected
-                                ? unselectedButtonStyle
-                                : selectedButtonStyle,
-                            child: Text(
-                              "History",
-                              style: selected
-                                  ? unselectedTextStyle
-                                  : selectedTextStyle,
-                            ),
+                                ? unselectedTextStyle
+                                : selectedTextStyle,
                           ),
-                        ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              assignedTasks.isEmpty
+                  ? Center(
+                      child: Text("data"),
+                    )
+                  : Container(
+                      margin: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(16),
+                      // color: Colors.greenAccent,
+                      height: 400,
+                      child: FutureBuilder(
+                        future: getAllTask(),
+                        initialData: assignedTasks,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return ListView.builder(
+                              itemBuilder: (context, index) =>
+                                  TaskItem(snapshot.data![index], context),
+                              itemCount: snapshot.data!.length,
+                            );
+                          } else if (snapshot.data == null) {
+                            return const Center(
+                              child: Text("No data found"),
+                            );
+                          } else {
+                            return const CircularProgressIndicator();
+                          }
+                        },
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.all(8),
-                padding: const EdgeInsets.all(16),
-                // color: Colors.greenAccent,
-                height: 400,
-                child: FutureBuilder(
-                  future: getAllTask(),
-                  initialData: assignedTasks,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return ListView.builder(
-                        itemBuilder: (context, index) =>
-                            TaskItem(snapshot.data![index], context),
-                        itemCount: snapshot.data!.length,
-                      );
-                    } else if (snapshot.data == null) {
-                      return const Center(
-                        child: Text("No data found"),
-                      );
-                    } else {
-                      return const CircularProgressIndicator();
-                    }
-                  },
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                color: colors.accent,
-                padding: EdgeInsets.all(8),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text("Create Task"),
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                color: colors.accent,
-                padding: EdgeInsets.all(8),
-                child: Text(
-                  "Manage your tasks",
-                  style: Theme.of(context).textTheme.displayLarge,
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                color: colors.accent,
-                padding: EdgeInsets.all(8),
-                child: Text(
-                  "Gateways 2023",
-                  style: Theme.of(context).primaryTextTheme.labelLarge,
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                color: colors.accent,
-                padding: EdgeInsets.all(8),
-                child: Text(
-                  textAlign: TextAlign.justify,
-                  "Heartiest congratulations to all the brilliant students who have achieved remarkable success and secured placements! Your hard work, dedication, and exceptional skills have paved the way for this significant accomplishment. Wishing you a future filled with continued success, growth, and prosperity. Well done!Heartiest congratulations to all the brilliant students who have achieved remarkable success and secured placements! Your hard work, dedication, and exceptional skills have paved the way for this significant accomplishment. Wishing you a future filled with continued success, growth, and prosperity. Well done!Heartiest congratulations to all the brilliant students who have achieved remarkable success and secured placements! Your hard work, dedication, and exceptional skills have paved the way for this significant accomplishment. Wishing you a future filled with continued success, growth, and prosperity. Well done!",
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-              ),
+
+              // Container(
+              //   margin: const EdgeInsets.all(8),
+              //   padding: const EdgeInsets.all(16),
+              //   // color: Colors.greenAccent,
+              //   height: 400,
+              //   child: FutureBuilder(
+              //     future: getAllTask(),
+              //     initialData: assignedTasks,
+              //     builder: (context, snapshot) {
+              //       if (snapshot.hasData) {
+              //         return ListView.builder(
+              //           itemBuilder: (context, index) =>
+              //               TaskItem(snapshot.data![index], context),
+              //           itemCount: snapshot.data!.length,
+              //         );
+              //       } else if (snapshot.data == null) {
+              //         return const Center(
+              //           child: Text("No data found"),
+              //         );
+              //       } else {
+              //         return const CircularProgressIndicator();
+              //       }
+              //     },
+              //   ),
+              // ),
             ],
           ),
         ),
