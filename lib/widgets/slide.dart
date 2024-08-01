@@ -23,8 +23,8 @@ class SlidePageRoute extends PageRouteBuilder {
             );
           },
           transitionDuration:
-              Duration(milliseconds: 300), // Adjust the duration here
-          reverseTransitionDuration:
-              Duration(milliseconds: 300), // Adjust the reverse duration here
+              const Duration(milliseconds: 300), // Adjust the duration here
+          reverseTransitionDuration: const Duration(
+              milliseconds: 300), // Adjust the reverse duration here
         );
 }
