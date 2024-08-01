@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:eventquest/constants/custom_colors.dart';
 import 'package:eventquest/models/announcement.dart';
 import 'package:eventquest/models/event.dart';
@@ -45,14 +47,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColors.bgLight,
       body: Container(
         // color: Color(0xff0D1B2A),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              TopBar(),
-              UserBar(context),
+              branding(context),
+              userDetails(context),
               const Highlights(),
               const SizedBox(
                 height: 8,

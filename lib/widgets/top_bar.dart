@@ -29,3 +29,45 @@ Widget TopBar() {
     ),
   );
 }
+
+Widget branding(BuildContext context) {
+  return Container(
+    padding: const EdgeInsets.all(12),
+    child: Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "EventQuest",
+              style: Theme.of(context).textTheme.displayLarge,
+            ),
+            Image.asset(
+              scale: 1,
+              height: 48,
+              "assets/images/christ-logo-color.png",
+              fit: BoxFit.cover,
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 12,
+        ),
+        Text(
+          "Developed by",
+          style: Theme.of(context).primaryTextTheme.labelLarge!.copyWith(
+                fontSize: 16,
+                fontWeight: FontWeight.w300,
+              ),
+        ),
+        Text(
+          "Department of Computer Science",
+          style: Theme.of(context).primaryTextTheme.labelLarge!.copyWith(
+                fontSize: 16,
+                fontWeight: FontWeight.w300,
+              ),
+        ),
+      ],
+    ),
+  );
+}

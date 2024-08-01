@@ -1,11 +1,9 @@
-import 'package:eventquest/constants/custom_theme.dart';
 import 'package:eventquest/provider/user_provider.dart';
 import 'package:eventquest/router.dart';
 import 'package:eventquest/screen_items/custom_navigation_botttom_bar.dart';
 import 'package:eventquest/screen_items/faculty_custom_navigation_bottom_bar.dart';
 import 'package:eventquest/theme/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/login_screen.dart';

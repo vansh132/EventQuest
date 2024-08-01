@@ -29,9 +29,33 @@ class AppTheme {
           ],
           fontWeight: FontWeight.bold,
         ),
+        displayMedium: GoogleFonts.alegreyaSans(
+          fontSize: 32,
+          color: color.primary,
+          shadows: [
+            const Shadow(
+              color: Colors.grey,
+              offset: Offset(1, 1),
+              blurRadius: 2,
+            ),
+          ],
+          fontWeight: FontWeight.bold,
+        ),
         // title
         titleLarge: GoogleFonts.robotoSlab(
           fontSize: 24,
+          color: color.primary,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 0.1,
+        ),
+        titleMedium: GoogleFonts.robotoSlab(
+          fontSize: 20,
+          color: color.primary,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 0.1,
+        ),
+        titleSmall: GoogleFonts.robotoSlab(
+          fontSize: 16,
           color: color.primary,
           fontWeight: FontWeight.bold,
           letterSpacing: 0.1,
