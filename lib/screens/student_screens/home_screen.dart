@@ -172,6 +172,14 @@ Widget announcementItem(BuildContext context, Announcement announcement) {
           width: 0.5,
           color: Colors.grey,
         ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1), // Shadow color with opacity
+            spreadRadius: 2, // The spread radius
+            blurRadius: 3, // The blur radius
+            offset: const Offset(1, 2), // The offset in x and y directions
+          ),
+        ],
         color: appColors.white,
         borderRadius: BorderRadius.circular(12),
       ),

@@ -5,6 +5,7 @@ import 'package:eventquest/models/task.dart';
 import 'package:eventquest/screens/constants/utils.dart';
 import 'package:eventquest/services/poster_validation.dart';
 import 'package:eventquest/services/task_services.dart';
+import 'package:eventquest/theme/theme_ext.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -41,6 +42,10 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
     setState(() {
       image = res;
     });
+  }
+
+  void disabledButton() {
+    showSnackBar(context, "Submission disabled");
   }
 
   void clearImage() {
@@ -128,7 +133,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
 
         Navigator.pop(context); // Dismiss the dialog
 
-        if (result == "Valid poster") {
+        if (result == "Logo detected") {
           posterValidationStatus = true;
           posterValidationMessage = "Hurray, Poster validated successfully...";
           print("Hurray, Poster validated successfully...");
@@ -162,12 +167,19 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          task.taskTitle,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              topbarTitle(context, task),
+              // topbarTitle(context, task),
               Container(
                 margin:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -180,7 +192,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       width: MediaQuery.of(context).size.width,
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.white70,
+                        color: appColors.accent,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
@@ -195,6 +207,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       child: Text(
                         task.taskDescription,
                         textAlign: TextAlign.justify,
+                        style: Theme.of(context).textTheme.titleSmall,
                       ),
                     ),
                     const SizedBox(
@@ -206,7 +219,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       width: MediaQuery.of(context).size.width,
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.white70,
+                        color: appColors.accent,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
@@ -220,26 +233,32 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       ),
                       child: RichText(
                         text: TextSpan(children: [
-                          const TextSpan(
-                              text: "Status: ",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              )),
+                          TextSpan(
+                            text: "Status: ",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall!
+                                .copyWith(
+                                  color: appColors.richBlack,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                          ),
                           TextSpan(
                             text: task.taskStatus ? "Completed" : "Incompleted",
                             style: !task.taskStatus
-                                ? const TextStyle(
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16,
-                                  )
-                                : const TextStyle(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16,
-                                  ),
+                                ? Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(
+                                      color: appColors.error,
+                                      fontWeight: FontWeight.w500,
+                                    )
+                                : Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(
+                                      color: appColors.success,
+                                    ),
                           ),
                         ]),
                         textAlign: TextAlign.justify,
@@ -249,14 +268,9 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       height: 20,
                     ),
                     // Guidelines
-                    const Text(
+                    Text(
                       "Guidelines",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0xff0D1B2A),
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 0.2,
-                      ),
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(
                       height: 6,
@@ -333,7 +347,10 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                             children: [
                               ElevatedButton.icon(
                                 onPressed: task.taskSubmission == true
-                                    ? null
+                                    ? () {
+                                        customSnackbar(context, "Note:",
+                                            "Poster in under still review.");
+                                      }
                                     : clearImage,
                                 label: Text(
                                   task.taskFile != ""
@@ -344,9 +361,15 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                               ),
                               ElevatedButton.icon(
                                 onPressed: posterValidationStatus == false
-                                    ? null
+                                    ? () {
+                                        customSnackbar(context, "Note:",
+                                            "Poster in under still review.");
+                                      }
                                     : task.taskSubmission == true
-                                        ? null
+                                        ? () {
+                                            customSnackbar(context, "Note:",
+                                                "Poster in under still review. ");
+                                          }
                                         : submitImage,
                                 icon: const Icon(
                                     Icons.playlist_add_check_circle_outlined),
@@ -355,16 +378,11 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                             ],
                           ),
                     const SizedBox(
-                      height: 16,
+                      height: 20,
                     ),
-                    const Text(
+                    Text(
                       "Remarks",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0xff0D1B2A),
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 0.2,
-                      ),
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(
                       height: 6,
@@ -376,7 +394,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       width: MediaQuery.of(context).size.width,
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.white70,
+                        color: appColors.accent,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
@@ -392,8 +410,14 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                           ? Text(
                               task.remarks.toString(),
                               textAlign: TextAlign.justify,
+                              style:
+                                  Theme.of(context).primaryTextTheme.labelSmall,
                             )
-                          : const Text("No Remarks"),
+                          : Text(
+                              "No Remarks",
+                              style:
+                                  Theme.of(context).primaryTextTheme.labelSmall,
+                            ),
                     ),
                   ],
                 ),
@@ -407,37 +431,40 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
 }
 
 Widget topbarTitle(BuildContext context, Task task) {
+  final appColors = context.appColors;
   return Container(
-    height: MediaQuery.of(context).size.height * 0.1,
+    // height: MediaQuery.of(context).size.height * 0.06,
     width: double.maxFinite,
     alignment: Alignment.center,
     decoration: BoxDecoration(
-      borderRadius: const BorderRadius.only(
-        bottomLeft: Radius.circular(24),
-        bottomRight: Radius.circular(24),
-      ),
+      // borderRadius: const BorderRadius.only(
+      //   bottomLeft: Radius.circular(24),
+      //   bottomRight: Radius.circular(24),
+      // ),
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withOpacity(0.5),
+          color: Colors.grey.withOpacity(0.5),
           spreadRadius: 1,
           blurRadius: 1,
           offset: const Offset(0, 1),
         ),
       ],
-      color: const Color(0xff0D1B2A),
+      color: appColors.white,
     ),
     child: Text(
       task.taskTitle,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 28,
         fontWeight: FontWeight.bold,
-        color: Colors.white,
+        color: appColors.primary,
       ),
     ),
   );
 }
 
 Widget guidelines(BuildContext context) {
+  final appColors = context.appColors;
+  TextStyle? listTileTextStyle = Theme.of(context).primaryTextTheme.labelSmall;
   ScrollController scrollController = ScrollController();
   return Container(
     height: 128,
@@ -445,7 +472,7 @@ Widget guidelines(BuildContext context) {
     width: MediaQuery.of(context).size.width,
     padding: const EdgeInsets.all(8),
     decoration: BoxDecoration(
-      color: Colors.white70,
+      color: appColors.accent,
       borderRadius: BorderRadius.circular(12),
       boxShadow: [
         BoxShadow(
@@ -461,42 +488,30 @@ Widget guidelines(BuildContext context) {
       thumbVisibility: true,
       child: ListView(
         controller: scrollController,
-        children: const [
+        children: [
           ListTile(
-            leading: Icon(Icons.arrow_right),
-            title: Text(
+            leading: const Icon(Icons.arrow_right),
+            title: const Text(
               "Christ (Deemed to be University) logo should be on Top - Right.",
               textAlign: TextAlign.justify,
             ),
-            titleTextStyle: TextStyle(
-              fontSize: 14,
-              letterSpacing: 0.2,
-              color: Colors.black,
-            ),
+            titleTextStyle: listTileTextStyle,
           ),
           ListTile(
-            leading: Icon(Icons.arrow_right),
-            title: Text(
+            leading: const Icon(Icons.arrow_right),
+            title: const Text(
               "\"School of Science\" should be on Bottom - Center.",
               textAlign: TextAlign.justify,
             ),
-            titleTextStyle: TextStyle(
-              fontSize: 14,
-              letterSpacing: 0.2,
-              color: Colors.black,
-            ),
+            titleTextStyle: listTileTextStyle,
           ),
           ListTile(
-            leading: Icon(Icons.arrow_right),
-            title: Text(
+            leading: const Icon(Icons.arrow_right),
+            title: const Text(
               "\"Designed By: (Name) (Register no) (class)\" should be on Bottom - Right.",
               textAlign: TextAlign.justify,
             ),
-            titleTextStyle: TextStyle(
-              fontSize: 14,
-              letterSpacing: 0.2,
-              color: Colors.black,
-            ),
+            titleTextStyle: listTileTextStyle,
           ),
         ],
       ),

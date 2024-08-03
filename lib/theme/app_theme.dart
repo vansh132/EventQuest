@@ -7,6 +7,10 @@ class AppTheme {
 
   ThemeData _base(AppColors color) {
     return ThemeData(
+      appBarTheme: AppBarTheme(
+        backgroundColor: color.white,
+        elevation: 2,
+      ),
       // TextEditingController
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(color: color.primary),
@@ -20,6 +24,16 @@ class AppTheme {
           fontSize: 24,
           color: color.primary,
           fontWeight: FontWeight.w600,
+        ),
+        labelMedium: GoogleFonts.raleway(
+          fontSize: 20,
+          color: color.primary,
+          fontWeight: FontWeight.w600,
+        ),
+        labelSmall: GoogleFonts.raleway(
+          fontSize: 14,
+          color: color.richBlack,
+          fontWeight: FontWeight.w500,
         ),
       ),
       textTheme: TextTheme(
@@ -69,7 +83,7 @@ class AppTheme {
         titleSmall: GoogleFonts.robotoSlab(
           fontSize: 16,
           color: color.primary,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.normal,
           letterSpacing: 0.1,
         ),
         // description
