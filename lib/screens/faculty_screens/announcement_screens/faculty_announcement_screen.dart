@@ -9,8 +9,6 @@ import 'package:eventquest/theme/theme_ext.dart';
 import 'package:eventquest/themes.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:eventquest/widgets/top_bar.dart';
-import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
 
 class FacultyAnnouncementScreen extends StatefulWidget {
