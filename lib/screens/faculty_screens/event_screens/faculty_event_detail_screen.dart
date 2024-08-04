@@ -1,38 +1,109 @@
 import 'package:eventquest/models/event.dart';
-import 'package:eventquest/provider/user_provider.dart';
-import 'package:eventquest/screens/constants/utils.dart';
-import 'package:eventquest/screens/student_screens/registration_screens/registration_screen.dart';
+import 'package:eventquest/models/eventReport.dart';
+import 'package:eventquest/models/eventSynopsis.dart';
+import 'package:eventquest/models/generalInfo.dart';
+import 'package:eventquest/models/participantsDetail.dart';
+import 'package:eventquest/screens/faculty_screens/event_screens/reportgenerator.dart';
+import 'package:eventquest/screens/student_screens/event_screens/eventReport.dart';
 import 'package:eventquest/theme/theme_ext.dart';
+import 'package:eventquest/themes.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class EventDetailsScreen extends StatefulWidget {
-  static const String routeName = '/event-detail-screen';
+class FacultyEventDetailsScreen extends StatefulWidget {
+  static const String routeName = '/faculty-event-detail-screen';
 
-  const EventDetailsScreen({Key? key});
+  const FacultyEventDetailsScreen({Key? key});
 
   @override
-  State<EventDetailsScreen> createState() => _EventDetailsScreenState();
+  State<FacultyEventDetailsScreen> createState() =>
+      _FacultyEventDetailsScreenState();
 }
 
-class _EventDetailsScreenState extends State<EventDetailsScreen> {
+class _FacultyEventDetailsScreenState extends State<FacultyEventDetailsScreen> {
+  final EventReportGenerator reportGenerator = EventReportGenerator();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final Event event = ModalRoute.of(context)!.settings.arguments as Event;
+
+      await reportGenerator.generateContent(event);
+      await reportGenerator.generateHighlightsOfActivity(event);
+      await reportGenerator.generateKeyTakeAways(event);
+      await reportGenerator.generateActivitySummary(event);
+      await reportGenerator.generateFollowUp(event);
+
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final appColors = context.appColors;
     final Event event = ModalRoute.of(context)!.settings.arguments as Event;
     var date = event.eventRegistrationDeadline.split("T")[0];
     final DateFormat formatter = DateFormat('dd-MM-yyyy');
-    final DateTime registrationDeadline = DateTime.parse(date);
-    final bool isRegistrationOpen =
-        DateTime.now().isBefore(registrationDeadline);
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: appColors.accent,
         title: Text(event.eventName),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.file_download_outlined,
+              color: AppColors.primaryColor,
+              size: 30,
+            ),
+            onPressed: () async {
+              if (reportGenerator.generatedActivitySummary.isEmpty ||
+                  reportGenerator.generatedContent.isEmpty ||
+                  reportGenerator.generatedFollowUp.isEmpty ||
+                  reportGenerator.generatedHighlightsOfActivity.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text(
+                        'Please complete all generated content before proceeding.'),
+                  ),
+                );
+              } else {
+                final EventReport eventReport = EventReport(
+                  generalInfo: GeneralInfo(
+                    type: '',
+                    title: event.eventName,
+                    date: date,
+                    time: '',
+                    venue: '',
+                  ),
+                  speakerDetails: [],
+                  participantsDetail: ParticipantsDetail(
+                      typeOfParticipants: '', noOfParticipants: 5),
+                  eventSynopsis: EventSynopsis(
+                    highlights: reportGenerator.generatedHighlightsOfActivity,
+                    keyTakeaways: reportGenerator.generatedKeyTakeAways,
+                    summary: reportGenerator.generatedActivitySummary,
+                    followUp: reportGenerator.generatedFollowUp,
+                  ),
+                  rapporteurName: '',
+                  rapporteurEmail: '',
+                  eventDescriptiveReport: reportGenerator.generatedContent,
+                  speakersProfile: [],
+                  geoTagPhotos: '',
+                  feedbackForm: '',
+                  activityImages: '',
+                  poster: event.eventImage,
+                );
+
+                Navigator.of(context)
+                    .pushNamed(ReportForm.routeName, arguments: eventReport);
+              }
+            },
+          ),
+        ],
       ),
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
@@ -53,25 +124,24 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                 child: Hero(
                   tag: event.eventImage, // Unique tag for the hero animation
                   child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(12),
-                      bottomRight: Radius.circular(12),
-                    ),
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.all(8.0), // Padding around the image
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(
-                            16.0), // Adjust the radius for desired roundness
-                        child: Image.network(
-                          event.eventImage,
-                          height: 250,
-                          width: double.infinity, // Fill available width
-                          fit: BoxFit.contain, // Cover the entire area
-                        ),
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(12),
+                        bottomRight: Radius.circular(12),
                       ),
-                    ),
-                  ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(
+                            8.0), // Padding around the image
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(
+                              16.0), // Adjust the radius for desired roundness
+                          child: Image.network(
+                            event.eventImage,
+                            height: 250,
+                            width: double.infinity, // Fill available width
+                            fit: BoxFit.contain, // Cover the entire area
+                          ),
+                        ),
+                      )),
                 ),
               ),
               // Event Amount and Registration Deadline
@@ -245,36 +315,10 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                         ],
                       ),
                     ),
+                    SizedBox(
+                      height: 16,
+                    )
                   ],
-                ),
-              ),
-
-              // Registration Button
-              SizedBox(
-                width: double.infinity,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: isRegistrationOpen
-                            ? appColors.primary
-                            : Color(0xffAACCE4)),
-                    onPressed: isRegistrationOpen
-                        ? () {
-                            Navigator.pushNamed(
-                                context, RegistrationScreen.routeName,
-                                arguments: event);
-                          }
-                        : () {
-                            customSnackbar(context, "Failed",
-                                "Sorry!! Registration Closed.");
-                          }, // Disable button if registration is closed
-                    child: const Text(
-                      'Register',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
                 ),
               ),
             ],

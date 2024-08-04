@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eventquest/models/announcement.dart';
+import 'package:eventquest/theme/theme_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:photo_view/photo_view.dart';
@@ -13,10 +14,11 @@ class AnnouncementDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Announcement announcement =
         ModalRoute.of(context)!.settings.arguments as Announcement;
-
+    final appColor = context.appColors;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Announcement Details'),
+        backgroundColor: appColor.accent,
+        title: Text(announcement.announcementTitle),
       ),
       body: Container(
         padding: const EdgeInsets.all(16),
@@ -50,21 +52,8 @@ class AnnouncementDetailContent extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              announcement.announcementTitle,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Date: ${formatter.format(DateTime.parse(date))}',
-              style: const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            Text('Date: ${formatter.format(DateTime.parse(date))}',
+                style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 8),
             Expanded(
               child: SingleChildScrollView(
@@ -94,9 +83,10 @@ class AnnouncementCarouselSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColor = context.appColors;
     return CarouselSlider(
       options: CarouselOptions(
-        height: 200,
+        height: 300,
         viewportFraction: 1.0,
         enlargeCenterPage: false,
         autoPlay: true,
@@ -124,10 +114,9 @@ class AnnouncementCarouselSlider extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 5.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  boxShadow: const [
+                  boxShadow: [
                     BoxShadow(
-                      color: Colors.grey,
-                      spreadRadius: 3,
+                      color: appColor.accent,
                       blurRadius: 5,
                       offset: Offset(0, 3),
                     ),

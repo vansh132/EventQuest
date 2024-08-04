@@ -1,7 +1,9 @@
 import 'package:eventquest/models/announcement.dart';
 import 'package:eventquest/screens/student_screens/announcement_screens/announcement_detail_screen.dart';
 import 'package:eventquest/services/announcement_services.dart';
+import 'package:eventquest/theme/theme_ext.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -30,6 +32,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
     return Scaffold(
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
@@ -37,21 +40,20 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Announcements",
-                    style: Theme.of(context).textTheme.displayLarge,
-                  ),
-                  Image.asset(
-                    scale: 1,
-                    height: 70,
-                    width: 70,
-                    "assets/images/announcement.gif",
-                    fit: BoxFit.cover,
-                  ),
-                ],
+              child: Text(
+                "Achievements",
+                style: Theme.of(context).textTheme.displayLarge,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                "\"You don't have to be great to start, but you have to start to be great.\"",
+                style: GoogleFonts.raleway(
+                  fontSize: 14,
+                  color: appColors.primary,
+                ),
+                textAlign: TextAlign.center,
               ),
             ),
             FutureBuilder(
@@ -179,6 +181,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
   }
 
   Widget buildAnnouncementCard(Announcement announcement) {
+    final appColors = context.appColors;
     var date = announcement.announcementPublishedOn.split("T")[0];
     final DateFormat formatter = DateFormat('dd-MM-yyyy');
     return GestureDetector(
@@ -194,6 +197,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Card(
+            color: appColors.accent,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0),
             ),
@@ -217,19 +221,14 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                             ),
                     ),
                   ),
-                  const SizedBox(width: 16),
+                  const SizedBox(width: 8),
                   Expanded(
                     flex: 3,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          announcement.announcementTitle,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        Text(announcement.announcementTitle,
+                            style: Theme.of(context).textTheme.titleMedium),
                         const SizedBox(height: 8),
                         Text(
                           announcement.announcementDescription,
@@ -240,43 +239,38 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          "By: ${announcement.announcementPublishedBy}",
-                          style: const TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "By: ${announcement.announcementPublishedBy}",
+                              style: const TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: Colors.grey[300],
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(
+                                formatter.format(DateTime.parse(date)),
+                                style: const TextStyle(
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          height: 65,
-                        ),
-                        const Text(
-                          "Date: ",
-                          style: TextStyle(
-                            fontSize: 8,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          formatter.format(DateTime.parse(date)),
-                          style: const TextStyle(
-                            fontSize: 8,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
+                  SizedBox(
+                    height: 8,
                   ),
                 ],
               ),

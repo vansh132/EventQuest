@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:eventquest/models/event.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/add_event_screen.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/edit_event_screen.dart';
+import 'package:eventquest/screens/faculty_screens/event_screens/faculty_event_detail_screen.dart';
 import 'package:eventquest/screens/student_screens/event_screens/event_detail_screen.dart';
 import 'package:eventquest/services/event_services.dart';
 import 'package:eventquest/theme/theme_ext.dart';
@@ -152,7 +153,8 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                   fit: BoxFit.cover,
                 ),
                 onTap: () {
-                  Navigator.pushNamed(context, EventDetailsScreen.routeName,
+                  Navigator.pushNamed(
+                      context, FacultyEventDetailsScreen.routeName,
                       arguments: event);
                 },
               ),
