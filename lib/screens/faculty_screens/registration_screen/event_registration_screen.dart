@@ -1,20 +1,19 @@
 import 'package:eventquest/models/registration.dart';
+import 'package:eventquest/screens/faculty_screens/registration_screen/event_registration_detail_screen.dart';
 import 'package:eventquest/services/registration_services.dart';
-import 'package:eventquest/widgets/top_bar.dart';
-import 'package:eventquest/widgets/user_info.dart';
 import 'package:flutter/material.dart';
 
-class FacultyRegistrationScreen extends StatefulWidget {
-  static const String routeName = "/faculty-registration-screen";
+class EventRegistrationScreen extends StatefulWidget {
+  static const String routeName = "/event-registration-screen";
 
-  const FacultyRegistrationScreen({Key? key}) : super(key: key);
+  const EventRegistrationScreen({Key? key}) : super(key: key);
 
   @override
-  State<FacultyRegistrationScreen> createState() =>
-      _FacultyRegistrationScreenState();
+  State<EventRegistrationScreen> createState() =>
+      _EventRegistrationScreenState();
 }
 
-class _FacultyRegistrationScreenState extends State<FacultyRegistrationScreen> {
+class _EventRegistrationScreenState extends State<EventRegistrationScreen> {
   RegistrationServices registrationServices = RegistrationServices();
   late Future<List<Registration>> _registrationsFuture;
   TextEditingController _searchController = TextEditingController();
@@ -28,16 +27,16 @@ class _FacultyRegistrationScreenState extends State<FacultyRegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Event Registrations"),
+      ),
       backgroundColor: Color(0xffFfFfFf),
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
-            TopBar(),
-            UserBar(context),
-            const SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(16.0),
               child: TextField(
                 controller: _searchController,
                 decoration: InputDecoration(
@@ -64,7 +63,6 @@ class _FacultyRegistrationScreenState extends State<FacultyRegistrationScreen> {
                       child: Text('Error: ${snapshot.error}'),
                     );
                   } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                    // Filter registrations based on search query
                     List<Registration> filteredRegistrations =
                         snapshot.data!.where((registration) {
                       return registration.eventName
@@ -99,56 +97,17 @@ class _FacultyRegistrationScreenState extends State<FacultyRegistrationScreen> {
                             String eventName = entry.key;
                             List<Registration> registrations = entry.value;
 
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  eventName,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: DataTable(
-                                    columnSpacing: 10,
-                                    columns: [
-                                      DataColumn(label: Text('User Name')),
-                                      DataColumn(label: Text('Event Amount')),
-                                      DataColumn(
-                                          label: Text('Participants Name')),
-                                      DataColumn(
-                                          label: Text('Participants Category')),
-                                      DataColumn(
-                                          label:
-                                              Text('Participants Register No')),
-                                    ],
-                                    rows: registrations.map((registration) {
-                                      return DataRow(cells: [
-                                        DataCell(Text(registration.userName)),
-                                        DataCell(
-                                            Text(registration.eventAmount)),
-                                        DataCell(Text(registration
-                                            .participantsName
-                                            .toString()
-                                            .replaceAll(
-                                                RegExp(r'[\[\]]'), ''))),
-                                        DataCell(Text(registration
-                                            .participantsCategory
-                                            .toString()
-                                            .replaceAll(
-                                                RegExp(r'[\[\]]'), ''))),
-                                        DataCell(Text(registration
-                                            .participantsRegisterNo
-                                            .toString()
-                                            .replaceAll(
-                                                RegExp(r'[\[\]]'), ''))),
-                                      ]);
-                                    }).toList(),
-                                  ),
-                                ),
-                              ],
+                            return ListTile(
+                              title: Text(
+                                eventName,
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                              trailing: Icon(Icons.arrow_forward_ios),
+                              onTap: () {
+                                Navigator.of(context).pushNamed(
+                                    EventRegistrationDetailScreen.routeName,
+                                    arguments: registrations);
+                              },
                             );
                           }).toList(),
                         ),

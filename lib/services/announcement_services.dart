@@ -160,7 +160,7 @@ class AnnouncementServices {
           onSuccess: () {
             customSnackbar(
                 context, "Success", 'Announcement Updated Successfully!!');
-            Timer(const Duration(seconds: 4), () {
+            Timer(const Duration(seconds: 3), () {
               Navigator.pop(context); // Go back to previous screen
             });
           });
@@ -180,16 +180,12 @@ class AnnouncementServices {
 
     try {
       http.Response res = await http.delete(
-        Uri.parse('$url/api/v1/announcements'),
+        Uri.parse('$url/api/v1/announcements/${announcement.announcementId}'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           // 'x-auth-token': userProvider.user.token,
         },
-        body: jsonEncode({
-          'id': announcement.announcementId,
-        }),
       );
-
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
@@ -198,6 +194,7 @@ class AnnouncementServices {
           onSuccess: () {
             customSnackbar(
                 context, "Success", "Announcement Deleted Successfully!!");
+            Navigator.of(context).pop();
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";

@@ -6,7 +6,8 @@ import 'package:eventquest/screens/faculty_screens/api_screen.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/add_event_screen.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/edit_event_screen.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/faculty_event_detail_screen.dart';
-import 'package:eventquest/screens/faculty_screens/registration_screen/faculty_registration_screen.dart';
+import 'package:eventquest/screens/faculty_screens/registration_screen/event_registration_detail_screen.dart';
+import 'package:eventquest/screens/faculty_screens/registration_screen/event_registration_screen.dart';
 import 'package:eventquest/screens/faculty_screens/task_screens/faculty_add_task_screen.dart';
 import 'package:eventquest/screens/faculty_screens/task_screens/faculty_edit_task_screen.dart';
 import 'package:eventquest/screens/faculty_screens/task_screens/faculty_task_detail_screen.dart';
@@ -102,10 +103,15 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => const FacultyEventDetailsScreen(),
       );
-    case FacultyRegistrationScreen.routeName:
+    case EventRegistrationScreen.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => const FacultyRegistrationScreen(),
+        builder: (_) => const EventRegistrationScreen(),
+      );
+    case EventRegistrationDetailScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => EventRegistrationDetailScreen(),
       );
     case ApiScreen.routeName:
       return MaterialPageRoute(

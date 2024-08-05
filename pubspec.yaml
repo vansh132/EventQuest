@@ -51,6 +51,7 @@ dependencies:
   pdf: ^3.11.0
   printing: ^5.12.0
   flutter_svg: ^2.0.10+1
+  pretty_animated_buttons: ^0.0.2
 
 dev_dependencies:
   flutter_test:

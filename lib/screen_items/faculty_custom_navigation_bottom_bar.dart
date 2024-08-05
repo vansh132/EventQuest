@@ -2,7 +2,6 @@ import 'package:eventquest/screens/faculty_screens/announcement_screens/faculty_
 import 'package:eventquest/screens/faculty_screens/event_screens/faculty_event_screen.dart';
 
 import 'package:eventquest/screens/faculty_screens/faculty_home_screen.dart';
-import 'package:eventquest/screens/faculty_screens/registration_screen/faculty_registration_screen.dart';
 
 import 'package:eventquest/screens/faculty_screens/task_screens/faculty_task_screen.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +24,6 @@ class _FacultyCustomBottomBarState extends State<FacultyCustomBottomBar> {
       FacultyEventScreen(),
       FacultyAnnouncementScreen(),
       const FacultyTaskScreen(),
-      FacultyRegistrationScreen(),
     ];
 
     void onItemTapped(int index) {
@@ -57,11 +55,6 @@ class _FacultyCustomBottomBarState extends State<FacultyCustomBottomBar> {
           BottomNavigationBarItem(
             icon: Icon(Icons.checklist_rounded),
             label: 'Tasks',
-            backgroundColor: Color(0xff002848),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.app_registration),
-            label: 'Registrations',
             backgroundColor: Color(0xff002848),
           ),
         ],

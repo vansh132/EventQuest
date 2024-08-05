@@ -3,6 +3,7 @@ import 'package:eventquest/models/event.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/add_event_screen.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/edit_event_screen.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/faculty_event_detail_screen.dart';
+import 'package:eventquest/screens/faculty_screens/registration_screen/event_registration_screen.dart';
 import 'package:eventquest/services/event_services.dart';
 import 'package:eventquest/theme/theme_ext.dart';
 import 'package:flutter/material.dart';
@@ -297,10 +298,68 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
   }
 
   Widget filterOption(BuildContext context) {
+    final appColor = context.appColors;
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Column(
         children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context)
+                  .pushNamed(EventRegistrationScreen.routeName);
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 75),
+              padding: const EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [
+                    Colors.orange,
+                    Colors.indigo,
+                    Colors.green,
+                    Colors.blue,
+                    Colors.purple,
+                    Colors.red,
+                    Color.fromARGB(255, 119, 109, 19),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 8,
+                ),
+                decoration: BoxDecoration(
+                  color: appColor.richBlack,
+                  borderRadius:
+                      BorderRadius.circular(8), // Match inner border radius
+                ),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      'Check Registrations',
+                      style: TextStyle(
+                        fontFamily: 'Brush Script MT',
+                        fontSize: 16,
+                        letterSpacing: 2,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_circle_right_sharp,
+                      color: Colors.white,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
           Text('Select your preference',
               style: Theme.of(context).primaryTextTheme.labelLarge),
           const SizedBox(height: 10.0),
