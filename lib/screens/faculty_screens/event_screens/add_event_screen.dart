@@ -389,7 +389,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
             data: ThemeData.light().copyWith(
               primaryColor: AppColors.primaryColor, // Header background color
               colorScheme: ColorScheme.light(primary: AppColors.primaryColor),
-              buttonTheme: ButtonThemeData(
+              buttonTheme: const ButtonThemeData(
                 textTheme: ButtonTextTheme.primary, // Button text color
               ),
             ),

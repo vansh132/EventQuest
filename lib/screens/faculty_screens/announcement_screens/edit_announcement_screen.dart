@@ -242,7 +242,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                               ),
                             ),
                           ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Row(

@@ -3,7 +3,6 @@ import 'package:eventquest/models/event.dart';
 import 'package:eventquest/screen_items/highlights.dart';
 import 'package:eventquest/screens/faculty_screens/event_screens/faculty_event_detail_screen.dart';
 import 'package:eventquest/screens/student_screens/announcement_screens/announcement_detail_screen.dart';
-import 'package:eventquest/screens/student_screens/event_screens/event_detail_screen.dart';
 import 'package:eventquest/services/announcement_services.dart';
 import 'package:eventquest/services/event_services.dart';
 import 'package:eventquest/theme/theme_ext.dart';

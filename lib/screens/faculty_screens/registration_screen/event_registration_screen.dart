@@ -16,7 +16,7 @@ class EventRegistrationScreen extends StatefulWidget {
 class _EventRegistrationScreenState extends State<EventRegistrationScreen> {
   RegistrationServices registrationServices = RegistrationServices();
   late Future<List<Registration>> _registrationsFuture;
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -28,9 +28,9 @@ class _EventRegistrationScreenState extends State<EventRegistrationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Event Registrations"),
+        title: const Text("Event Registrations"),
       ),
-      backgroundColor: Color(0xffFfFfFf),
+      backgroundColor: const Color(0xffFfFfFf),
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Column(
@@ -39,7 +39,7 @@ class _EventRegistrationScreenState extends State<EventRegistrationScreen> {
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 controller: _searchController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Search by Event Name',
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(),
@@ -102,7 +102,7 @@ class _EventRegistrationScreenState extends State<EventRegistrationScreen> {
                                 eventName,
                                 style: Theme.of(context).textTheme.titleMedium,
                               ),
-                              trailing: Icon(Icons.arrow_forward_ios),
+                              trailing: const Icon(Icons.arrow_forward_ios),
                               onTap: () {
                                 Navigator.of(context).pushNamed(
                                     EventRegistrationDetailScreen.routeName,

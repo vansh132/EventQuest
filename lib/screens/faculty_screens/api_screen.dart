@@ -21,7 +21,7 @@ class _ApiScreenState extends State<ApiScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               // Text(
@@ -29,8 +29,8 @@ class _ApiScreenState extends State<ApiScreen> {
               //   style: Theme.of(context).textTheme.titleLarge,
               // ),
               Container(
-                padding: EdgeInsets.all(20),
-                margin: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(20),
+                margin: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(
@@ -41,19 +41,19 @@ class _ApiScreenState extends State<ApiScreen> {
                       color: CustomColors.bgLight.withOpacity(0.8),
                       spreadRadius: 3,
                       blurRadius: 5,
-                      offset: Offset(0, 3), // changes position of shadow
+                      offset: const Offset(0, 3), // changes position of shadow
                     ),
                   ],
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(
                       generatedText,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.black,
                       ),

@@ -315,7 +315,7 @@ class _FacultyEventDetailsScreenState extends State<FacultyEventDetailsScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     )
                   ],

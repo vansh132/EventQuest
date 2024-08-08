@@ -131,7 +131,7 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Wrap the image with a Container to set fixed size
-                      Container(
+                      SizedBox(
                         height: 100, // Set the desired height
                         width: 90, // Set the desired width
                         child: ClipRRect(

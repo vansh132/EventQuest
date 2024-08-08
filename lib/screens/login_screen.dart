@@ -1,7 +1,6 @@
 import 'package:eventquest/constants/custom_colors.dart';
 import 'package:eventquest/services/user_services.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = '/login-screen';
@@ -79,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: CustomColors.bgLight,
                       ), //previous color - 0xfff1faee
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 12,
                     ),
                     Text(
@@ -217,7 +216,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 52,
               ),
-              Container(
+              const SizedBox(
                 width: double.infinity,
                 child: Align(
                   alignment: Alignment.center,
