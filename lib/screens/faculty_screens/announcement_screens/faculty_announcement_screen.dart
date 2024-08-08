@@ -61,27 +61,40 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                 textAlign: TextAlign.center,
               ),
             ),
-            FutureBuilder(
-                future: getAllAnnouncement(),
-                initialData: announcements,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return Expanded(
-                      child: ListView.builder(
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (context, index) {
-                          return buildAnnouncementCard(snapshot.data![index]);
-                        },
-                      ),
-                    );
-                  } else if (snapshot.data == null) {
-                    return const Center(
-                      child: Text("No data found"),
-                    );
-                  } else {
-                    return const CircularProgressIndicator();
-                  }
-                }),
+            Container(
+              height: 500,
+              child: FutureBuilder(
+                  future: getAllAnnouncement(),
+                  initialData: announcements,
+                  builder: (context, snapshot) {
+                    if (snapshot.data!.isEmpty) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/images/noDataFound.gif',
+                            height: 100,
+                          ),
+                          Text(
+                            'No Announcements found',
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                        ],
+                      );
+                    } else if (snapshot.hasData) {
+                      return Expanded(
+                        child: ListView.builder(
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (context, index) {
+                            return buildAnnouncementCard(snapshot.data![index]);
+                          },
+                        ),
+                      );
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  }),
+            ),
           ],
         ),
       ),

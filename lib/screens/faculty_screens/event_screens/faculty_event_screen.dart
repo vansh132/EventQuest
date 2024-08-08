@@ -76,6 +76,20 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                   return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (events.isEmpty) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/noDataFound.gif',
+                        height: 100,
+                      ),
+                      Text(
+                        'No events found',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                    ],
+                  );
                 } else {
                   events.sort((a, b) => a.eventRegistrationDeadline
                       .compareTo(b.eventRegistrationDeadline));
