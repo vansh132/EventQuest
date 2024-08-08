@@ -1,6 +1,7 @@
 import 'package:eventquest/models/announcement.dart';
 import 'package:eventquest/models/event.dart';
 import 'package:eventquest/screen_items/highlights.dart';
+import 'package:eventquest/screens/faculty_screens/event_screens/faculty_event_detail_screen.dart';
 import 'package:eventquest/screens/student_screens/announcement_screens/announcement_detail_screen.dart';
 import 'package:eventquest/screens/student_screens/event_screens/event_detail_screen.dart';
 import 'package:eventquest/services/announcement_services.dart';
@@ -267,7 +268,8 @@ Widget eventItem(Event event, BuildContext context) {
   var date = event.eventRegistrationDeadline.split("T")[0];
 
   return GestureDetector(
-    onTap: () => Navigator.pushNamed(context, EventDetailsScreen.routeName,
+    onTap: () => Navigator.pushNamed(
+        context, FacultyEventDetailsScreen.routeName,
         arguments: event),
     child: Container(
       margin: const EdgeInsets.only(right: 12),
