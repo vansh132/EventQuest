@@ -85,9 +85,11 @@ class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodyLarge,
                   controller: announcementTitle,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: "Announcement Title",
+                    labelStyle: Theme.of(context).textTheme.bodyLarge,
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -100,9 +102,11 @@ class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
                   height: 14,
                 ),
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodyLarge,
                   controller: announcementDescription,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: "Description",
+                    labelStyle: Theme.of(context).textTheme.bodyLarge,
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -112,14 +116,14 @@ class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
                   },
                 ),
                 const SizedBox(
-                  height: 16,
+                  height: 24,
                 ),
-                const Text(
+                Text(
                   "Upload Image",
-                  style: TextStyle(fontSize: 18),
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 const SizedBox(
-                  height: 8,
+                  height: 16,
                 ),
                 images.isNotEmpty
                     ? CarouselSlider(
@@ -163,16 +167,16 @@ class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
                                 ),
                                 Text(
                                   "Upload Announcement Images",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.grey.shade400,
-                                  ),
+                                  style: Theme.of(context).textTheme.bodyLarge,
                                 )
                               ],
                             ),
                           ),
                         ),
                       ),
+                const SizedBox(
+                  height: 16,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

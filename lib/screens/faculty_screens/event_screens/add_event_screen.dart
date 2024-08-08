@@ -98,9 +98,11 @@ class _AddEventScreenState extends State<AddEventScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodyLarge,
                   controller: eventName,
                   decoration: InputDecoration(
                     labelText: "Event Name",
+                    labelStyle: Theme.of(context).textTheme.bodyLarge,
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -113,10 +115,12 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   height: 8,
                 ),
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodyLarge,
                   controller: description,
                   maxLines: 4,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: "Description",
+                    labelStyle: Theme.of(context).textTheme.bodyLarge,
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -126,10 +130,10 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   },
                 ),
                 const SizedBox(
-                  height: 8,
+                  height: 16,
                 ),
                 Text("Event Type",
-                    style: Theme.of(context).textTheme.titleSmall),
+                    style: Theme.of(context).textTheme.bodyLarge),
                 Container(
                   padding: const EdgeInsets.all(8.0),
                   child: DropdownButton<String>(
@@ -141,21 +145,21 @@ class _AddEventScreenState extends State<AddEventScreen> {
                         value: 'UG',
                         child: Text(
                           'UG',
-                          style: Theme.of(context).textTheme.labelLarge,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
                       DropdownMenuItem<String>(
                         value: 'PG',
                         child: Text(
                           'PG',
-                          style: Theme.of(context).textTheme.labelLarge,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
                       DropdownMenuItem<String>(
                         value: 'Both',
                         child: Text(
                           'Both',
-                          style: Theme.of(context).textTheme.labelLarge,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
                     ],
@@ -171,9 +175,9 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   height: 8,
                 ),
                 Text("Upload Image",
-                    style: Theme.of(context).textTheme.titleSmall),
+                    style: Theme.of(context).textTheme.bodyLarge),
                 const SizedBox(
-                  height: 8,
+                  height: 16,
                 ),
                 image.existsSync() == true
                     ? Center(
@@ -212,18 +216,15 @@ class _AddEventScreenState extends State<AddEventScreen> {
                                 ),
                                 Text(
                                   "Upload Event Image",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.grey.shade400,
-                                  ),
+                                  style: Theme.of(context).textTheme.bodyLarge,
                                 )
                               ],
                             ),
                           ),
                         ),
                       ),
-                SizedBox(
-                  height: 8,
+                const SizedBox(
+                  height: 16,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -239,10 +240,12 @@ class _AddEventScreenState extends State<AddEventScreen> {
                 ),
 
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodyLarge,
                   controller: eventAmount,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: "Event Amount",
+                    labelStyle: Theme.of(context).textTheme.bodyLarge,
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -255,9 +258,11 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   height: 8,
                 ),
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodyLarge,
                   controller: noOfParticipants,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
+                    labelStyle: Theme.of(context).textTheme.bodyLarge,
                     labelText: "No Of Participant",
                   ),
                   validator: (value) {
@@ -271,9 +276,11 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   height: 8,
                 ),
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodyLarge,
                   controller: eventLink,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: "Event Link",
+                    labelStyle: Theme.of(context).textTheme.bodyLarge,
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -286,9 +293,11 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   height: 8,
                 ),
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodyLarge,
                   controller: contactName,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: "Contact Name",
+                    labelStyle: Theme.of(context).textTheme.bodyLarge,
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -301,10 +310,12 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   height: 8,
                 ),
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodyLarge,
                   controller: contactPerson,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: "Contact No",
+                    labelStyle: Theme.of(context).textTheme.bodyLarge,
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -321,7 +332,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
                 // Date picker for Registration Deadline
                 Text(
                   "Registration Deadline",
-                  style: Theme.of(context).textTheme.titleSmall,
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 const SizedBox(
                   height: 10,

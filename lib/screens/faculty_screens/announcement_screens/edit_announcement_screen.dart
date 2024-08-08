@@ -167,12 +167,12 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                 const SizedBox(
                   height: 16,
                 ),
-                const Text(
-                  "Upload Image",
-                  style: TextStyle(fontSize: 18),
+                Text(
+                  "Announcement Image",
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(
-                  height: 8,
+                  height: 16,
                 ),
                 updateImageFlag == false
                     ? CarouselSlider(
@@ -242,6 +242,9 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                               ),
                             ),
                           ),
+                SizedBox(
+                  height: 16,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

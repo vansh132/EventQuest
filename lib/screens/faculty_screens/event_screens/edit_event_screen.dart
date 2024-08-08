@@ -198,7 +198,10 @@ class _EditEventScreenState extends State<EditEventScreen> {
                     },
                   ),
                 ),
-                Text("Upload Image",
+                const SizedBox(
+                  height: 8,
+                ),
+                Text("Event Image",
                     style: Theme.of(context).textTheme.titleMedium),
                 const SizedBox(
                   height: 8,
@@ -252,6 +255,9 @@ class _EditEventScreenState extends State<EditEventScreen> {
                               ),
                             ),
                           ),
+                const SizedBox(
+                  height: 8,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
