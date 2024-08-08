@@ -64,47 +64,60 @@ class _EventScreenState extends State<EventScreen> {
             const SizedBox(height: 8),
             filterOption(context),
             const SizedBox(height: 20),
-            FutureBuilder(
-              future: Future.delayed(
-                  const Duration(seconds: 1), () => getAllPost()),
-              initialData: events,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ListView.builder(
-                        itemCount: 5,
-                        itemBuilder: (context, index) {
-                          return Shimmer.fromColors(
-                            baseColor: Colors.grey[300]!,
-                            highlightColor: Colors.grey[100]!,
-                            child: buildShimmerEventCard(),
-                          );
-                        },
+            SizedBox(
+              height: 400,
+              child: FutureBuilder(
+                future: Future.delayed(
+                    const Duration(seconds: 1), () => getAllPost()),
+                initialData: events,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListView.builder(
+                          itemCount: 5,
+                          itemBuilder: (context, index) {
+                            return Shimmer.fromColors(
+                              baseColor: Colors.grey[300]!,
+                              highlightColor: Colors.grey[100]!,
+                              child: buildShimmerEventCard(),
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                  );
-                } else if (snapshot.hasData) {
-                  return Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ListView.builder(
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (context, index) {
-                          return buildEventCard(snapshot.data![index]);
-                        },
+                    );
+                  } else if (snapshot.data!.isEmpty) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/images/noDataFound.gif',
+                          height: 100,
+                        ),
+                        Text(
+                          'No Events found',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ],
+                    );
+                  } else if (snapshot.hasData) {
+                    return Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListView.builder(
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (context, index) {
+                            return buildEventCard(snapshot.data![index]);
+                          },
+                        ),
                       ),
-                    ),
-                  );
-                } else if (snapshot.data == null) {
-                  return const Center(
-                    child: Text("No data found"),
-                  );
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              },
+                    );
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                },
+              ),
             ),
           ],
         ),

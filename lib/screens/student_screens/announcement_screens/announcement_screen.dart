@@ -56,47 +56,64 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                 textAlign: TextAlign.center,
               ),
             ),
-            FutureBuilder(
-              future: Future.delayed(
-                  const Duration(seconds: 1), () => getAllAnnouncement()),
-              initialData: announcements,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ListView.builder(
-                        itemCount: 5,
-                        itemBuilder: (context, index) {
-                          return Shimmer.fromColors(
-                            baseColor: Colors.grey[300]!,
-                            highlightColor: Colors.grey[100]!,
-                            child: buildShimmerAnnouncementCard(),
-                          );
-                        },
+            SizedBox(
+              height: 500,
+              child: FutureBuilder(
+                future: Future.delayed(
+                    const Duration(seconds: 1), () => getAllAnnouncement()),
+                initialData: announcements,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListView.builder(
+                          itemCount: 5,
+                          itemBuilder: (context, index) {
+                            return Shimmer.fromColors(
+                              baseColor: Colors.grey[300]!,
+                              highlightColor: Colors.grey[100]!,
+                              child: buildShimmerAnnouncementCard(),
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                  );
-                } else if (snapshot.hasData) {
-                  return Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ListView.builder(
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (context, index) {
-                          return buildAnnouncementCard(snapshot.data![index]);
-                        },
+                    );
+                  } else if (snapshot.data!.isEmpty) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/images/noDataFound.gif',
+                          height: 100,
+                        ),
+                        Text(
+                          'No Announcements found',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ],
+                    );
+                  } else if (snapshot.hasData) {
+                    return Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListView.builder(
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (context, index) {
+                            return buildAnnouncementCard(snapshot.data![index]);
+                          },
+                        ),
                       ),
-                    ),
-                  );
-                } else if (snapshot.data == null) {
-                  return const Center(
-                    child: Text("No data found"),
-                  );
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              },
+                    );
+                  } else if (snapshot.data == null) {
+                    return const Center(
+                      child: Text("No data found"),
+                    );
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                },
+              ),
             ),
           ],
         ),
