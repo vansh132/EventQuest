@@ -37,8 +37,10 @@ class _EventScreenState extends State<EventScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      body: SizedBox(
+      body: Container(
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
@@ -64,27 +66,26 @@ class _EventScreenState extends State<EventScreen> {
             const SizedBox(height: 8),
             filterOption(context),
             const SizedBox(height: 20),
+            // Here, remove the Expanded and just use SizedBox
             SizedBox(
-              height: 400,
+              height: height * 0.59,
               child: FutureBuilder(
                 future: Future.delayed(
                     const Duration(seconds: 1), () => getAllPost()),
                 initialData: events,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListView.builder(
-                          itemCount: 5,
-                          itemBuilder: (context, index) {
-                            return Shimmer.fromColors(
-                              baseColor: Colors.grey[300]!,
-                              highlightColor: Colors.grey[100]!,
-                              child: buildShimmerEventCard(),
-                            );
-                          },
-                        ),
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListView.builder(
+                        itemCount: 5,
+                        itemBuilder: (context, index) {
+                          return Shimmer.fromColors(
+                            baseColor: Colors.grey[300]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: buildShimmerEventCard(),
+                          );
+                        },
                       ),
                     );
                   } else if (snapshot.data!.isEmpty) {
@@ -102,15 +103,13 @@ class _EventScreenState extends State<EventScreen> {
                       ],
                     );
                   } else if (snapshot.hasData) {
-                    return Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListView.builder(
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (context, index) {
-                            return buildEventCard(snapshot.data![index]);
-                          },
-                        ),
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          return buildEventCard(snapshot.data![index]);
+                        },
                       ),
                     );
                   } else {

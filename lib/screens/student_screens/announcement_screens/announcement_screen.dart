@@ -32,6 +32,8 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+
     final appColors = context.appColors;
     return Scaffold(
       body: SizedBox(
@@ -57,26 +59,24 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
               ),
             ),
             SizedBox(
-              height: 500,
+              height: height * 0.65,
               child: FutureBuilder(
                 future: Future.delayed(
                     const Duration(seconds: 1), () => getAllAnnouncement()),
                 initialData: announcements,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListView.builder(
-                          itemCount: 5,
-                          itemBuilder: (context, index) {
-                            return Shimmer.fromColors(
-                              baseColor: Colors.grey[300]!,
-                              highlightColor: Colors.grey[100]!,
-                              child: buildShimmerAnnouncementCard(),
-                            );
-                          },
-                        ),
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListView.builder(
+                        itemCount: 5,
+                        itemBuilder: (context, index) {
+                          return Shimmer.fromColors(
+                            baseColor: Colors.grey[300]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: buildShimmerAnnouncementCard(),
+                          );
+                        },
                       ),
                     );
                   } else if (snapshot.data!.isEmpty) {
@@ -94,15 +94,13 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                       ],
                     );
                   } else if (snapshot.hasData) {
-                    return Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListView.builder(
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (context, index) {
-                            return buildAnnouncementCard(snapshot.data![index]);
-                          },
-                        ),
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          return buildAnnouncementCard(snapshot.data![index]);
+                        },
                       ),
                     );
                   } else if (snapshot.data == null) {
