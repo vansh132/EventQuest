@@ -87,7 +87,21 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
     );
   }
 
+  Future<String> verifyLogo(
+      File posterImage, int xmin, int xmax, int ymin, int ymax) async {
+    var result = await posterValidation.verifyLogo(
+      context: context,
+      posterImage: posterImage,
+      xmin: xmin.toString(),
+      ymin: ymin.toString(),
+      xmax: xmax.toString(),
+      ymax: ymax.toString(),
+    );
+    return result;
+  }
+
   Future<File> pickImages() async {
+    bool logoDetected = false;
     File image = File("");
     try {
       var files = await FilePicker.platform.pickFiles(
@@ -128,28 +142,46 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
         var result = await posterValidation.verifyPoster(
             context: context, posterImage: image);
 
+        if (result[0] == "Logo detected") {
+          logoDetected = true;
+        } else {
+          logoDetected = false;
+        }
+        var resultBody = result[0];
+
+        String logoVerificationStatus = "";
+        if (!logoDetected) {
+          var result = verifyLogo(
+            image,
+            resultBody['xmin'],
+            resultBody['xmax'],
+            resultBody['ymin'],
+            resultBody['ymax'],
+          );
+
+          result.then((data) {
+            logoVerificationStatus = data;
+          });
+        } else {
+          logoVerificationStatus = "no logo";
+        }
+
         // Adding delay of 2 seconds
         await Future.delayed(const Duration(seconds: 2));
 
         Navigator.pop(context); // Dismiss the dialog
-
-        if (result == "Logo detected") {
+        if (logoVerificationStatus == "valid poster") {
           posterValidationStatus = true;
           posterValidationMessage = "Hurray, Poster validated successfully...";
-          print("Hurray, Poster validated successfully...");
-        } else if (result == "Invalid poster") {
+        } else if (logoVerificationStatus == "poster not valid") {
           posterValidationStatus = false;
           posterValidationMessage =
-              "OOPS, Poster is invalid. Please read guidelines...";
-          print("OOPS, Poster is invalid. Please read guidelines.");
-        } else if (result == "Logo not detected") {
+              "OOPS, Use valid CHRIST Logo. Please read guidelines...";
+        } else if (logoVerificationStatus == "no logo") {
           posterValidationStatus = false;
-          posterValidationMessage =
-              "Please add CHRIST logo at top-right. Read guidelines..";
-          print("Please add CHRIST logo at top-right. Read guidelines.");
+          posterValidationMessage = "No logo found";
         } else {
           posterValidationMessage = "Something went wrong...";
-          print("Something went wrong...");
         }
       }
     } catch (e) {
@@ -168,6 +200,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final appColors = context.appColors;
+    print(task.remarks);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -339,7 +372,31 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                                       ),
                                     ),
                                   ),
-                    Text(posterValidationMessage),
+                    posterValidationMessage == ''
+                        ? const SizedBox(
+                            height: 12,
+                          )
+                        : Container(
+                            padding: const EdgeInsets.all(12),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: posterValidationStatus
+                                  ? appColors.success
+                                  : appColors.error,
+                            ),
+                            child: Text(
+                              textAlign: TextAlign.center,
+                              posterValidationMessage,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(
+                                    color: appColors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                          ),
                     task.taskStatus
                         ? const SizedBox()
                         : Row(
@@ -406,7 +463,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                           ),
                         ],
                       ),
-                      child: task.remarks != null
+                      child: (task.remarks != null)
                           ? Text(
                               task.remarks.toString(),
                               textAlign: TextAlign.justify,

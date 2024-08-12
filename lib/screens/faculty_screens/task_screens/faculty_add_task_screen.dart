@@ -96,40 +96,42 @@ class _FacultyAddTaskScreenState extends State<FacultyAddTaskScreen> {
                     const SizedBox(
                       height: 16,
                     ),
-                    const Text(
-                      "Event Type",
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10.0),
-                      child: DropdownButton<String>(
-                        isExpanded: true,
-                        borderRadius: BorderRadius.circular(10),
-                        items: const [
-                          DropdownMenuItem<String>(
-                            value: 'Poster',
-                            child: Text('Poster'),
-                          ),
-                          // DropdownMenuItem<String>(
-                          //   value: 'Report',
-                          //   child: Text('Report'),
-                          // ),
-                        ],
-                        value: dropdownValue,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            dropdownValue = newValue!;
-                          });
-                        },
-                      ),
-                    ),
+                    // const Text(
+                    //   "Event Type",
+                    //   style: TextStyle(fontSize: 16),
+                    // ),
+                    // Container(
+                    //   padding: const EdgeInsets.all(10.0),
+                    //   child: DropdownButton<String>(
+                    //     isExpanded: true,
+                    //     borderRadius: BorderRadius.circular(10),
+                    //     items: const [
+                    //       DropdownMenuItem<String>(
+                    //         value: 'Poster',
+                    //         child: Text('Poster'),
+                    //       ),
+                    //       // DropdownMenuItem<String>(
+                    //       //   value: 'Report',
+                    //       //   child: Text('Report'),
+                    //       // ),
+                    //     ],
+                    //     value: dropdownValue,
+                    //     onChanged: (String? newValue) {
+                    //       setState(() {
+                    //         dropdownValue = newValue!;
+                    //       });
+                    //     },
+                    //   ),
+                    // ),
                     TextFormField(
                       controller: taskAssignedTo,
                       keyboardType: TextInputType.number,
                       decoration: const InputDecoration(
-                        hintText: "Register no (2347152)",
-                        labelText: "Assign to",
-                      ),
+                          hintText: "Register no (2347152)",
+                          labelText: "Assign to",
+                          hintStyle: TextStyle(
+                            color: Color(0xffd4dcdf),
+                          )),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please Enter Register Number';

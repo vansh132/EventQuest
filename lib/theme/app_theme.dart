@@ -7,6 +7,10 @@ class AppTheme {
 
   ThemeData _base(AppColors color) {
     return ThemeData(
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: color.primary,
+        foregroundColor: color.accent,
+      ),
       appBarTheme: AppBarTheme(
         backgroundColor: color.white,
         elevation: 2,

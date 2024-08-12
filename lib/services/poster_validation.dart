@@ -6,13 +6,13 @@ import 'package:http/http.dart' as http;
 import '../screens/constants/utils.dart';
 
 class PosterValidation {
-  Future<String> verifyPoster(
+  Future<List<dynamic>> verifyPoster(
       {required BuildContext context, required File posterImage}) async {
     void handleHttpError(String errorMessage) {
       showSnackBar(context, errorMessage);
     }
 
-    String result = "";
+    List<dynamic> result = [];
 
     try {
       var request = http.MultipartRequest(
@@ -39,10 +39,13 @@ class PosterValidation {
         var responseBody = jsonDecode(response.body);
         if (responseBody['status']) {
           print(responseBody['message']);
-          result = responseBody['message'];
+          result.addAll(responseBody[
+              'bounding_boxes']); // responseBody['bounding_boxes'];
+          print(result);
         } else {
           print(responseBody['message']);
-          result = responseBody['message'];
+          result.add(responseBody['message']); // responseBody['message'];
+          // print("inside..." + result.toString());
         }
       } else {
         print('Upload failed with status: ${response.statusCode}');
@@ -73,7 +76,7 @@ class PosterValidation {
     try {
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('http://127.0.0.1:9000/detect-text-db'),
+        Uri.parse('http://127.0.0.1:7000/detect-text-db'),
       );
 
       request.headers['Content-Type'] = 'multipart/form-data';

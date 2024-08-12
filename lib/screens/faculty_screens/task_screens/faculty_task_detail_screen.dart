@@ -1,7 +1,7 @@
 import 'package:eventquest/models/task.dart';
 import 'package:eventquest/screens/faculty_screens/task_screens/faculty_edit_task_screen.dart';
 import 'package:eventquest/services/task_services.dart';
-import 'package:eventquest/widgets/top_bar.dart';
+import 'package:eventquest/theme/theme_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
@@ -57,16 +57,24 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
     // final Task tempTask = ModalRoute.of(context)!.settings.arguments as Task;
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          task.taskTitle,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+      ),
       floatingActionButton: task.taskStatus
-          ? const IconButton(onPressed: null, icon: Icon(Icons.edit))
-          : IconButton.filled(
+          ? const FloatingActionButton(onPressed: null, child: Icon(Icons.edit))
+          : FloatingActionButton(
               onPressed: () {
                 Navigator.pushNamed(context, FacultyEditTaskScreen.routeName,
                     arguments: task);
               },
-              icon: const Icon(
+              tooltip: "Edit",
+              child: const Icon(
                 Icons.edit,
               ),
             ),
@@ -74,8 +82,6 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              TopBar(),
-              facultyTopbarTitle(context, task),
               Container(
                 margin:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -86,7 +92,7 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                       width: MediaQuery.of(context).size.width,
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.white70,
+                        color: appColors.accent,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
@@ -101,17 +107,19 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                       child: Text(
                         task.taskDescription,
                         textAlign: TextAlign.justify,
+                        style: Theme.of(context).textTheme.titleSmall,
                       ),
                     ),
                     const SizedBox(
                       height: 12,
                     ),
+                    // Task Status
                     Container(
                       alignment: Alignment.center,
                       width: MediaQuery.of(context).size.width,
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.white70,
+                        color: appColors.accent,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
@@ -125,42 +133,44 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                       ),
                       child: RichText(
                         text: TextSpan(children: [
-                          const TextSpan(
-                              text: "Status: ",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              )),
+                          TextSpan(
+                            text: "Status: ",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall!
+                                .copyWith(
+                                  color: appColors.richBlack,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                          ),
                           TextSpan(
                             text: task.taskStatus ? "Completed" : "Incompleted",
                             style: !task.taskStatus
-                                ? const TextStyle(
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16,
-                                  )
-                                : const TextStyle(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16,
-                                  ),
+                                ? Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(
+                                      color: appColors.error,
+                                      fontWeight: FontWeight.w500,
+                                    )
+                                : Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(
+                                      color: appColors.success,
+                                    ),
                           ),
                         ]),
                         textAlign: TextAlign.justify,
                       ),
                     ),
+
                     const SizedBox(
                       height: 16,
                     ),
-                    const Text(
+                    Text(
                       "Uploaded Poster",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0xff0D1B2A),
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 0.2,
-                      ),
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(
                       height: 12,
@@ -195,9 +205,6 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                         ),
                       ),
                     ),
-
-                    //NetworkImage(task.taskFile ??
-                    //"https://res.cloudinary.com/dq1q5mtdo/image/upload/f_auto,q_auto/v1/Dummy-images/uo2rk3gkixuyqdznlhqs"))
                     const SizedBox(
                       height: 16,
                     ),
@@ -208,7 +215,7 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                         width: MediaQuery.of(context).size.width,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: Colors.white70,
+                          color: appColors.accent,
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -223,14 +230,9 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                         ),
                         child: Column(
                           children: [
-                            const Text(
+                            Text(
                               "Remarks",
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Color(0xff0D1B2A),
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: 0.2,
-                              ),
+                              style: Theme.of(context).textTheme.titleMedium,
                             ),
                             const SizedBox(
                               height: 6,
@@ -245,9 +247,14 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                                     task.remarks.toString(),
                                     textAlign: TextAlign.justify,
                                   )
-                                : const Text("No Remarks"),
+                                : Text(
+                                    "No Remarks",
+                                    style: Theme.of(context)
+                                        .primaryTextTheme
+                                        .labelSmall,
+                                  ),
                             const SizedBox(
-                              height: 4,
+                              height: 8,
                             ),
                             task.taskStatus
                                 ? const SizedBox()
@@ -257,26 +264,40 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                                         context: context,
                                         builder: (context) {
                                           return Dialog(
+                                            backgroundColor: appColors.accent,
                                             child: Container(
+                                              margin: EdgeInsets.all(16),
                                               padding: const EdgeInsets.all(16),
                                               height: 200,
                                               child: SingleChildScrollView(
                                                 child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    const Text(
-                                                        "Give Remarks: "),
+                                                    Text(
+                                                      "Give Remarks: ",
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .titleMedium,
+                                                    ),
                                                     TextFormField(
                                                       controller:
                                                           remarkController,
                                                       minLines: 1,
                                                       maxLines: 3,
                                                     ),
-                                                    ElevatedButton(
-                                                        onPressed: addRemark,
-                                                        child: const Text(
-                                                            "Add Remark"))
+                                                    SizedBox(
+                                                      height: 4,
+                                                    ),
+                                                    Center(
+                                                      child: ElevatedButton(
+                                                          onPressed: addRemark,
+                                                          child: const Text(
+                                                              "Add Remark")),
+                                                    )
                                                   ],
                                                 ),
                                               ),

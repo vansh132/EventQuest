@@ -2,9 +2,10 @@ import 'package:eventquest/models/task.dart';
 import 'package:eventquest/screens/faculty_screens/task_screens/faculty_add_task_screen.dart';
 import 'package:eventquest/screens/faculty_screens/task_screens/faculty_task_detail_screen.dart';
 import 'package:eventquest/services/task_services.dart';
+import 'package:eventquest/theme/theme_ext.dart';
 import 'package:eventquest/themes.dart';
-import 'package:eventquest/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class FacultyTaskScreen extends StatefulWidget {
   const FacultyTaskScreen({super.key});
@@ -61,28 +62,40 @@ class _FacultyTaskScreenState extends State<FacultyTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
+          padding: EdgeInsets.all(8),
           child: Column(
             children: [
-              TopBar(),
-              const SizedBox(
-                height: 16,
+              Text(
+                "Manage Your Tasks",
+                style: Theme.of(context).textTheme.displayMedium,
               ),
-              const Text(
-                "Tasks Created",
-                style: TextStyle(
-                  color: Color(0xff012a4a),
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.2,
+              const SizedBox(
+                height: 12,
+              ),
+              Text(
+                "\"The harder you work for something, the greater you'll feel when you achieve it.\"",
+                style: GoogleFonts.raleway(
+                  fontSize: 14,
+                  color: appColors.primary,
                 ),
+                textAlign: TextAlign.center,
               ),
               const Divider(
                 color: Colors.grey,
                 indent: 36,
                 endIndent: 36,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Text(
+                "Tasks Created",
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               Container(
                 height: 500,
@@ -99,7 +112,7 @@ class _FacultyTaskScreenState extends State<FacultyTaskScreen> {
                     if (snapshot.hasData) {
                       return ListView.builder(
                         itemBuilder: (context, index) =>
-                            taskItem(context, snapshot.data![index]),
+                            taskItem(snapshot.data![index], context),
                         itemCount: tasks.length,
                       );
                     } else {
@@ -126,48 +139,43 @@ class _FacultyTaskScreenState extends State<FacultyTaskScreen> {
   }
 }
 
-Widget taskItem(BuildContext context, Task task) {
+Widget taskItem(Task task, BuildContext context) {
   return GestureDetector(
-    onTap: () {
-      Navigator.pushNamed(context, FacultyTaskDetailScreen.routeName,
-          arguments: task);
-    },
+    onTap: () => Navigator.pushNamed(
+      context,
+      FacultyTaskDetailScreen.routeName,
+      arguments: task,
+    ),
     child: Container(
-      padding: const EdgeInsets.all(8),
-      margin: const EdgeInsets.all(8),
+      margin: const EdgeInsets.symmetric(
+        vertical: 8,
+      ),
       decoration: BoxDecoration(
-        color: const Color(0xfffbfcf8),
+        color: Colors.white,
+        border: Border.all(width: 0.2),
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2), // Shadow color
-            spreadRadius: 5, // Spread radius
-            blurRadius: 7, // Blur radius
-            offset: const Offset(0, 3), // Offset in the x, y direction
+            color: Colors.grey.withOpacity(0.3), // Shadow color
+            spreadRadius: 1, // Spread radius
+            blurRadius: 3, // Blur radius
+            offset: const Offset(2, 2), // Offset in the x, y direction
           ),
         ],
       ),
       child: ListTile(
         title: Text(
           task.taskTitle,
-          style: const TextStyle(
-            color: Color(0xff012a4a),
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
-        trailing: Text(
-          task.taskStatus ? "Completed" : "Incompleted",
-          style: !task.taskStatus
-              ? const TextStyle(
-                  color: Colors.red,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                )
-              : const TextStyle(
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        subtitle: Text(
+          "Assigned To: ${task.assignedTo}",
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                fontSize: 14,
+                fontWeight: FontWeight.normal,
+                color: Colors.blueGrey.withOpacity(0.8),
+              ),
         ),
       ),
     ),
