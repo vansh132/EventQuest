@@ -13,7 +13,8 @@ class Event {
   String eventContactPerson;
   int eventContactPersonNo;
   String eventRegistrationDeadline;
-  // Constructor
+
+  // Event Constructor
   Event({
     required this.eventId,
     required this.eventName,
@@ -29,6 +30,7 @@ class Event {
     required this.eventRegistrationDeadline,
   });
 
+// Map Function
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
 
