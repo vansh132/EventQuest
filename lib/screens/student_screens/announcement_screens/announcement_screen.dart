@@ -59,7 +59,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
               ),
             ),
             SizedBox(
-              height: height * 0.65,
+              height: height * 0.66,
               child: FutureBuilder(
                 future: Future.delayed(
                     const Duration(seconds: 1), () => getAllAnnouncement()),
@@ -224,7 +224,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                 children: [
                   // Wrap the image with a Container to set fixed size
                   Container(
-                    height: 100, // Set the desired height
+                    height: 130, // Set the desired height
                     width: 100, // Set the desired width
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(12.0),

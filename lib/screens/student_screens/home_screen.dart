@@ -213,7 +213,7 @@ Widget announcementItem(BuildContext context, Announcement announcement) {
                         child: Text(
                           announcement.announcementTitle,
                           style:
-                              Theme.of(context).textTheme.titleLarge!.copyWith(
+                              Theme.of(context).textTheme.titleMedium!.copyWith(
                                     color: appColors.richBlack,
                                   ),
                           textAlign: TextAlign.center,

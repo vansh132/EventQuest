@@ -313,12 +313,6 @@ class _EditEventScreenState extends State<EditEventScreen> {
                   decoration: InputDecoration(
                     hintText: eventData.eventLink,
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please Enter Event Link';
-                    }
-                    return null;
-                  },
                 ),
                 const SizedBox(
                   height: 14,

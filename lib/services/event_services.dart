@@ -156,7 +156,7 @@ class EventServices {
       required String eventCategory,
       required DateTime eventPublishedOn,
       required int eventNoOfParticipants,
-      required String eventLink,
+      String? eventLink,
       required String eventContactPerson,
       required int eventContactNo,
       required DateTime eventRegistartionDeadline}) async {
@@ -224,7 +224,7 @@ class EventServices {
       required String eventCategory,
       required DateTime eventPublishedOn,
       required int eventNoOfParticipants,
-      required String eventLink,
+      String? eventLink,
       required String eventContactPerson,
       required int eventContactNo,
       required DateTime eventRegistartionDeadline}) async {

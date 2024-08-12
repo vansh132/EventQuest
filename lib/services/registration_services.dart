@@ -80,10 +80,10 @@ class RegistrationServices {
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
-            showSnackBar(context, errMessage);
+            customSnackbar(context, "Error", 'Failed to Register!!');
           },
           onSuccess: () {
-            showSnackBar(context, "Registered Successfully");
+            customSnackbar(context, "Success", 'Registered Successfully!!');
 
             Navigator.pop(context);
           });

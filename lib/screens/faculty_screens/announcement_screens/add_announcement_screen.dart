@@ -104,6 +104,7 @@ class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
                 TextFormField(
                   style: Theme.of(context).textTheme.bodyLarge,
                   controller: announcementDescription,
+                  maxLines: 4,
                   decoration: InputDecoration(
                     labelText: "Description",
                     labelStyle: Theme.of(context).textTheme.bodyLarge,

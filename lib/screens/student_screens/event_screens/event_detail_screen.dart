@@ -149,29 +149,35 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                 height: 16,
               ),
               // Event Link
-              RichText(
-                text: TextSpan(
-                  style: const TextStyle(fontSize: 18, color: Colors.black),
-                  children: [
-                    TextSpan(
-                      text: 'Event Link: ',
-                      style: Theme.of(context).textTheme.titleMedium,
+              event.eventLink!.isEmpty
+                  ? const SizedBox()
+                  : Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: RichText(
+                        text: TextSpan(
+                          style: const TextStyle(
+                              fontSize: 18, color: Colors.black),
+                          children: [
+                            TextSpan(
+                              text: 'Event Link: ',
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                            TextSpan(
+                                text: ' ${event.eventLink}',
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () async {
+                                    var url = event.eventLink!;
+                                    if (!await launchUrl(Uri.parse(url))) {
+                                      throw Exception('Could not launch $url');
+                                    }
+                                  },
+                                style: const TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    color: Color(0xff0B3F63))),
+                          ],
+                        ),
+                      ),
                     ),
-                    TextSpan(
-                        text: ' ${event.eventLink}',
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () async {
-                            var url = event.eventLink;
-                            if (!await launchUrl(Uri.parse(url))) {
-                              throw Exception('Could not launch $url');
-                            }
-                          },
-                        style: const TextStyle(
-                            decoration: TextDecoration.underline,
-                            color: Color(0xff0B3F63))),
-                  ],
-                ),
-              ),
 
               // Description
               Padding(

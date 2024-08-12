@@ -282,12 +282,6 @@ class _AddEventScreenState extends State<AddEventScreen> {
                     labelText: "Event Link",
                     labelStyle: Theme.of(context).textTheme.bodyLarge,
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please Enter Event Link';
-                    }
-                    return null;
-                  },
                 ),
                 const SizedBox(
                   height: 8,

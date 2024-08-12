@@ -26,6 +26,7 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
 
   Future<List<Announcement>> getAllAnnouncement() async {
     announcements = await announcementServices.getAllAnnouncements(context);
+
     return announcements;
   }
 
@@ -38,6 +39,7 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
   @override
   Widget build(BuildContext context) {
     final appColors = context.appColors;
+
     return Scaffold(
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
@@ -61,40 +63,37 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                 textAlign: TextAlign.center,
               ),
             ),
-            Container(
-              height: 500,
-              child: FutureBuilder(
-                  future: getAllAnnouncement(),
-                  initialData: announcements,
-                  builder: (context, snapshot) {
-                    if (snapshot.data!.isEmpty) {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/images/noDataFound.gif',
-                            height: 100,
-                          ),
-                          Text(
-                            'No Announcements found',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                        ],
-                      );
-                    } else if (snapshot.hasData) {
-                      return Expanded(
-                        child: ListView.builder(
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (context, index) {
-                            return buildAnnouncementCard(snapshot.data![index]);
-                          },
+            FutureBuilder(
+                future: getAllAnnouncement(),
+                initialData: announcements,
+                builder: (context, snapshot) {
+                  if (snapshot.data!.isEmpty) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/images/noDataFound.gif',
+                          height: 100,
                         ),
-                      );
-                    } else {
-                      return const CircularProgressIndicator();
-                    }
-                  }),
-            ),
+                        Text(
+                          'No Announcements found',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ],
+                    );
+                  } else if (snapshot.hasData) {
+                    return Expanded(
+                      child: ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          return buildAnnouncementCard(snapshot.data![index]);
+                        },
+                      ),
+                    );
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                }),
           ],
         ),
       ),
@@ -145,8 +144,8 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                     children: [
                       // Wrap the image with a Container to set fixed size
                       SizedBox(
-                        height: 100, // Set the desired height
-                        width: 90, // Set the desired width
+                        height: 110, // Set the desired height
+                        width: 110, // Set the desired width
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(12.0),
                           child: announcement.announcementImages!.isEmpty
@@ -164,7 +163,7 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(announcement.announcementTitle,
-                                style: Theme.of(context).textTheme.titleMedium),
+                                style: Theme.of(context).textTheme.titleSmall),
                             const SizedBox(height: 8),
                             Text(
                               announcement.announcementDescription,

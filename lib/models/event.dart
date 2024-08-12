@@ -9,7 +9,7 @@ class Event {
   String eventCategory;
   String eventPublishedOn;
   int eventNoOfParticipants;
-  String eventLink;
+  String? eventLink; // Made nullable
   String eventContactPerson;
   int eventContactPersonNo;
   String eventRegistrationDeadline;
@@ -24,13 +24,13 @@ class Event {
     required this.eventCategory,
     required this.eventPublishedOn,
     required this.eventNoOfParticipants,
-    required this.eventLink,
+    this.eventLink, // Optional parameter
     required this.eventContactPerson,
     required this.eventContactPersonNo,
     required this.eventRegistrationDeadline,
   });
 
-// Map Function
+  // Map Function
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
 
@@ -42,7 +42,9 @@ class Event {
     result.addAll({'eventCategory': eventCategory});
     result.addAll({'eventPublishedOn': eventPublishedOn});
     result.addAll({'eventNoOfParticipants': eventNoOfParticipants});
-    result.addAll({'eventLink': eventLink});
+    if (eventLink != null) {
+      result.addAll({'eventLink': eventLink});
+    }
     result.addAll({'eventContactPerson': eventContactPerson});
     result.addAll({'eventContactPersonNo': eventContactPersonNo});
     result.addAll({'eventRegistrationDeadline': eventRegistrationDeadline});
@@ -60,7 +62,7 @@ class Event {
       eventCategory: map['eventCategory'] ?? '',
       eventPublishedOn: map['eventPublishedOn'],
       eventNoOfParticipants: map['eventNoOfParticipants'] ?? 0,
-      eventLink: map['eventLink'] ?? '',
+      eventLink: map['eventLink'], // Optional field
       eventContactPerson: map['eventContactPerson'] ?? '',
       eventContactPersonNo: map['eventContactPersonNo'] ?? 0,
       eventRegistrationDeadline: map['eventRegistrationDeadline'],
