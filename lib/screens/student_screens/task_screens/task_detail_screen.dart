@@ -141,30 +141,34 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
         image = File(files.files[0].path!);
         var result = await posterValidation.verifyPoster(
             context: context, posterImage: image);
-        print(result.isEmpty);
-        if (result.isEmpty) {
-          logoDetected = false;
-        } else if (result[0] == "Logo detected") {
+        print("after detecting logo");
+        var resultBody = result[0];
+        print(resultBody);
+        if (resultBody['status']) {
           logoDetected = true;
         } else {
           logoDetected = false;
         }
 
-        var resultBody = result.isEmpty ? [] : result[0];
-
         String logoVerificationStatus = "";
-        if (!logoDetected) {
-          var result = verifyLogo(
-            image,
-            resultBody['xmin'],
-            resultBody['xmax'],
-            resultBody['ymin'],
-            resultBody['ymax'],
-          );
-          result.then((data) {
-            print(data);
-            logoVerificationStatus = data;
-          });
+        if (logoDetected) {
+          List<dynamic> boundings = resultBody['bounding_boxes'];
+          if (boundings.isEmpty) {
+            logoVerificationStatus = "blur logo";
+          } else {
+            var result = verifyLogo(
+              image,
+              boundings[0]['xmin'],
+              boundings[0]['xmax'],
+              boundings[0]['ymin'],
+              boundings[0]['ymax'],
+            );
+            await result.then((data) {
+              setState(() {
+                logoVerificationStatus = data;
+              });
+            });
+          }
         } else {
           logoVerificationStatus = "no logo";
         }
@@ -173,6 +177,8 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
         await Future.delayed(const Duration(seconds: 2));
 
         Navigator.pop(context); // Dismiss the dialog
+        print("verification status");
+        print(logoVerificationStatus);
         if (logoVerificationStatus == "valid poster") {
           posterValidationStatus = true;
           posterValidationMessage = "Hurray, Poster validated successfully...";
@@ -183,6 +189,9 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
         } else if (logoVerificationStatus == "no logo") {
           posterValidationStatus = false;
           posterValidationMessage = "No logo found";
+        } else if (logoVerificationStatus == 'blur logo') {
+          posterValidationStatus = false;
+          posterValidationMessage = "Logo is blur";
         } else {
           posterValidationMessage = "Something went wrong...";
         }
@@ -203,7 +212,6 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final appColors = context.appColors;
-    print(task.remarks);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -375,18 +383,21 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                                       ),
                                     ),
                                   ),
+                    SizedBox(
+                      height: 12,
+                    ),
                     posterValidationMessage == ''
                         ? const SizedBox(
                             height: 12,
                           )
                         : Container(
-                            padding: const EdgeInsets.all(12),
+                            padding: const EdgeInsets.all(8),
                             width: double.infinity,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               color: posterValidationStatus
                                   ? appColors.success
-                                  : appColors.error,
+                                  : appColors.error.withOpacity(0.8),
                             ),
                             child: Text(
                               textAlign: TextAlign.center,
@@ -400,6 +411,9 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                                   ),
                             ),
                           ),
+                    SizedBox(
+                      height: 12,
+                    ),
                     task.taskStatus
                         ? const SizedBox()
                         : Row(

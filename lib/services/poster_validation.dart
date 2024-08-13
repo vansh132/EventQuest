@@ -35,17 +35,14 @@ class PosterValidation {
       http.Response response = await http.Response.fromStream(streamedResponse);
 
       if (response.statusCode == 200) {
-        print("Poster uploaded successfully...");
         var responseBody = jsonDecode(response.body);
+        print("inside service..");
+        print(responseBody);
         if (responseBody['status']) {
-          print(responseBody['message']);
-          result.addAll(responseBody[
-              'bounding_boxes']); // responseBody['bounding_boxes'];
-          print(result);
+          result.add(responseBody);
+          // result.addAll(responseBody['bounding_boxes']);
         } else {
-          print(responseBody['message']);
-          result.add(responseBody['message']); // responseBody['message'];
-          // print("inside..." + result.toString());
+          result.add(responseBody);
         }
       } else {
         print('Upload failed with status: ${response.statusCode}');
@@ -55,7 +52,6 @@ class PosterValidation {
       final errorMessage = "Error occurred: ${e.toString()}";
       handleHttpError(errorMessage);
     }
-
     return result;
   }
 
@@ -100,15 +96,11 @@ class PosterValidation {
       http.Response response = await http.Response.fromStream(streamedResponse);
 
       if (response.statusCode == 200) {
-        print("Poster uploaded successfully...");
         var responseBody = jsonDecode(response.body);
-        print(responseBody.toString());
 
         if (responseBody['status']) {
-          print(responseBody['message']);
           result = responseBody['message'];
         } else {
-          print(responseBody['message']);
           result = responseBody['message'];
         }
       } else {
