@@ -55,7 +55,7 @@ class EventServices {
     List<Event> eventList = [];
 
     try {
-      http.Response res = await http.get(Uri.parse("$url/api/v1/events"),
+      http.Response res = await http.get(Uri.parse("$url/api/v1/both/events"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8'
           });
