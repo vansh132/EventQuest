@@ -66,9 +66,8 @@ class _EventScreenState extends State<EventScreen> {
             const SizedBox(height: 8),
             filterOption(context),
             const SizedBox(height: 20),
-            // Here, remove the Expanded and just use SizedBox
-            SizedBox(
-              height: height * 0.59,
+            Expanded(
+              // height: 400,
               child: FutureBuilder(
                 future: Future.delayed(
                     const Duration(seconds: 1), () => getAllPost()),
