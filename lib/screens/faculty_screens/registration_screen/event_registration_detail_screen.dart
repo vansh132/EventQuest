@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:eventquest/models/reg_dummy.dart';
 import 'package:eventquest/models/registration.dart';
-import 'package:eventquest/themes.dart';
 import 'package:flutter/material.dart';
 
 class EventRegistrationDetailScreen extends StatelessWidget {
@@ -24,6 +23,8 @@ class EventRegistrationDetailScreen extends StatelessWidget {
     DummyReg(registerNumber: "2348113", verify: true),
     DummyReg(registerNumber: "2348114", verify: false),
   ];
+
+  EventRegistrationDetailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
