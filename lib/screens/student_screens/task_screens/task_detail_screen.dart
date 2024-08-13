@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:eventquest/models/task.dart';
@@ -141,13 +142,16 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
         image = File(files.files[0].path!);
         var result = await posterValidation.verifyPoster(
             context: context, posterImage: image);
-
-        if (result[0] == "Logo detected") {
+        print(result.isEmpty);
+        if (result.isEmpty) {
+          logoDetected = false;
+        } else if (result[0] == "Logo detected") {
           logoDetected = true;
         } else {
           logoDetected = false;
         }
-        var resultBody = result[0];
+
+        var resultBody = result.isEmpty ? [] : result[0];
 
         String logoVerificationStatus = "";
         if (!logoDetected) {
@@ -158,8 +162,8 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
             resultBody['ymin'],
             resultBody['ymax'],
           );
-
           result.then((data) {
+            print(data);
             logoVerificationStatus = data;
           });
         } else {

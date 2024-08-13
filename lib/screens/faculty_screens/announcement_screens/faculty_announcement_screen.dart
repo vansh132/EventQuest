@@ -21,19 +21,24 @@ class FacultyAnnouncementScreen extends StatefulWidget {
 
 class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
   List<Announcement> announcements = [];
+  bool isLoading = true; // Add this flag
 
   AnnouncementServices announcementServices = AnnouncementServices();
 
   Future<List<Announcement>> getAllAnnouncement() async {
-    announcements = await announcementServices.getAllAnnouncements(context);
-
+    final fetchedAnnouncements =
+        await announcementServices.getAllAnnouncements(context);
+    setState(() {
+      announcements = fetchedAnnouncements;
+      isLoading = false; // Update loading state
+    });
     return announcements;
   }
 
   @override
   void initState() {
-    getAllAnnouncement();
     super.initState();
+    getAllAnnouncement();
   }
 
   @override
@@ -65,9 +70,12 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
             ),
             FutureBuilder(
                 future: getAllAnnouncement(),
-                initialData: announcements,
                 builder: (context, snapshot) {
-                  if (snapshot.data!.isEmpty) {
+                  if (isLoading) {
+                    return const Center(
+                        child:
+                            CircularProgressIndicator()); // Show loading indicator
+                  } else if (snapshot.hasData && snapshot.data!.isEmpty) {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -91,7 +99,7 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                       ),
                     );
                   } else {
-                    return const CircularProgressIndicator();
+                    return const Center(child: Text('An error occurred'));
                   }
                 }),
           ],
@@ -253,7 +261,8 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                                             announcement: announcement,
                                             onSuccess: () {
                                               setState(() {
-                                                announcements;
+                                                announcements
+                                                    .remove(announcement);
                                               });
                                             },
                                           );

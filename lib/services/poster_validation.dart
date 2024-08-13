@@ -102,6 +102,8 @@ class PosterValidation {
       if (response.statusCode == 200) {
         print("Poster uploaded successfully...");
         var responseBody = jsonDecode(response.body);
+        print(responseBody.toString());
+
         if (responseBody['status']) {
           print(responseBody['message']);
           result = responseBody['message'];
