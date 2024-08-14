@@ -43,7 +43,7 @@ class EventRegistrationDetailScreen extends StatelessWidget {
 
     // Limit the dummyRegistrations list to the random number generated
     List<DummyReg> displayedRegistrations =
-        dummyRegistrations.take(randomNumber).toList();
+        dummyRegistrations.take(14).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -58,7 +58,7 @@ class EventRegistrationDetailScreen extends StatelessWidget {
                 onPressed: () {
                   // Action for pending status
                 },
-                child: Text("No Of Participants: ${randomNumber.toString()}"),
+                child: Text("No Of Participants: 14"),
               ),
             ),
             const SizedBox(

@@ -1,7 +1,6 @@
 import 'package:eventquest/models/event.dart';
 import 'package:eventquest/screens/student_screens/event_screens/event_detail_screen.dart';
 import 'package:eventquest/services/event_services.dart';
-import 'package:eventquest/theme/theme_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -38,7 +37,6 @@ class _EventScreenState extends State<EventScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final appColors = context.appColors;
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -65,91 +63,7 @@ class _EventScreenState extends State<EventScreen> {
             ),
             const SizedBox(height: 8),
             filterOption(context),
-            if (_value == 0)
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    Expanded(
-                        child: Divider(
-                      height: 1,
-                      thickness: 2,
-                      color: appColors.primary,
-                    )),
-                    Expanded(
-                      flex: 4,
-                      child: Text(
-                        " Events For UG Only ",
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        height: 1,
-                        thickness: 2,
-                        color: appColors.primary,
-                      ),
-                    )
-                  ],
-                ),
-              )
-            else if (_value == 1)
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    Expanded(
-                        child: Divider(
-                      height: 1,
-                      thickness: 2,
-                      color: appColors.primary,
-                    )),
-                    Expanded(
-                      flex: 4,
-                      child: Text(
-                        " Events For PG Only ",
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        height: 1,
-                        thickness: 2,
-                        color: appColors.primary,
-                      ),
-                    )
-                  ],
-                ),
-              )
-            else
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  // crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                        child: Divider(
-                      height: 1,
-                      thickness: 2,
-                      color: appColors.primary,
-                    )),
-                    Expanded(
-                      flex: 4,
-                      child: Text(
-                        " Events For UG & PG ",
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        height: 1,
-                        thickness: 2,
-                        color: appColors.primary,
-                      ),
-                    )
-                  ],
-                ),
-              ),
+            const SizedBox(height: 20),
             Expanded(
               // height: 400,
               child: FutureBuilder(
@@ -186,18 +100,14 @@ class _EventScreenState extends State<EventScreen> {
                       ],
                     );
                   } else if (snapshot.hasData) {
-                    return Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ListView.builder(
-                            itemCount: snapshot.data!.length,
-                            itemBuilder: (context, index) {
-                              return buildEventCard(snapshot.data![index]);
-                            },
-                          ),
-                        ),
-                      ],
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          return buildEventCard(snapshot.data![index]);
+                        },
+                      ),
                     );
                   } else {
                     return const CircularProgressIndicator();
