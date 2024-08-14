@@ -321,7 +321,7 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                         ? const ElevatedButton(
                             style: ButtonStyle(
                                 backgroundColor:
-                                    MaterialStatePropertyAll(Colors.green)),
+                                    WidgetStatePropertyAll(Colors.green)),
                             onPressed: null,
                             child: Text(
                               "Task Completed",
