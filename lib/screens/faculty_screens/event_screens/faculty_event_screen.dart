@@ -67,7 +67,91 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
             height: 8,
           ),
           filterOption(context),
-          const SizedBox(height: 20),
+          if (_value == 0)
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  Expanded(
+                      child: Divider(
+                    height: 1,
+                    thickness: 2,
+                    color: appColors.primary,
+                  )),
+                  Expanded(
+                    flex: 4,
+                    child: Text(
+                      " Events For UG Only ",
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                  Expanded(
+                    child: Divider(
+                      height: 1,
+                      thickness: 2,
+                      color: appColors.primary,
+                    ),
+                  )
+                ],
+              ),
+            )
+          else if (_value == 1)
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  Expanded(
+                      child: Divider(
+                    height: 1,
+                    thickness: 2,
+                    color: appColors.primary,
+                  )),
+                  Expanded(
+                    flex: 4,
+                    child: Text(
+                      " Events For PG Only ",
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                  Expanded(
+                    child: Divider(
+                      height: 1,
+                      thickness: 2,
+                      color: appColors.primary,
+                    ),
+                  )
+                ],
+              ),
+            )
+          else
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                      child: Divider(
+                    height: 1,
+                    thickness: 2,
+                    color: appColors.primary,
+                  )),
+                  Expanded(
+                    flex: 4,
+                    child: Text(
+                      " Events For UG & PG ",
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                  Expanded(
+                    child: Divider(
+                      height: 1,
+                      thickness: 2,
+                      color: appColors.primary,
+                    ),
+                  )
+                ],
+              ),
+            ),
           Expanded(
             child: FutureBuilder(
               future: getAllPost(),
@@ -162,7 +246,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
               child: GestureDetector(
                 child: Image.network(
                   event.eventImage,
-                  height: 220,
+                  height: 200,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),

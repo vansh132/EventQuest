@@ -133,7 +133,6 @@ class EventServices {
             showSnackBar(context, errMessage);
           },
           onSuccess: () {
-            print(jsonDecode(res.body)['data']);
             for (int i = 0; i < jsonDecode(res.body)['data'].length; i++) {
               eventList.add(
                   Event.fromJson(jsonEncode(jsonDecode(res.body)['data'][i])));
@@ -269,13 +268,14 @@ class EventServices {
                 // 'x-auth-token': userProvider.user.token,
               },
               body: jsonEncode(eventData));
+
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
             customSnackbar(context, "Error", 'Failed to Update Event!!');
           },
           onSuccess: () {
-            Timer(const Duration(seconds: 3), () {
+            Timer(const Duration(seconds: 2), () {
               Navigator.pop(context);
             });
             customSnackbar(context, "Success", 'Event Updated Successfully!!');

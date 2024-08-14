@@ -105,11 +105,25 @@ class _FacultyTaskScreenState extends State<FacultyTaskScreen> {
                   initialData: tasks,
                   builder: (context, snapshot) {
                     if (snapshot.data!.isEmpty) {
-                      return const Center(
-                        child: Text("No data found"),
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            "assets/images/task.gif",
+                            height: 72,
+                            width: 72,
+                          ),
+                          Text(
+                            "No Pending Tasks!",
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                          Text(
+                            "Take this moment to relax and recharge!",
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                        ],
                       );
-                    }
-                    if (snapshot.hasData) {
+                    } else if (snapshot.hasData) {
                       return ListView.builder(
                         itemBuilder: (context, index) =>
                             taskItem(snapshot.data![index], context),

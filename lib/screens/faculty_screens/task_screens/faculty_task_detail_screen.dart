@@ -35,11 +35,14 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
       remarks: remarkController.text,
       taskSubmission: false,
     );
+    Navigator.of(context).pop();
   }
 
   void markAsCompleted() async {
     await taskServices.markAsCompleted(
         context: context, taskId: task.taskId, taskStatus: true);
+
+    Navigator.of(context).pop();
   }
 
   @override

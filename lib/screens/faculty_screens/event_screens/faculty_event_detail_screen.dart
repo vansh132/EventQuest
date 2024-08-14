@@ -64,13 +64,83 @@ class _FacultyEventDetailsScreenState extends State<FacultyEventDetailsScreen> {
                   reportGenerator.generatedContent.isEmpty ||
                   reportGenerator.generatedFollowUp.isEmpty ||
                   reportGenerator.generatedHighlightsOfActivity.isEmpty) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                        'Please complete all generated content before proceeding.'),
-                  ),
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (BuildContext context) {
+                    return Dialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CircularProgressIndicator(),
+                            SizedBox(height: 16),
+                            Text(
+                              "Processing...",
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 );
+
+                // Wait for the content generation to finish
+                await Future.wait([
+                  reportGenerator.generateContent(event),
+                  reportGenerator.generateHighlightsOfActivity(event),
+                  reportGenerator.generateKeyTakeAways(event),
+                  reportGenerator.generateActivitySummary(event),
+                  reportGenerator.generateFollowUp(event),
+                ]);
+
+                Navigator.of(context).pop(); // Dismiss the loading dialog
+
+                // Check again if the content is generated after the process
+                if (reportGenerator.generatedActivitySummary.isNotEmpty &&
+                    reportGenerator.generatedContent.isNotEmpty &&
+                    reportGenerator.generatedFollowUp.isNotEmpty &&
+                    reportGenerator.generatedHighlightsOfActivity.isNotEmpty) {
+                  final EventReport eventReport = EventReport(
+                    generalInfo: GeneralInfo(
+                      type: '',
+                      title: event.eventName,
+                      date: date,
+                      time: '',
+                      venue: '',
+                    ),
+                    speakerDetails: [],
+                    participantsDetail: ParticipantsDetail(
+                        typeOfParticipants: '', noOfParticipants: 5),
+                    eventSynopsis: EventSynopsis(
+                      highlights: reportGenerator.generatedHighlightsOfActivity,
+                      keyTakeaways: reportGenerator.generatedKeyTakeAways,
+                      summary: reportGenerator.generatedActivitySummary,
+                      followUp: reportGenerator.generatedFollowUp,
+                    ),
+                    rapporteurName: '',
+                    rapporteurEmail: '',
+                    eventDescriptiveReport: reportGenerator.generatedContent,
+                    speakersProfile: [],
+                    geoTagPhotos: '',
+                    feedbackForm: '',
+                    activityImages: '',
+                    poster: event.eventImage,
+                  );
+
+                  Navigator.of(context)
+                      .pushNamed(ReportForm.routeName, arguments: eventReport);
+                }
               } else {
+                // Directly navigate to the Report Form if everything is already generated
                 final EventReport eventReport = EventReport(
                   generalInfo: GeneralInfo(
                     type: '',
@@ -223,32 +293,36 @@ class _FacultyEventDetailsScreenState extends State<FacultyEventDetailsScreen> {
               // Event Link
               event.eventLink!.isEmpty
                   ? SizedBox()
-                  : RichText(
-                      text: TextSpan(
-                        style:
-                            const TextStyle(fontSize: 18, color: Colors.black),
-                        children: [
-                          TextSpan(
-                            text: 'Event Link: ',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          TextSpan(
-                              text: ' ${event.eventLink}',
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () async {
-                                  var url = event.eventLink;
-                                  if (url == null) {
-                                    url = '';
-                                  } else {
-                                    if (!await launchUrl(Uri.parse(url))) {
-                                      throw Exception('Could not launch $url');
+                  : Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: RichText(
+                        text: TextSpan(
+                          style: const TextStyle(
+                              fontSize: 18, color: Colors.black),
+                          children: [
+                            TextSpan(
+                              text: 'Event Link: ',
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                            TextSpan(
+                                text: ' ${event.eventLink}',
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () async {
+                                    var url = event.eventLink;
+                                    if (url == null) {
+                                      url = '';
+                                    } else {
+                                      if (!await launchUrl(Uri.parse(url))) {
+                                        throw Exception(
+                                            'Could not launch $url');
+                                      }
                                     }
-                                  }
-                                },
-                              style: const TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  color: Color(0xff0B3F63))),
-                        ],
+                                  },
+                                style: const TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    color: Color(0xff0B3F63))),
+                          ],
+                        ),
                       ),
                     ),
 

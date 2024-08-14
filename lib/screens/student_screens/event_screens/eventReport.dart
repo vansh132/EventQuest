@@ -376,23 +376,23 @@ class _ReportFormState extends State<ReportForm> {
               pw.Column(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
                 children: [
-                  pw.Row(
-                    crossAxisAlignment: pw.CrossAxisAlignment.start,
-                    children: [
-                      pw.Expanded(
-                        child: pw.Image(
+                  pw.Container(
+                    width: double.infinity,
+                    child: pw.Row(
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      children: [
+                        pw.Image(
                             pw.MemoryImage(_speakerImages[i].readAsBytesSync()),
-                            height: 100,
-                            width: 100),
-                      ),
-                      pw.SizedBox(width: 20),
-                      pw.Container(
-                        width: 100,
-                        height: 100,
-                        child: pw.Text(_speakerBioControllers[i].text),
-                      ),
-                    ],
-                  ),
+                            height: 150,
+                            width: 150),
+                        pw.SizedBox(width: width * 0.05),
+                        pw.Expanded(
+                          child: pw.Text(_speakerBioControllers[i].text,
+                              textAlign: pw.TextAlign.justify),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             pw.Text('Geo Tagged Image',

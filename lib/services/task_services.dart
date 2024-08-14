@@ -232,10 +232,10 @@ class TaskServices {
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
-            showSnackBar(context, errMessage);
+            customSnackbar(context, "Error", 'Failed To Add Poster!!');
           },
           onSuccess: () {
-            showSnackBar(context, "Poster Uploaded!! ");
+            customSnackbar(context, "Success", 'Poster Added Successfully!!');
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";
@@ -266,10 +266,10 @@ class TaskServices {
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
-            showSnackBar(context, errMessage);
+            customSnackbar(context, "Error", 'Failed To Add Remarks!!');
           },
           onSuccess: () {
-            showSnackBar(context, "Poster Uploaded!! ");
+            customSnackbar(context, "Success", 'Remarks Added Successfully!!');
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";
@@ -288,19 +288,18 @@ class TaskServices {
 
     final taskCompleted = {"taskStatus": taskStatus};
     try {
-      http.Response res =
-          await http.post(Uri.parse("$url/api/add-poster/$taskId"),
-              headers: <String, String>{
-                "Content-Type": 'application/json; charset=UTF-8',
-              },
-              body: jsonEncode(taskCompleted));
+      http.Response res = await http.put(Uri.parse("$url/api/v1/tasks/$taskId"),
+          headers: <String, String>{
+            "Content-Type": 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(taskCompleted));
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
-            showSnackBar(context, errMessage);
+            customSnackbar(context, "Error", 'Failed To Marked As Completed!!');
           },
           onSuccess: () {
-            showSnackBar(context, "Poster Uploaded!! ");
+            customSnackbar(context, "Success", 'Marked As Completed!!');
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";
@@ -332,10 +331,10 @@ class TaskServices {
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
-            showSnackBar(context, errMessage);
+            customSnackbar(context, "Error", 'Failed To Update Task!!');
           },
           onSuccess: () {
-            // showSnackBar(context, "Task updated!! ");
+            customSnackbar(context, "Success", 'Task Updated Successfully!!');
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";

@@ -31,23 +31,29 @@ class _EditEventScreenState extends State<EditEventScreen> {
   late TextEditingController eventContactNo;
   late Event eventData;
   EventServices eventServices = EventServices();
+  bool _isInitialized = false;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    eventData = ModalRoute.of(context)!.settings.arguments as Event;
-    eventName = TextEditingController(text: eventData.eventName);
-    eventDescription = TextEditingController(text: eventData.eventDescription);
+    if (!_isInitialized) {
+      eventData = ModalRoute.of(context)!.settings.arguments as Event;
+      eventName = TextEditingController(text: eventData.eventName);
+      eventDescription =
+          TextEditingController(text: eventData.eventDescription);
+      dropdownValue = eventData.eventCategory;
+      eventAmount =
+          TextEditingController(text: eventData.eventAmount.toString());
 
-    eventAmount = TextEditingController(text: eventData.eventAmount.toString());
-
-    eventNoOfParticipants =
-        TextEditingController(text: eventData.eventNoOfParticipants.toString());
-    eventLink = TextEditingController(text: eventData.eventLink);
-    eventContactPerson =
-        TextEditingController(text: eventData.eventContactPerson);
-    eventContactNo =
-        TextEditingController(text: eventData.eventContactPersonNo.toString());
+      eventNoOfParticipants = TextEditingController(
+          text: eventData.eventNoOfParticipants.toString());
+      eventLink = TextEditingController(text: eventData.eventLink);
+      eventContactPerson =
+          TextEditingController(text: eventData.eventContactPerson);
+      eventContactNo = TextEditingController(
+          text: eventData.eventContactPersonNo.toString());
+      _isInitialized = true;
+    }
   }
 
   File image = File("");
@@ -192,16 +198,11 @@ class _EditEventScreenState extends State<EditEventScreen> {
                     ],
                     value: dropdownValue,
                     onChanged: (String? newValue) {
-                      setState(() {
-                        dropdownValue = newValue!;
-                      });
+                      dropdownValue = newValue!;
                     },
                   ),
                 ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Text("Event Image",
+                Text("Upload Image",
                     style: Theme.of(context).textTheme.titleMedium),
                 const SizedBox(
                   height: 8,
@@ -255,9 +256,6 @@ class _EditEventScreenState extends State<EditEventScreen> {
                               ),
                             ),
                           ),
-                const SizedBox(
-                  height: 8,
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

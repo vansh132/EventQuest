@@ -69,22 +69,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
         taskSubmission: true,
       );
     }
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          actions: [
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('OK'))
-          ],
-          title: const Text('Status'),
-          content: const Text('Poster Submitted successfully.'),
-        );
-      },
-    );
+    Navigator.of(context).pop();
   }
 
   Future<String> verifyLogo(
