@@ -3,6 +3,7 @@ import 'package:eventquest/models/reg_dummy.dart';
 import 'package:eventquest/models/registration.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class EventRegistrationDetailScreen extends StatelessWidget {
   static const String routeName = "/event-registration-detail-screen";
 
@@ -70,7 +71,7 @@ class EventRegistrationDetailScreen extends StatelessWidget {
                   return ListTile(
                     title: Text(registration.registerNumber),
                     trailing: registration.verify
-                        ? Row(
+                        ? const Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
@@ -81,19 +82,19 @@ class EventRegistrationDetailScreen extends StatelessWidget {
                               SizedBox(
                                 width: 8,
                               ),
-                              const Icon(Icons.verified, color: Colors.green),
+                              Icon(Icons.verified, color: Colors.green),
                             ],
                           )
-                        : Row(
+                        : const Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Text('Pending',
+                              Text('Pending',
                                   style: TextStyle(
                                       fontSize: 20, color: Colors.orange)),
                               SizedBox(
                                 width: 8,
                               ),
-                              const Icon(Icons.timer, color: Colors.orange),
+                              Icon(Icons.timer, color: Colors.orange),
                             ],
                           ),
                   );

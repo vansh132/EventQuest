@@ -35,13 +35,14 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
       remarks: remarkController.text,
       taskSubmission: false,
     );
+    // ignore: use_build_context_synchronously
     Navigator.of(context).pop();
   }
 
   void markAsCompleted() async {
     await taskServices.markAsCompleted(
         context: context, taskId: task.taskId, taskStatus: true);
-
+    // ignore: use_build_context_synchronously
     Navigator.of(context).pop();
   }
 
@@ -269,7 +270,7 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                                           return Dialog(
                                             backgroundColor: appColors.accent,
                                             child: Container(
-                                              margin: EdgeInsets.all(16),
+                                              margin: const EdgeInsets.all(16),
                                               padding: const EdgeInsets.all(16),
                                               height: 200,
                                               child: SingleChildScrollView(
@@ -292,7 +293,7 @@ class _FacultyTaskDetailScreenState extends State<FacultyTaskDetailScreen> {
                                                       minLines: 1,
                                                       maxLines: 3,
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 4,
                                                     ),
                                                     Center(
