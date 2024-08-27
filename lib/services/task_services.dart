@@ -322,12 +322,11 @@ class TaskServices {
       "taskDescription": taskDescription,
     };
     try {
-      http.Response res =
-          await http.post(Uri.parse("$url/api/add-poster/$taskId"),
-              headers: <String, String>{
-                "Content-Type": 'application/json; charset=UTF-8',
-              },
-              body: jsonEncode(taskCompleted));
+      http.Response res = await http.put(Uri.parse("$url/api/v1/tasks/$taskId"),
+          headers: <String, String>{
+            "Content-Type": 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(taskCompleted));
       httpErrorHandle(
           response: res,
           onError: (errMessage) {
