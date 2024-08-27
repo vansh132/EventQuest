@@ -372,9 +372,10 @@ class _EditEventScreenState extends State<EditEventScreen> {
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             updateEvent();
+                           
                           }
                         },
-                        child: const Text('Submit')))
+                        child: const Text('Update ')))
               ],
             ),
           ),

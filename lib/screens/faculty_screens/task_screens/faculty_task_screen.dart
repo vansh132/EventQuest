@@ -80,22 +80,22 @@ class _FacultyTaskScreenState extends State<FacultyTaskScreen> {
               Text(
                 "\"The harder you work for something, the greater you'll feel when you achieve it.\"",
                 style: GoogleFonts.raleway(
-                  fontSize: 14,
+                  fontSize: 16,
                   color: appColors.primary,
                 ),
                 textAlign: TextAlign.center,
               ),
-              const Divider(
-                color: Colors.grey,
-                indent: 36,
-                endIndent: 36,
-              ),
+              // const Divider(
+              //   color: Colors.grey,
+              //   indent: 36,
+              //   endIndent: 36,
+              // ),
               const SizedBox(
-                height: 16,
+                height: 24,
               ),
               Text(
-                "Tasks Created",
-                style: Theme.of(context).textTheme.titleMedium,
+                "Assigned Tasks",
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               Container(
                 height: 500,

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:eventquest/models/task.dart';
 import 'package:eventquest/services/task_services.dart';
+import 'package:eventquest/theme/theme_ext.dart';
 import 'package:eventquest/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -60,7 +61,11 @@ class _FacultyEditTaskScreenState extends State<FacultyEditTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appColor = context.appColors;
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Update Task"),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (_taskFormKey.currentState!.validate()) {
@@ -75,7 +80,6 @@ class _FacultyEditTaskScreenState extends State<FacultyEditTaskScreen> {
           child: SingleChildScrollView(
         child: Column(
           children: [
-            TopBar(),
             Container(
               padding: const EdgeInsets.all(10.0),
               margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
@@ -84,13 +88,8 @@ class _FacultyEditTaskScreenState extends State<FacultyEditTaskScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "Title",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
+                    Text("Title",
+                        style: Theme.of(context).textTheme.titleMedium),
                     TextFormField(
                       controller: title,
                       validator: (value) {
@@ -103,16 +102,11 @@ class _FacultyEditTaskScreenState extends State<FacultyEditTaskScreen> {
                     const SizedBox(
                       height: 14,
                     ),
-                    const Text(
-                      "Description",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
+                    Text("Description",
+                        style: Theme.of(context).textTheme.titleMedium),
                     TextFormField(
                       controller: description,
-                      maxLines: 10,
+                      maxLines: 6,
                       textAlign: TextAlign.justify,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -139,7 +133,7 @@ class _FacultyEditTaskScreenState extends State<FacultyEditTaskScreen> {
                       width: MediaQuery.of(context).size.width,
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.white70,
+                        color: appColor.accent,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
@@ -153,17 +147,11 @@ class _FacultyEditTaskScreenState extends State<FacultyEditTaskScreen> {
                       ),
                       child: Column(
                         children: [
-                          const Text(
-                            "Assigned By:",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          Text(
-                            taskData.assignedBy,
-                            textAlign: TextAlign.justify,
-                          ),
+                          Text("Assigned By:",
+                              style: Theme.of(context).textTheme.titleMedium),
+                          Text(taskData.assignedBy,
+                              textAlign: TextAlign.justify,
+                              style: Theme.of(context).textTheme.bodyLarge),
                         ],
                       ),
                     ),
@@ -177,7 +165,7 @@ class _FacultyEditTaskScreenState extends State<FacultyEditTaskScreen> {
                       width: MediaQuery.of(context).size.width,
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.white70,
+                        color: appColor.accent,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
@@ -191,17 +179,11 @@ class _FacultyEditTaskScreenState extends State<FacultyEditTaskScreen> {
                       ),
                       child: Column(
                         children: [
-                          const Text(
-                            "Assigned To:",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          Text(
-                            taskData.assignedTo,
-                            textAlign: TextAlign.justify,
-                          ),
+                          Text("Assigned To:",
+                              style: Theme.of(context).textTheme.titleMedium),
+                          Text(taskData.assignedTo,
+                              textAlign: TextAlign.justify,
+                              style: Theme.of(context).textTheme.bodyLarge),
                         ],
                       ),
                     ),

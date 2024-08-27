@@ -145,14 +145,18 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 16,
-              ),
+              event.eventLink!.isEmpty
+                  ? const SizedBox(
+                      height: 0,
+                    )
+                  : SizedBox(
+                      height: 8,
+                    ),
               // Event Link
               event.eventLink!.isEmpty
                   ? const SizedBox()
                   : Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: RichText(
                         text: TextSpan(
                           style: const TextStyle(
@@ -181,7 +185,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
 
               // Description
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -191,7 +195,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       const SizedBox(
-                        height: 16,
+                        height: 8,
                       ),
                       RichText(
                         text: TextSpan(

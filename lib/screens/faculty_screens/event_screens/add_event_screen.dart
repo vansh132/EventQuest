@@ -342,11 +342,68 @@ class _AddEventScreenState extends State<AddEventScreen> {
                 Center(
                     child: ElevatedButton(
                         onPressed: () {
+                          // Validate the form
                           if (_formKey.currentState!.validate()) {
-                            addEvent();
+                            if (image.path.isEmpty) {
+                              // If no image selected, show an alert dialog
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  backgroundColor: appColor.accent,
+                                  title: Text(
+                                    'Image Required',
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                  content: const Text(
+                                      'Please select an image to upload.'),
+                                  actions: [
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: appColor.primary,
+                                          foregroundColor: appColor.white),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            } // Check if the registration deadline is selected
+                            else if (_registrationDeadline == null) {
+                              // If no deadline is selected, show an alert dialog
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  backgroundColor: appColor.accent,
+                                  title: Text(
+                                    'Registration Deadline Required',
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                  content: const Text(
+                                      'Please select a registration deadline.'),
+                                  actions: [
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: appColor.primary,
+                                          foregroundColor: appColor.white),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            } else {
+                              // If the image is selected, proceed to add the event
+                              addEvent();
+                            }
                           }
                         },
-                        child: const Text('Submit')))
+                        child: const Text('Add Event')))
               ],
             ),
           ),

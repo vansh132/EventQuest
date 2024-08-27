@@ -29,6 +29,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
     } else {
       events = await eventServices.getAllBothEvents(context);
     }
+
     return events;
   }
 
@@ -323,10 +324,11 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                     children: [
                       Image.asset(
                         'assets/images/edit.png',
-                        height: 14,
+                        height: 16,
                       ),
                       const SizedBox(width: 12),
-                      const Text('Edit'),
+                      Text('Edit',
+                          style: Theme.of(context).textTheme.titleSmall),
                     ],
                   ),
                   onTap: () {
@@ -334,21 +336,22 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                         arguments: event);
                   },
                 ),
-                const SizedBox(width: 65),
+                const SizedBox(width: 60),
                 const Text(
                   '|',
                   style: TextStyle(fontSize: 25),
                 ),
-                const SizedBox(width: 65),
+                const SizedBox(width: 60),
                 GestureDetector(
                   child: Row(
                     children: [
                       Image.asset(
                         'assets/images/delete.png',
-                        height: 14,
+                        height: 16,
                       ),
                       const SizedBox(width: 8),
-                      const Text('Delete'),
+                      Text('Delete',
+                          style: Theme.of(context).textTheme.titleSmall),
                     ],
                   ),
                   onTap: () {

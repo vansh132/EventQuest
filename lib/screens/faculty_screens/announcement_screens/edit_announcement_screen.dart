@@ -113,13 +113,8 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Announcement Title",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                Text("Announcement Title",
+                    style: Theme.of(context).textTheme.titleMedium),
                 TextFormField(
                   controller: announcementTitle,
                   onChanged: (value) {
@@ -138,13 +133,8 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-                const Text(
-                  "Description",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                Text("Description",
+                    style: Theme.of(context).textTheme.titleMedium),
                 TextFormField(
                   controller: announcementDescription,
                   onChanged: (value) {
@@ -269,7 +259,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                             }
                           }
                         : null,
-                    child: const Text('Submit'),
+                    child: const Text('Update'),
                   ),
                 )
               ],

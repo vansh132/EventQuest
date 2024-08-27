@@ -54,7 +54,7 @@ class _FacultyAddTaskScreenState extends State<FacultyAddTaskScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add Task"),
+        title: const Text("Create Task"),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

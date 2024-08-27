@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 
 import 'package:eventquest/services/announcement_services.dart';
+import 'package:eventquest/theme/theme_ext.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -70,6 +71,8 @@ class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appColor = context.appColors;
+    ;
     final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
@@ -197,10 +200,38 @@ class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
                     child: ElevatedButton(
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
-                            addAnnouncement();
+                            if (images.isEmpty) {
+                              // If no image selected, show an alert dialog
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  backgroundColor: appColor.accent,
+                                  title: Text(
+                                    'Image Required',
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                  content: const Text(
+                                      'Please select an image to upload.'),
+                                  actions: [
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: appColor.primary,
+                                          foregroundColor: appColor.white),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            } else {
+                              addAnnouncement();
+                            }
                           }
                         },
-                        child: const Text('Submit')))
+                        child: const Text('Add Announcement')))
               ],
             ),
           ),

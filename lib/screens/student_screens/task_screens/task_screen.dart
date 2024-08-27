@@ -83,7 +83,7 @@ class _TaskScreenState extends State<TaskScreen> {
               Text(
                 "\"The harder you work for something, the greater you'll feel when you achieve it.\"",
                 style: GoogleFonts.raleway(
-                  fontSize: 14,
+                  fontSize: 15,
                   color: appColors.primary,
                 ),
                 textAlign: TextAlign.center,

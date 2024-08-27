@@ -76,7 +76,6 @@ class EventServices {
       final errorMessage = "Error occurred: ${e.toString()}";
       handleHttpError(errorMessage);
     }
-
     return eventList;
   }
 
@@ -276,10 +275,10 @@ class EventServices {
             customSnackbar(context, "Error", 'Failed to Update Event!!');
           },
           onSuccess: () {
+            customSnackbar(context, "Success", 'Event Updated Successfully!!');
             Timer(const Duration(seconds: 2), () {
               Navigator.pop(context);
             });
-            customSnackbar(context, "Success", 'Event Updated Successfully!!');
           });
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";
