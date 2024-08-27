@@ -252,6 +252,7 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
+                                    backgroundColor: appColor.accent,
                                     actions: [
                                       ElevatedButton(
                                         onPressed: () {
@@ -276,7 +277,10 @@ class _FacultyAnnouncementScreenState extends State<FacultyAnnouncementScreen> {
                                         child: const Text('No'),
                                       ),
                                     ],
-                                    title: const Text('Status'),
+                                    title: Text('Confirm Deletion',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge),
                                     content: const Text(
                                         'Are you sure to delete Announcement?'),
                                   );

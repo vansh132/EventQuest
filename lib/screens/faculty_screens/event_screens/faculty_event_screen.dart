@@ -227,6 +227,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
   }
 
   Widget buildEventCard(Event event) {
+    final appColor = context.appColors;
     var date = event.eventRegistrationDeadline.split("T")[0];
 
     return Padding(
@@ -355,6 +356,7 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
+                          backgroundColor: appColor.accent,
                           actions: [
                             ElevatedButton(
                               onPressed: () {
@@ -377,7 +379,8 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                               child: const Text('No'),
                             ),
                           ],
-                          title: const Text('Status'),
+                          title: Text('Confirm Deletion',
+                              style: Theme.of(context).textTheme.bodyLarge),
                           content: const Text('Are you sure to delete Event?'),
                         );
                       },
