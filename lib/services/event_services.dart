@@ -76,6 +76,7 @@ class EventServices {
       final errorMessage = "Error occurred: ${e.toString()}";
       handleHttpError(errorMessage);
     }
+
     return eventList;
   }
 

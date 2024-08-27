@@ -175,8 +175,8 @@ class _FacultyEventScreenState extends State<FacultyEventScreen> {
                     ],
                   );
                 } else {
-                  events.sort((a, b) => a.eventRegistrationDeadline
-                      .compareTo(b.eventRegistrationDeadline));
+                  events.sort((a, b) => b.eventRegistrationDeadline
+                      .compareTo(a.eventRegistrationDeadline));
                   Map<String, List<Event>> groupedEvents = {};
                   events.forEach((event) {
                     String date = event.eventRegistrationDeadline.split("T")[0];

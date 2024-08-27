@@ -44,7 +44,7 @@ class AnnouncementServices {
       final errorMessage = "Error occurred: ${e.toString()}";
       handleHttpError(errorMessage);
     }
-    return announcementList;
+    return announcementList.reversed.toList();
   }
 
   Future<void> addAnnouncement({
