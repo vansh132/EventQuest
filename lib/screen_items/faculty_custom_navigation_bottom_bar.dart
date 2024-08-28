@@ -1,9 +1,9 @@
-import 'package:eventquest/screens/faculty_screens/announcement_screens/faculty_announcement_screen.dart';
-import 'package:eventquest/screens/faculty_screens/event_screens/faculty_event_screen.dart';
+import 'package:event_quest/screens/faculty_screens/announcement_screens/faculty_announcement_screen.dart';
+import 'package:event_quest/screens/faculty_screens/event_screens/faculty_event_screen.dart';
 
-import 'package:eventquest/screens/faculty_screens/faculty_home_screen.dart';
+import 'package:event_quest/screens/faculty_screens/faculty_home_screen.dart';
 
-import 'package:eventquest/screens/faculty_screens/task_screens/faculty_task_screen.dart';
+import 'package:event_quest/screens/faculty_screens/task_screens/faculty_task_screen.dart';
 import 'package:flutter/material.dart';
 
 class FacultyCustomBottomBar extends StatefulWidget {

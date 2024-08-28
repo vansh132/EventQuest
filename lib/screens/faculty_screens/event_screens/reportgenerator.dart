@@ -1,4 +1,4 @@
-import 'package:eventquest/models/event.dart';
+import 'package:event_quest/models/event.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 class EventReportGenerator {

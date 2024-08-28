@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:eventquest/models/announcement.dart';
-import 'package:eventquest/services/announcement_services.dart';
+import 'package:event_quest/models/announcement.dart';
+import 'package:event_quest/services/announcement_services.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 

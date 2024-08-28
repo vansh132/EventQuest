@@ -1,6 +1,6 @@
-import 'package:eventquest/models/registration.dart';
-import 'package:eventquest/screens/faculty_screens/registration_screen/event_registration_detail_screen.dart';
-import 'package:eventquest/services/registration_services.dart';
+import 'package:event_quest/models/registration.dart';
+import 'package:event_quest/screens/faculty_screens/registration_screen/event_registration_detail_screen.dart';
+import 'package:event_quest/services/registration_services.dart';
 import 'package:flutter/material.dart';
 
 class EventRegistrationScreen extends StatefulWidget {

@@ -1,6 +1,6 @@
-import 'package:eventquest/models/event.dart';
-import 'package:eventquest/provider/user_provider.dart';
-import 'package:eventquest/services/registration_services.dart';
+import 'package:event_quest/models/event.dart';
+import 'package:event_quest/provider/user_provider.dart';
+import 'package:event_quest/services/registration_services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

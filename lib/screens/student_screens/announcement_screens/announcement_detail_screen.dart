@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:eventquest/models/announcement.dart';
-import 'package:eventquest/theme/theme_ext.dart';
+import 'package:event_quest/models/announcement.dart';
+import 'package:event_quest/theme/theme_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:photo_view/photo_view.dart';

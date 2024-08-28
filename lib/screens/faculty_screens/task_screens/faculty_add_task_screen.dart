@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:eventquest/services/task_services.dart';
+import 'package:event_quest/services/task_services.dart';
 import 'package:flutter/material.dart';
 
 class FacultyAddTaskScreen extends StatefulWidget {

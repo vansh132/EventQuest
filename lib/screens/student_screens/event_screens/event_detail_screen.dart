@@ -1,7 +1,7 @@
-import 'package:eventquest/models/event.dart';
-import 'package:eventquest/screens/constants/utils.dart';
-import 'package:eventquest/screens/student_screens/registration_screens/registration_screen.dart';
-import 'package:eventquest/theme/theme_ext.dart';
+import 'package:event_quest/models/event.dart';
+import 'package:event_quest/screens/constants/utils.dart';
+import 'package:event_quest/screens/student_screens/registration_screens/registration_screen.dart';
+import 'package:event_quest/theme/theme_ext.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

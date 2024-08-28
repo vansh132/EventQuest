@@ -1,4 +1,4 @@
-import 'package:eventquest/constants/custom_colors.dart';
+import 'package:event_quest/constants/custom_colors.dart';
 import 'package:flutter/material.dart';
 
 class ApiScreen extends StatefulWidget {

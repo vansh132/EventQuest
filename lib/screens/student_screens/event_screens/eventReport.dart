@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:typed_data';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:eventquest/models/eventReport.dart';
+import 'package:event_quest/models/eventReport.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';

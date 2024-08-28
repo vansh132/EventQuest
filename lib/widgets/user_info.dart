@@ -1,8 +1,8 @@
-import 'package:eventquest/constants/custom_colors.dart';
-import 'package:eventquest/provider/user_provider.dart';
-import 'package:eventquest/screens/login_screen.dart';
-import 'package:eventquest/theme/theme_ext.dart';
-import 'package:eventquest/widgets/slide.dart';
+import 'package:event_quest/constants/custom_colors.dart';
+import 'package:event_quest/provider/user_provider.dart';
+import 'package:event_quest/screens/login_screen.dart';
+import 'package:event_quest/theme/theme_ext.dart';
+import 'package:event_quest/widgets/slide.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,4 +1,4 @@
-import 'package:eventquest/models/user.dart';
+import 'package:event_quest/models/user.dart';
 import 'package:flutter/material.dart';
 
 class UserProvider extends ChangeNotifier {

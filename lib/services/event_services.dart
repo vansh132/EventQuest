@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cloudinary_public/cloudinary_public.dart';
-import 'package:eventquest/constants/error_handling.dart';
-import 'package:eventquest/constants/global_variable.dart';
-import 'package:eventquest/models/event.dart';
+import 'package:event_quest/constants/error_handling.dart';
+import 'package:event_quest/constants/global_variable.dart';
+import 'package:event_quest/models/event.dart';
 
-import 'package:eventquest/screens/constants/utils.dart';
+import 'package:event_quest/screens/constants/utils.dart';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;

@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
-import 'package:eventquest/models/event.dart';
-import 'package:eventquest/services/event_services.dart';
-import 'package:eventquest/theme/theme_ext.dart';
-import 'package:eventquest/themes.dart';
+import 'package:event_quest/models/event.dart';
+import 'package:event_quest/services/event_services.dart';
+import 'package:event_quest/theme/theme_ext.dart';
+import 'package:event_quest/themes.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -372,7 +372,6 @@ class _EditEventScreenState extends State<EditEventScreen> {
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             updateEvent();
-                           
                           }
                         },
                         child: const Text('Update ')))

@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:eventquest/constants/error_handling.dart';
-import 'package:eventquest/constants/global_variable.dart';
-import 'package:eventquest/models/event.dart';
-import 'package:eventquest/models/registration.dart';
-import 'package:eventquest/provider/user_provider.dart';
-import 'package:eventquest/screens/constants/utils.dart';
+import 'package:event_quest/constants/error_handling.dart';
+import 'package:event_quest/constants/global_variable.dart';
+import 'package:event_quest/models/event.dart';
+import 'package:event_quest/models/registration.dart';
+import 'package:event_quest/provider/user_provider.dart';
+import 'package:event_quest/screens/constants/utils.dart';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;

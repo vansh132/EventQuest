@@ -1,6 +1,5 @@
-import 'dart:math';
-import 'package:eventquest/models/reg_dummy.dart';
-import 'package:eventquest/models/registration.dart';
+import 'package:event_quest/models/reg_dummy.dart';
+import 'package:event_quest/models/registration.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -39,7 +38,7 @@ class EventRegistrationDetailScreen extends StatelessWidget {
         : "Unknown Event";
 
     // Generate a random number between 1 and the length of dummyRegistrations
-    int randomNumber = Random().nextInt(dummyRegistrations.length) + 1;
+    // int randomNumber = Random().nextInt(dummyRegistrations.length) + 1;
 
     // Limit the dummyRegistrations list to the random number generated
     List<DummyReg> displayedRegistrations =

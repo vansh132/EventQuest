@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:eventquest/constants/error_handling.dart';
-import 'package:eventquest/constants/global_variable.dart';
-import 'package:eventquest/models/eventReport.dart';
-import 'package:eventquest/screens/constants/utils.dart';
+import 'package:event_quest/constants/error_handling.dart';
+import 'package:event_quest/constants/global_variable.dart';
+import 'package:event_quest/models/eventReport.dart';
+import 'package:event_quest/screens/constants/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 

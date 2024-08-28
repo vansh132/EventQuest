@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:eventquest/models/task.dart';
-import 'package:eventquest/screens/constants/utils.dart';
-import 'package:eventquest/services/poster_validation.dart';
-import 'package:eventquest/services/task_services.dart';
-import 'package:eventquest/theme/theme_ext.dart';
+import 'package:event_quest/models/task.dart';
+import 'package:event_quest/screens/constants/utils.dart';
+import 'package:event_quest/services/poster_validation.dart';
+import 'package:event_quest/services/task_services.dart';
+import 'package:event_quest/theme/theme_ext.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 

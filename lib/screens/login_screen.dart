@@ -1,5 +1,5 @@
-import 'package:eventquest/constants/custom_colors.dart';
-import 'package:eventquest/services/user_services.dart';
+import 'package:event_quest/constants/custom_colors.dart';
+import 'package:event_quest/services/user_services.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {

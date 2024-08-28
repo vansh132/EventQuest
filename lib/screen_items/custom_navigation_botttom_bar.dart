@@ -1,8 +1,8 @@
-import 'package:eventquest/constants/custom_colors.dart';
-import 'package:eventquest/screens/student_screens/announcement_screens/announcement_screen.dart';
-import 'package:eventquest/screens/student_screens/event_screens/event_screen.dart';
-import 'package:eventquest/screens/student_screens/home_screen.dart';
-import 'package:eventquest/screens/student_screens/task_screens/task_screen.dart';
+import 'package:event_quest/constants/custom_colors.dart';
+import 'package:event_quest/screens/student_screens/announcement_screens/announcement_screen.dart';
+import 'package:event_quest/screens/student_screens/event_screens/event_screen.dart';
+import 'package:event_quest/screens/student_screens/home_screen.dart';
+import 'package:event_quest/screens/student_screens/task_screens/task_screen.dart';
 
 import 'package:flutter/material.dart';
 

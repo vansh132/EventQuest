@@ -1,6 +1,6 @@
-import 'package:eventquest/models/event.dart';
-import 'package:eventquest/screens/student_screens/event_screens/event_detail_screen.dart';
-import 'package:eventquest/services/event_services.dart';
+import 'package:event_quest/models/event.dart';
+import 'package:event_quest/screens/student_screens/event_screens/event_detail_screen.dart';
+import 'package:event_quest/services/event_services.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 

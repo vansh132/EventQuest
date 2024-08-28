@@ -1,7 +1,7 @@
-import 'package:eventquest/models/announcement.dart';
-import 'package:eventquest/screens/student_screens/announcement_screens/announcement_detail_screen.dart';
-import 'package:eventquest/services/announcement_services.dart';
-import 'package:eventquest/theme/theme_ext.dart';
+import 'package:event_quest/models/announcement.dart';
+import 'package:event_quest/screens/student_screens/announcement_screens/announcement_detail_screen.dart';
+import 'package:event_quest/services/announcement_services.dart';
+import 'package:event_quest/theme/theme_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';

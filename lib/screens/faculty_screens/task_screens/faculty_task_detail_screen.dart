@@ -1,7 +1,7 @@
-import 'package:eventquest/models/task.dart';
-import 'package:eventquest/screens/faculty_screens/task_screens/faculty_edit_task_screen.dart';
-import 'package:eventquest/services/task_services.dart';
-import 'package:eventquest/theme/theme_ext.dart';
+import 'package:event_quest/models/task.dart';
+import 'package:event_quest/screens/faculty_screens/task_screens/faculty_edit_task_screen.dart';
+import 'package:event_quest/services/task_services.dart';
+import 'package:event_quest/theme/theme_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 

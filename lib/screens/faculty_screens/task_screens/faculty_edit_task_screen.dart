@@ -1,9 +1,8 @@
 import 'dart:async';
 
-import 'package:eventquest/models/task.dart';
-import 'package:eventquest/services/task_services.dart';
-import 'package:eventquest/theme/theme_ext.dart';
-import 'package:eventquest/widgets/top_bar.dart';
+import 'package:event_quest/models/task.dart';
+import 'package:event_quest/services/task_services.dart';
+import 'package:event_quest/theme/theme_ext.dart';
 import 'package:flutter/material.dart';
 
 class FacultyEditTaskScreen extends StatefulWidget {
