@@ -1,8 +1,8 @@
+import 'dart:math';
 import 'package:event_quest/models/reg_dummy.dart';
 import 'package:event_quest/models/registration.dart';
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class EventRegistrationDetailScreen extends StatelessWidget {
   static const String routeName = "/event-registration-detail-screen";
 
@@ -38,11 +38,11 @@ class EventRegistrationDetailScreen extends StatelessWidget {
         : "Unknown Event";
 
     // Generate a random number between 1 and the length of dummyRegistrations
-    // int randomNumber = Random().nextInt(dummyRegistrations.length) + 1;
+    int randomNumber = Random().nextInt(dummyRegistrations.length) + 1;
 
     // Limit the dummyRegistrations list to the random number generated
     List<DummyReg> displayedRegistrations =
-        dummyRegistrations.take(14).toList();
+        dummyRegistrations.take(randomNumber).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -57,7 +57,7 @@ class EventRegistrationDetailScreen extends StatelessWidget {
                 onPressed: () {
                   // Action for pending status
                 },
-                child: Text("No Of Participants: 14"),
+                child: Text("No Of Participants: ${randomNumber.toString()}"),
               ),
             ),
             const SizedBox(
@@ -70,7 +70,7 @@ class EventRegistrationDetailScreen extends StatelessWidget {
                   return ListTile(
                     title: Text(registration.registerNumber),
                     trailing: registration.verify
-                        ? const Row(
+                        ? Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
@@ -81,19 +81,19 @@ class EventRegistrationDetailScreen extends StatelessWidget {
                               SizedBox(
                                 width: 8,
                               ),
-                              Icon(Icons.verified, color: Colors.green),
+                              const Icon(Icons.verified, color: Colors.green),
                             ],
                           )
-                        : const Row(
+                        : Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text('Pending',
+                              const Text('Pending',
                                   style: TextStyle(
                                       fontSize: 20, color: Colors.orange)),
                               SizedBox(
                                 width: 8,
                               ),
-                              Icon(Icons.timer, color: Colors.orange),
+                              const Icon(Icons.timer, color: Colors.orange),
                             ],
                           ),
                   );
