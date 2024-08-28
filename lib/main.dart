@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     final theme = AppTheme();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Event Quest',
       theme: theme.light,
       onGenerateRoute: (settings) => generateRoute(settings),
       home: Provider.of<UserProvider>(context).user.type == "Student"

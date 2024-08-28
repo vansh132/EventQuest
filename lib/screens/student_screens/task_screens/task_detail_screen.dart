@@ -203,6 +203,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
           task.taskTitle,
           style: Theme.of(context).textTheme.titleLarge,
         ),
+        centerTitle: true,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
