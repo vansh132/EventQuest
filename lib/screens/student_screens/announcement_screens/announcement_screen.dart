@@ -59,7 +59,9 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
               ),
             ),
             SizedBox(
-              height: height * 0.66,
+              height: Theme.of(context).platform == TargetPlatform.android
+                  ? height * 0.75
+                  : height * 0.66,
               child: FutureBuilder(
                 future: Future.delayed(
                     const Duration(seconds: 1), () => getAllAnnouncement()),

@@ -14,6 +14,7 @@ class AppTheme {
       appBarTheme: AppBarTheme(
         backgroundColor: color.white,
         elevation: 2,
+        centerTitle: true,
       ),
       // TextEditingController
       inputDecorationTheme: InputDecorationTheme(
