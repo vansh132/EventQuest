@@ -69,7 +69,6 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
         taskSubmission: true,
       );
     }
-    Navigator.of(context).pop();
   }
 
   Future<String> verifyLogo(

@@ -7,6 +7,7 @@ import 'package:event_quest/constants/global_variable.dart';
 import 'package:event_quest/models/task.dart';
 import 'package:event_quest/provider/user_provider.dart';
 import 'package:event_quest/screens/constants/utils.dart';
+import 'package:event_quest/theme/theme_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -234,7 +235,41 @@ class TaskServices {
           onError: (errMessage) {
             customSnackbar(context, "Error", 'Failed To Add Poster!!');
           },
-          onSuccess: () {
+          onSuccess: () async {
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                final appColors = context.appColors;
+                return Dialog(
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CircularProgressIndicator(
+                          color: appColors.primary,
+                        ),
+                        const SizedBox(height: 16),
+                        const Text(
+                          "Uploading poster...",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+            await Future.delayed(Duration(seconds: 2));
+            Navigator.of(context).pop();
             customSnackbar(context, "Success", 'Poster Added Successfully!!');
           });
     } catch (e) {
