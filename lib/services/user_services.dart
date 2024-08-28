@@ -12,7 +12,7 @@ class UserService {
       required String username,
       required String password}) async {
     void handleHttpError(String errorMessage) {
-      showSnackBar(context, errorMessage);
+      customSnackbar(context, "Error", errorMessage);
     }
 
     void onSuccess(http.Response res) {
