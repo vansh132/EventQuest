@@ -15,6 +15,11 @@ class UserService {
       showSnackBar(context, errorMessage);
     }
 
+    void onSuccess(http.Response res) {
+      Provider.of<UserProvider>(context, listen: false).setUser(res.body);
+      Navigator.pushNamedAndRemoveUntil(context, "/", (route) => false);
+    }
+
     try {
       final uri = Uri.parse("$url/api/v1/signin").replace(queryParameters: {
         'username': username,
@@ -24,16 +29,37 @@ class UserService {
         'Content-Type': 'application/json; charset=UTF-8'
       });
 
-      httpErrorHandle(
-        response: res,
-        onSuccess: () async {
-          Provider.of<UserProvider>(context, listen: false).setUser(res.body);
-          Navigator.pushNamedAndRemoveUntil(context, "/", (route) => false);
-        },
-        onError: (errorMessage) {
-          showSnackBar(context, errorMessage);
-        },
-      );
+      print(res.statusCode);
+
+      if (res.statusCode == 404) {
+        const errorMessage = "User not found";
+        handleHttpError(errorMessage);
+        return;
+      } else if (res.statusCode == 401) {
+        const errorMessage = "Invalid password";
+        handleHttpError(errorMessage);
+        return;
+      } else if (res.statusCode != 200) {
+        const errorMessage = "Error occurred";
+        handleHttpError(errorMessage);
+        return;
+      }
+
+      if (res.statusCode == 200) {
+        onSuccess(res);
+      }
+
+      // httpErrorHandle(
+      //   response: res,
+      //   onSuccess: () async {
+
+      //     Provider.of<UserProvider>(context, listen: false).setUser(res.body);
+      //     Navigator.pushNamedAndRemoveUntil(context, "/", (route) => false);
+      //   },
+      //   onError: (errorMessage) {
+      //     showSnackBar(context, errorMessage);
+      //   },
+      // );
     } catch (e) {
       final errorMessage = "Error occurred: ${e.toString()}";
       handleHttpError(errorMessage);
