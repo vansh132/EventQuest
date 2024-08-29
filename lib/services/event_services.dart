@@ -199,7 +199,7 @@ class EventServices {
             customSnackbar(context, "Error", 'Failed to Add Event!!');
           },
           onSuccess: () {
-            Timer(const Duration(seconds: 3), () {
+            Timer(const Duration(seconds: 2), () {
               Navigator.pop(context);
             });
             customSnackbar(context, "Success", 'Event Added Successfully!!');

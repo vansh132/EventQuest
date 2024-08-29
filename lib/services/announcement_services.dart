@@ -94,7 +94,7 @@ class AnnouncementServices {
             customSnackbar(context, "Error", 'Failed to Add Announcement!!');
           },
           onSuccess: () {
-            Timer(const Duration(seconds: 4), () {
+            Timer(const Duration(seconds: 2), () {
               Navigator.pop(context); // Go back to previous screen
             });
             customSnackbar(
@@ -160,7 +160,7 @@ class AnnouncementServices {
           onSuccess: () {
             customSnackbar(
                 context, "Success", 'Announcement Updated Successfully!!');
-            Timer(const Duration(seconds: 3), () {
+            Timer(const Duration(seconds: 2), () {
               Navigator.pop(context); // Go back to previous screen
             });
           });
