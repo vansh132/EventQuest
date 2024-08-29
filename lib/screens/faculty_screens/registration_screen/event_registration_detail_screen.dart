@@ -28,98 +28,124 @@ class _EventRegistrationDetailScreenState
       appBar: AppBar(
         title: Text(eventName),
       ),
-      body: ListView.builder(
-        itemCount: registrations.length,
-        itemBuilder: (context, index) {
-          var registration = registrations[index];
-          var participantNames = registration.participantsName;
-          var participantRegisterNos = registration.participantsRegisterNo;
-          var participantCategories = registration.participantsCategory;
-
-          return Container(
-            margin: const EdgeInsets.all(8),
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.blue, // Background color of the container
-              borderRadius: BorderRadius.circular(8.0), // Rounded corners
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.grey, // Shadow color
-                  spreadRadius: 2, // How much the shadow spreads
-                  blurRadius: 5, // How much the shadow is blurred
-                  offset: Offset(0, 3), // Shadow offset (x, y)
-                ),
-              ],
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Text(
+              "Total Registrations: ${registrations.length}",
+              style: Theme.of(context).textTheme.titleMedium,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: Text(
-                    'Registered By: ${registration.userName}',
-                    style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: registrations.length,
+              itemBuilder: (context, index) {
+                var registration = registrations[index];
+                var participantNames = registration.participantsName;
+                var participantRegisterNos =
+                    registration.participantsRegisterNo;
+                var participantCategories = registration.participantsCategory;
+
+                return Container(
+                  margin: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: const Color(
+                        0xffFEFEFA), // Background color of the container
+                    borderRadius: BorderRadius.circular(8.0), // Rounded corners
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5), // Shadow color
+                        spreadRadius: 2, // How much the shadow spreads
+                        blurRadius: 5, // How much the shadow is blurred
+                        offset: const Offset(0, 3), // Shadow offset (x, y)
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(height: 10),
-                Table(
-                  border: TableBorder.all(),
-                  columnWidths: const {
-                    0: FlexColumnWidth(1.5),
-                    1: FlexColumnWidth(1.5),
-                    2: FlexColumnWidth(1.5),
-                  },
-                  children: [
-                    // Header Row
-                    const TableRow(
-                      children: [
-                        TableCell(
-                            child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('Name',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                        )),
-                        TableCell(
-                            child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('Register No',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                        )),
-                        TableCell(
-                            child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('Category',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                        )),
-                      ],
-                    ),
-                    // Data Rows
-                    for (int i = 0; i < participantNames.length; i++)
-                      TableRow(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Text(
+                          'Registered By: ${registration.userName}',
+                          style:
+                              Theme.of(context).textTheme.titleSmall!.copyWith(
+                                    color: Colors.black.withOpacity(0.8),
+                                  ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Table(
+                        border: TableBorder.all(color: Colors.grey),
+                        columnWidths: const {
+                          0: FlexColumnWidth(1.5),
+                          1: FlexColumnWidth(1.5),
+                          2: FlexColumnWidth(1.5),
+                        },
                         children: [
-                          TableCell(
-                              child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(participantNames[i]),
-                          )),
-                          TableCell(
-                              child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(participantRegisterNos[i]),
-                          )),
-                          TableCell(
-                              child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(participantCategories[i]),
-                          )),
+                          // Header Row
+                          const TableRow(
+                            children: [
+                              TableCell(
+                                  child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: Text('Name',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                              )),
+                              TableCell(
+                                  child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: Text('Register No',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                              )),
+                              TableCell(
+                                  child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: Text('Course',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                              )),
+                            ],
+                          ),
+                          // Data Rows
+                          for (int i = 0; i < participantNames.length; i++)
+                            TableRow(
+                              children: [
+                                TableCell(
+                                    child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(participantNames[i]),
+                                )),
+                                TableCell(
+                                    child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(participantRegisterNos[i]),
+                                )),
+                                TableCell(
+                                    child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(participantCategories[i]),
+                                )),
+                              ],
+                            ),
                         ],
                       ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                );
+              },
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }
