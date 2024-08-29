@@ -13,15 +13,56 @@ class EventRegistrationDetailScreen extends StatefulWidget {
 
 class _EventRegistrationDetailScreenState
     extends State<EventRegistrationDetailScreen> {
+  TextEditingController _searchController = TextEditingController();
+  List<Registration> _filteredRegistrations = [];
+  List<Registration> _allRegistrations = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize search controller and listen for changes
+    _searchController.addListener(() {
+      _filterRegistrations(_searchController.text);
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _filterRegistrations(String query) {
+    setState(() {
+      if (query.isEmpty) {
+        _filteredRegistrations = _allRegistrations;
+      } else {
+        _filteredRegistrations = _allRegistrations.where((registration) {
+          bool matchesName = registration.participantsName
+              .any((name) => name.toLowerCase().contains(query.toLowerCase()));
+          bool matchesRegisterNo = registration.participantsRegisterNo.any(
+              (registerNo) =>
+                  registerNo.toLowerCase().contains(query.toLowerCase()));
+          return matchesName || matchesRegisterNo;
+        }).toList();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // Get the list of registrations passed from the previous screen
-    final List<Registration> registrations =
+    _allRegistrations =
         ModalRoute.of(context)!.settings.arguments as List<Registration>;
 
+    // Initialize the filtered list with all registrations
+    _filteredRegistrations = _filteredRegistrations.isNotEmpty
+        ? _filteredRegistrations
+        : _allRegistrations;
+
     // Get the event name from the first registration (assuming all registrations are for the same event)
-    String eventName = registrations.isNotEmpty
-        ? registrations.first.eventName
+    String eventName = _filteredRegistrations.isNotEmpty
+        ? _filteredRegistrations.first.eventName
         : "Unknown Event";
 
     return Scaffold(
@@ -32,16 +73,27 @@ class _EventRegistrationDetailScreenState
         children: [
           Padding(
             padding: const EdgeInsets.all(12.0),
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                labelText: 'Search by Name or Register No',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.search),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
             child: Text(
-              "Total Registrations: ${registrations.length}",
+              "Total Registrations: ${_filteredRegistrations.length}",
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: registrations.length,
+              itemCount: _filteredRegistrations.length,
               itemBuilder: (context, index) {
-                var registration = registrations[index];
+                var registration = _filteredRegistrations[index];
                 var participantNames = registration.participantsName;
                 var participantRegisterNos =
                     registration.participantsRegisterNo;
