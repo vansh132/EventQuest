@@ -15,7 +15,7 @@ class EventReportGenerator {
   Future<void> generateContent(Event event) async {
     final content = [
       Content.text(
-          "${event.eventName} Event name and ${event.eventDescription} event description.Please write the report for this event for perfect 800 words only in single paragraph only.please dont use **. Don't write title"),
+          "${event.eventName} Event name and ${event.eventDescription} event description. Please generate a report for this event in a single paragraph of exactly 800 words. Ensure that the content is plain text, without any special characters, formatting, or emphasis like **. Do not include any titles or headers."),
     ];
     final response = await model.generateContent(content);
     generatedContent = response.text!;
@@ -24,7 +24,7 @@ class EventReportGenerator {
   Future<void> generateHighlightsOfActivity(Event event) async {
     final content = [
       Content.text(
-          "${event.eventName} Event name and ${event.eventDescription} event description.Please write the Highlight of the Activity report for this event in simple paragraph with perfect 50 words only which should be real.please dont use **"),
+          "${event.eventName} Event name and ${event.eventDescription} event description. Please write a plain text highlight of the activity for this event in a single paragraph of exactly 50 words. Ensure that the content is plain text, without any special characters, formatting, or emphasis like **."),
     ];
     final response = await model.generateContent(content);
     generatedHighlightsOfActivity = response.text!;
@@ -33,7 +33,7 @@ class EventReportGenerator {
   Future<void> generateKeyTakeAways(Event event) async {
     final content = [
       Content.text(
-          "${event.eventName} Event name and ${event.eventDescription} event description.Please write the Key Take Aways of event in report in simple 2 bullet points which should be real.please dont use **"),
+          "${event.eventName} Event name and ${event.eventDescription} event description. Please list the key takeaways of this event in plain text, using only 2 bullet points. Ensure that the content is plain text, without any special characters, formatting, or emphasis like **."),
     ];
     final response = await model.generateContent(content);
     generatedKeyTakeAways = response.text!;
@@ -42,7 +42,7 @@ class EventReportGenerator {
   Future<void> generateActivitySummary(Event event) async {
     final content = [
       Content.text(
-          "${event.eventName} Event name and ${event.eventDescription} event description.Please write the Summary of the Activity report for this event in simple paragraph of perfect 70 words which should be real.please dont use **"),
+          "${event.eventName} Event name and ${event.eventDescription} event description. Please write a plain text summary of the activity for this event in a single paragraph of exactly 70 words. Ensure that the content is plain text, without any special characters, formatting, or emphasis like **."),
     ];
     final response = await model.generateContent(content);
     generatedActivitySummary = response.text!;
@@ -51,7 +51,7 @@ class EventReportGenerator {
   Future<void> generateFollowUp(Event event) async {
     final content = [
       Content.text(
-          "${event.eventName} Event name and $generatedActivitySummary.Please write the FollowUp of the Activity for this event in simple one point 20 words only which should be real.please dont use **"),
+          "${event.eventName} Event name and $generatedActivitySummary. Please write a plain text follow-up of the activity for this event in one point of exactly 20 words. Ensure that the content is plain text, without any special characters, formatting, or emphasis like **."),
     ];
     final response = await model.generateContent(content);
     generatedFollowUp = response.text!;

@@ -395,36 +395,119 @@ class _ReportFormState extends State<ReportForm> {
                   )
                 ],
               ),
-            pw.Text('Geo Tagged Image',
-                style:
-                    pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
-            pw.SizedBox(height: 12),
-            pw.Center(
-              child: pw.Image(geoPdfImage,
-                  height: height * 0.3, width: width * 0.95),
-            ),
-            pw.SizedBox(height: 20),
-            pw.Text('FeedBack Form Image',
-                style:
-                    pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
-            pw.SizedBox(height: 12),
-            pw.Center(
-                child: pw.Image(feedbackPdfImage,
-                    height: height * 0.3, width: width * 0.95)),
-            pw.SizedBox(height: 20),
-            pw.Text('Activity Image',
-                style:
-                    pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
-            pw.SizedBox(height: 12),
-            pw.Center(
-                child: pw.Image(activityPdfImage,
-                    height: height * 0.3, width: width * 0.95)),
-            pw.SizedBox(height: 20),
-            pw.Text('Event Poster',
-                style:
-                    pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
-            pw.Image(posterPdfImage),
+            // pw.Text('Geo Tagged Image',
+            //     style:
+            //         pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
+            // pw.SizedBox(height: 12),
+            // pw.Center(
+            //   child: pw.Image(geoPdfImage,
+            //       height: height * 0.3, width: width * 0.95),
+            // ),
+            // pw.SizedBox(height: 20),
+            // pw.Text('FeedBack Form Image',
+            //     style:
+            //         pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
+            // pw.SizedBox(height: 12),
+            // pw.Center(
+            //     child: pw.Image(feedbackPdfImage,
+            //         height: height * 0.3, width: width * 0.95)),
+            // pw.SizedBox(height: 20),
+            // pw.Text('Activity Image',
+            //     style:
+            //         pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
+            // pw.SizedBox(height: 12),
+            // pw.Center(
+            //     child: pw.Image(activityPdfImage,
+            //         height: height * 0.3, width: width * 0.95)),
+            // pw.SizedBox(height: 20),
+            // pw.Text('Event Poster',
+            //     style:
+            //         pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
+            // pw.Image(posterPdfImage),
           ];
+        },
+      ),
+    );
+
+    // New page for Geo Tagged Image
+    pdf.addPage(
+      pw.Page(
+        build: (pw.Context context) {
+          return pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              pw.Text('Geo Tagged Image',
+                  style: pw.TextStyle(
+                      fontSize: 14, fontWeight: pw.FontWeight.bold)),
+              pw.SizedBox(height: 12),
+              pw.Center(
+                child: pw.Image(geoPdfImage,
+                    height: height * 0.5, width: width * 0.95),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+
+    // New page for Feedback Form Image
+    pdf.addPage(
+      pw.Page(
+        build: (pw.Context context) {
+          return pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              pw.Text('FeedBack Form Image',
+                  style: pw.TextStyle(
+                      fontSize: 14, fontWeight: pw.FontWeight.bold)),
+              pw.SizedBox(height: 12),
+              pw.Center(
+                child: pw.Image(feedbackPdfImage,
+                    height: height * 0.5, width: width * 0.95),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+
+    // New page for Activity Image
+    pdf.addPage(
+      pw.Page(
+        build: (pw.Context context) {
+          return pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              pw.Text('Activity Image',
+                  style: pw.TextStyle(
+                      fontSize: 14, fontWeight: pw.FontWeight.bold)),
+              pw.SizedBox(height: 12),
+              pw.Center(
+                child: pw.Image(activityPdfImage,
+                    height: height * 0.5, width: width * 0.95),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+
+    // New page for Event Poster
+    pdf.addPage(
+      pw.Page(
+        build: (pw.Context context) {
+          return pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              pw.Text('Event Poster',
+                  style: pw.TextStyle(
+                      fontSize: 14, fontWeight: pw.FontWeight.bold)),
+              pw.SizedBox(height: 12),
+              pw.Center(
+                child: pw.Image(posterPdfImage, width: width * 0.95),
+              ),
+            ],
+          );
         },
       ),
     );
