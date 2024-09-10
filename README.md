@@ -1,16 +1,14 @@
-# eventquest
 
-A new Flutter project.
+![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+# EventQuest
 
-A few resources to get you started if this is your first Flutter project:
+An Departmental Activites Forum for Department of Computer Science of CHRIST (Deemed to be University), Central Campus, Bangalore. 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Demo
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Demo video
+
+[![Watch the video](https://res.cloudinary.com/dq1q5mtdo/image/upload/v1723642353/Announcements/rh8npkw8giju2ckzyldj.jpg)](https://www.youtube.com/watch?v=bStQwuVibyI)
