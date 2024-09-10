@@ -13,17 +13,40 @@
 
 **Client:** Flutter
 
-**Server:** Node.js, Express.js
+**Server:** Node.js, Express.js, FastAPI
 
 **Database:** MongoDB, Cloudinary
 
+**ML Model:** Yolov8 (Object Detection), EasyOCR (Text Detection), TensorFlow lite
 
 
 
-## Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file
+## Features
 
-`MONGODB_URL`
+- **Machine Learning Poster Verification:** Automatically validates event posters for accuracy and compliance (e.g., university logo positioning, event details etc).
 
-`GEMINI_API`
+- **Generative AI for Report Generation:** Generates detailed reports for events, summarizing key metrics and participant data.
+
+- **In-App Event Registration:** Provides a comprehensive system for participants to register for events within the app.
+
+- **Interactive Registration Display:** Displays participant lists and event information in real-time for easy management.
+
+- **Integrated Payment Gateway:** Enables secure and seamless payment for event registrations.
+
+- **Registration Data Export:** Allows easy download and export of participant data, including names, categories, and registration numbers.
+
+
+## Feedback
+
+If you have any feedback, please reach out to us at shah.vansh132@gmail.com
+
+
+## Authors
+
+- [Vansh Shah](https://www.github.com/vansh132)
+- [Riya Shah](https://www.github.com/riyashah22)
+
+
+
+
