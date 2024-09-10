@@ -11,4 +11,4 @@ An Departmental Activites Forum for Department of Computer Science of CHRIST (De
 
 ## Demo video
 
-[![Watch the video](https://res.cloudinary.com/dq1q5mtdo/image/upload/v1723642353/Announcements/rh8npkw8giju2ckzyldj.jpg)](https://www.youtube.com/watch?v=bStQwuVibyI)
+<video src="https://www.youtube.com/watch?v=bStQwuVibyI"></video>
