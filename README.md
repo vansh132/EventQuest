@@ -1,6 +1,5 @@
 
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
-
+<img src="https://github.com/user-attachments/assets/27da0ae0-56f6-45c8-859c-45def9dd7580" alt="eventQuest" style="width: 100%; height: 50%;">
 
 # EventQuest
 
