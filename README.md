@@ -41,7 +41,7 @@
 
 **Database:** MongoDB, Cloudinary
 
-**ML Model:** Yolov8 (Object Detection), EasyOCR (Text Detection), TensorFlow lite
+**ML Model:** Yolov8 (Object Detection), PaddleOCR (Text Detection), TensorFlow lite
 
 
 
