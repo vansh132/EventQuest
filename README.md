@@ -48,7 +48,7 @@
 
 ## Features
 
-- **Machine Learning Poster Verification:** Automatically validates event posters for accuracy and compliance (e.g., university logo positioning, event details etc).
+- **Machine Learning Poster Verification:** Automatically validates event posters for accuracy and compliance (e.g., university logo positioning).
 
 - **Generative AI for Report Generation:** Generates detailed reports for events, summarizing key metrics and participant data.
 
