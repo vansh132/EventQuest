@@ -7,17 +7,25 @@
 
 ## Screenshots
 
-<img width="400" alt="Screenshot 2024-09-19 at 21 13 37" src="https://github.com/user-attachments/assets/67b3d935-74a3-4107-9e75-02d6f61f50c5">
-<img width="400" alt="Screenshot 2024-09-19 at 21 13 54" src="https://github.com/user-attachments/assets/14d91c8c-ec6c-4d1f-8a55-ebae1da73156">
-<img width="400" alt="Screenshot 2024-09-19 at 21 14 07" src="https://github.com/user-attachments/assets/c2039649-7f2e-432b-863f-76086a6bc6be">
-<img width="400" alt="Screenshot 2024-09-19 at 21 14 20" src="https://github.com/user-attachments/assets/1c40aadc-9fee-41ec-b53d-ebc6cad4de8b">
-<img width="400" alt="Screenshot 2024-09-19 at 21 14 32" src="https://github.com/user-attachments/assets/bd227b23-0c64-4d32-bf93-cb39102659d4">
-<img width="400" alt="Screenshot 2024-09-19 at 21 15 47" src="https://github.com/user-attachments/assets/f3885d25-547e-4c52-ae54-a8aac1fe318e">
-<img width="400" alt="Screenshot 2024-09-19 at 21 15 55" src="https://github.com/user-attachments/assets/5ac483e5-9371-43ad-83f7-28982ad332b4">
-<img width="400" alt="Screenshot 2024-09-19 at 21 16 03" src="https://github.com/user-attachments/assets/f490ba4b-06a1-4083-83d9-b893ed76e0d1">
-<img width="400" alt="Screenshot 2024-09-19 at 21 16 11" src="https://github.com/user-attachments/assets/9087d834-abd8-42a0-b360-eda6be244564">
-<img width="400" alt="Screenshot 2024-09-19 at 21 16 18" src="https://github.com/user-attachments/assets/6513dc24-a466-4b7e-9a50-88821bcdd9e4">
 
+<img width="400" alt="Screenshot 2024-09-19 at 21 13 37" src="https://github.com/user-attachments/assets/3107d120-6196-450d-9bce-d4cfad4fa812">
+<img width="400" alt="Screenshot 2024-09-19 at 21 13 54" src="https://github.com/user-attachments/assets/43b4d69b-9726-4ddb-b870-9a4ef4506bbc">
+<img width="400" alt="Screenshot 2024-09-19 at 21 14 07" src="https://github.com/user-attachments/assets/f5752289-287b-45d8-a721-b90c26037809">
+<img width="400" alt="Screenshot 2024-09-19 at 21 14 20" src="https://github.com/user-attachments/assets/c77473e3-0736-4b66-a945-1135af8dd1ee">
+<!-- <img width="400" alt="Screenshot 2024-09-19 at 21 14 32" src="https://github.com/user-attachments/assets/18b2b70d-5975-49b7-a3c5-5cb763ed9889">
+<img width="400" alt="Screenshot 2024-09-19 at 21 15 47" src="https://github.com/user-attachments/assets/a7b28bf5-10f3-4e63-88bb-ce7e037b5df7">
+<img width="400" alt="Screenshot 2024-09-19 at 21 15 55" src="https://github.com/user-attachments/assets/b73113ef-7c83-48f5-996c-e241fa87ce49">
+<img width="400" alt="Screenshot 2024-09-19 at 21 16 03" src="https://github.com/user-attachments/assets/856fa3da-8e72-4dc4-9ea5-cd127cc7927b">
+<img width="400" alt="Screenshot 2024-09-19 at 21 16 11" src="https://github.com/user-attachments/assets/9130f028-68d9-4504-a9bb-956994dacfe5"> -->
+<img width="400" alt="Screenshot 2024-09-19 at 21 16 18" src="https://github.com/user-attachments/assets/22d8879a-6710-4ad6-8ab1-aead359d5d2a">
+<img width="400" alt="Screenshot 2024-09-19 at 21 16 18" src="https://github.com/user-attachments/assets/e0895382-5363-426f-8cd7-6259c35d2a5f">
+<img width="400" alt="Screenshot 2024-09-19 at 21 16 18" src="https://github.com/user-attachments/assets/17cacf96-2ae5-44ef-969e-96351c5be4d2">
+<img width="400" alt="Screenshot 2024-09-19 at 21 16 18" src="https://github.com/user-attachments/assets/1f163a6f-a8f8-4063-9d70-4fdb7dc4358d">
+<!-- <img width="400" alt="Screenshot 2024-09-19 at 21 16 18" src="https://github.com/user-attachments/assets/dd5a23df-78a8-48f5-ab92-b2148539bd91"> -->
+<img width="400" alt="Screenshot 2024-09-19 at 21 16 18" src="https://github.com/user-attachments/assets/4b6ddfec-f2e8-40cb-b9b7-910046c9218b">
+<!-- <img width="400" alt="Screenshot 2024-09-19 at 21 16 18" src="https://github.com/user-attachments/assets/8a5c913b-23e5-41f7-94db-9623542bf947">
+<img width="400" alt="Screenshot 2024-09-19 at 21 16 18" src="https://github.com/user-attachments/assets/d9260b29-6fe8-4c27-adce-8bacd11ff32b">
+ -->
 ---
 
 [<video src="https://www.youtube.com/watch?v=bStQwuVibyI"></video>
@@ -31,14 +39,14 @@
 
 **Database:** MongoDB, Cloudinary
 
-**ML Model:** Yolov8 (Object Detection), EasyOCR (Text Detection), TensorFlow lite
+**ML Model:** Yolov8 (Object Detection), PaddleOCR (Text Detection), TensorFlow lite
 
 
 
 
 ## Features
 
-- **Machine Learning Poster Verification:** Automatically validates event posters for accuracy and compliance (e.g., university logo positioning, event details etc).
+- **Machine Learning Poster Verification:** Automatically validates event posters for accuracy and compliance (e.g., university logo positioning).
 
 - **Generative AI for Report Generation:** Generates detailed reports for events, summarizing key metrics and participant data.
 
