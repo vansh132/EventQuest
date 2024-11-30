@@ -61,13 +61,14 @@
 
 ## Feedback
 
-If you have any feedback, please reach out to us at shah.vansh132@gmail.com
+If you have any feedback, please reach out to us at riyapshah22@gmail.com
 
 
 ## Authors
 
-- [Vansh Shah](https://www.github.com/vansh132)
 - [Riya Shah](https://www.github.com/riyashah22)
+- [Vansh Shah](https://www.github.com/vansh132)
+
 
 
 
